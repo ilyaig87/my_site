@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 md:py-32 bg-white">
+      <section className="relative py-24 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
@@ -37,7 +37,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info */}
-      <section className="relative py-24 md:py-32 bg-gray-50">
+      <section className="relative py-24 md:py-32 bg-gradient-to-b from-white to-yellow-50">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {/* Phone */}

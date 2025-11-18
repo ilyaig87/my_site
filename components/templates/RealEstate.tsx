@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface RealEstateProps {
   template: Template;
@@ -9,36 +11,79 @@ export default function RealEstate({ template }: RealEstateProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
-      {/* Hero Section */}
-      <section
-        className="relative py-56 px-6 overflow-hidden"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="absolute inset-0" style={{ backgroundColor: `${colors.primary}DD` }}></div>
+      <TemplateHeader template={template} />
+      {/* Modern Fullwidth Hero with Search */}
+      <section className="relative h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        ></div>
 
-        <div className="relative max-w-7xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-2xl">
-            מצא את הבית של החלומות שלך
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-white drop-shadow">
-            סוכנות נדל"ן מובילה עם מאות נכסים למכירה והשכרה
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button
-              className="px-8 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-105 shadow-lg"
-              style={{ backgroundColor: colors.accent, color: '#ffffff' }}
-            >
-              חיפוש נכסים
-            </button>
-            <button
-              className="px-8 py-4 rounded-lg font-semibold text-lg border-2 border-white text-white transition-all hover:scale-105 hover:bg-white/10"
-            >
-              הערכת שווי
-            </button>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0" style={{
+          background: `linear-gradient(to right, ${colors.primary}EE 0%, ${colors.primary}88 50%, transparent 100%)`
+        }}></div>
+
+        <div className="relative max-w-7xl mx-auto px-6 z-10 w-full">
+          <div className="max-w-2xl text-white">
+            <div className="inline-block px-4 py-2 mb-6 rounded-full text-sm font-semibold" style={{
+              backgroundColor: colors.accent,
+              color: '#000000'
+            }}>
+              מצא את הנכס המושלם
+            </div>
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              הבית של החלומות
+              <br />
+              <span style={{ color: colors.accent }}>מחכה לך</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl mb-10 opacity-90">
+              למעלה מ-500 נכסים פרימיום למכירה והשכרה
+            </p>
+
+            {/* Search Box */}
+            <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-xl">
+              <div className="flex gap-4 flex-wrap mb-4">
+                <button className="px-6 py-2 rounded-lg font-semibold transition-colors" style={{
+                  backgroundColor: colors.primary,
+                  color: '#ffffff'
+                }}>
+                  קנייה
+                </button>
+                <button className="px-6 py-2 rounded-lg font-semibold text-gray-600 hover:bg-gray-100 transition-colors">
+                  השכרה
+                </button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <input
+                  type="text"
+                  placeholder="עיר או שכונה"
+                  className="px-4 py-3 rounded-lg border border-gray-300 text-gray-900"
+                />
+                <select className="px-4 py-3 rounded-lg border border-gray-300 text-gray-900">
+                  <option>סוג נכס</option>
+                  <option>דירה</option>
+                  <option>בית</option>
+                  <option>פנטהאוז</option>
+                </select>
+              </div>
+              <button
+                className="w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: colors.accent,
+                  color: '#000000'
+                }}
+              >
+                חיפוש נכסים
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -111,6 +156,8 @@ export default function RealEstate({ template }: RealEstateProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

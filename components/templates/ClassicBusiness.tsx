@@ -1,5 +1,7 @@
 import { Template } from '@/types';
 import Button from '@/components/ui/Button';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface ClassicBusinessProps {
   template: Template;
@@ -8,6 +10,7 @@ interface ClassicBusinessProps {
 export default function ClassicBusiness({ template }: ClassicBusinessProps) {
   return (
     <div className="min-h-screen bg-gray-50">
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section
         className="relative py-48 text-white overflow-hidden"
@@ -144,6 +147,8 @@ export default function ClassicBusiness({ template }: ClassicBusinessProps) {
           </Button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

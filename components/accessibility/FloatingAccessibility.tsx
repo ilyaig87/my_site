@@ -11,7 +11,7 @@ export default function FloatingAccessibility() {
       {/* Background overlay when menu is open */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90]"
+          className="fixed inset-0 bg-black/5 z-[90]"
           onClick={() => setIsOpen(false)}
         />
       )}

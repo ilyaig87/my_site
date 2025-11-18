@@ -44,9 +44,9 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
   return (
     <>
       {/* Template Header */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             {/* Template Info */}
             <div>
               <span className="inline-block px-4 py-2 bg-yellow-50 text-yellow-700 rounded-full mb-4 text-sm font-medium border border-yellow-200">
@@ -55,12 +55,12 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
                 {template.name}
               </h1>
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 {template.longDescription}
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button href="/contact" size="lg">
                   אני רוצה את הטמפלייט הזה
                 </Button>
@@ -69,17 +69,12 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
                 </Button>
               </div>
             </div>
-
-            {/* Template Preview */}
-            <div>
-              <TemplatePreview template={template} showDeviceToggle={false} />
-            </div>
           </div>
         </Container>
       </section>
 
       {/* Suitable For */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-b from-white to-yellow-50">
         <Container>
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             מתאים במיוחד ל:
@@ -98,7 +93,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
       </section>
 
       {/* Features */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
             מה כולל הטמפלייט הזה?
@@ -124,7 +119,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
       </section>
 
       {/* Live Template Preview */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-b from-white to-yellow-50">
         <Container size="xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             תצוגה חיה של הטמפלייט
@@ -151,7 +146,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
       </section>
 
       {/* Design Details */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Color Scheme */}

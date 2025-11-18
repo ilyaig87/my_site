@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface LawyerProps {
   template: Template;
@@ -9,6 +11,7 @@ export default function Lawyer({ template }: LawyerProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section
         className="relative py-48 px-6 overflow-hidden"
@@ -149,7 +152,7 @@ export default function Lawyer({ template }: LawyerProps) {
             זקוקים לייעוץ משפטי?
           </h2>
           <p className="text-xl mb-10 opacity-90">
-            קבעו פגישת ייעוץ ראשונית ללא התחייבות
+            קבעו פגישת ייעוץ ראשונית
           </p>
           <button
             className="px-12 py-5 rounded-lg font-bold text-lg transition-all hover:scale-105"
@@ -159,6 +162,8 @@ export default function Lawyer({ template }: LawyerProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

@@ -58,7 +58,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 transition-all duration-300">
+    <header className="sticky top-0 z-50 bg-gradient-to-b from-yellow-50 to-white backdrop-blur-sm border-b border-yellow-200 shadow-md transition-all duration-300">
       <Container>
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
@@ -96,14 +96,14 @@ export default function Header() {
             {/* Light/Dark Mode Toggle - Enhanced Design */}
             <button
               onClick={toggleLightMode}
-              className="relative w-14 h-7 bg-gray-200 rounded-full transition-all duration-300 group hover:shadow-lg"
+              className="relative w-14 h-7 bg-gray-200 rounded-full transition-all duration-300 group hover:shadow-lg hover:scale-105"
               aria-label={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
               title={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
             >
               {/* Toggle Track */}
               <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
                 isLightMode
-                  ? 'bg-gradient-to-r from-blue-400 to-blue-500'
+                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500'
                   : 'bg-gradient-to-r from-indigo-600 to-purple-700'
               }`}></div>
 
@@ -142,7 +142,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 transition-colors text-gray-600 hover:text-gray-900"
+            className="md:hidden p-2 rounded-lg transition-all bg-yellow-100 border border-yellow-300 text-orange-600 hover:bg-yellow-200 hover:scale-110"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -174,13 +174,13 @@ export default function Header() {
               {/* Light/Dark Mode Toggle - Mobile Enhanced */}
               <button
                 onClick={toggleLightMode}
-                className="w-full mb-3 flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl hover:shadow-lg transition-all border-2 border-gray-200 group"
+                className="w-full mb-3 flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl hover:shadow-lg transition-all border-2 border-yellow-200 hover:border-yellow-300 group"
                 aria-label={isLightMode ? 'מצב לילה' : 'מצב יום'}
               >
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
                     isLightMode
-                      ? 'bg-gradient-to-br from-blue-400 to-blue-500'
+                      ? 'bg-gradient-to-br from-yellow-400 to-orange-500'
                       : 'bg-gradient-to-br from-indigo-600 to-purple-700'
                   }`}>
                     {isLightMode ? (

@@ -1,34 +1,82 @@
 import { Template } from '@/types';
 import Button from '@/components/ui/Button';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 export default function ModernCoach({ template }: { template: Template }) {
   return (
     <div className="min-h-screen">
-      {/* Hero with Gradient */}
-      <section
-        className="relative py-64 text-white overflow-hidden"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${template.colors.primary}DD 0%, ${template.colors.secondary}DD 100%)` }}></div>
+      <TemplateHeader template={template} />
+      {/* Inspirational Hero with Quote */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background with Parallax Feel */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'brightness(0.5)',
+          }}
+        ></div>
 
-        <div className="relative max-w-6xl mx-auto px-4 text-center z-10">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 drop-shadow-2xl" style={{ fontFamily: template.typography.headingFont }}>
-            השגת מטרות זה כאן
-          </h1>
-          <p className="text-2xl mb-8">
-            אני כאן כדי להוביל אותך למקום שבו אתה רוצה להיות
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button href="/contact" size="lg">
-              התחל עכשיו
-            </Button>
-            <Button href="#about" size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-              קרא עוד
-            </Button>
+        {/* Soft Gradient Overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, ${template.colors.primary}CC 0%, ${template.colors.secondary}99 100%)`
+          }}
+        ></div>
+
+        <div className="relative max-w-5xl mx-auto px-6 z-10 text-white">
+          {/* Inspirational Quote Section */}
+          <div className="text-center mb-16">
+            <div className="mb-8">
+              <svg className="w-16 h-16 mx-auto mb-4 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+              </svg>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 italic">
+                "השינוי שאתה רוצה לראות
+                <br />
+                <span className="font-bold" style={{ color: template.colors.accent }}>
+                  מתחיל ממך"
+                </span>
+              </h1>
+            </div>
+
+            <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: template.colors.accent }}></div>
+
+            <p className="text-2xl md:text-3xl mb-4 font-semibold">
+              אני כאן כדי להוביל אותך למקום שבו אתה רוצה להיות
+            </p>
+            <p className="text-xl mb-12 opacity-90 max-w-2xl mx-auto">
+              קואצ'ינג אישי ומקצועי להשגת מטרות ופריצת גבולות
+            </p>
+
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Button href="/contact" size="lg">
+                בואו נדבר
+              </Button>
+              <button className="px-10 py-4 text-lg font-semibold border-2 border-white text-white rounded-lg transition-all duration-300 hover:bg-white/10 hover:scale-105">
+                סיפורי הצלחה
+              </button>
+            </div>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex justify-center gap-12 flex-wrap text-center">
+            <div>
+              <div className="text-4xl font-bold mb-2" style={{ color: template.colors.accent }}>10+</div>
+              <div className="text-sm uppercase tracking-wider opacity-80">שנות ניסיון</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2" style={{ color: template.colors.accent }}>200+</div>
+              <div className="text-sm uppercase tracking-wider opacity-80">לקוחות מרוצים</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2" style={{ color: template.colors.accent }}>95%</div>
+              <div className="text-sm uppercase tracking-wider opacity-80">השגת מטרות</div>
+            </div>
           </div>
         </div>
       </section>
@@ -98,6 +146,8 @@ export default function ModernCoach({ template }: { template: Template }) {
           </Button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

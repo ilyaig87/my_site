@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface CreativeAgencyProps {
   template: Template;
@@ -9,6 +11,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section
         className="relative py-56 px-6 overflow-hidden"
@@ -43,7 +46,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
           <h2 className="text-5xl font-black text-center mb-4 uppercase" style={{ color: colors.primary }}>
             מה אנחנו עושים
           </h2>
-          <p className="text-center text-lg mb-16 opacity-80">
+          <p className="text-center text-lg mb-16 opacity-80" style={{ color: colors.text }}>
             שירותים קריאייטיביים מקיפים
           </p>
 
@@ -70,7 +73,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
                   <h3 className="text-2xl font-bold mb-3" style={{ color: colors.primary }}>
                     {service.title}
                   </h3>
-                  <p className="opacity-80">{service.desc}</p>
+                  <p className="opacity-80" style={{ color: colors.text }}>{service.desc}</p>
                 </div>
               </div>
             ))}
@@ -113,7 +116,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
                   <h3 className="text-2xl font-bold mb-2" style={{ color: colors.primary }}>
                     {project.title}
                   </h3>
-                  <p className="opacity-70">עיצוב מותג מלא ופיתוח דיגיטלי</p>
+                  <p className="opacity-70" style={{ color: colors.text }}>עיצוב מותג מלא ופיתוח דיגיטלי</p>
                 </div>
               </div>
             ))}
@@ -127,7 +130,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
           <h2 className="text-5xl font-black text-center mb-4 uppercase" style={{ color: colors.primary }}>
             התהליך שלנו
           </h2>
-          <p className="text-center text-lg mb-16 opacity-80">
+          <p className="text-center text-lg mb-16 opacity-80" style={{ color: colors.text }}>
             מרעיון להשקה ב-4 שלבים
           </p>
 
@@ -148,7 +151,7 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
                 <h3 className="text-2xl font-bold mb-3" style={{ color: colors.primary }}>
                   {phase.title}
                 </h3>
-                <p className="opacity-80">{phase.desc}</p>
+                <p className="opacity-80" style={{ color: colors.text }}>{phase.desc}</p>
               </div>
             ))}
           </div>
@@ -177,6 +180,8 @@ export default function CreativeAgency({ template }: CreativeAgencyProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

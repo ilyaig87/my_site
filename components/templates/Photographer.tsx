@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface PhotographerProps {
   template: Template;
@@ -9,6 +11,7 @@ export default function Photographer({ template }: PhotographerProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section
         className="relative py-64 px-6 overflow-hidden"
@@ -35,17 +38,18 @@ export default function Photographer({ template }: PhotographerProps) {
         </div>
       </section>
 
-      {/* Portfolio Gallery Grid */}
+      {/* Masonry Gallery - Pinterest Style */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-center gap-4 mb-12">
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
             {['הכל', 'חתונות', 'אירועים', 'תדמית', 'טבע'].map((category) => (
               <button
                 key={category}
-                className="px-6 py-2 rounded-full font-medium transition-all hover:scale-105"
+                className="px-5 py-2 text-sm font-medium transition-all duration-300"
                 style={{
-                  backgroundColor: category === 'הכל' ? colors.accent : colors.secondary,
-                  color: category === 'הכל' ? '#ffffff' : colors.text
+                  backgroundColor: category === 'הכל' ? colors.accent : 'transparent',
+                  color: category === 'הכל' ? '#000000' : colors.text,
+                  border: category === 'הכל' ? 'none' : `1px solid ${colors.text}33`
                 }}
               >
                 {category}
@@ -53,30 +57,34 @@ export default function Photographer({ template }: PhotographerProps) {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Masonry Grid Layout */}
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {[
-              'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=80',
-              'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=600&q=80',
-              'https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80',
-              'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80',
-              'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=80',
-              'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=600&q=80',
-              'https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80',
-              'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80',
-              'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=80',
-              'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=600&q=80',
-              'https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80',
-              'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80',
-            ].map((image, idx) => (
+              { img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=80', tall: true },
+              { img: 'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80', tall: true },
+              { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80', tall: true },
+              { img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80', tall: true },
+              { img: 'https://images.unsplash.com/photo-1525921429624-479b6a26d84d?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80', tall: true },
+              { img: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80', tall: false },
+              { img: 'https://images.unsplash.com/photo-1543599538-a6c4483d8dd2?w=600&q=80', tall: false },
+            ].map((item, idx) => (
               <div
                 key={idx}
-                className="aspect-square overflow-hidden rounded-lg cursor-pointer transition-all hover:scale-105 hover:shadow-2xl"
+                className="break-inside-avoid mb-4 group cursor-pointer"
               >
-                <img
-                  src={image}
-                  alt={`Gallery ${idx + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative overflow-hidden rounded-sm">
+                  <img
+                    src={item.img}
+                    alt={`Gallery ${idx + 1}`}
+                    className={`w-full ${item.tall ? 'h-96' : 'h-64'} object-cover transition-all duration-500 group-hover:scale-110`}
+                  />
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
               </div>
             ))}
           </div>
@@ -188,6 +196,8 @@ export default function Photographer({ template }: PhotographerProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

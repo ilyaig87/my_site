@@ -31,7 +31,7 @@ const iconMap: { [key: string]: ReactElement } = {
 
 export default function ProcessSection({ steps }: ProcessSectionProps) {
   return (
-    <section className="relative py-24 md:py-32 bg-white">
+    <section className="relative py-24 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
       <Container>
         <div className="relative z-10">
           {/* Section Header */}

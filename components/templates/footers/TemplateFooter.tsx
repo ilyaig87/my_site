@@ -153,7 +153,7 @@ export default function TemplateFooter({ template, variant = 'professional' }: T
 
         <div className="border-t border-white/20 pt-8 text-center">
           <p className="text-white/60 text-sm">
-            © {currentYear} כל הזכויות שמורות | עיצוב ופיתוח: WebSites
+            © {currentYear} כל הזכויות שמורות
           </p>
         </div>
       </div>

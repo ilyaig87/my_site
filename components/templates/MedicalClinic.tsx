@@ -1,5 +1,6 @@
 import { Template } from '@/types';
 import { medicalClinicImages } from '@/data/medical-clinic-images';
+import TemplateHeader from './common/TemplateHeader';
 import TemplateFooter from './footers/TemplateFooter';
 
 interface MedicalClinicProps {
@@ -11,6 +12,7 @@ export default function MedicalClinic({ template }: MedicalClinicProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section className="relative py-48 px-6 overflow-hidden" style={{
         backgroundImage: `url(${medicalClinicImages.hero})`,

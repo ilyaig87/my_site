@@ -33,7 +33,7 @@ const iconMap: { [key: string]: ReactElement } = {
 
 export default function BenefitsSection({ benefits }: BenefitsSectionProps) {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gradient-to-b from-white to-yellow-50">
       <Container>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">

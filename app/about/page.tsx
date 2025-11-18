@@ -15,7 +15,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 md:py-32 bg-white">
+      <section className="relative py-24 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
@@ -38,7 +38,7 @@ export default function AboutPage() {
       </section>
 
       {/* Experience & Technologies */}
-      <section className="relative py-24 md:py-32 bg-gray-50">
+      <section className="relative py-24 md:py-32 bg-gradient-to-b from-white to-yellow-50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Experience */}

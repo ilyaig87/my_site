@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
-import "../../../globals.css";
+import "../globals.css";
 
 const heebo = Heebo({
   subsets: ["hebrew", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-heebo",
 });
 
 export const metadata: Metadata = {
-  title: "תצוגה מקדימה - WebSites",
+  title: "תצוגה מקדימה - SiteCraft",
   description: "תצוגה מקדימה של טמפלייט",
 };
 
-export default function PreviewLayout({
+export default function PreviewRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

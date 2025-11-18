@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface MiniShopProps {
   template: Template;
@@ -9,6 +11,7 @@ export default function MiniShop({ template }: MiniShopProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
+      <TemplateHeader template={template} />
       {/* Hero Section */}
       <section
         className="py-20 px-6"
@@ -148,6 +151,8 @@ export default function MiniShop({ template }: MiniShopProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 interface FitnessStudioProps {
   template: Template;
@@ -9,33 +11,73 @@ export default function FitnessStudio({ template }: FitnessStudioProps) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.background, color: colors.text }}>
-      {/* Hero Section */}
+      <TemplateHeader template={template} />
+      {/* Fullscreen Video-Style Hero */}
       <section
-        className="relative py-56 px-6 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1920&q=80)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=1920&q=80)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
         }}
       >
-        <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${colors.primary}DD 0%, ${colors.secondary}DD 100%)` }}></div>
+        {/* Dark overlay with gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, ${colors.primary}EE 0%, ${colors.secondary}CC 100%)`,
+            mixBlendMode: 'multiply'
+          }}
+        ></div>
 
-        <div className="relative max-w-7xl mx-auto text-center z-10">
-          <h1 className="text-6xl md:text-7xl font-black mb-6 uppercase text-white drop-shadow-2xl">
-            התחל את המסע שלך
-          </h1>
-          <p className="text-2xl md:text-3xl mb-8 font-semibold drop-shadow-lg" style={{ color: colors.accent }}>
-            הפוך לגרסה הטובה ביותר של עצמך
+        {/* Animated accent stripes */}
+        <div className="absolute top-0 left-0 w-full h-2" style={{ backgroundColor: colors.accent }}></div>
+        <div className="absolute bottom-0 left-0 w-full h-2" style={{ backgroundColor: colors.accent }}></div>
+
+        <div className="relative max-w-5xl mx-auto px-6 text-center z-10">
+          {/* Large Impact Typography */}
+          <div className="mb-8">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-none text-white drop-shadow-2xl mb-4">
+              NO PAIN
+            </h1>
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-none drop-shadow-2xl" style={{ color: colors.accent }}>
+              NO GAIN
+            </h1>
+          </div>
+
+          <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: colors.accent }}></div>
+
+          <p className="text-2xl md:text-3xl font-bold text-white mb-12 drop-shadow-lg">
+            הצטרף למהפכת הכושר • אימונים קבוצתיים ואישיים
           </p>
-          <p className="text-xl mb-10 text-white max-w-2xl mx-auto drop-shadow">
-            סטודיו כושר מתקדם עם מאמנים מקצועיים, ציוד חדיש ואווירה מוטיבציונית
-          </p>
-          <button
-            className="px-12 py-5 rounded-full font-bold text-xl uppercase transition-all hover:scale-110 shadow-2xl"
-            style={{ backgroundColor: colors.accent, color: colors.secondary }}
-          >
-            הצטרף עכשיו
-          </button>
+
+          <div className="flex gap-4 justify-center flex-wrap">
+            <button
+              className="px-10 py-5 font-black text-xl uppercase transition-all duration-300 hover:scale-110 shadow-2xl"
+              style={{
+                backgroundColor: colors.accent,
+                color: '#000000',
+                transform: 'skew(-5deg)'
+              }}
+            >
+              <span style={{ display: 'block', transform: 'skew(5deg)' }}>
+                אימון ניסיון חינם
+              </span>
+            </button>
+            <button
+              className="px-10 py-5 font-black text-xl uppercase border-4 text-white transition-all duration-300 hover:scale-110"
+              style={{
+                borderColor: colors.accent,
+                backgroundColor: 'transparent',
+                transform: 'skew(-5deg)'
+              }}
+            >
+              <span style={{ display: 'block', transform: 'skew(5deg)' }}>
+                לוח זמנים
+              </span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -163,6 +205,8 @@ export default function FitnessStudio({ template }: FitnessStudioProps) {
           </button>
         </div>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }

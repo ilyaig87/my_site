@@ -1,8 +1,11 @@
 import { Template } from '@/types';
+import TemplateHeader from './common/TemplateHeader';
+import TemplateFooter from './common/TemplateFooter';
 
 export default function MinimalPortfolio({ template }: { template: Template }) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: template.colors.background }}>
+      <TemplateHeader template={template} />
       <section className="py-32 text-center">
         <h1 className="text-8xl font-light mb-8" style={{ color: template.colors.primary, fontFamily: template.typography.headingFont }}>
           אמנות בעדשה
@@ -44,6 +47,8 @@ export default function MinimalPortfolio({ template }: { template: Template }) {
           צרו קשר
         </a>
       </section>
+
+      <TemplateFooter template={template} />
     </div>
   );
 }
