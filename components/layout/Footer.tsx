@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getSiteContent, getNavItems } from '@/lib/data';
 import Container from '@/components/ui/Container';
 
@@ -17,13 +18,21 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
             {/* About Section */}
             <div className="md:col-span-2">
-              <Link href="/" className="inline-block mb-6">
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
-                  WebSites
+              <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
+                <div className="relative w-12 h-12 transform group-hover:scale-110 transition-transform duration-300">
+                  <Image
+                    src="/logo.svg"
+                    alt="SiteCraft Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent group-hover:from-blue-300 group-hover:via-cyan-300 group-hover:to-sky-300 transition-all duration-300">
+                  SiteCraft
                 </h3>
               </Link>
               <p className="text-gray-300 leading-relaxed mb-6 text-lg">
-                פיתוח אתרים מקצועיים לעסקים קטנים ובינוניים. בחר מתוך עיצובים מוכנים או צור עיצוב מותאם אישית - והעלה לאוויר תוך ימים ספורים.
+                יוצרים אתרים מקצועיים לעסקים קטנים ובינוניים. בחר מתוך תבניות עיצוב מוכנות או צור עיצוב מותאם אישית - והעלה לאוויר תוך ימים ספורים.
               </p>
 
               {/* Social Links */}
@@ -134,7 +143,7 @@ export default function Footer() {
               {/* Copyright */}
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-gray-400 text-sm">
-                  &copy; {currentYear} WebSites. כל הזכויות שמורות.
+                  &copy; {currentYear} SiteCraft. כל הזכויות שמורות.
                 </p>
               </div>
             </div>

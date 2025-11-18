@@ -4,7 +4,10 @@
       "Bash(curl:*)",
       "Bash(npm run dev)",
       "Bash(npm run build:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(git remote add:*)",
+      "Bash(vercel:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { getNavItems } from '@/lib/data';
 import Container from '@/components/ui/Container';
@@ -59,12 +60,23 @@ export default function Header() {
       <Container>
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className={`text-2xl md:text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent transition-all duration-300 ${
-            isLightBackground
-              ? 'from-blue-600 via-cyan-600 to-sky-600 hover:from-blue-500 hover:via-cyan-500 hover:to-sky-500'
-              : 'from-blue-400 via-cyan-400 to-sky-400 hover:from-blue-300 hover:via-cyan-300 hover:to-sky-300'
-          }`}>
-            WebSites
+          <Link href="/" className="flex items-center gap-3 group transition-all duration-300">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 transform group-hover:scale-110 transition-transform duration-300">
+              <Image
+                src="/logo.svg"
+                alt="SiteCraft Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className={`text-2xl md:text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent transition-all duration-300 ${
+              isLightBackground
+                ? 'from-blue-600 via-cyan-600 to-sky-600 group-hover:from-blue-500 group-hover:via-cyan-500 group-hover:to-sky-500'
+                : 'from-blue-400 via-cyan-400 to-sky-400 group-hover:from-blue-300 group-hover:via-cyan-300 group-hover:to-sky-300'
+            }`}>
+              SiteCraft
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
