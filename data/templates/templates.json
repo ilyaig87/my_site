@@ -1,0 +1,578 @@
+[
+  {
+    "id": "classic-business",
+    "name": "קלאסי עסקי",
+    "slug": "classic-business",
+    "description": "עיצוב קלאסי ומקצועי המתאים לכל סוג של עסק שירות",
+    "longDescription": "טמפלייט עסקי קלאסי עם מבנה נקי ומסודר. כולל סקשן היירו מרשים, הצגת שירותים בכרטיסים, גלריית עבודות, המלצות לקוחות וטופס יצירת קשר. העיצוב מתאים במיוחד לעסקי שירות כמו יועצים, משרדי שירות, חברות ייעוץ ועוד.",
+    "category": "business",
+    "suitableFor": [
+      "עסקי שירות",
+      "יועצים עצמאיים",
+      "משרדי ייעוץ",
+      "חברות B2B",
+      "עורכי דין",
+      "רואי חשבון"
+    ],
+    "features": [
+      {
+        "icon": "layout",
+        "title": "מבנה מסודר",
+        "description": "Hero גדול, כרטיסי שירותים, המלצות, גלריה וטופס צור קשר"
+      },
+      {
+        "icon": "palette",
+        "title": "צבעוניות מקצועית",
+        "description": "כחול כהה ולבן עם אקסנטים של זהב - נראה יוקרתי ומקצועי"
+      },
+      {
+        "icon": "type",
+        "title": "טיפוגרפיה קריאה",
+        "description": "פונטים ברורים וקריאים מסוג Serif המעניקים אמינות"
+      }
+    ],
+    "colors": {
+      "primary": "#1e3a8a",
+      "secondary": "#ffffff",
+      "accent": "#d97706",
+      "background": "#f8fafc",
+      "text": "#1e293b"
+    },
+    "typography": {
+      "headingFont": "Playfair Display",
+      "bodyFont": "Inter",
+      "style": "professional"
+    },
+    "previewImage": "/images/templates/classic-business-preview.jpg",
+    "mobilePreviewImage": "/images/templates/classic-business-mobile.jpg",
+    "tags": ["קלאסי", "מקצועי", "עסקי", "נקי"]
+  },
+  {
+    "id": "modern-coach",
+    "name": "מודרני למאמן",
+    "slug": "modern-coach",
+    "description": "עיצוב מודרני וצבעוני למאמנים אישיים וקואוצ'רים",
+    "longDescription": "טמפלייט מודרני ודינמי המיועד למאמנים אישיים, קואוצ'רים וטרנרים. כולל hero עם וידאו ברקע, סקשן 'תהליך העבודה' עם אייקונים, תיק עבודות / תוצאות, המלצות מרשימות ו-CTA חזק. העיצוב משדר אנרגיה, מוטיבציה והשראה.",
+    "category": "landing",
+    "suitableFor": [
+      "מאמנים אישיים",
+      "קואוצ'רים",
+      "טרנרים",
+      "יועצי קריירה",
+      "מנחי סדנאות",
+      "מומחי פיתוח אישי"
+    ],
+    "features": [
+      {
+        "icon": "video",
+        "title": "Hero עם וידאו",
+        "description": "סקשן פתיחה מרשים עם רקע וידאו או תמונה דינמית"
+      },
+      {
+        "icon": "timeline",
+        "title": "מסע התהליך",
+        "description": "הצגה חזותית של תהליך העבודה בציר זמן אינטראקטיבי"
+      },
+      {
+        "icon": "gradient",
+        "title": "צבעוניות מרעננת",
+        "description": "גרדיאנטים של כחול ותכלת המשדרים אנרגיה חיובית"
+      }
+    ],
+    "colors": {
+      "primary": "#0ea5e9",
+      "secondary": "#6366f1",
+      "accent": "#f59e0b",
+      "background": "#ffffff",
+      "text": "#0f172a"
+    },
+    "typography": {
+      "headingFont": "Poppins",
+      "bodyFont": "Open Sans",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/modern-coach-preview.jpg",
+    "mobilePreviewImage": "/images/templates/modern-coach-mobile.jpg",
+    "tags": ["מודרני", "צבעוני", "דינמי", "אנרגטי"]
+  },
+  {
+    "id": "minimal-portfolio",
+    "name": "פורטפוליו מינימליסטי",
+    "slug": "minimal-portfolio",
+    "description": "עיצוב מינימליסטי ואלגנטי לצלמים ומעצבים",
+    "longDescription": "טמפלייט מינימליסטי ומודרני המיועד לצלמים, מעצבים גרפיים ואמנים. התמקדות בתמונות ועבודות עם מינימום טקסט. כולל גלריה מתקדמת עם lightbox, סקשן אודות קצר, רשימת שירותים פשוטה וטופס צור קשר מינימלי. מושלם למי שרוצה שהעבודות ידברו בעד עצמן.",
+    "category": "portfolio",
+    "suitableFor": [
+      "צלמים",
+      "מעצבים גרפיים",
+      "אמנים דיגיטליים",
+      "מעצבי פנים",
+      "אדריכלים",
+      "אמני וידאו"
+    ],
+    "features": [
+      {
+        "icon": "grid",
+        "title": "גלריה מתקדמת",
+        "description": "רשת תמונות מסוננת עם lightbox וקטגוריות"
+      },
+      {
+        "icon": "minus",
+        "title": "עיצוב מינימליסטי",
+        "description": "הרבה רווח לבן, מעט טקסט - התמקדות בעבודות"
+      },
+      {
+        "icon": "contrast",
+        "title": "שחור לבן אלגנטי",
+        "description": "פלטת צבעים מונוכרומטית עם אקסנטים עדינים"
+      }
+    ],
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#ffffff",
+      "accent": "#6b7280",
+      "background": "#fafafa",
+      "text": "#1f2937"
+    },
+    "typography": {
+      "headingFont": "Raleway",
+      "bodyFont": "Lato",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/minimal-portfolio-preview.jpg",
+    "mobilePreviewImage": "/images/templates/minimal-portfolio-mobile.jpg",
+    "tags": ["מינימליסטי", "אלגנטי", "נקי", "פורטפוליו"]
+  },
+  {
+    "id": "event-landing",
+    "name": "דף נחיתה לכנס",
+    "slug": "event-landing",
+    "description": "דף נחיתה ממוקד המרה לכנסים ואירועים",
+    "longDescription": "טמפלייט one-page חזק המיועד לכנסים, וובינרים ואירועים. כולל ספירה לאחור, טופס הרשמה בולט, לוח זמנים מפורט, הצגת מרצים ונותני חסות. העיצוב ממוקד בהמרה ומעודד רישום מהיר.",
+    "category": "landing",
+    "suitableFor": [
+      "כנסים ואירועים",
+      "וובינרים",
+      "סדנאות",
+      "השקות מוצר",
+      "קורסים",
+      "מפגשי רשת"
+    ],
+    "features": [
+      {
+        "icon": "calendar",
+        "title": "ספירה לאחור",
+        "description": "טיימר דינמי היוצר דחיפות ומעודד רישום"
+      },
+      {
+        "icon": "users",
+        "title": "הצגת מרצים",
+        "description": "גלריה מרשימה של המרצים והמומחים"
+      },
+      {
+        "icon": "zap",
+        "title": "CTA חזק",
+        "description": "כפתורי רישום בולטים בכל עמוד הנחיתה"
+      }
+    ],
+    "colors": {
+      "primary": "#dc2626",
+      "secondary": "#1f2937",
+      "accent": "#fbbf24",
+      "background": "#ffffff",
+      "text": "#111827"
+    },
+    "typography": {
+      "headingFont": "Montserrat",
+      "bodyFont": "Roboto",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/event-landing-preview.jpg",
+    "mobilePreviewImage": "/images/templates/event-landing-mobile.jpg",
+    "tags": ["דינמי", "ממיר", "אירועים", "מודרני"]
+  },
+  {
+    "id": "real-estate",
+    "name": "סוכן נדל\"ן מקצועי",
+    "slug": "real-estate",
+    "description": "אתר מקצועי לסוכני נדל\"ן עם גלריית נכסים",
+    "longDescription": "טמפלייט מיוחד לסוכני נדל\"ן המציג נכסים באופן מושך. כולל חיפוש מתקדם של נכסים, גלריה עם פילטרים, פרטי נכס מפורטים, מפה אינטראקטיבית וטופס יצירת קשר. העיצוב מקצועי ומשדר אמינות.",
+    "category": "business",
+    "suitableFor": [
+      "סוכני נדל\"ן",
+      "משרדי תיווך",
+      "חברות בנייה",
+      "משקיעי נדל\"ן",
+      "מתווכי דירות",
+      "יועצי נדל\"ן"
+    ],
+    "features": [
+      {
+        "icon": "search",
+        "title": "חיפוש מתקדם",
+        "description": "מנוע חיפוש נכסים עם פילטרים מרובים"
+      },
+      {
+        "icon": "map",
+        "title": "מפה אינטראקטיבית",
+        "description": "הצגת נכסים על מפה עם סימונים"
+      },
+      {
+        "icon": "image",
+        "title": "גלריית נכסים",
+        "description": "הצגה מושכת של נכסים עם תמונות איכותיות"
+      }
+    ],
+    "colors": {
+      "primary": "#059669",
+      "secondary": "#f3f4f6",
+      "accent": "#fb923c",
+      "background": "#ffffff",
+      "text": "#1f2937"
+    },
+    "typography": {
+      "headingFont": "Rubik",
+      "bodyFont": "Assistant",
+      "style": "professional"
+    },
+    "previewImage": "/images/templates/real-estate-preview.jpg",
+    "mobilePreviewImage": "/images/templates/real-estate-mobile.jpg",
+    "tags": ["נדל\"ן", "מקצועי", "פילטרים", "מפות"]
+  },
+  {
+    "id": "medical-clinic",
+    "name": "קליניקה רפואית",
+    "slug": "medical-clinic",
+    "description": "אתר נקי ומרגיע לרופאים וקליניקות",
+    "longDescription": "טמפלייט המיועד לרופאים, מרפאות וקליניקות. עיצוב נקי ומרגיע עם צבעים רפואיים. כולל מערכת תורים, הצגת צוות רפואי, שירותים רפואיים, שעות פעילות ודרכי הגעה. משדר אמינות ומקצועיות רפואית.",
+    "category": "medical",
+    "suitableFor": [
+      "רופאים",
+      "מרפאות",
+      "קליניקות",
+      "רופאי שיניים",
+      "פסיכולוגים",
+      "מטפלים"
+    ],
+    "features": [
+      {
+        "icon": "calendar",
+        "title": "קביעת תורים",
+        "description": "טופס לקביעת תור או אינטגרציה עם מערכת תורים"
+      },
+      {
+        "icon": "team",
+        "title": "הצגת צוות",
+        "description": "גלריית הצוות הרפואי עם פרטים וניסיון"
+      },
+      {
+        "icon": "shield",
+        "title": "עיצוב מרגיע",
+        "description": "צבעים רכים ועיצוב נקי המשדר אמון"
+      }
+    ],
+    "colors": {
+      "primary": "#0284c7",
+      "secondary": "#e0f2fe",
+      "accent": "#0ea5e9",
+      "background": "#f8fafc",
+      "text": "#334155"
+    },
+    "typography": {
+      "headingFont": "Heebo",
+      "bodyFont": "Rubik",
+      "style": "professional"
+    },
+    "previewImage": "https://impeccabuild.com.au/wp-content/uploads/2020/09/Medical-Waiting-Room-Design-Ideas-Medical-Fitouts-ImpeccaBuild-7-scaled.jpg",
+    "mobilePreviewImage": "https://impeccabuild.com.au/wp-content/uploads/2020/09/Medical-Waiting-Room-Design-Ideas-Medical-Fitouts-ImpeccaBuild-5-scaled.jpg",
+    "tags": ["רפואי", "נקי", "מרגיע", "מקצועי"]
+  },
+  {
+    "id": "fitness-studio",
+    "name": "סטודיו כושר ופילאטיס",
+    "slug": "fitness-studio",
+    "description": "אתר אנרגטי לסטודיו כושר, פילאטיס ויוגה",
+    "longDescription": "טמפלייט דינמי ואנרגטי המיועד לסטודיו כושר, פילאטיס ויוגה. כולל מערכת שיעורים, מחירונים, גלריית תמונות, הצגת מאמנים וטופס הרשמה. העיצוב משדר אנרגיה, חיוניות ומוטיבציה.",
+    "category": "fitness",
+    "suitableFor": [
+      "סטודיו כושר",
+      "פילאטיס",
+      "יוגה",
+      "מאמנים אישיים",
+      "חדרי כושר",
+      "אימוני קבוצה"
+    ],
+    "features": [
+      {
+        "icon": "calendar",
+        "title": "לוח שיעורים",
+        "description": "הצגה ברורה של לוח השיעורים השבועי"
+      },
+      {
+        "icon": "energy",
+        "title": "עיצוב אנרגטי",
+        "description": "צבעים חזקים ותמונות מעוררות מוטיבציה"
+      },
+      {
+        "icon": "users",
+        "title": "מחירונים גמישים",
+        "description": "הצגת חבילות ומחירונים בצורה ברורה"
+      }
+    ],
+    "colors": {
+      "primary": "#ea580c",
+      "secondary": "#1e293b",
+      "accent": "#fbbf24",
+      "background": "#fafaf9",
+      "text": "#0c0a09"
+    },
+    "typography": {
+      "headingFont": "Oswald",
+      "bodyFont": "Heebo",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/fitness-studio-preview.jpg",
+    "mobilePreviewImage": "/images/templates/fitness-studio-mobile.jpg",
+    "tags": ["אנרגטי", "ספורט", "כושר", "דינמי"]
+  },
+  {
+    "id": "restaurant",
+    "name": "מסעדה ובית קפה",
+    "slug": "restaurant",
+    "description": "אתר מושך ותיאבון למסעדות ובתי קפה",
+    "longDescription": "טמפלייט מיוחד למסעדות ובתי קפה עם דגש על תמונות מזון איכותיות. כולל תפריט דיגיטלי, גלריית תמונות, הזמנת שולחן, שעות פתיחה ודרכי הגעה. העיצוב חם ומזמין עם צבעים שמעוררים תיאבון.",
+    "category": "restaurant",
+    "suitableFor": [
+      "מסעדות",
+      "בתי קפה",
+      "קייטרינג",
+      "פאבים",
+      "מאפיות",
+      "שפים פרטיים"
+    ],
+    "features": [
+      {
+        "icon": "menu",
+        "title": "תפריט דיגיטלי",
+        "description": "הצגה מושכת של התפריט עם תמונות ומחירים"
+      },
+      {
+        "icon": "image",
+        "title": "גלריית מנות",
+        "description": "תמונות איכותיות של מנות המעוררות תיאבון"
+      },
+      {
+        "icon": "calendar",
+        "title": "הזמנת שולחן",
+        "description": "טופס פשוט להזמנת שולחנות מראש"
+      }
+    ],
+    "colors": {
+      "primary": "#92400e",
+      "secondary": "#fef3c7",
+      "accent": "#f59e0b",
+      "background": "#fffbeb",
+      "text": "#451a03"
+    },
+    "typography": {
+      "headingFont": "Playfair Display",
+      "bodyFont": "Varela Round",
+      "style": "classic"
+    },
+    "previewImage": "/images/templates/restaurant-preview.jpg",
+    "mobilePreviewImage": "/images/templates/restaurant-mobile.jpg",
+    "tags": ["מסעדה", "אוכל", "חם", "מזמין"]
+  },
+  {
+    "id": "photographer",
+    "name": "צלם מקצועי",
+    "slug": "photographer",
+    "description": "פורטפוליו מרשים לצלמים מקצועיים",
+    "longDescription": "טמפלייט פורטפוליו מיוחד לצלמים עם דגש על הצגת עבודות. כולל גלריה מתקדמת בלייבוקס, סינון לפי קטגוריות, אודות הצלם, שירותים וחבילות צילום. העיצוב אלגנטי ונקי המאפשר לעבודות לזרוח.",
+    "category": "portfolio",
+    "suitableFor": [
+      "צלמים",
+      "צלמי אירועים",
+      "צלמי תדמית",
+      "צלמי טבע",
+      "צלמי מוצר",
+      "וידאוגרפים"
+    ],
+    "features": [
+      {
+        "icon": "camera",
+        "title": "גלריה מתקדמת",
+        "description": "הצגה מושלמת של תמונות עם לייבוקס מלא"
+      },
+      {
+        "icon": "filter",
+        "title": "סינון קטגוריות",
+        "description": "מעבר קל בין סוגי צילומים שונים"
+      },
+      {
+        "icon": "layout",
+        "title": "פריסה גמישה",
+        "description": "רשת תמונות מסתגלת לגדלים שונים"
+      }
+    ],
+    "colors": {
+      "primary": "#18181b",
+      "secondary": "#f4f4f5",
+      "accent": "#a855f7",
+      "background": "#ffffff",
+      "text": "#27272a"
+    },
+    "typography": {
+      "headingFont": "Cormorant Garamond",
+      "bodyFont": "Crimson Text",
+      "style": "classic"
+    },
+    "previewImage": "/images/templates/photographer-preview.jpg",
+    "mobilePreviewImage": "/images/templates/photographer-mobile.jpg",
+    "tags": ["צילום", "אמנותי", "אלגנטי", "גלריה"]
+  },
+  {
+    "id": "mini-shop",
+    "name": "חנות מיני קטלוג",
+    "slug": "mini-shop",
+    "description": "קטלוג מוצרים עם כפתורי הזמנה",
+    "longDescription": "טמפלייט לחנות קטנה או קטלוג מוצרים ללא מערכת תשלומים מלאה. כולל גריד מוצרים, פילטרים, עמודי מוצר בודדים וכפתורי הזמנה בוואטסאפ. מושלם לעסקים קטנים שרוצים להציג מוצרים ולקבל הזמנות.",
+    "category": "ecommerce",
+    "suitableFor": [
+      "חנויות קטנות",
+      "מוכרים פרטיים",
+      "מעצבים",
+      "אמנים",
+      "מוצרים בעבודת יד",
+      "עסקים ביתיים"
+    ],
+    "features": [
+      {
+        "icon": "grid",
+        "title": "גריד מוצרים",
+        "description": "הצגה מושכת של מוצרים ברשת"
+      },
+      {
+        "icon": "filter",
+        "title": "פילטרים וחיפוש",
+        "description": "מציאת מוצרים בקלות לפי קטגוריות"
+      },
+      {
+        "icon": "whatsapp",
+        "title": "הזמנה בוואטסאפ",
+        "description": "כפתור הזמנה ישיר דרך WhatsApp"
+      }
+    ],
+    "colors": {
+      "primary": "#7c3aed",
+      "secondary": "#faf5ff",
+      "accent": "#ec4899",
+      "background": "#ffffff",
+      "text": "#1f2937"
+    },
+    "typography": {
+      "headingFont": "Alef",
+      "bodyFont": "Assistant",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/mini-shop-preview.jpg",
+    "mobilePreviewImage": "/images/templates/mini-shop-mobile.jpg",
+    "tags": ["חנות", "מוצרים", "קטלוג", "מודרני"]
+  },
+  {
+    "id": "lawyer",
+    "name": "עורך דין מקצועי",
+    "slug": "lawyer",
+    "description": "אתר מקצועי ויוקרתי לעורכי דין ומשרדי עו\"ד",
+    "longDescription": "טמפלייט אלגנטי ומקצועי המיועד לעורכי דין ומשרדי עורכי דין. כולל הצגת תחומי עיסוק, צוות עורכי הדין, מאמרים משפטיים, המלצות לקוחות וטופס ייעוץ ראשוני. העיצוב משדר מקצועיות, אמינות ויוקרה.",
+    "category": "professional",
+    "suitableFor": [
+      "עורכי דין",
+      "משרדי עו\"ד",
+      "נוטריונים",
+      "יועצים משפטיים",
+      "בוררים",
+      "מגשרים"
+    ],
+    "features": [
+      {
+        "icon": "book",
+        "title": "תחומי עיסוק",
+        "description": "הצגה מפורטת של תחומי המשפט והמומחיות"
+      },
+      {
+        "icon": "team",
+        "title": "הצגת צוות",
+        "description": "גלריית עורכי הדין עם קורות חיים"
+      },
+      {
+        "icon": "article",
+        "title": "מאמרים משפטיים",
+        "description": "בלוג עם מאמרים וחדשות משפטיות"
+      }
+    ],
+    "colors": {
+      "primary": "#1e40af",
+      "secondary": "#f1f5f9",
+      "accent": "#b45309",
+      "background": "#ffffff",
+      "text": "#0f172a"
+    },
+    "typography": {
+      "headingFont": "Merriweather",
+      "bodyFont": "Open Sans",
+      "style": "professional"
+    },
+    "previewImage": "/images/templates/lawyer-preview.jpg",
+    "mobilePreviewImage": "/images/templates/lawyer-mobile.jpg",
+    "tags": ["משפטי", "יוקרתי", "מקצועי", "אמין"]
+  },
+  {
+    "id": "creative-agency",
+    "name": "סוכנות קריאייטיבית",
+    "slug": "creative-agency",
+    "description": "אתר מודרני וצבעוני לסוכנויות קריאייטיביות",
+    "longDescription": "טמפלייט מודרני וייחודי המיועד לסוכנויות פרסום, עיצוב ושיווק דיגיטלי. כולל אנימציות מרשימות, פורטפוליו עבודות, הצגת צוות, תהליך עבודה ולקוחות. העיצוב נועז, צבעוני ויצירתי.",
+    "category": "creative",
+    "suitableFor": [
+      "סוכנויות פרסום",
+      "סטודיו עיצוב",
+      "שיווק דיגיטלי",
+      "מעצבי UX/UI",
+      "יוצרי תוכן",
+      "חברות ייעוץ"
+    ],
+    "features": [
+      {
+        "icon": "sparkles",
+        "title": "אנימציות מרשימות",
+        "description": "אפקטים ואנימציות שמושכים את העין"
+      },
+      {
+        "icon": "portfolio",
+        "title": "פורטפוליו דינמי",
+        "description": "הצגת עבודות בצורה יצירתית וייחודית"
+      },
+      {
+        "icon": "gradient",
+        "title": "צבעוניות נועזת",
+        "description": "שימוש בגרדיאנטים וצבעים חזקים"
+      }
+    ],
+    "colors": {
+      "primary": "#8b5cf6",
+      "secondary": "#0f172a",
+      "accent": "#f472b6",
+      "background": "#fafafa",
+      "text": "#1e293b"
+    },
+    "typography": {
+      "headingFont": "Space Grotesk",
+      "bodyFont": "Inter",
+      "style": "modern"
+    },
+    "previewImage": "/images/templates/creative-agency-preview.jpg",
+    "mobilePreviewImage": "/images/templates/creative-agency-mobile.jpg",
+    "tags": ["קריאייטיבי", "נועז", "צבעוני", "מודרני"]
+  }
+]
