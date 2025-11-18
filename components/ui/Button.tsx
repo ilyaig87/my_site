@@ -23,9 +23,9 @@ export default function Button({
   const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 relative overflow-hidden group';
 
   const variantStyles = {
-    primary: 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white hover:from-blue-500 hover:via-cyan-500 hover:to-cyan-400 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/50 hover:-translate-y-1',
-    secondary: 'bg-gradient-to-r from-slate-700 to-slate-900 text-white hover:from-slate-600 hover:to-slate-800 shadow-lg hover:shadow-xl hover:-translate-y-1',
-    outline: 'border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 hover:border-blue-500 hover:text-blue-400 backdrop-blur-sm',
+    primary: 'bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-bold shadow-sm hover:shadow-md',
+    secondary: 'bg-gray-900 text-white hover:bg-gray-800 shadow-sm hover:shadow-md',
+    outline: 'border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white',
   };
 
   const sizeStyles = {
@@ -37,10 +37,7 @@ export default function Button({
   const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   const ButtonContent = () => (
-    <>
-      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-      <span className="relative z-10">{children}</span>
-    </>
+    <span>{children}</span>
   );
 
   if (href) {

@@ -67,10 +67,10 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
   return (
     <>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-white">הנגשה</h2>
+        <h2 className="text-2xl font-bold text-gray-900">הנגשה</h2>
         <button
           onClick={onClose}
-          className="text-white/70 hover:text-white transition-colors"
+          className="text-gray-600 hover:text-gray-900 transition-colors"
           aria-label="סגור"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,13 +82,13 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
       <div className="space-y-6">
         {/* גודל טקסט */}
         <div>
-          <label className="block text-white font-medium mb-3">
+          <label className="block text-gray-900 font-medium mb-3">
             גודל טקסט: {fontSize}%
           </label>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setFontSize(Math.max(80, fontSize - 10))}
-              className="glass px-3 py-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+              className="bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-gray-900 hover:bg-gray-200 transition-colors"
               aria-label="הקטן טקסט"
             >
               A-
@@ -100,12 +100,12 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
               step="10"
               value={fontSize}
               onChange={(e) => setFontSize(parseInt(e.target.value))}
-              className="flex-1"
+              className="flex-1 accent-yellow-500"
               aria-label="גודל טקסט"
             />
             <button
               onClick={() => setFontSize(Math.min(150, fontSize + 10))}
-              className="glass px-3 py-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+              className="bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-gray-900 hover:bg-gray-200 transition-colors"
               aria-label="הגדל טקסט"
             >
               A+
@@ -117,11 +117,11 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
         <button
           onClick={() => setContrast(!contrast)}
           className={`w-full flex items-center justify-between p-4 rounded-lg transition-all ${
-            contrast ? 'bg-white/20 border-2 border-white' : 'glass hover:bg-white/10'
+            contrast ? 'bg-yellow-50 border-2 border-yellow-400' : 'bg-gray-100 border border-gray-200 hover:bg-gray-200'
           }`}
         >
-          <span className="text-white font-medium">ניגודיות גבוהה</span>
-          <div className={`w-12 h-6 rounded-full transition-colors ${contrast ? 'bg-green-500' : 'bg-gray-600'}`}>
+          <span className="text-gray-900 font-medium">ניגודיות גבוהה</span>
+          <div className={`w-12 h-6 rounded-full transition-colors ${contrast ? 'bg-yellow-500' : 'bg-gray-300'}`}>
             <div className={`w-5 h-5 bg-white rounded-full mt-0.5 transition-transform ${contrast ? 'translate-x-6' : 'translate-x-0.5'}`} />
           </div>
         </button>
@@ -130,11 +130,11 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
         <button
           onClick={() => setGrayscale(!grayscale)}
           className={`w-full flex items-center justify-between p-4 rounded-lg transition-all ${
-            grayscale ? 'bg-white/20 border-2 border-white' : 'glass hover:bg-white/10'
+            grayscale ? 'bg-yellow-50 border-2 border-yellow-400' : 'bg-gray-100 border border-gray-200 hover:bg-gray-200'
           }`}
         >
-          <span className="text-white font-medium">גווני אפור</span>
-          <div className={`w-12 h-6 rounded-full transition-colors ${grayscale ? 'bg-green-500' : 'bg-gray-600'}`}>
+          <span className="text-gray-900 font-medium">גווני אפור</span>
+          <div className={`w-12 h-6 rounded-full transition-colors ${grayscale ? 'bg-yellow-500' : 'bg-gray-300'}`}>
             <div className={`w-5 h-5 bg-white rounded-full mt-0.5 transition-transform ${grayscale ? 'translate-x-6' : 'translate-x-0.5'}`} />
           </div>
         </button>
@@ -143,11 +143,11 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
         <button
           onClick={() => setHighlightLinks(!highlightLinks)}
           className={`w-full flex items-center justify-between p-4 rounded-lg transition-all ${
-            highlightLinks ? 'bg-white/20 border-2 border-white' : 'glass hover:bg-white/10'
+            highlightLinks ? 'bg-yellow-50 border-2 border-yellow-400' : 'bg-gray-100 border border-gray-200 hover:bg-gray-200'
           }`}
         >
-          <span className="text-white font-medium">הדגשת קישורים</span>
-          <div className={`w-12 h-6 rounded-full transition-colors ${highlightLinks ? 'bg-green-500' : 'bg-gray-600'}`}>
+          <span className="text-gray-900 font-medium">הדגשת קישורים</span>
+          <div className={`w-12 h-6 rounded-full transition-colors ${highlightLinks ? 'bg-yellow-500' : 'bg-gray-300'}`}>
             <div className={`w-5 h-5 bg-white rounded-full mt-0.5 transition-transform ${highlightLinks ? 'translate-x-6' : 'translate-x-0.5'}`} />
           </div>
         </button>
@@ -155,7 +155,7 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
         {/* איפוס */}
         <button
           onClick={resetSettings}
-          className="w-full glass hover:bg-white/10 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          className="w-full bg-gray-100 border border-gray-200 hover:bg-gray-200 text-gray-900 font-medium py-3 px-4 rounded-lg transition-colors"
         >
           איפוס הגדרות
         </button>
@@ -163,7 +163,7 @@ export default function AccessibilityMenu({ isOpen, onClose }: AccessibilityMenu
         {/* הצהרת נגישות */}
         <a
           href="/accessibility"
-          className="block w-full text-center glass hover:bg-white/10 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          className="block w-full text-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-3 px-4 rounded-lg transition-colors"
         >
           הצהרת נגישות
         </a>

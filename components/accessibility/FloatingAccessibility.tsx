@@ -26,10 +26,10 @@ export default function FloatingAccessibility() {
             aria-label="תפריט נגישות"
             title="נגישות"
           >
-            <div className="w-16 h-16 rounded-full shadow-2xl ring-4 ring-white/20 group-hover:ring-white/40 transition-all duration-300 group-hover:scale-110 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full shadow-xl ring-4 ring-yellow-200 group-hover:ring-yellow-300 transition-all duration-300 group-hover:scale-110 bg-yellow-400 flex items-center justify-center">
               {/* Icon */}
               <svg
-                className="w-8 h-8 text-white drop-shadow-lg"
+                className="w-8 h-8 text-gray-900 drop-shadow-sm"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -38,17 +38,17 @@ export default function FloatingAccessibility() {
             </div>
 
             {/* Tooltip */}
-            <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-black/90 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               נגישות
               <div className="absolute right-full top-1/2 -translate-y-1/2 -mr-1">
-                <div className="border-8 border-transparent border-l-black/90"></div>
+                <div className="border-8 border-transparent border-l-gray-900"></div>
               </div>
             </div>
           </button>
 
           {/* Accessibility Menu - positioned relative to button */}
           {isOpen && (
-            <div className="absolute left-[72px] top-0 w-80 max-h-[70vh] overflow-y-auto glass-card p-6 rounded-2xl shadow-2xl border-2 border-white/20">
+            <div className="absolute left-[72px] top-0 w-80 max-h-[70vh] overflow-y-auto bg-white border-2 border-gray-200 p-6 rounded-2xl shadow-2xl">
               <AccessibilityMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
             </div>
           )}

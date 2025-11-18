@@ -43,12 +43,12 @@ export default function CookieBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-slideUp">
       <div className="max-w-7xl mx-auto">
-        <div className="glass-card p-6 md:p-8 shadow-2xl">
+        <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 md:p-8 shadow-2xl">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
             {/* אייקון עוגיה */}
             <div className="flex-shrink-0">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-yellow-400 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                 </svg>
               </div>
@@ -56,13 +56,13 @@ export default function CookieBanner() {
 
             {/* תוכן */}
             <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                 אנחנו משתמשים בעוגיות 🍪
               </h3>
-              <p className="text-white/80 text-sm md:text-base leading-relaxed">
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed">
                 אנו משתמשים בעוגיות כדי לשפר את חווית הגלישה שלך, לנתח את התנועה באתר ולהציג תוכן מותאם אישית.
                 על ידי לחיצה על "אני מסכים", אתה מאשר את השימוש בעוגיות.{' '}
-                <Link href="/privacy" className="underline hover:text-white transition-colors">
+                <Link href="/privacy" className="underline hover:text-gray-900 transition-colors">
                   מדיניות פרטיות
                 </Link>
               </p>
@@ -72,13 +72,13 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <button
                 onClick={acceptCookies}
-                className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all whitespace-nowrap"
+                className="px-6 py-3 bg-yellow-400 text-gray-900 font-bold rounded-lg hover:bg-yellow-500 hover:shadow-lg transition-all whitespace-nowrap"
               >
                 אני מסכים
               </button>
               <button
                 onClick={declineCookies}
-                className="px-6 py-3 glass hover:bg-white/10 text-white font-medium rounded-lg transition-all whitespace-nowrap"
+                className="px-6 py-3 bg-gray-100 border border-gray-200 hover:bg-gray-200 text-gray-900 font-medium rounded-lg transition-all whitespace-nowrap"
               >
                 דחה
               </button>

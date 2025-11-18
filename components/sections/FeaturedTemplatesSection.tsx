@@ -68,7 +68,7 @@ function TemplateCard({ template }: { template: Template }) {
 
         {/* Template Info */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-yellow-600 transition-colors">
             {template.name}
           </h3>
           <p className="text-gray-600 mb-4 line-clamp-2">
@@ -80,7 +80,7 @@ function TemplateCard({ template }: { template: Template }) {
             {template.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full"
+                className="px-3 py-1 bg-yellow-50 text-yellow-700 text-sm rounded-full border border-yellow-200"
               >
                 {tag}
               </span>

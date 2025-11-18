@@ -44,12 +44,12 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
   return (
     <>
       {/* Template Header */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-white">
+      <section className="py-16 md:py-24 bg-gray-50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Template Info */}
             <div>
-              <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full mb-4 text-sm font-medium">
+              <span className="inline-block px-4 py-2 bg-yellow-50 text-yellow-700 rounded-full mb-4 text-sm font-medium border border-yellow-200">
                 {getCategoryLabel(template.category)}
               </span>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
@@ -88,7 +88,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
             {template.suitableFor.map((item, index) => (
               <div
                 key={index}
-                className="bg-blue-50 rounded-lg p-4 text-center hover:bg-blue-100 transition-colors"
+                className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center hover:bg-yellow-100 transition-colors"
               >
                 <p className="text-gray-800 font-medium text-sm">{item}</p>
               </div>
@@ -106,7 +106,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {template.features.map((feature, index) => (
               <Card key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 text-gray-900 rounded-full mb-4 shadow-md">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -220,27 +220,27 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
       </section>
 
       {/* What You Get */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-yellow-50">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <div className="text-center max-w-3xl mx-auto bg-white border-2 border-yellow-200 rounded-2xl p-8 md:p-12 shadow-lg">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
               מה אתם מקבלים?
             </h2>
-            <ul className="space-y-4 text-lg md:text-xl mb-8">
+            <ul className="space-y-4 text-lg md:text-xl mb-8 text-gray-700">
               <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>אתר שנראה מקצועי ועובד מעולה</span>
               </li>
               <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>בסיס טוב לקידום אורגני ב-Google</span>
               </li>
               <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>תחזוקה ושינויים עתידיים בתיאום</span>
@@ -248,9 +248,8 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
             </ul>
             <Button
               href="/contact"
-              variant="secondary"
+              variant="primary"
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100"
             >
               בואו נתחיל!
             </Button>
