@@ -25,6 +25,7 @@ export default function FloatingAccessibility() {
             className="group"
             aria-label="תפריט נגישות"
             title="נגישות"
+            suppressHydrationWarning
           >
             <div className="w-16 h-16 rounded-full shadow-xl ring-4 ring-yellow-200 group-hover:ring-yellow-300 transition-all duration-300 group-hover:scale-110 bg-yellow-400 flex items-center justify-center">
               {/* Icon */}

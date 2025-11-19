@@ -1,6 +1,7 @@
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import BenefitsSection from '@/components/sections/BenefitsSection';
 import { getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
 
@@ -95,6 +96,9 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      {/* Benefits */}
+      <BenefitsSection benefits={content.benefits} />
 
       {/* CTA */}
       <section className="relative py-24 md:py-32 bg-yellow-50">

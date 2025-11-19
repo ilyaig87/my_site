@@ -560,3 +560,159 @@ html.dark .hover\:bg-gray-900:hover {
   background-size: 200% 200%;
   animation: animate-gradient 6s ease infinite;
 }
+
+/* Compact Layout - Reduce spacing globally */
+section {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* Compact headings */
+h1 {
+  font-size: 1.875rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.25rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3rem !important;
+  }
+}
+
+h2 {
+  font-size: 1.5rem !important;
+  line-height: 1.3 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 1.875rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  h2 {
+    font-size: 2.25rem !important;
+  }
+}
+
+h3 {
+  font-size: 1.25rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Compact paragraphs */
+p {
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+@media (min-width: 768px) {
+  p {
+    font-size: 1rem !important;
+  }
+}
+
+/* Compact margins */
+.mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .mb-12 {
+    margin-bottom: 2rem !important;
+  }
+}
+
+.mb-16 {
+  margin-bottom: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  .mb-16 {
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+.mt-12 {
+  margin-top: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .mt-12 {
+    margin-top: 2rem !important;
+  }
+}
+
+.mt-16 {
+  margin-top: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  .mt-16 {
+    margin-top: 2.5rem !important;
+  }
+}
+
+/* Compact grids */
+.grid {
+  gap: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: 1.25rem !important;
+  }
+}
+
+/* Compact buttons */
+button:not(.group):not([aria-label]),
+.btn {
+  font-size: 0.875rem !important;
+  padding-top: 0.625rem !important;
+  padding-bottom: 0.625rem !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+@media (min-width: 768px) {
+  button:not(.group):not([aria-label]),
+  .btn {
+    font-size: 1rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}

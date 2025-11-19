@@ -1,9 +1,8 @@
 import HeroSection from '@/components/sections/HeroSection';
-import BenefitsSection from '@/components/sections/BenefitsSection';
+import StatsSection from '@/components/sections/StatsSection';
 import FeaturedTemplatesSection from '@/components/sections/FeaturedTemplatesSection';
-import ProcessSection from '@/components/sections/ProcessSection';
+import PricingCTA from '@/components/sections/PricingCTA';
 import CTASection from '@/components/sections/CTASection';
-import Reviews from '@/components/Reviews';
 import { getSiteContent, getFeaturedTemplates } from '@/lib/data';
 
 export default function Home() {
@@ -13,10 +12,9 @@ export default function Home() {
   return (
     <>
       <HeroSection content={content.hero} />
-      <BenefitsSection benefits={content.whyChooseMe} />
+      <StatsSection />
       <FeaturedTemplatesSection templates={featuredTemplates} />
-      <ProcessSection steps={content.process} />
-      <Reviews />
+      <PricingCTA />
       <CTASection />
     </>
   );

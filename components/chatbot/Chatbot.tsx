@@ -113,6 +113,7 @@ export default function Chatbot() {
           isOpen ? 'scale-0' : 'scale-100'
         } bg-yellow-400 text-gray-900`}
         aria-label="פתח צ'אט"
+        suppressHydrationWarning
       >
         <svg
           className="w-8 h-8 mx-auto"

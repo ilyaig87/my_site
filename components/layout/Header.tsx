@@ -11,6 +11,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLightBackground, setIsLightBackground] = useState(false);
   const [isLightMode, setIsLightMode] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navItems = getNavItems();
 
   useEffect(() => {
@@ -80,14 +81,46 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-lg transition-all duration-300 font-medium relative group text-gray-700 hover:text-gray-900"
-              >
-                <span className="relative z-10">{item.label}</span>
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              </Link>
+              item.submenu ? (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                >
+                  <button
+                    className="text-lg transition-all duration-300 font-medium relative group text-gray-700 hover:text-gray-900 flex items-center gap-1"
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50">
+                      {item.submenu.map((subitem) => (
+                        <Link
+                          key={subitem.href}
+                          href={subitem.href}
+                          className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-yellow-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors"
+                        >
+                          {subitem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-lg transition-all duration-300 font-medium relative group text-gray-700 hover:text-gray-900"
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </Link>
+              )
             ))}
           </nav>
 
@@ -99,6 +132,7 @@ export default function Header() {
               className="relative w-14 h-7 bg-gray-200 rounded-full transition-all duration-300 group hover:shadow-lg hover:scale-105"
               aria-label={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
               title={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
+              suppressHydrationWarning
             >
               {/* Toggle Track */}
               <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
@@ -161,14 +195,45 @@ export default function Header() {
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-gray-200">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block py-3 text-lg transition-colors font-medium text-gray-700 hover:text-gray-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
+              item.submenu ? (
+                <div key={item.label}>
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="w-full flex items-center justify-between py-3 text-lg transition-colors font-medium text-gray-700 hover:text-gray-900"
+                  >
+                    <span>{item.label}</span>
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {dropdownOpen && (
+                    <div className="pr-4 pb-2">
+                      {item.submenu.map((subitem) => (
+                        <Link
+                          key={subitem.href}
+                          href={subitem.href}
+                          className="block py-2 text-gray-600 hover:text-gray-900 transition-colors"
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            setDropdownOpen(false);
+                          }}
+                        >
+                          {subitem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block py-3 text-lg transition-colors font-medium text-gray-700 hover:text-gray-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
             <div className="mt-4 pt-4 border-t border-gray-200">
               {/* Light/Dark Mode Toggle - Mobile Enhanced */}

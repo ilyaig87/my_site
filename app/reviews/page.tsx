@@ -6,5 +6,9 @@ export const metadata = {
 }
 
 export default function ReviewsPage() {
-  return <Reviews />
+  return (
+    <main className="min-h-screen">
+      <Reviews />
+    </main>
+  )
 }

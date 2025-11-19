@@ -19,7 +19,9 @@
       "Bash(git commit:*)",
       "Bash(taskkill:*)",
       "Bash(npm uninstall:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(powershell.exe \"taskkill /F /PID 9484\")",
+      "Bash(powershell.exe \"taskkill /F /PID 22328\")"
     ],
     "deny": [],
     "ask": []

@@ -64,6 +64,29 @@ export default function Footer() {
             </a>
           </div>
 
+          {/* Quick Links */}
+          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600 mb-6">
+            <Link href="/" className="hover:text-gray-900 transition-colors">
+              בית
+            </Link>
+            <span>•</span>
+            <Link href="/templates" className="hover:text-gray-900 transition-colors">
+              טמפלייטים
+            </Link>
+            <span>•</span>
+            <Link href="/pricing" className="hover:text-gray-900 transition-colors font-semibold text-yellow-600">
+              תמחור
+            </Link>
+            <span>•</span>
+            <Link href="/services" className="hover:text-gray-900 transition-colors">
+              שירותים
+            </Link>
+            <span>•</span>
+            <Link href="/contact" className="hover:text-gray-900 transition-colors">
+              צור קשר
+            </Link>
+          </div>
+
           {/* Legal Links */}
           <div className="flex flex-wrap justify-center gap-3 text-xs text-gray-500 mb-4">
             <Link href="/privacy" className="hover:text-gray-900 transition-colors">

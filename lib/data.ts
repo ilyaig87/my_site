@@ -35,8 +35,17 @@ export function getNavItems() {
   return [
     { label: 'בית', href: '/' },
     { label: 'טמפלייטים', href: '/templates' },
+    { label: 'תמחור', href: '/pricing' },
     { label: 'אודות', href: '/about' },
-    { label: 'שירותים', href: '/services' },
+    {
+      label: 'עוד',
+      href: '#',
+      submenu: [
+        { label: 'ביקורות', href: '/reviews' },
+        { label: 'שאלות נפוצות', href: '/faq' },
+        { label: 'שירותים', href: '/services' },
+      ]
+    },
     { label: 'צור קשר', href: '/contact' },
   ];
 }

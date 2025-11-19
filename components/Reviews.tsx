@@ -118,6 +118,7 @@ export default function Reviews() {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition bg-white"
               placeholder="השם שלך"
+              suppressHydrationWarning
             />
           </div>
 
@@ -130,6 +131,7 @@ export default function Reviews() {
                   type="button"
                   onClick={() => setFormData({ ...formData, rating: star })}
                   className="text-4xl focus:outline-none hover:scale-110 transition-transform"
+                  suppressHydrationWarning
                 >
                   <span className={star <= formData.rating ? 'text-yellow-500' : 'text-gray-300'}>
                     ★
@@ -154,6 +156,7 @@ export default function Reviews() {
           <button
             type="submit"
             disabled={submitting}
+            suppressHydrationWarning
             className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? 'שולח...' : 'שלח ביקורת'}
