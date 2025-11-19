@@ -133,7 +133,7 @@ export default function Chatbot() {
 
       {/* Chat window */}
       <div
-        className={`fixed bottom-24 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[500px] max-h-[calc(100vh-8rem)] rounded-2xl shadow-2xl transition-all duration-300 flex flex-col ${
+        className={`fixed bottom-24 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[85vh] max-h-[850px] rounded-2xl shadow-2xl transition-all duration-300 flex flex-col ${
           isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
         } ${
           isDarkMode
@@ -249,7 +249,7 @@ export default function Chatbot() {
 
         {/* Questions Menu */}
         {showQuestions && !isTyping && (
-          <div className={`border-t p-4 max-h-[200px] overflow-y-auto flex-shrink-0 ${
+          <div className={`border-t p-4 max-h-[400px] overflow-y-auto flex-shrink-0 ${
             isDarkMode
               ? 'border-gray-700 bg-gray-800'
               : 'border-gray-200 bg-white'

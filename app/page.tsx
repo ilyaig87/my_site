@@ -3,6 +3,7 @@ import BenefitsSection from '@/components/sections/BenefitsSection';
 import FeaturedTemplatesSection from '@/components/sections/FeaturedTemplatesSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import CTASection from '@/components/sections/CTASection';
+import Reviews from '@/components/Reviews';
 import { getSiteContent, getFeaturedTemplates } from '@/lib/data';
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <BenefitsSection benefits={content.whyChooseMe} />
       <FeaturedTemplatesSection templates={featuredTemplates} />
       <ProcessSection steps={content.process} />
+      <Reviews />
       <CTASection />
     </>
   );

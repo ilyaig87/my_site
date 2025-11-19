@@ -15,7 +15,11 @@
       "Bash(timeout 5 bash:*)",
       "Bash(npx next build:*)",
       "Bash(find:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git commit:*)",
+      "Bash(taskkill:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
