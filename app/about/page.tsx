@@ -98,7 +98,7 @@ export default function AboutPage() {
       </section>
 
       {/* Benefits */}
-      <BenefitsSection benefits={content.benefits} />
+      <BenefitsSection benefits={content.whyChooseMe} />
 
       {/* CTA */}
       <section className="relative py-24 md:py-32 bg-yellow-50">
