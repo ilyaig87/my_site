@@ -1,27 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(curl:*)",
-      "Bash(npm run dev)",
-      "Bash(npm run build:*)",
-      "Bash(tee:*)",
-      "Bash(git remote add:*)",
-      "Bash(vercel:*)",
-      "Bash(npm install:*)",
-      "WebFetch(domain:www.extra.co.il)",
-      "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nRedesign website with minimalist yellow/white theme and dark mode\n\nMajor updates:\n- Complete color scheme overhaul to minimalist design (white bg, yellow accents)\n- Implement fully functional light/dark mode toggle with enhanced UI\n- Redesign all pages: home, about, contact, services, templates\n- Enhanced templates page with filters, search, and custom design CTA\n- Update all components (Hero, Benefits, Process, CTA, etc.)\n- Redesign buttons, cards, accessibility menu, cookie banner\n- Add comprehensive dark mode CSS support for all elements\n- Fix Header toggle to use correct ''dark'' class instead of ''light''\n- Add animated toggle switch with sun/moon icons and stars\n\nDesign inspired by extra.co.il - clean, professional, minimal aesthetic.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push:*)",
-      "Bash(timeout 5 bash:*)",
-      "Bash(npx next build:*)",
-      "Bash(find:*)",
-      "Bash(done)",
-      "Bash(git commit:*)",
-      "Bash(taskkill:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(git rm:*)",
-      "Bash(powershell.exe \"taskkill /F /PID 9484\")",
-      "Bash(powershell.exe \"taskkill /F /PID 22328\")"
+      "Bash(powershell.exe \"Get-ChildItem ''public\\images\\logo'' | Select-Object Name, Length\")",
+      "Bash(powershell.exe \"Copy-Item ''public\\images\\logo\\pixelia-favicon.png'' ''app\\icon.png'' -Force\")",
+      "Bash(powershell.exe \"Get-Item ''app\\icon.png'' | Select-Object Name, Length\")",
+      "Bash(powershell.exe \"Remove-Item ''.next'' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host ''Cache cleared''\")",
+      "Bash(powershell.exe \"Get-ChildItem ''app'' -Filter ''*.png'' | Select-Object Name, Length\")"
     ],
     "deny": [],
     "ask": []

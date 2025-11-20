@@ -33,7 +33,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 mb-16 mx-auto w-fit">
             <Button href="/templates" size="lg">
               {content.primaryCTA}
             </Button>

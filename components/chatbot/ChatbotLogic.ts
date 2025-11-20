@@ -18,7 +18,7 @@ const knowledgeBase: QuestionPattern[] = [
   // Greetings
   {
     patterns: ['שלום', 'היי', 'הי', 'בוקר טוב', 'ערב טוב', 'מה קורה', 'מה המצב'],
-    response: 'שלום! 👋 אני הבוט החכם של SiteCraft. אני כאן לעזור לך עם כל שאלה על השירותים שלנו, מחירים, תהליך העבודה ועוד. במה אוכל לעזור?',
+    response: 'שלום! 👋 אני הבוט החכם של Pixelia. אני כאן לעזור לך עם כל שאלה על השירותים שלנו, מחירים, תהליך העבודה ועוד. במה אוכל לעזור?',
     category: 'greeting'
   },
 
@@ -137,7 +137,7 @@ const knowledgeBase: QuestionPattern[] = [
   // About / Experience
   {
     patterns: ['ניסיון', 'מי אתם', 'על החברה', 'רקע', 'עבודות קודמות', 'פרויקטים'],
-    response: `👨‍💻 **אודות SiteCraft:**
+    response: `👨‍💻 **אודות Pixelia:**
 
 ✅ 5+ שנות ניסיון בפיתוח אתרים
 ✅ למעלה מ-50 אתרים שהשקנו בהצלחה
@@ -192,7 +192,7 @@ const knowledgeBase: QuestionPattern[] = [
   // Advantages / Benefits
   {
     patterns: ['למה', 'יתרונות', 'מה מיוחד', 'למה לבחור', 'הבדל', 'כדאי'],
-    response: `⭐ **למה לבחור ב-SiteCraft?**
+    response: `⭐ **למה לבחור ב-Pixelia?**
 
 🎨 **עיצוב מותאם אישית**
 התאמה מלאה - צבעים, לוגו, תמונות וטקסטים

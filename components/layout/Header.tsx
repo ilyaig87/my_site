@@ -63,19 +63,16 @@ export default function Header() {
       <Container>
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group transition-all duration-300">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 transform group-hover:scale-110 transition-transform duration-300">
+          <Link href="/" className="flex items-center group transition-all duration-300">
+            <div className="relative h-12 md:h-14 w-32 md:w-40 transform group-hover:scale-110 transition-transform duration-300">
               <Image
-                src="/logo.svg"
-                alt="SiteCraft Logo"
+                src="/images/logo/pixelia_logo_color.png"
+                alt="Pixelia Logo"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <span className="text-2xl md:text-3xl font-bold text-gray-900 transition-all duration-300 group-hover:text-yellow-600">
-              SiteCraft
-            </span>
           </Link>
 
           {/* Desktop Navigation */}

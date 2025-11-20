@@ -50,7 +50,7 @@ export default function Chatbot() {
     if (messages.length === 0) {
       const welcomeMessage: Message = {
         id: generateMessageId(),
-        text: 'שלום! 👋 אני הבוט החכם של SiteCraft.\nבחר שאלה מהרשימה למטה ואשמח לעזור!',
+        text: 'שלום! 👋 אני הבוט החכם של Pixelia.\nבחר שאלה מהרשימה למטה ואשמח לעזור!',
         sender: 'bot',
         timestamp: new Date()
       };
@@ -161,7 +161,7 @@ export default function Chatbot() {
               </svg>
             </div>
             <div>
-              <h3 className="font-bold">SiteCraft Bot</h3>
+              <h3 className="font-bold">Pixelia Bot</h3>
               <p className="text-xs opacity-90">פה כדי לעזור 24/7</p>
             </div>
           </div>
