@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import FloatingAccessibility from "@/components/accessibility/FloatingAccessibility";
 import CookieBanner from "@/components/CookieBanner";
 import Chatbot from "@/components/chatbot/Chatbot";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const heebo = Heebo({
   subsets: ["hebrew", "latin"],
@@ -53,6 +55,8 @@ export default function RootLayout({
         <FloatingAccessibility />
         <CookieBanner />
         <Chatbot />
+        <VisitorCounter />
+        <AnalyticsTracker />
       </body>
     </html>
   );

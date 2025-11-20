@@ -7,6 +7,8 @@ interface Review {
   rating: number
   comment: string
   date: string
+  approved: number
+  created_at: number
 }
 
 // Initialize database on first request
@@ -19,15 +21,23 @@ async function ensureInitialized() {
 }
 
 // GET - Get all reviews
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await ensureInitialized()
 
-    const result = await turso.execute(`
-      SELECT id, name, rating, comment, date
-      FROM reviews
-      ORDER BY date DESC
-    `)
+    const searchParams = request.nextUrl.searchParams
+    const includeUnapproved = searchParams.get('admin') === 'true'
+
+    let query = `SELECT id, name, rating, comment, date, approved, created_at FROM reviews`
+
+    // For public API, only show approved reviews
+    if (!includeUnapproved) {
+      query += ` WHERE approved = 1`
+    }
+
+    query += ` ORDER BY date DESC`
+
+    const result = await turso.execute(query)
 
     const reviews: Review[] = result.rows.map(row => ({
       id: row.id as string,
@@ -35,9 +45,11 @@ export async function GET() {
       rating: row.rating as number,
       comment: row.comment as string,
       date: row.date as string,
+      approved: row.approved as number,
+      created_at: row.created_at as number
     }))
 
-    return NextResponse.json(reviews)
+    return NextResponse.json({ reviews })
   } catch (error) {
     console.error('Error reading reviews:', error)
     return NextResponse.json({ error: 'Failed to load reviews' }, { status: 500 })
@@ -94,5 +106,30 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error saving review:', error)
     return NextResponse.json({ error: 'Failed to save review' }, { status: 500 })
+  }
+}
+
+// DELETE - Delete a review
+export async function DELETE(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Review ID is required' },
+        { status: 400 }
+      )
+    }
+
+    await turso.execute({
+      sql: 'DELETE FROM reviews WHERE id = ?',
+      args: [id]
+    })
+
+    return NextResponse.json({ success: true, message: 'Review deleted successfully' })
+  } catch (error) {
+    console.error('Error deleting review:', error)
+    return NextResponse.json({ error: 'Failed to delete review' }, { status: 500 })
   }
 }

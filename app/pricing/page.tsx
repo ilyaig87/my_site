@@ -1,7 +1,7 @@
 import Pricing from '@/components/Pricing'
 
 export const metadata = {
-  title: 'מחירים וחבילות | SiteCraft',
+  title: 'מחירים וחבילות | Pixelia',
   description: 'בחר את החבילה המתאימה לך - חבילות בניית אתרים מקצועיות במחירים שקופים'
 }
 

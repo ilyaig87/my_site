@@ -6,8 +6,8 @@ import { getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'אודות - WebSites',
-  description: 'קצת עלינו, הניסיון והטכנולוגיות שאנחנו עובדים איתן',
+  title: 'אודות - Pixelia',
+  description: 'קצת עלינו, הניסיון והטכנולוגיות שאנחנו עובדים איתן - בניית אתרים מקצועיים לעסקים',
 };
 
 export default function AboutPage() {

@@ -91,47 +91,47 @@ export default function StatsSection() {
   ]
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+    <section className="py-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        <div className="text-center mb-3">
+          <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-1">
             במספרים
           </h2>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-[10px] text-gray-600 dark:text-gray-300">
             הנתונים מדברים בעד עצמם
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {stats.map((stat, index) => (
             <div
               key={index}
               className="relative group"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 dark:border-gray-700 hover:border-yellow-400 dark:hover:border-yellow-500 transform hover:scale-105">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 dark:border-gray-700 hover:border-yellow-400 dark:hover:border-yellow-500 transform hover:scale-105">
                 {/* Live indicator */}
                 {stat.live && (
-                  <div className="absolute top-3 right-3 flex items-center gap-1">
-                    <span className="relative flex h-3 w-3">
+                  <div className="absolute top-1.5 right-1.5 flex items-center gap-0.5">
+                    <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
                     </span>
-                    <span className="text-xs text-green-600 dark:text-green-400 font-medium">LIVE</span>
+                    <span className="text-[8px] text-green-600 dark:text-green-400 font-medium">LIVE</span>
                   </div>
                 )}
 
                 {/* Icon */}
-                <div className="text-4xl mb-3 transform group-hover:scale-110 transition-transform">
+                <div className="text-lg mb-1 transform group-hover:scale-110 transition-transform">
                   {stat.icon}
                 </div>
 
                 {/* Value */}
-                <div className={`text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                <div className={`text-xl md:text-2xl font-bold mb-0.5 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
                   {stat.value}{stat.suffix}
                 </div>
 
                 {/* Label */}
-                <div className="text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium">
+                <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-300 font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -140,8 +140,8 @@ export default function StatsSection() {
         </div>
 
         {/* Additional trust line */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
+        <div className="mt-3 text-center">
+          <p className="text-gray-600 dark:text-gray-400 text-[10px]">
             🎉 <strong>עדכון אחרון:</strong> פרויקט חדש הושלם לפני{' '}
             <span className="text-yellow-600 dark:text-yellow-400 font-semibold">2 שעות</span>
           </p>

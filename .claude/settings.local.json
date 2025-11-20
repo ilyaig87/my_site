@@ -1,11 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell.exe \"Get-ChildItem ''public\\images\\logo'' | Select-Object Name, Length\")",
-      "Bash(powershell.exe \"Copy-Item ''public\\images\\logo\\pixelia-favicon.png'' ''app\\icon.png'' -Force\")",
-      "Bash(powershell.exe \"Get-Item ''app\\icon.png'' | Select-Object Name, Length\")",
-      "Bash(powershell.exe \"Remove-Item ''.next'' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host ''Cache cleared''\")",
-      "Bash(powershell.exe \"Get-ChildItem ''app'' -Filter ''*.png'' | Select-Object Name, Length\")"
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

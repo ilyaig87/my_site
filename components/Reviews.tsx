@@ -30,7 +30,8 @@ export default function Reviews() {
     try {
       const response = await fetch('/api/reviews')
       const data = await response.json()
-      setReviews(data)
+      // API now returns { reviews: [...] }
+      setReviews(data.reviews || data || [])
     } catch (error) {
       console.error('Error loading reviews:', error)
     } finally {
@@ -53,10 +54,8 @@ export default function Reviews() {
       })
 
       if (response.ok) {
-        const newReview = await response.json()
-        setReviews([newReview, ...reviews])
         setFormData({ name: '', rating: 5, comment: '' })
-        setMessage('הביקורת נשמרה בהצלחה!')
+        setMessage('תודה! הביקורת שלך נשלחה ותופיע לאחר אישור.')
       } else {
         setMessage('שגיאה בשמירת הביקורת')
       }

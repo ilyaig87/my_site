@@ -6,6 +6,7 @@ import TemplateRenderer from '@/components/templates/TemplateRenderer';
 import TemplatePreview from '@/components/ui/TemplatePreview';
 import { getTemplateBySlug, getAllTemplateSlugs, getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
+import TemplateViewTracker from '@/components/TemplateViewTracker';
 
 interface TemplatePageProps {
   params: Promise<{ slug: string }>;
@@ -251,6 +252,9 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
           </div>
         </Container>
       </section>
+
+      {/* Track template view and show stats */}
+      <TemplateViewTracker templateSlug={template.slug} templateName={template.name} />
     </>
   );
 }

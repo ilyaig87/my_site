@@ -1,8 +1,8 @@
 import Reviews from '@/components/Reviews'
 
 export const metadata = {
-  title: 'ביקורות לקוחות | SiteCraft',
-  description: 'קרא ביקורות לקוחות והוסף את הביקורת שלך'
+  title: 'ביקורות לקוחות | Pixelia',
+  description: 'קרא ביקורות לקוחות והוסף את הביקורת שלך - אתרים מקצועיים מ-Pixelia'
 }
 
 export default function ReviewsPage() {

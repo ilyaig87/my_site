@@ -2,10 +2,11 @@ import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
 import { getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
+import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'צור קשר - WebSites',
-  description: 'דברו איתנו ובואו נתחיל לעבוד על האתר שלכם',
+  title: 'צור קשר - Pixelia',
+  description: 'דברו עם Pixelia ובואו נתחיל לעבוד על האתר המושלם שלכם',
 };
 
 export default function ContactPage() {
@@ -131,6 +132,11 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="max-w-3xl mx-auto mt-16">
+            <ContactForm />
           </div>
         </Container>
       </section>

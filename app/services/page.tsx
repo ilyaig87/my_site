@@ -7,8 +7,8 @@ import { Metadata } from 'next';
 import { ReactElement } from 'react';
 
 export const metadata: Metadata = {
-  title: 'שירותים - WebSites',
-  description: 'סוגי האתרים שאנחנו בונים ותהליך העבודה',
+  title: 'שירותים - Pixelia',
+  description: 'סוגי האתרים שאנחנו בונים ב-Pixelia ותהליך העבודה המקצועי שלנו',
 };
 
 export default function ServicesPage() {
