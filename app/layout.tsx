@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Heebo, Inter, Poppins } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -56,7 +57,9 @@ export default function RootLayout({
         <CookieBanner />
         <Chatbot />
         <VisitorCounter />
-        <AnalyticsTracker />
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
       </body>
     </html>
   );

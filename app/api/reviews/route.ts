@@ -84,7 +84,9 @@ export async function POST(request: NextRequest) {
       name: body.name.trim(),
       rating: Number(body.rating),
       comment: body.comment.trim(),
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      approved: 0,
+      created_at: Date.now()
     }
 
     // Insert into database
