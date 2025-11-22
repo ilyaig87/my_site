@@ -270,6 +270,45 @@ export async function initDatabase() {
       console.log('Reviews table already has approved column or other alter error')
     }
 
+    // Admin: Users table for authentication
+    await turso.execute(`
+      CREATE TABLE IF NOT EXISTS admin_users (
+        id TEXT PRIMARY KEY,
+        email TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        name TEXT NOT NULL,
+        role TEXT DEFAULT 'admin',
+        is_active INTEGER DEFAULT 1,
+        created_at TEXT NOT NULL,
+        last_login TEXT
+      )
+    `)
+
+    await turso.execute(`
+      CREATE INDEX IF NOT EXISTS idx_admin_email ON admin_users(email)
+    `)
+
+    // Pricing: Packages table
+    await turso.execute(`
+      CREATE TABLE IF NOT EXISTS pricing_packages (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        price INTEGER NOT NULL,
+        currency TEXT DEFAULT 'ILS',
+        description TEXT,
+        features TEXT NOT NULL,
+        is_popular INTEGER DEFAULT 0,
+        is_active INTEGER DEFAULT 1,
+        display_order INTEGER DEFAULT 0,
+        created_at TEXT NOT NULL,
+        updated_at TEXT
+      )
+    `)
+
+    await turso.execute(`
+      CREATE INDEX IF NOT EXISTS idx_packages_order ON pricing_packages(display_order, is_active)
+    `)
+
     console.log('✅ Turso database initialized with all tables')
   } catch (error) {
     console.error('❌ Error initializing database:', error)

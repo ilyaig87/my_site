@@ -1,31 +1,58 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Container from '@/components/ui/Container'
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [canRegister, setCanRegister] = useState(false)
+
+  useEffect(() => {
+    // Check if just registered
+    if (searchParams.get('registered') === 'true') {
+      setSuccessMessage('ההרשמה בוצעה בהצלחה! כעת אתה יכול להתחבר.')
+    }
+
+    // Check if registration is available
+    const checkRegistrationStatus = async () => {
+      try {
+        const response = await fetch('/api/admin/register')
+        const data = await response.json()
+        setCanRegister(data.canRegister)
+      } catch (error) {
+        console.error('Error checking registration status:', error)
+      }
+    }
+
+    checkRegistrationStatus()
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
+    setSuccessMessage('')
 
     try {
       const response = await fetch('/api/admin/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ email, password })
       })
+
+      const data = await response.json()
 
       if (response.ok) {
         router.push('/admin')
       } else {
-        setError('סיסמה שגויה')
+        setError(data.error || 'פרטי התחברות שגויים')
       }
     } catch (error) {
       setError('שגיאה בהתחברות')
@@ -55,7 +82,23 @@ export default function AdminLoginPage() {
             </div>
 
             {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label htmlFor="email" className="block text-sm font-bold text-gray-900 mb-2">
+                  אימייל
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none text-gray-900"
+                  placeholder="admin@example.com"
+                  autoFocus
+                />
+              </div>
+
               <div>
                 <label htmlFor="password" className="block text-sm font-bold text-gray-900 mb-2">
                   סיסמה
@@ -68,9 +111,14 @@ export default function AdminLoginPage() {
                   required
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none text-gray-900"
                   placeholder="••••••••"
-                  autoFocus
                 />
               </div>
+
+              {successMessage && (
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-green-700 text-sm">
+                  {successMessage}
+                </div>
+              )}
 
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm">
@@ -80,12 +128,27 @@ export default function AdminLoginPage() {
 
               <button
                 type="submit"
-                disabled={isLoading || !password}
+                disabled={isLoading || !email || !password}
                 className="w-full px-6 py-3 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'מתחבר...' : 'התחבר'}
               </button>
             </form>
+
+            {/* Registration Link */}
+            {canRegister && (
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl text-center">
+                <p className="text-sm text-blue-900 mb-2">
+                  אין לך חשבון אדמין?
+                </p>
+                <a
+                  href="/admin/register"
+                  className="text-sm font-bold text-blue-700 hover:text-blue-900 underline"
+                >
+                  צור חשבון אדמין ראשון
+                </a>
+              </div>
+            )}
 
             {/* Back Link */}
             <div className="mt-6 text-center">
@@ -97,5 +160,20 @@ export default function AdminLoginPage() {
         </div>
       </Container>
     </section>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="text-center">
+          <div className="inline-block w-12 h-12 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+          <p className="mt-4 text-gray-600">טוען...</p>
+        </div>
+      </section>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }

@@ -7,9 +7,10 @@ import OrdersView from '@/components/admin/OrdersView'
 import LeadsView from '@/components/admin/LeadsView'
 import AnalyticsView from '@/components/admin/AnalyticsView'
 import ReviewsView from '@/components/admin/ReviewsView'
+import PricingView from '@/components/admin/PricingView'
 import { useRouter } from 'next/navigation'
 
-type TabType = 'analytics' | 'orders' | 'leads' | 'reviews'
+type TabType = 'analytics' | 'orders' | 'leads' | 'reviews' | 'pricing'
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -34,7 +35,6 @@ export default function AdminDashboard() {
                   </svg>
                 </div>
                 <div>
-                  <h1 className="text-2xl font-black text-gray-900">Admin Dashboard</h1>
                   <p className="text-sm text-gray-600">ניהול האתר</p>
                 </div>
               </div>
@@ -103,6 +103,16 @@ export default function AdminDashboard() {
               >
                 ⭐ ביקורות
               </button>
+              <button
+                onClick={() => setActiveTab('pricing')}
+                className={`px-6 py-3 rounded-xl font-bold whitespace-nowrap transition-all ${
+                  activeTab === 'pricing'
+                    ? 'bg-yellow-400 text-gray-900 shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                💰 מחירים
+              </button>
             </div>
           </Container>
         </div>
@@ -114,6 +124,7 @@ export default function AdminDashboard() {
             {activeTab === 'orders' && <OrdersView />}
             {activeTab === 'leads' && <LeadsView />}
             {activeTab === 'reviews' && <ReviewsView />}
+            {activeTab === 'pricing' && <PricingView />}
           </Container>
         </div>
       </div>

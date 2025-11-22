@@ -118,12 +118,27 @@ export default function Lawyer({ template }: LawyerProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { image: 'https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=600&q=80', name: 'עו"ד דוד כהן', position: 'שותף בכיר' },
-              { image: 'https://images.unsplash.com/photo-1531498680898-915b3c7e07bf?w=600&q=80', name: 'עו"ד שרה לוי', position: 'שותפה מייסדת' },
-              { image: 'https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=600&q=80', name: 'עו"ד מיכאל גולן', position: 'שותף בכיר' },
+              {
+                image: '/images/templates/lawyer-team1.png',
+                name: 'עו"ד דוד כהן',
+                position: 'שותף בכיר',
+                description: 'מתמחה במשפט אזרחי ומסחרי עם ניסיון של 15 שנה'
+              },
+              {
+                image: '/images/templates/lawyer-team3.png',
+                name: 'עו"ד שרה לוי',
+                position: 'שותפה מייסדת',
+                description: 'מתמחה במשפט אזרחי ומסחרי עם ניסיון של 15 שנה'
+              },
+              {
+                image: '/images/templates/lawyer-team2.png',
+                name: 'עו"ד מיכאל גולן',
+                position: 'שותף',
+                description: 'מתמחה במשפט פלילי ומשפט משפחה עם ניסיון של 10 שנים'
+              },
             ].map((lawyer, idx) => (
               <div key={idx} className="text-center">
-                <div className="w-48 h-48 mx-auto rounded-lg mb-6 overflow-hidden shadow-lg">
+                <div className="w-64 h-80 mx-auto rounded-lg mb-6 overflow-hidden shadow-lg">
                   <img
                     src={lawyer.image}
                     alt={lawyer.name}
@@ -137,7 +152,7 @@ export default function Lawyer({ template }: LawyerProps) {
                   {lawyer.position}
                 </p>
                 <p className="opacity-80 max-w-sm mx-auto">
-                  מתמחה במשפט אזרחי ומסחרי עם ניסיון של 15 שנה
+                  {lawyer.description}
                 </p>
               </div>
             ))}

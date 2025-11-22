@@ -11,6 +11,17 @@ interface AnalyticsStats {
 export default function VisitorCounter() {
   const [stats, setStats] = useState<AnalyticsStats | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  // Check if user is admin
+  const checkAdminStatus = async () => {
+    try {
+      const response = await fetch('/api/admin/auth')
+      setIsAdmin(response.ok)
+    } catch (error) {
+      setIsAdmin(false)
+    }
+  }
 
   const fetchStats = async () => {
     try {
@@ -27,6 +38,7 @@ export default function VisitorCounter() {
   }
 
   useEffect(() => {
+    checkAdminStatus()
     fetchStats()
 
     // Refresh stats every 30 seconds
@@ -34,6 +46,11 @@ export default function VisitorCounter() {
 
     return () => clearInterval(interval)
   }, [])
+
+  // Only show to admin users
+  if (!isAdmin) {
+    return null
+  }
 
   if (isLoading) {
     return null // Don't show anything while loading

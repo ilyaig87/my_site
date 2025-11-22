@@ -189,6 +189,7 @@ export default function ContactSection() {
                         errors.fullName ? 'border-red-300 bg-red-50' : 'border-gray-200'
                       }`}
                       placeholder="איך קוראים לך?"
+                      suppressHydrationWarning
                     />
                     {errors.fullName && (
                       <p className="text-red-600 text-[10px] mt-0.5">{errors.fullName}</p>
@@ -208,6 +209,7 @@ export default function ContactSection() {
                         errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200'
                       }`}
                       placeholder="your@email.com"
+                      suppressHydrationWarning
                     />
                     {errors.email && (
                       <p className="text-red-600 text-[10px] mt-0.5">{errors.email}</p>
@@ -229,6 +231,7 @@ export default function ContactSection() {
                         errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200'
                       }`}
                       placeholder="050-123-4567"
+                      suppressHydrationWarning
                     />
                     {errors.phone && (
                       <p className="text-red-600 text-[10px] mt-0.5">{errors.phone}</p>
@@ -246,6 +249,7 @@ export default function ContactSection() {
                       className={`w-full px-2.5 py-1.5 text-xs border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all ${
                         errors.businessType ? 'border-red-300 bg-red-50' : 'border-gray-200'
                       }`}
+                      suppressHydrationWarning
                     >
                       <option value="">בחר סוג עסק</option>
                       <option value="restaurant">מסעדה / בית קפה</option>

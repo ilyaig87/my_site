@@ -64,6 +64,14 @@ export default function Footer() {
               <Link href="/terms" className="hover:text-orange-600 transition-colors">תנאי שימוש</Link>
               <span className="text-gray-400">•</span>
               <Link href="/accessibility" className="hover:text-orange-600 transition-colors">הצהרת נגישות</Link>
+              <span className="text-gray-400">•</span>
+              <Link
+                href="/admin/login"
+                className="hover:text-yellow-600 transition-colors opacity-60 hover:opacity-100"
+                title="כניסה לאדמין"
+              >
+                Admin
+              </Link>
             </div>
 
             {/* Copyright */}

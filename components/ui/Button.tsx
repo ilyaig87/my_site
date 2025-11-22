@@ -65,7 +65,7 @@ export default function Button({
   }
 
   return (
-    <button onClick={onClick} className={classes} type={type} disabled={disabled}>
+    <button onClick={onClick} className={classes} type={type} disabled={disabled} suppressHydrationWarning>
       <ButtonContent />
     </button>
   );

@@ -43,8 +43,8 @@
       "bodyFont": "Inter",
       "style": "professional"
     },
-    "previewImage": "/images/templates/classic-business-preview.jpg",
-    "mobilePreviewImage": "/images/templates/classic-business-mobile.jpg",
+    "previewImage": "/images/templates/classic-business-preview.png",
+    "mobilePreviewImage": "/images/templates/classic-business-mobile.png",
     "tags": ["קלאסי", "מקצועי", "עסקי", "נקי"]
   },
   {
@@ -91,8 +91,8 @@
       "bodyFont": "Open Sans",
       "style": "modern"
     },
-    "previewImage": "/images/templates/modern-coach-preview.jpg",
-    "mobilePreviewImage": "/images/templates/modern-coach-mobile.jpg",
+    "previewImage": "/images/templates/modern-coach-preview.png",
+    "mobilePreviewImage": "/images/templates/modern-coach-mobile.png",
     "tags": ["מודרני", "צבעוני", "דינמי", "אנרגטי"]
   },
   {
@@ -139,8 +139,8 @@
       "bodyFont": "Lato",
       "style": "modern"
     },
-    "previewImage": "/images/templates/minimal-portfolio-preview.jpg",
-    "mobilePreviewImage": "/images/templates/minimal-portfolio-mobile.jpg",
+    "previewImage": "/images/templates/minimal-portfolio-preview.png",
+    "mobilePreviewImage": "/images/templates/minimal-portfolio-preview.png",
     "tags": ["מינימליסטי", "אלגנטי", "נקי", "פורטפוליו"]
   },
   {
@@ -187,8 +187,8 @@
       "bodyFont": "Roboto",
       "style": "modern"
     },
-    "previewImage": "/images/templates/event-landing-preview.jpg",
-    "mobilePreviewImage": "/images/templates/event-landing-mobile.jpg",
+    "previewImage": "/images/templates/event-landing-preview.png",
+    "mobilePreviewImage": "/images/templates/event-landing-mobile.png",
     "tags": ["דינמי", "ממיר", "אירועים", "מודרני"]
   },
   {
@@ -235,8 +235,8 @@
       "bodyFont": "Assistant",
       "style": "professional"
     },
-    "previewImage": "/images/templates/real-estate-preview.jpg",
-    "mobilePreviewImage": "/images/templates/real-estate-mobile.jpg",
+    "previewImage": "/images/templates/real-estate-preview.png",
+    "mobilePreviewImage": "/images/templates/real-estate-preview.png",
     "tags": ["נדל\"ן", "מקצועי", "פילטרים", "מפות"]
   },
   {
@@ -283,8 +283,8 @@
       "bodyFont": "Rubik",
       "style": "professional"
     },
-    "previewImage": "https://impeccabuild.com.au/wp-content/uploads/2020/09/Medical-Waiting-Room-Design-Ideas-Medical-Fitouts-ImpeccaBuild-7-scaled.jpg",
-    "mobilePreviewImage": "https://impeccabuild.com.au/wp-content/uploads/2020/09/Medical-Waiting-Room-Design-Ideas-Medical-Fitouts-ImpeccaBuild-5-scaled.jpg",
+    "previewImage": "/images/templates/medical-clinic-preview.png",
+    "mobilePreviewImage": "/images/templates/medical-clinic-preview.png",
     "tags": ["רפואי", "נקי", "מרגיע", "מקצועי"]
   },
   {
@@ -331,8 +331,8 @@
       "bodyFont": "Heebo",
       "style": "modern"
     },
-    "previewImage": "/images/templates/fitness-studio-preview.jpg",
-    "mobilePreviewImage": "/images/templates/fitness-studio-mobile.jpg",
+    "previewImage": "/images/templates/fitness-studio-preview.png",
+    "mobilePreviewImage": "/images/templates/fitness-studio-preview.png",
     "tags": ["אנרגטי", "ספורט", "כושר", "דינמי"]
   },
   {
@@ -475,8 +475,8 @@
       "bodyFont": "Assistant",
       "style": "modern"
     },
-    "previewImage": "/images/templates/mini-shop-preview.jpg",
-    "mobilePreviewImage": "/images/templates/mini-shop-mobile.jpg",
+    "previewImage": "/images/templates/mini-shop-preview.png",
+    "mobilePreviewImage": "/images/templates/mini-shop-preview.png",
     "tags": ["חנות", "מוצרים", "קטלוג", "מודרני"]
   },
   {
@@ -523,8 +523,33 @@
       "bodyFont": "Open Sans",
       "style": "professional"
     },
-    "previewImage": "/images/templates/lawyer-preview.jpg",
-    "mobilePreviewImage": "/images/templates/lawyer-mobile.jpg",
+    "previewImage": "/images/templates/lawyer-preview.png",
+    "mobilePreviewImage": "/images/templates/lawyer-mobile.png",
+    "teamImages": [
+      "/images/templates/lawyer-team1.png",
+      "/images/templates/lawyer-team2.png",
+      "/images/templates/lawyer-team3.png"
+    ],
+    "teamMembers": [
+      {
+        "name": "עו\"ד דוד כהן",
+        "title": "שותף בכיר",
+        "description": "מתמחה במשפט אזרחי ומסחרי עם ניסיון של 15 שנה",
+        "image": "/images/templates/lawyer-team1.png"
+      },
+      {
+        "name": "עו\"ד שרה לוי",
+        "title": "שותפה מייסדת",
+        "description": "מתמחה במשפט אזרחי ומסחרי עם ניסיון של 15 שנה",
+        "image": "/images/templates/lawyer-team3.png"
+      },
+      {
+        "name": "עו\"ד מיכאל גולן",
+        "title": "שותף",
+        "description": "מתמחה במשפט פלילי ומשפט משפחה עם ניסיון של 10 שנים",
+        "image": "/images/templates/lawyer-team2.png"
+      }
+    ],
     "tags": ["משפטי", "יוקרתי", "מקצועי", "אמין"]
   },
   {
@@ -571,8 +596,8 @@
       "bodyFont": "Inter",
       "style": "modern"
     },
-    "previewImage": "/images/templates/creative-agency-preview.jpg",
-    "mobilePreviewImage": "/images/templates/creative-agency-mobile.jpg",
+    "previewImage": "/images/templates/creative-agency-preview.png",
+    "mobilePreviewImage": "/images/templates/creative-agency-preview.png",
     "tags": ["קריאייטיבי", "נועז", "צבעוני", "מודרני"]
   }
 ]

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <HeroSection content={content.hero} />
-      <StatsSection />
+      {/* <StatsSection /> */}
       <ServicesSection />
       <FeaturedTemplatesSection templates={featuredTemplates} />
       <PricingSection />
