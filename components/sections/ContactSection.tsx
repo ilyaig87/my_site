@@ -3,8 +3,26 @@
 import { useState, FormEvent } from 'react';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
+import { ContactInfo } from '@/types';
 
-export default function ContactSection() {
+interface ContactSectionProps {
+  contact?: ContactInfo;
+}
+
+function formatPhoneDisplay(phone: string) {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) {
+    return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+  return phone;
+}
+
+export default function ContactSection({ contact }: ContactSectionProps) {
+  const phone = contact?.phone ?? '';
+  const phoneDigits = phone.replace(/\D/g, '');
+  const phoneDisplay = formatPhoneDisplay(phone);
+  const email = contact?.email ?? '';
+  const whatsapp = contact?.whatsapp ?? '';
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -105,62 +123,112 @@ export default function ContactSection() {
 
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-3">
-              <div>
-                <h3 className="text-base font-bold mb-3 text-gray-900">
-                  דרכי התקשרות
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
+            <div className="lg:col-span-1">
+              <div className="relative h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-5 shadow-xl overflow-hidden">
+                {/* Decorative gradient blobs */}
+                <div className="pointer-events-none absolute -top-12 -right-12 w-40 h-40 bg-yellow-400/20 rounded-full blur-3xl"></div>
+                <div className="pointer-events-none absolute -bottom-16 -left-12 w-44 h-44 bg-yellow-500/10 rounded-full blur-3xl"></div>
+
+                <div className="relative">
+                  {/* Header */}
+                  <div className="mb-4">
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 mb-2 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-300 text-[9px] font-semibold uppercase tracking-wide">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-400"></span>
+                      </span>
+                      <span>זמינים עכשיו</span>
                     </div>
-                    <div>
-                      <p className="font-semibold text-xs text-gray-900 mb-0.5">אימייל</p>
-                      <a href="mailto:contact@pixelia.co.il" className="text-[10px] text-gray-600 hover:text-yellow-600 transition-colors">
-                        contact@pixelia.co.il
-                      </a>
-                    </div>
+                    <h3 className="text-lg font-black text-white mb-1">
+                      דרכי התקשרות
+                    </h3>
+                    <p className="text-[11px] text-gray-300 leading-relaxed">
+                      בחרו את הדרך הנוחה לכם — מענה תוך 24 שעות
+                    </p>
                   </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  {/* Contact methods */}
+                  <div className="space-y-2 mb-4">
+                    {/* Email */}
+                    <a
+                      href={`mailto:${email}`}
+                      className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-yellow-400/40 transition-all"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-yellow-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-md">
+                        <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-semibold text-yellow-300 uppercase tracking-wide mb-0.5">אימייל</p>
+                        <p className="text-xs text-white truncate" dir="ltr">{email}</p>
+                      </div>
+                      <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-yellow-300 transition-colors flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                       </svg>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-xs text-gray-900 mb-0.5">טלפון</p>
-                      <a href="tel:+972501234567" className="text-[10px] text-gray-600 hover:text-yellow-600 transition-colors">
-                        050-123-4567
-                      </a>
-                    </div>
+                    </a>
+
+                    {/* Phone */}
+                    <a
+                      href={`tel:+972${phoneDigits.replace(/^0/, '')}`}
+                      className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-yellow-400/40 transition-all"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-md">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-semibold text-blue-300 uppercase tracking-wide mb-0.5">טלפון</p>
+                        <p className="text-xs text-white" dir="ltr">{phoneDisplay}</p>
+                      </div>
+                      <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-300 transition-colors flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </a>
                   </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                  {/* WhatsApp CTA - emphasized */}
+                  <a
+                    href={`https://wa.me/${whatsapp}?text=${encodeURIComponent('היי, אני מעוניין לבנות אתר')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative flex items-center justify-center gap-2 w-full py-2.5 px-3 bg-green-500 hover:bg-green-400 text-white font-bold text-sm rounded-xl shadow-lg shadow-green-500/30 transition-all hover:scale-[1.02] mb-3 overflow-hidden"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    <svg className="relative w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    <span className="relative">שלחו הודעה ב-WhatsApp</span>
+                  </a>
+
+                  {/* Trust signals */}
+                  <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/10">
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3 h-3 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
+                      <span className="text-[10px] text-gray-300">ייעוץ ראשוני חינם</span>
                     </div>
-                    <div>
-                      <p className="font-semibold text-xs text-gray-900 mb-0.5">WhatsApp</p>
-                      <a href="https://wa.me/972501234567" target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-600 hover:text-yellow-600 transition-colors">
-                        שלחו הודעה
-                      </a>
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3 h-3 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-[10px] text-gray-300">ללא התחייבות</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3 h-3 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-[10px] text-gray-300">מחירים שקופים</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3 h-3 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-[10px] text-gray-300">מענה תוך 24ש'</span>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="bg-yellow-50 rounded-lg p-3 border-2 border-yellow-200">
-                <h4 className="font-bold text-xs text-gray-900 mb-1.5">זמני מענה</h4>
-                <div className="space-y-0.5 text-[10px] text-gray-600">
-                  <p>ראשון - חמישי: 9:00 - 18:00</p>
-                  <p>שישי: 9:00 - 14:00</p>
-                  <p>שבת: סגור</p>
                 </div>
               </div>
             </div>
@@ -230,7 +298,7 @@ export default function ContactSection() {
                       className={`w-full px-2.5 py-1.5 text-xs border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all ${
                         errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200'
                       }`}
-                      placeholder="050-123-4567"
+                      placeholder="054-6361555"
                       suppressHydrationWarning
                     />
                     {errors.phone && (

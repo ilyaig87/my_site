@@ -49,7 +49,11 @@ export default function FloatingAccessibility() {
 
           {/* Accessibility Menu - positioned relative to button */}
           {isOpen && (
-            <div className="absolute left-[72px] top-0 w-80 max-h-[70vh] overflow-y-auto bg-white border-2 border-gray-200 p-6 rounded-2xl shadow-2xl">
+            <div
+              role="dialog"
+              aria-label="תפריט נגישות"
+              className="absolute left-[72px] top-0 w-[340px] max-h-[80vh] overflow-y-auto bg-white border-2 border-gray-200 p-5 rounded-2xl shadow-2xl"
+            >
               <AccessibilityMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
             </div>
           )}

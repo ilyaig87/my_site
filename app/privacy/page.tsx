@@ -2,175 +2,151 @@ import Container from '@/components/ui/Container';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'מדיניות פרטיות - WebSites',
-  description: 'מדיניות הפרטיות של WebSites - כיצד אנו אוספים, משתמשים ושומרים על המידע שלך',
+  title: 'מדיניות פרטיות - Pixelia',
+  description: 'מדיניות הפרטיות של Pixelia - כיצד אנו אוספים, משתמשים ושומרים על המידע שלך',
 };
 
 export default function PrivacyPage() {
   const lastUpdated = new Date().toLocaleDateString('he-IL');
 
   return (
-    <div className="min-h-screen py-16 md:py-24">
+    <div className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white">
       <Container size="md">
-        <div className="glass-card p-8 md:p-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            מדיניות פרטיות
-          </h1>
-          <p className="text-white/70 mb-8">עודכן לאחרונה: {lastUpdated}</p>
+        <div className="bg-white border-2 border-gray-200 rounded-xl shadow-sm p-5 md:p-8">
+          <header className="mb-4 pb-3 border-b border-gray-100">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+              מדיניות פרטיות
+            </h1>
+            <p className="text-xs text-gray-500">עודכן לאחרונה: {lastUpdated}</p>
+          </header>
 
-          <div className="prose prose-invert max-w-none space-y-6 text-white/90">
+          <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">הקדמה</h2>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">הקדמה</h2>
               <p>
-                ב-WebSites אנו מכבדים את פרטיותך ומחויבים להגן על המידע האישי שלך.
-                מדיניות פרטיות זו מסבירה כיצד אנו אוספים, משתמשים, משתפים ומגנים על המידע האישי שלך.
+                ב-Pixelia אנו מכבדים את פרטיותך ומחויבים להגן על המידע האישי שלך.
+                מדיניות זו מסבירה כיצד אנו אוספים, משתמשים, משתפים ומגנים על המידע האישי שלך.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">איסוף מידע</h2>
-              <h3 className="text-xl font-semibold text-white mb-3">מידע שאתה מספק לנו:</h3>
-              <ul className="list-disc pr-6 space-y-2">
-                <li><strong>פרטים אישיים:</strong> שם, כתובת אימייל, מספר טלפון שאתה מספק בטפסי יצירת קשר</li>
-                <li><strong>מידע עסקי:</strong> שם העסק, תחום עיסוק, דרישות פרויקט</li>
-                <li><strong>תקשורת:</strong> התכתבות שלך איתנו באימייל או בטפסים</li>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">איסוף מידע</h2>
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">מידע שאתה מספק:</h3>
+              <ul className="list-disc pr-5 space-y-0.5 mb-2">
+                <li><strong>פרטים אישיים:</strong> שם, אימייל, טלפון מטפסי יצירת קשר</li>
+                <li><strong>מידע עסקי:</strong> שם העסק, תחום, דרישות פרויקט</li>
+                <li><strong>תקשורת:</strong> התכתבות איתנו באימייל או בטפסים</li>
               </ul>
-
-              <h3 className="text-xl font-semibold text-white mb-3 mt-6">מידע שנאסף אוטומטית:</h3>
-              <ul className="list-disc pr-6 space-y-2">
-                <li><strong>נתוני שימוש:</strong> דפים שביקרת, זמן השהייה, מקור ההפניה</li>
-                <li><strong>מידע טכני:</strong> כתובת IP, סוג דפדפן, מערכת הפעלה, סוג מכשיר</li>
-                <li><strong>עוגיות:</strong> מזהים ייחודיים לשיפור חוויית המשתמש</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">שימוש במידע</h2>
-              <p>אנו משתמשים במידע שלך למטרות הבאות:</p>
-              <ul className="list-disc pr-6 space-y-2">
-                <li>מתן ושיפור השירותים שלנו</li>
-                <li>תקשורת איתך בנוגע לפרויקטים ושירותים</li>
-                <li>שליחת עדכונים שיווקיים (אם נתת את הסכמתך)</li>
-                <li>ניתוח וניהול האתר שלנו</li>
-                <li>זיהוי ומניעת הונאות או פעילות לא חוקית</li>
-                <li>עמידה בדרישות חוקיות</li>
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">מידע שנאסף אוטומטית:</h3>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>נתוני שימוש:</strong> דפים שביקרת, זמן שהייה, מקור הפניה</li>
+                <li><strong>מידע טכני:</strong> כתובת IP, דפדפן, מערכת הפעלה, סוג מכשיר</li>
+                <li><strong>עוגיות:</strong> מזהים ייחודיים לשיפור החוויה</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">שיתוף מידע</h2>
-              <p>אנו לא מוכרים או משכירים את המידע האישי שלך לצדדים שלישיים. אנו עשויים לשתף מידע:</p>
-              <ul className="list-disc pr-6 space-y-2">
-                <li><strong>ספקי שירות:</strong> חברות המספקות שירותים טכניים (אחסון, ניתוח נתונים)</li>
-                <li><strong>דרישות חוקיות:</strong> כאשר נדרש על פי חוק או לצורך הליכים משפטיים</li>
-                <li><strong>הגנה על זכויות:</strong> כדי להגן על הזכויות, הרכוש או הבטיחות שלנו או של אחרים</li>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">שימוש במידע</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li>מתן ושיפור השירותים</li>
+                <li>תקשורת לגבי פרויקטים ושירותים</li>
+                <li>עדכונים שיווקיים (בהסכמה)</li>
+                <li>ניתוח וניהול האתר</li>
+                <li>מניעת הונאות ועמידה בחוק</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">עוגיות (Cookies)</h2>
-              <p>
-                אנו משתמשים בעוגיות לשיפור חוויית המשתמש, ניתוח תנועה באתר והצגת תוכן רלוונטי.
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">שיתוף מידע</h2>
+              <p className="mb-1.5">אנו לא מוכרים או משכירים מידע אישי. שיתוף יכול להתקיים עם:</p>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>ספקי שירות:</strong> אחסון, ניתוח נתונים</li>
+                <li><strong>דרישה חוקית:</strong> כשנדרש על פי חוק או הליך משפטי</li>
+                <li><strong>הגנה על זכויות:</strong> להגנה על הזכויות, הרכוש או הבטיחות</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">עוגיות (Cookies)</h2>
+              <p className="mb-1.5">
+                אנו משתמשים בעוגיות לשיפור חוויית המשתמש, ניתוח תנועה והצגת תוכן רלוונטי.
               </p>
-              <h3 className="text-xl font-semibold text-white mb-3 mt-4">סוגי עוגיות:</h3>
-              <ul className="list-disc pr-6 space-y-2">
-                <li><strong>עוגיות הכרחיות:</strong> נדרשות לתפעול בסיסי של האתר</li>
-                <li><strong>עוגיות ביצועים:</strong> עוזרות לנו להבין כיצד המשתמשים משתמשים באתר</li>
-                <li><strong>עוגיות פונקציונליות:</strong> זוכרות העדפות והגדרות שלך</li>
-                <li><strong>עוגיות שיווקיות:</strong> מציגות תוכן ופרסומות רלוונטיות</li>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>הכרחיות:</strong> נדרשות לתפעול בסיסי</li>
+                <li><strong>ביצועים:</strong> מבינות איך משתמשים באתר</li>
+                <li><strong>פונקציונליות:</strong> זוכרות העדפות</li>
+                <li><strong>שיווקיות:</strong> תוכן ופרסומות רלוונטיות</li>
               </ul>
-              <p className="mt-4">
-                אתה יכול לנהל את העדפות העוגיות שלך דרך הגדרות הדפדפן או באמצעות באנר העוגיות באתר.
-              </p>
+              <p className="mt-1.5">ניהול ההעדפות דרך הדפדפן או באנר העוגיות באתר.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">אבטחת מידע</h2>
-              <p>
-                אנו נוקטים אמצעי אבטחה סבירים להגנה על המידע שלך, כולל:
-              </p>
-              <ul className="list-disc pr-6 space-y-2">
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">אבטחת מידע</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
                 <li>הצפנת SSL/TLS לכל התקשורת</li>
                 <li>אחסון מאובטח בשרתים מוגנים</li>
-                <li>הגבלת גישה למידע רק לעובדים מורשים</li>
-                <li>מעקב ובדיקות אבטחה שוטפות</li>
+                <li>גישה מוגבלת לעובדים מורשים בלבד</li>
+                <li>בדיקות אבטחה שוטפות</li>
               </ul>
-              <p className="mt-4">
-                <strong>שים לב:</strong> למרות המאמצים שלנו, אין שיטת העברה או אחסון באינטרנט שהיא 100% מאובטחת.
+              <p className="mt-1.5 text-xs text-gray-600">
+                שים לב: אין שיטת העברה או אחסון באינטרנט שהיא 100% מאובטחת.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">זכויותיך</h2>
-              <p>בהתאם לחוקי הגנת הפרטיות, יש לך את הזכויות הבאות:</p>
-              <ul className="list-disc pr-6 space-y-2">
-                <li><strong>גישה:</strong> לבקש עותק של המידע האישי שאנו שומרים עליך</li>
-                <li><strong>תיקון:</strong> לבקש לתקן מידע שגוי או לא מדויק</li>
-                <li><strong>מחיקה:</strong> לבקש למחוק את המידע האישי שלך</li>
-                <li><strong>הגבלה:</strong> לבקש להגביל את העיבוד של המידע שלך</li>
-                <li><strong>נייד תות:</strong> לקבל את המידע שלך בפורמט נייד</li>
-                <li><strong>התנגדות:</strong> להתנגד לשימוש מסוים במידע שלך</li>
-                <li><strong>ביטול הסכמה:</strong> לבטל הסכמה שנתת בעבר</li>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">זכויותיך</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>גישה</strong> - לבקש עותק של המידע ששמור עליך</li>
+                <li><strong>תיקון</strong> - לתקן מידע שגוי</li>
+                <li><strong>מחיקה</strong> - לבקש למחוק מידע אישי</li>
+                <li><strong>הגבלה</strong> - להגביל את העיבוד</li>
+                <li><strong>ניידות</strong> - לקבל את המידע בפורמט נייד</li>
+                <li><strong>התנגדות</strong> - להתנגד לשימושים מסוימים</li>
+                <li><strong>ביטול הסכמה</strong> - לבטל הסכמה שניתנה</li>
               </ul>
-              <p className="mt-4">
-                לממש זכויות אלה, אנא צור קשר איתנו בפרטים המפורטים בסוף מדיניות זו.
+              <p className="mt-1.5">למימוש זכויות אלה - יצירת קשר בפרטים בסוף המסמך.</p>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">שמירה ושינויים</h2>
+              <p className="mb-1.5">
+                המידע נשמר כל עוד נדרש למטרות המפורטות או על פי חוק. לאחר מכן יימחק או יאנונם.
+              </p>
+              <p>
+                מדיניות זו עשויה להתעדכן. שינויים משמעותיים יפורסמו באתר עם תאריך עדכון חדש.
+                המשך השימוש מהווה הסכמה לעדכונים.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">שימוש על ידי ילדים</h2>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">שימוש ע"י ילדים</h2>
               <p>
-                האתר שלנו אינו מיועד לילדים מתחת לגיל 18. אנו לא אוספים ביודעין מידע אישי מילדים.
-                אם הנך הורה או אפוטרופוס ואתה מאמין שילדך סיפק לנו מידע אישי, אנא צור איתנו קשר.
+                האתר אינו מיועד לילדים מתחת לגיל 18. אם הנך הורה ואתה מאמין שילדך סיפק מידע - אנא צור קשר.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">שמירת מידע</h2>
-              <p>
-                אנו שומרים את המידע האישי שלך כל עוד הוא נדרש למטרות המפורטות במדיניות זו,
-                או כפי שנדרש על פי חוק. לאחר מכן, המידע יימחק או יאנונם באופן מאובטח.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">שינויים במדיניות</h2>
-              <p>
-                אנו עשויים לעדכן מדיניות פרטיות זו מעת לעת. שינויים משמעותיים יפורסמו באתר
-                עם תאריך עדכון חדש. המשך השימוש באתר לאחר שינויים מהווה הסכמה למדיניות המעודכנת.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">יצירת קשר</h2>
-              <p>
-                אם יש לך שאלות או דאגות לגבי מדיניות הפרטיות שלנו או הטיפול במידע שלך, אנא צור קשר:
-              </p>
-              <div className="mt-4 glass p-6 rounded-lg">
-                <ul className="space-y-2">
-                  <li>
-                    <strong>אימייל:</strong>{' '}
-                    <a href="mailto:privacy@websites.co.il" className="text-primary-light hover:underline">
-                      privacy@websites.co.il
-                    </a>
-                  </li>
-                  <li>
-                    <strong>טלפון:</strong>{' '}
-                    <a href="tel:+972-50-123-4567" className="text-primary-light hover:underline">
-                      050-123-4567
-                    </a>
-                  </li>
-                  <li><strong>כתובת:</strong> תל אביב, ישראל</li>
-                </ul>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">יצירת קשר</h2>
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-xs space-y-1">
+                <div>
+                  <strong>אימייל:</strong>{' '}
+                  <a href="mailto:ilyaig8@gmail.com" className="text-yellow-700 hover:underline font-semibold">
+                    ilyaig8@gmail.com
+                  </a>
+                </div>
+                <div>
+                  <strong>טלפון:</strong>{' '}
+                  <a href="tel:+972546361555" className="text-yellow-700 hover:underline font-semibold" dir="ltr">
+                    054-6361555
+                  </a>
+                </div>
+                <div><strong>כתובת:</strong> תל אביב, ישראל</div>
               </div>
             </section>
 
-            <section className="mt-8 p-6 glass rounded-lg border-2 border-primary/30">
-              <h3 className="text-xl font-bold text-white mb-3">חוק הגנת הפרטיות</h3>
-              <p className="text-sm">
-                מדיניות זו מבוססת על חוק הגנת הפרטיות, התשמ"א-1981 ותקנות הגנת הפרטיות (אבטחת מידע), התשע"ז-2017.
-                כמו כן, אנו עומדים בדרישות תקנת הגנת המידע הכללית (GDPR) של האיחוד האירופי למשתמשים מאירופה.
-              </p>
+            <section className="pt-2 text-xs text-gray-500 leading-relaxed">
+              מדיניות זו מבוססת על חוק הגנת הפרטיות, התשמ"א-1981 ותקנות אבטחת מידע, התשע"ז-2017,
+              ועומדת בדרישות GDPR למשתמשים מאירופה.
             </section>
           </div>
         </div>

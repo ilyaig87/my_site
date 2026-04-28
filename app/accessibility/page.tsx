@@ -2,125 +2,181 @@ import Container from '@/components/ui/Container';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'הצהרת נגישות - WebSites',
-  description: 'הצהרת נגישות לאתר WebSites - אנו מחויבים להנגשת האתר לכלל האוכלוסייה',
+  title: 'הצהרת נגישות - Pixelia',
+  description: 'הצהרת נגישות לאתר Pixelia בהתאם לתקן הישראלי ת"י 5568 ברמה AA',
 };
 
 export default function AccessibilityPage() {
+  const lastUpdated = '28 באפריל 2026';
+
   return (
-    <div className="min-h-screen py-16 md:py-24">
+    <div className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white">
       <Container size="md">
-        <div className="glass-card p-8 md:p-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
-            הצהרת נגישות
-          </h1>
+        <div className="bg-white border-2 border-gray-200 rounded-xl shadow-sm p-5 md:p-8">
+          <header className="mb-4 pb-3 border-b border-gray-100">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+              הצהרת נגישות
+            </h1>
+            <p className="text-sm text-gray-600">
+              Pixelia מחויבת להפיכת המרחב הדיגיטלי לנגיש לכלל האוכלוסייה
+            </p>
+            <p className="text-xs text-gray-500 mt-1">עודכן לאחרונה: {lastUpdated}</p>
+          </header>
 
-          <div className="prose prose-invert max-w-none space-y-6 text-white/90">
+          <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">מחויבות לנגישות</h2>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">1. מחויבות לנגישות</h2>
               <p>
-                WebSites מחויבת להנגשת האתר שלה לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות.
-                אנו משקיעים משאבים רבים על מנת להבטיח שהאתר יהיה נגיש וידידותי לכל המשתמשים.
+                ב-Pixelia אינטרנט נגיש הוא זכות בסיסית. אנו פועלים להפיכת האתר ושירותינו
+                לנגישים לכלל הציבור, לרבות אנשים עם מוגבלויות מוטוריות, חזותיות, שמיעתיות,
+                קוגניטיביות ולמידה. נגישות היא חלק בלתי נפרד מהפיתוח, לא תוספת מאוחרת.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">תקן הנגישות</h2>
-              <p>
-                האתר עומד בדרישות תקן ישראלי (ת"י 5568) ברמה AA, בהתאם לתקנות שוויון זכויות לאנשים
-                עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013.
-              </p>
-              <p>
-                התקן הבינלאומי WCAG 2.1 ברמה AA משמש כבסיס להנגשת האתר.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">אמצעי הנגישות באתר</h2>
-              <ul className="list-disc pr-6 space-y-2">
-                <li>תפריט נגישות מתקדם המאפשר התאמה אישית של האתר</li>
-                <li>שינוי גודל הטקסט (80% עד 150%)</li>
-                <li>מצב ניגודיות גבוהה לקריאות מיטבית</li>
-                <li>מצב גווני אפור למשתמשים עם עיוורון צבעים</li>
-                <li>הדגשת קישורים לניווט נוח יותר</li>
-                <li>מבנה סמנטי תקין עם כותרות היררכיות</li>
-                <li>טקסטים חלופיים (Alt Text) לכל התמונות</li>
-                <li>ניווט מלא באמצעות מקלדת</li>
-                <li>תמיכה בקוראי מסך</li>
-                <li>סימון ברור של שדות טפסים</li>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">2. תקנים ורגולציה</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>תקנות שוויון זכויות לאנשים עם מוגבלות</strong> (התאמות נגישות לשירות), התשע"ג–2013</li>
+                <li><strong>תקן ישראלי ת"י 5568</strong> ברמה AA - נגישות תכנים באינטרנט</li>
+                <li><strong>WCAG 2.1</strong> ברמה AA - התקן הבינלאומי</li>
+                <li>עיקרי <strong>POUR</strong>: נתפס, שמיש, מובן, עמיד</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">דפדפנים נתמכים</h2>
-              <p>האתר נבדק ונמצא תקין בדפדפנים הבאים:</p>
-              <ul className="list-disc pr-6 space-y-2">
-                <li>Google Chrome (גרסה אחרונה)</li>
-                <li>Mozilla Firefox (גרסה אחרונה)</li>
-                <li>Microsoft Edge (גרסה אחרונה)</li>
-                <li>Safari (גרסה אחרונה)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">טכנולוגיות מסייעות</h2>
-              <p>האתר תומך בטכנולוגיות מסייעות כגון:</p>
-              <ul className="list-disc pr-6 space-y-2">
-                <li>NVDA - קורא מסך חינמי</li>
-                <li>JAWS - קורא מסך מתקדם</li>
-                <li>VoiceOver - קורא המסך של Apple</li>
-                <li>TalkBack - קורא המסך של Android</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">בעיות נגישות ופניות</h2>
-              <p>
-                אם נתקלתם בבעיית נגישות באתר, אנא פנו אלינו ואנו נעשה כמיטב יכולתנו לפתור את הבעיה בהקדם.
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">3. אמצעי נגישות באתר</h2>
+              <p className="mb-2">
+                האתר כולל תפריט נגישות מתקדם הפועל בכל עמוד (אייקון בצד שמאל). המאפיינים:
               </p>
-              <div className="mt-4 glass p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-3">פרטי התקשרות:</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <strong>אימייל:</strong>{' '}
-                    <a href="mailto:accessibility@websites.co.il" className="text-primary-light hover:underline">
-                      accessibility@websites.co.il
-                    </a>
-                  </li>
-                  <li>
-                    <strong>טלפון:</strong>{' '}
-                    <a href="tel:+972-50-123-4567" className="text-primary-light hover:underline">
-                      050-123-4567
-                    </a>
-                  </li>
-                  <li><strong>רכז נגישות:</strong> מנהל האתר</li>
-                </ul>
+
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">3.1 התאמות תצוגה</h3>
+              <ul className="list-disc pr-5 space-y-0.5 mb-2">
+                <li>הגדלה והקטנה של גודל הטקסט (80%-200%)</li>
+                <li>מרווח בין שורות וטקסטים</li>
+                <li>מרווח בין אותיות</li>
+                <li>פונט קריא לדיסלקטים</li>
+                <li>הדגשת כותרות לזיהוי מבנה</li>
+              </ul>
+
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">3.2 צבע וניגודיות</h3>
+              <ul className="list-disc pr-5 space-y-0.5 mb-2">
+                <li>מצב ניגודיות גבוהה / הפוכה</li>
+                <li>גווני אפור (לעיוורון צבעים)</li>
+                <li>מצב בהיר / כהה</li>
+              </ul>
+
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">3.3 ניווט ואינטראקציה</h3>
+              <ul className="list-disc pr-5 space-y-0.5 mb-2">
+                <li>הדגשת קישורים וסמן עכבר מוגדל</li>
+                <li>קו מנחה לקריאה</li>
+                <li>השהיית אנימציות וסרטונים אוטומטיים</li>
+                <li>ניווט מלא במקלדת (Tab/Enter/חצים)</li>
+                <li>מיקוד (focus) ברור על אלמנטים פעילים</li>
+                <li>קישור "דלג לתוכן"</li>
+              </ul>
+
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">3.4 קוראי מסך</h3>
+              <ul className="list-disc pr-5 space-y-0.5 mb-2">
+                <li>HTML5 סמנטי + היררכיית כותרות תקינה</li>
+                <li>תוויות ARIA על אלמנטים אינטראקטיביים</li>
+                <li>טקסט חלופי (alt) לתמונות</li>
+                <li>סימון שדות טופס ושגיאות (aria-invalid, aria-required)</li>
+                <li>זיהוי שפה (lang="he", dir="rtl")</li>
+              </ul>
+
+              <h3 className="text-sm font-semibold text-gray-900 mb-1">3.5 שמירת העדפות</h3>
+              <p>ההתאמות נשמרות בדפדפן (localStorage) ומיושמות אוטומטית בביקור הבא.</p>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">4. תאימות דפדפנים</h2>
+              <p className="mb-1">נבדק בדפדפנים (שתי גרסאות אחרונות):</p>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li>Chrome, Firefox, Edge, Safari, Samsung Internet</li>
+                <li>תאימות מלאה למחשב, טאבלט וסלולר</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">5. טכנולוגיות מסייעות</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>NVDA, JAWS, Narrator</strong> - קוראי מסך ל-Windows</li>
+                <li><strong>VoiceOver</strong> - macOS / iOS</li>
+                <li><strong>TalkBack</strong> - Android</li>
+                <li>תוכנות הקלדה קולית והגדלה (Dragon, ZoomText)</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">6. חלקים שאינם נגישים במלואם</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li>תוכן משובץ מצדדים שלישיים (מפות, וידאו, רשתות חברתיות) - תלוי בספק</li>
+                <li>קבצי PDF מסוימים שהועלו ע"י לקוחות</li>
+                <li>אזורים בתבניות הדגמה</li>
+              </ul>
+              <p className="mt-1.5 text-xs">נתקלתם באזור לא נגיש? פנו אלינו ונטפל מיד.</p>
+            </section>
+
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">7. רכז הנגישות ופניות</h2>
+              <p className="mb-2">
+                לבעיית נגישות, הצעה לשיפור או סיוע בגישה לתוכן - נשמח לשמוע.
+              </p>
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-xs space-y-1">
+                <div><strong>שם:</strong> איליה, מנהל Pixelia</div>
+                <div>
+                  <strong>אימייל:</strong>{' '}
+                  <a href="mailto:ilyaig8@gmail.com" className="text-yellow-700 hover:underline font-semibold">
+                    ilyaig8@gmail.com
+                  </a>
+                </div>
+                <div>
+                  <strong>טלפון:</strong>{' '}
+                  <a href="tel:+972546361555" className="text-yellow-700 hover:underline font-semibold" dir="ltr">
+                    054-6361555
+                  </a>
+                </div>
+                <div>
+                  <strong>WhatsApp:</strong>{' '}
+                  <a
+                    href="https://wa.me/972546361555"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-yellow-700 hover:underline font-semibold"
+                  >
+                    לחצו לפתיחת שיחה
+                  </a>
+                </div>
+                <div><strong>כתובת:</strong> תל אביב, ישראל</div>
               </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">זמני תגובה</h2>
-              <p>
-                אנו מחויבים להגיב לפניות בנושא נגישות תוך 5 ימי עסקים ולפתור את הבעיה תוך 30 ימים.
+              <p className="mt-2 text-xs text-gray-500">
+                בפנייתכם פרטו: כתובת הדף (URL), תיאור הבעיה, דפדפן/מערכת הפעלה/טכנולוגיה מסייעת, וצילום מסך אם רלוונטי.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">הערכה ובדיקות</h2>
-              <p>
-                הצהרת נגישות זו נבדקה ועודכנה לאחרונה בתאריך: {new Date().toLocaleDateString('he-IL')}
-              </p>
-              <p>
-                האתר נבדק באמצעות כלי בדיקה אוטומטיים ובדיקות ידניות על ידי מומחי נגישות.
-              </p>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">8. זמני תגובה</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li><strong>אישור פנייה:</strong> תוך 2 ימי עסקים</li>
+                <li><strong>מענה ראשוני:</strong> תוך 5 ימי עסקים</li>
+                <li><strong>פתרון או חלופה:</strong> תוך 30 ימי עסקים</li>
+              </ul>
             </section>
 
-            <section className="mt-8 p-6 glass rounded-lg">
-              <p className="text-sm text-white/70">
-                <strong>הערה:</strong> למרות המאמצים שלנו להנגיש את כל העמודים באתר, ייתכן ויימצאו עמודים או חלקים שטרם
-                הונגשו במלואם, או שאין להם פתרון טכנולוגי נגיש מתאים. אנו ממשיכים במאמצים לשפר את נגישות האתר,
-                ככל האפשר, מתוך אמונה ומחויבות מוסרית לאפשר שימוש באתר לכלל האוכלוסייה.
-              </p>
+            <section>
+              <h2 className="text-base md:text-lg font-bold text-gray-900 mb-1.5">9. בדיקות ושיפור מתמיד</h2>
+              <ul className="list-disc pr-5 space-y-0.5">
+                <li>בדיקות אוטומטיות (Lighthouse, axe DevTools, WAVE)</li>
+                <li>בדיקות ידניות מול קוראי מסך</li>
+                <li>בדיקות ניווט במקלדת בלבד</li>
+                <li>בדיקות בדפדפנים ומכשירים שונים</li>
+                <li>ניגודיות מינימלית (4.5:1 רגיל / 3:1 גדול)</li>
+              </ul>
+            </section>
+
+            <section className="bg-gray-50 border-r-4 border-yellow-400 rounded-lg p-3 text-xs text-gray-600">
+              למרות מאמצינו, ייתכן שעדיין קיימים חלקים שאינם מונגשים במלואם. אנו ממשיכים
+              לשפר באופן שוטף ומזמינים פניות ובקשות.
             </section>
           </div>
         </div>

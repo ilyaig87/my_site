@@ -37,7 +37,7 @@
         "טפסים ו-CTA חזקים",
         "אינטגרציה עם כלי שיווק"
       ],
-      "priceRange": "החל מ-2,000 ₪"
+      "priceRange": "1,500 ₪"
     },
     {
       "id": "business",
@@ -50,7 +50,7 @@
         "מערכת המלצות",
         "טופס יצירת קשר מתקדם"
       ],
-      "priceRange": "החל מ-3,500 ₪"
+      "priceRange": "3,000 ₪"
     },
     {
       "id": "portfolio",
@@ -63,7 +63,7 @@
         "אנימציות חלקות",
         "אופטימיזציה לתמונות"
       ],
-      "priceRange": "החל מ-2,500 ₪"
+      "priceRange": "מ-3,000 ₪"
     },
     {
       "id": "ecommerce",
@@ -76,7 +76,7 @@
         "כפתורי WhatsApp להזמנה",
         "ניהול מלאי פשוט"
       ],
-      "priceRange": "החל מ-4,000 ₪"
+      "priceRange": "5,000 ₪"
     }
   ],
   "whyChooseMe": [
@@ -133,8 +133,8 @@
     "whatsapp": "972546361555",
     "address": "תל אביב, ישראל",
     "socialMedia": {
-      "linkedin": "https://linkedin.com/in/yourprofile",
-      "github": "https://github.com/yourprofile"
+      "linkedin": "",
+      "github": ""
     }
   }
 }

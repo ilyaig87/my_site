@@ -41,7 +41,6 @@ export function getNavItems() {
       label: 'עוד',
       href: '#',
       submenu: [
-        { label: 'ביקורות', href: '/reviews' },
         { label: 'שאלות נפוצות', href: '/faq' },
         { label: 'שירותים', href: '/services' },
       ]

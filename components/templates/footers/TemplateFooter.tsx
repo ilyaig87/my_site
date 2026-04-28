@@ -60,9 +60,9 @@ export default function TemplateFooter({ template, variant = 'professional' }: T
               <h3 className="text-xl font-bold mb-4 text-white">
                 צור קשר
               </h3>
-              <p className="text-white/80 text-sm">
-                📞 050-1234567<br />
-                ✉️ info@example.com
+              <p className="text-white/80 text-sm" dir="ltr">
+                📞 054-6361555<br />
+                ✉️ ilyaig8@gmail.com
               </p>
             </div>
           </div>
@@ -145,8 +145,8 @@ export default function TemplateFooter({ template, variant = 'professional' }: T
             <h4 className="text-lg font-semibold mb-4">יצירת קשר</h4>
             <ul className="space-y-2 text-white/80">
               <li>📍 תל אביב, ישראל</li>
-              <li>📞 050-1234567</li>
-              <li>✉️ info@example.com</li>
+              <li dir="ltr" className="text-right">📞 054-6361555</li>
+              <li dir="ltr" className="text-right">✉️ ilyaig8@gmail.com</li>
             </ul>
           </div>
         </div>

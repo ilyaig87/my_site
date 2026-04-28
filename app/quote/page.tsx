@@ -4,10 +4,10 @@ import { useState } from 'react'
 import Container from '@/components/ui/Container'
 
 const websiteTypes = [
-  { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד להמרות', basePrice: 2000 },
-  { id: 'business', label: 'אתר עסקי', description: '3-7 עמודים', basePrice: 4000 },
-  { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 3500 },
-  { id: 'shop', label: 'חנות אונליין', description: 'מכירה באינטרנט', basePrice: 6000 },
+  { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד להמרות', basePrice: 1500 },
+  { id: 'business', label: 'אתר עסקי', description: 'עד 4 דפים', basePrice: 3000 },
+  { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 3000 },
+  { id: 'shop', label: 'חנות / אתר מורחב', description: '5+ דפים עם DB', basePrice: 5000 },
 ]
 
 const pageRanges = [

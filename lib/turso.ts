@@ -1,9 +1,32 @@
-import { createClient } from '@libsql/client'
+import { createClient, type Client } from '@libsql/client'
 
-// Create Turso client
-export const turso = createClient({
-  url: process.env.TURSO_DATABASE_URL || '',
-  authToken: process.env.TURSO_AUTH_TOKEN || '',
+export const isDbConfigured = Boolean(process.env.TURSO_DATABASE_URL)
+
+let _client: Client | null = null
+
+function buildClient(): Client {
+  const url = process.env.TURSO_DATABASE_URL
+  if (url) {
+    return createClient({
+      url,
+      authToken: process.env.TURSO_AUTH_TOKEN || '',
+    })
+  }
+  // Local dev fallback: use a local SQLite file when Turso is not configured
+  console.warn('⚠️  TURSO_DATABASE_URL not set — using local SQLite file (dev fallback)')
+  return createClient({ url: 'file:local-dev.db' })
+}
+
+// Lazy proxy: createClient is only invoked on first real usage.
+// This prevents module-load crashes when env vars are missing,
+// so API routes can still respond with proper JSON errors instead
+// of Next.js HTML error pages.
+export const turso: Client = new Proxy({} as Client, {
+  get(_target, prop) {
+    if (!_client) _client = buildClient()
+    const value = (_client as unknown as Record<string | symbol, unknown>)[prop as string]
+    return typeof value === 'function' ? value.bind(_client) : value
+  },
 })
 
 // Initialize database schema
