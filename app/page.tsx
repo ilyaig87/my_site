@@ -2,8 +2,8 @@ import HeroSection from '@/components/sections/HeroSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import FeaturedTemplatesSection from '@/components/sections/FeaturedTemplatesSection';
-import PricingSection from '@/components/sections/PricingSection';
-import ContactSection from '@/components/sections/ContactSection';
+import PricingTeaser from '@/components/sections/PricingTeaser';
+import ContactTeaser from '@/components/sections/ContactTeaser';
 import { getSiteContent, getFeaturedTemplates } from '@/lib/data';
 
 export default function Home() {
@@ -16,8 +16,8 @@ export default function Home() {
       <ServicesSection />
       <ProjectsSection />
       <FeaturedTemplatesSection templates={featuredTemplates} />
-      <PricingSection />
-      <ContactSection />
+      <PricingTeaser />
+      <ContactTeaser />
     </>
   );
 }

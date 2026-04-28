@@ -6,8 +6,8 @@ export default function PricingSection() {
     {
       name: 'דף בודד',
       tagline: 'Landing Page מושלם',
-      description: 'דף נחיתה יחיד למבצע, קמפיין או מוצר בודד',
-      priceDisplay: '1,500 ₪',
+      description: 'דף יחיד ממוקד - לקמפיין, מוצר או שירות מסוים',
+      priceDisplay: 'החל מ-1,500 ₪',
       features: [
         'דף נחיתה יחיד (Landing Page)',
         'בחירת תבנית מהגלריה + התאמה אישית',
@@ -28,7 +28,7 @@ export default function PricingSection() {
       name: 'אתר תדמית',
       tagline: 'הבחירה המומלצת לעסקים',
       description: 'אתר מלא עם כל מה שצריך לנוכחות מקצועית',
-      priceDisplay: '3,000 ₪',
+      priceDisplay: 'החל מ-3,000 ₪',
       features: [
         'עד 4 דפים (דף בית + 3 דפים נוספים)',
         'בחירת תבנית או עיצוב אישי',
@@ -43,7 +43,7 @@ export default function PricingSection() {
       additions: [
         'דומיין ואחסון: 300 ₪/שנה',
         'דף נוסף: 300 ₪',
-        'מסד נתונים (DB): מ-800 ₪ (בתיאום)',
+        'מסד נתונים (DB): החל מ-800 ₪ (בתיאום)',
       ],
       highlighted: true,
       ctaText: 'דברו איתי',
@@ -52,7 +52,7 @@ export default function PricingSection() {
       name: 'אתר מורחב',
       tagline: 'לעסקים שרוצים יותר',
       description: 'אתר מלא עם יותר דפים ופיצ\'רים מתקדמים',
-      priceDisplay: '5,000 ₪',
+      priceDisplay: 'החל מ-5,000 ₪',
       features: [
         '5+ דפים',
         'עיצוב מותאם אישית במלואו',
@@ -68,8 +68,8 @@ export default function PricingSection() {
       additions: [
         'דומיין ואחסון: 300 ₪/שנה',
         'דף נוסף: 250 ₪',
-        'מסד נתונים (DB): מ-800 ₪ (בתיאום)',
-        'פאנל ניהול תוכן: מ-1,200 ₪ (בתיאום)',
+        'מסד נתונים (DB): החל מ-800 ₪ (בתיאום)',
+        'פאנל ניהול תוכן: החל מ-1,200 ₪ (בתיאום)',
         'תחזוקה חודשית: 200 ₪/חודש',
       ],
       highlighted: false,
@@ -184,7 +184,7 @@ export default function PricingSection() {
                 {pkg.additions && pkg.additions.length > 0 && (
                   <div className="mb-3 pt-2 border-t border-gray-200">
                     <p className="text-[9px] font-bold text-gray-500 mb-1.5 uppercase tracking-wide">
-                      תוספות אופציונליות
+                      תוספות לחבילה
                     </p>
                     <ul className="space-y-1">
                       {pkg.additions.map((addition, additionIndex) => (

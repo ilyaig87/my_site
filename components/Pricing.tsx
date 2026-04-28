@@ -2,7 +2,6 @@
 
 import { useRef, useState } from 'react'
 import packagesData from '@/data/packages.json'
-import TrustBadges from '@/components/TrustBadges'
 
 const WHATSAPP_NUMBER = '972546361555'
 
@@ -27,11 +26,11 @@ interface Package {
 }
 
 const optionalAddons = [
-  { label: 'מסד נתונים (DB) - שמירת לידים, הרשמות', price: 'מ-800 ₪' },
-  { label: 'פאנל ניהול תוכן פשוט', price: 'מ-1,200 ₪' },
+  { label: 'מסד נתונים (DB) - שמירת לידים, הרשמות', price: 'החל מ-800 ₪' },
+  { label: 'פאנל ניהול תוכן פשוט', price: 'החל מ-1,200 ₪' },
   { label: 'דומיין + אחסון שנתי', price: '300 ₪/שנה' },
   { label: 'דף נוסף לאתר', price: '250-300 ₪' },
-  { label: 'תחזוקה חודשית', price: 'מ-150 ₪/חודש' },
+  { label: 'תחזוקה חודשית', price: 'החל מ-150 ₪/חודש' },
 ]
 
 export default function Pricing() {
@@ -147,54 +146,9 @@ export default function Pricing() {
     <section className="py-12 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
             בחר את החבילה המתאימה לך
           </h2>
-          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            המחיר שתראה הוא המחיר הסופי. נבנה ב-Next.js / React לאתר מהיר ומאובטח
-          </p>
-        </div>
-
-        {/* How it works - 3 steps */}
-        <div className="max-w-4xl mx-auto mb-8 bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-200 dark:border-yellow-700 rounded-2xl p-5">
-          <h3 className="text-center text-base font-bold mb-4 text-gray-900 dark:text-white">
-            איך זה עובד?
-          </h3>
-          <div className="grid md:grid-cols-3 gap-4 text-sm">
-            <div className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-400 text-gray-900 font-bold flex items-center justify-center text-xs">
-                1
-              </span>
-              <div>
-                <p className="font-semibold text-gray-900 dark:text-white">משאירים פרטים</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  בוחרים חבילה ומשאירים שם, מייל וטלפון
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-400 text-gray-900 font-bold flex items-center justify-center text-xs">
-                2
-              </span>
-              <div>
-                <p className="font-semibold text-gray-900 dark:text-white">שיחה לסיכום</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  נחזור אליכם תוך 24 שעות, נסכם פרטים מדויקים
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-400 text-gray-900 font-bold flex items-center justify-center text-xs">
-                3
-              </span>
-              <div>
-                <p className="font-semibold text-gray-900 dark:text-white">חשבונית ותשלום</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  שולח קישור לחשבונית עם תשלום מאובטח (אשראי / ביט / העברה)
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Lead Form */}
@@ -255,11 +209,11 @@ export default function Pricing() {
         </div>
 
         {/* Packages Grid */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
-              className={`relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-transform hover:scale-105 ${
+              className={`relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-transform hover:scale-105 flex flex-col ${
                 pkg.popular
                   ? 'border-4 border-yellow-400 dark:border-yellow-500'
                   : 'border-2 border-gray-200 dark:border-gray-700'
@@ -280,11 +234,11 @@ export default function Pricing() {
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
                   {pkg.description}
                 </p>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-0.5">
+                  החל מ-
+                </p>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white leading-none">
                   {formatPrice(pkg.price)}
-                  <span className="text-base font-normal text-gray-500 dark:text-gray-400">
-                    {' '}חד פעמי
-                  </span>
                 </div>
               </div>
 
@@ -312,7 +266,7 @@ export default function Pricing() {
               <button
                 onClick={() => handleSelectPackage(pkg)}
                 disabled={pendingPackageId === pkg.id}
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
+                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 mt-auto ${
                   pkg.popular
                     ? 'bg-yellow-400 hover:bg-yellow-500 text-gray-900'
                     : 'bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900'
@@ -355,25 +309,33 @@ export default function Pricing() {
           <div className="flex items-center justify-center gap-2 mb-1">
             <span className="text-2xl">🧩</span>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center">
-              תוספות אופציונליות
+              תוספות אופציונליות לחבילה
             </h3>
           </div>
-          <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-5">
-            ניתן להוסיף לכל חבילה. <b>תוספות מתקדמות מתואמות בשיחה</b> לפי המורכבות והצורך
+          <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-1">
+            כל תוספת מתווספת למחיר החבילה הבסיסית
+          </p>
+          <p className="text-center text-xs text-gray-500 dark:text-gray-400 mb-5">
+            <b>תוספות מתקדמות מתואמות בשיחה</b> לפי המורכבות והצורך
           </p>
 
           <div className="grid md:grid-cols-2 gap-3 max-w-3xl mx-auto">
             {optionalAddons.map((addon) => (
               <div
                 key={addon.label}
-                className="flex items-center justify-between gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700"
               >
-                <span className="text-sm text-gray-800 dark:text-gray-200">
-                  {addon.label}
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-100 dark:bg-yellow-900/40 border border-yellow-300 dark:border-yellow-700 flex items-center justify-center text-yellow-700 dark:text-yellow-400 font-bold text-sm">
+                  +
                 </span>
-                <span className="text-sm font-bold text-yellow-600 dark:text-yellow-400 whitespace-nowrap">
-                  {addon.price}
-                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-gray-800 dark:text-gray-200 leading-tight">
+                    {addon.label}
+                  </p>
+                  <p className="text-xs font-bold text-yellow-600 dark:text-yellow-400 mt-0.5">
+                    {addon.price}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -388,19 +350,6 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Trust Badges */}
-        <div className="max-w-5xl mx-auto mt-10">
-          <TrustBadges />
-        </div>
-
-        <div className="mt-6 text-center text-gray-600 dark:text-gray-400">
-          <p className="text-sm">
-            💳 אשראי | 📱 ביט | 🏦 העברה בנקאית | 🧾 חשבונית מס מסודרת
-          </p>
-          <p className="text-xs mt-1">
-            🔒 התשלום מתבצע דרך מערכת חיצונית מאובטחת לאחר סיכום פרטים
-          </p>
-        </div>
       </div>
     </section>
   )
