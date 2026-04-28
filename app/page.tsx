@@ -3,7 +3,6 @@ import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import FeaturedTemplatesSection from '@/components/sections/FeaturedTemplatesSection';
 import PricingSection from '@/components/sections/PricingSection';
-import CTASection from '@/components/sections/CTASection';
 import ContactSection from '@/components/sections/ContactSection';
 import { getSiteContent, getFeaturedTemplates } from '@/lib/data';
 
@@ -18,8 +17,7 @@ export default function Home() {
       <ProjectsSection />
       <FeaturedTemplatesSection templates={featuredTemplates} />
       <PricingSection />
-      <CTASection />
-      <ContactSection contact={content.contact} />
+      <ContactSection />
     </>
   );
 }

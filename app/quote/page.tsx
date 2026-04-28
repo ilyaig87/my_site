@@ -3,6 +3,16 @@
 import { useState } from 'react'
 import Container from '@/components/ui/Container'
 
+// Israeli phone validation - exactly 10 digits (mobile or VOIP/business)
+function isValidIsraeliPhone(value: string) {
+  const cleaned = value.replace(/[\s-]/g, '')
+  return cleaned.length === 10 && /^0(5\d|7[2-9])\d{7}$/.test(cleaned)
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
 const websiteTypes = [
   { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד להמרות', basePrice: 1500 },
   { id: 'business', label: 'אתר עסקי', description: 'עד 4 דפים', basePrice: 3000 },
@@ -41,6 +51,7 @@ export default function QuotePage() {
   const [calculatedPrice, setCalculatedPrice] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const calculatePrice = () => {
     const type = websiteTypes.find(t => t.id === formData.websiteType)
@@ -83,6 +94,25 @@ export default function QuotePage() {
   }
 
   const handleSubmit = async () => {
+    setSubmitError('')
+
+    if (!formData.name.trim()) {
+      setSubmitError('נא למלא שם מלא')
+      return
+    }
+    if (!formData.email.trim() || !isValidEmail(formData.email)) {
+      setSubmitError('כתובת אימייל לא תקינה')
+      return
+    }
+    if (!formData.phone.trim()) {
+      setSubmitError('נא למלא מספר טלפון')
+      return
+    }
+    if (!isValidIsraeliPhone(formData.phone)) {
+      setSubmitError('מספר טלפון חייב להכיל 10 ספרות (לדוגמה: 054-6361555)')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -97,9 +127,12 @@ export default function QuotePage() {
 
       if (response.ok) {
         setIsComplete(true)
+      } else {
+        setSubmitError('שגיאה בשליחת הבקשה. נסו שוב')
       }
     } catch (error) {
       console.error('Error submitting quote:', error)
+      setSubmitError('שגיאה בחיבור לשרת')
     } finally {
       setIsSubmitting(false)
     }
@@ -356,13 +389,23 @@ export default function QuotePage() {
                       />
                       <input
                         type="tel"
-                        placeholder="טלפון (אופציונלי)"
+                        placeholder="טלפון *"
+                        required
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none"
+                        maxLength={11}
+                        inputMode="tel"
+                        autoComplete="tel"
                       />
                     </div>
                   </div>
+
+                  {submitError && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+                      {submitError}
+                    </div>
+                  )}
 
                   <div className="flex gap-4">
                     <button
@@ -373,7 +416,7 @@ export default function QuotePage() {
                     </button>
                     <button
                       onClick={handleSubmit}
-                      disabled={!formData.name || !formData.email || isSubmitting}
+                      disabled={!formData.name || !formData.email || !formData.phone || isSubmitting}
                       className="flex-1 px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                     >
                       {isSubmitting ? 'שולח...' : 'שלח בקשה'}

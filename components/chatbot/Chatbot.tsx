@@ -162,7 +162,7 @@ export default function Chatbot() {
             </div>
             <div>
               <h3 className="font-bold">Pixelia Bot</h3>
-              <p className="text-xs opacity-90">פה כדי לעזור 24/7</p>
+              <p className="text-xs opacity-90">תשובות מיידיות לשאלות שלכם</p>
             </div>
           </div>
           <button

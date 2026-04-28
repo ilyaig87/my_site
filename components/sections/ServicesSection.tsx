@@ -27,7 +27,7 @@ export default function ServicesSection() {
         </svg>
       ),
       title: 'העלאה לדומיין',
-      description: 'אני מעלה את האתר שלכם לדומיין שרכשתם, או עוזר לכם לרכוש דומיין חדש ומעלה אותו בשבילכם. האתר יהיה באוויר ופעיל.'
+      description: 'נעלה את האתר שלכם לדומיין שרכשתם, או נעזור לכם לרכוש דומיין חדש ונעלה אותו בשבילכם. האתר יהיה באוויר ופעיל.'
     },
     {
       icon: (
@@ -55,7 +55,7 @@ export default function ServicesSection() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
             {services.map((service, index) => (
               <div
                 key={index}

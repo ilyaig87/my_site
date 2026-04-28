@@ -8,9 +8,9 @@ interface HeroSectionProps {
 
 export default function HeroSection({ content }: HeroSectionProps) {
   return (
-    <section className="relative bg-gradient-to-b from-yellow-50 to-white py-6 md:py-8">
+    <section className="relative bg-gradient-to-b from-yellow-50 to-white py-5 sm:py-6 md:py-8">
       <Container>
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center px-1">
           {/* Simple Badge */}
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-full bg-yellow-50 border border-yellow-200 text-gray-900 text-[10px] font-medium">
             <span className="w-1 h-1 bg-yellow-400 rounded-full"></span>
@@ -18,12 +18,12 @@ export default function HeroSection({ content }: HeroSectionProps) {
           </div>
 
           {/* Clean Title */}
-          <h1 className="text-2xl md:text-3xl font-black mb-2 leading-tight text-gray-900">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-black mb-2 leading-tight text-gray-900">
             {content.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base md:text-lg font-bold mb-2 text-gray-700">
+          <p className="text-sm sm:text-base md:text-lg font-bold mb-2 text-gray-700">
             {content.subtitle}
           </p>
 
@@ -33,18 +33,18 @@ export default function HeroSection({ content }: HeroSectionProps) {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-row gap-2 mb-4 mx-auto w-fit">
-            <Button href="/templates" size="lg">
+          <div className="flex flex-col sm:flex-row gap-2 mb-4 mx-auto w-full sm:w-fit max-w-xs sm:max-w-none">
+            <Button href="/templates" size="md" className="w-full sm:w-auto">
               {content.primaryCTA}
             </Button>
-            <Button href="/contact" variant="outline" size="lg">
+            <Button href="/contact" variant="outline" size="md" className="w-full sm:w-auto">
               {content.secondaryCTA}
             </Button>
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center gap-4 text-gray-600 text-[10px]">
-              <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-gray-600 text-[10px]">
+            <div className="flex items-center gap-1.5">
               <svg className="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>

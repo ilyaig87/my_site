@@ -120,28 +120,28 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* Project info */}
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-2 mb-1.5">
-          <h3 className="text-base font-bold text-gray-900 group-hover:text-yellow-600 transition-colors">
+      <div className="p-3 sm:p-4">
+        <div className="mb-1.5">
+          <h3 className="text-sm sm:text-base font-bold text-gray-900 group-hover:text-yellow-600 transition-colors leading-tight">
             {project.name}
           </h3>
-          <span className="text-[10px] text-gray-500 mt-1 whitespace-nowrap" dir="ltr">
+          <span className="text-[10px] text-gray-500 whitespace-nowrap block mt-0.5" dir="ltr">
             {project.domain}
           </span>
         </div>
 
-        <p className="text-xs font-semibold text-yellow-600 mb-1.5">
+        <p className="text-[11px] sm:text-xs font-semibold text-yellow-600 mb-1.5">
           {project.tagline}
         </p>
 
-        <p className="text-xs text-gray-600 mb-3 leading-relaxed">
+        <p className="text-[11px] sm:text-xs text-gray-600 mb-3 leading-relaxed">
           {project.description}
         </p>
 
         {/* Highlights */}
         <ul className="grid grid-cols-2 gap-x-2 gap-y-1 mb-3">
           {project.highlights.map((highlight) => (
-            <li key={highlight} className="flex items-start gap-1 text-[10px] text-gray-700">
+            <li key={highlight} className="flex items-start gap-1 text-[10px] sm:text-[11px] text-gray-700">
               <svg className="w-2.5 h-2.5 text-yellow-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>

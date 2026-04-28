@@ -18,16 +18,16 @@ export default function PricingSection() {
         'אופטימיזציה בסיסית ל-SEO',
       ],
       additions: [
-        '+ דומיין ואחסון: 300 ₪/שנה',
-        '+ עיצוב מותאם אישית: +500 ₪',
+        'דומיין ואחסון: 300 ₪/שנה',
+        'עיצוב מותאם אישית: +500 ₪',
       ],
       highlighted: false,
-      ctaText: 'בואו נדבר',
+      ctaText: 'דברו איתי',
     },
     {
-      name: 'אתר קטן',
-      tagline: 'הכי פופולרי',
-      description: 'אתר תדמית מלא לעסקים קטנים ובינוניים',
+      name: 'אתר תדמית',
+      tagline: 'הבחירה המומלצת לעסקים',
+      description: 'אתר מלא עם כל מה שצריך לנוכחות מקצועית',
       priceDisplay: '3,000 ₪',
       features: [
         'עד 4 דפים (דף בית + 3 דפים נוספים)',
@@ -41,9 +41,9 @@ export default function PricingSection() {
         'אינטגרציה עם WhatsApp',
       ],
       additions: [
-        '+ דומיין ואחסון: 300 ₪/שנה',
-        '+ דף נוסף: 300 ₪',
-        '+ מסד נתונים (DB): מ-800 ₪ (בתיאום)',
+        'דומיין ואחסון: 300 ₪/שנה',
+        'דף נוסף: 300 ₪',
+        'מסד נתונים (DB): מ-800 ₪ (בתיאום)',
       ],
       highlighted: true,
       ctaText: 'דברו איתי',
@@ -66,14 +66,14 @@ export default function PricingSection() {
         'אינטגרציה עם כלים חיצוניים (Google Analytics, Pixel)',
       ],
       additions: [
-        '+ דומיין ואחסון: 300 ₪/שנה',
-        '+ דף נוסף: 250 ₪',
-        '+ מסד נתונים (DB): מ-800 ₪ (בתיאום)',
-        '+ פאנל ניהול תוכן: מ-1,200 ₪ (בתיאום)',
-        '+ תחזוקה חודשית: 200 ₪/חודש',
+        'דומיין ואחסון: 300 ₪/שנה',
+        'דף נוסף: 250 ₪',
+        'מסד נתונים (DB): מ-800 ₪ (בתיאום)',
+        'פאנל ניהול תוכן: מ-1,200 ₪ (בתיאום)',
+        'תחזוקה חודשית: 200 ₪/חודש',
       ],
       highlighted: false,
-      ctaText: 'בואו נדבר',
+      ctaText: 'דברו איתי',
     },
   ];
 
@@ -91,7 +91,7 @@ export default function PricingSection() {
               בחרו את החבילה המתאימה לכם
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              המחירים שקופים וללא הפתעות. העלאה לדומיין כלולה
+              מחירים חד-פעמיים שקופים, ללא הפתעות
             </p>
           </div>
 
@@ -123,11 +123,11 @@ export default function PricingSection() {
           </div>
 
           {/* Packages Grid */}
-          <div className="grid md:grid-cols-3 gap-3">
+          <div className="grid md:grid-cols-3 gap-3 items-stretch">
             {packages.map((pkg, index) => (
               <div
                 key={index}
-                className={`relative rounded-lg p-3 transition-all duration-300 ${
+                className={`relative rounded-lg p-3 transition-all duration-300 flex flex-col ${
                   pkg.highlighted
                     ? 'bg-yellow-50 border-2 border-yellow-400 shadow-xl md:-translate-y-1'
                     : 'bg-white border-2 border-gray-200 hover:border-yellow-300 hover:shadow-lg'
@@ -204,7 +204,7 @@ export default function PricingSection() {
                   href="#contact"
                   variant={pkg.highlighted ? 'primary' : 'outline'}
                   size="sm"
-                  className="w-full"
+                  className="w-full mt-auto"
                 >
                   {pkg.ctaText}
                 </Button>

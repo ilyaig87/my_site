@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingAccessibility from "@/components/accessibility/FloatingAccessibility";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import CookieBanner from "@/components/CookieBanner";
 import Chatbot from "@/components/chatbot/Chatbot";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
@@ -56,6 +57,7 @@ export default function RootLayout({
         <FloatingAccessibility />
         <CookieBanner />
         <Chatbot />
+        <FloatingWhatsApp />
         <VisitorCounter />
         <Suspense fallback={null}>
           <AnalyticsTracker />

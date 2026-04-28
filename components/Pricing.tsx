@@ -6,6 +6,16 @@ import TrustBadges from '@/components/TrustBadges'
 
 const WHATSAPP_NUMBER = '972546361555'
 
+// Israeli phone validation - exactly 10 digits (mobile or VOIP/business)
+function isValidIsraeliPhone(value: string) {
+  const cleaned = value.replace(/[\s-]/g, '')
+  return cleaned.length === 10 && /^0(5\d|7[2-9])\d{7}$/.test(cleaned)
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
 interface Package {
   id: string
   name: string
@@ -76,6 +86,16 @@ export default function Pricing() {
     if (!formData.name || !formData.email || !formData.phone) {
       setFormError('נא למלא שם, אימייל וטלפון לפני בחירת החבילה')
       focusFirstInvalid()
+      return
+    }
+    if (!isValidEmail(formData.email)) {
+      setFormError('כתובת אימייל לא תקינה')
+      emailRef.current?.focus()
+      return
+    }
+    if (!isValidIsraeliPhone(formData.phone)) {
+      setFormError('מספר טלפון חייב להכיל 10 ספרות (לדוגמה: 054-6361555)')
+      phoneRef.current?.focus()
       return
     }
 
@@ -159,7 +179,7 @@ export default function Pricing() {
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">שיחה לסיכום</p>
                 <p className="text-xs text-gray-600 dark:text-gray-300">
-                  אחזור אליך תוך 24 שעות, נסכם פרטים מדויקים
+                  נחזור אליכם תוך 24 שעות, נסכם פרטים מדויקים
                 </p>
               </div>
             </div>
@@ -206,7 +226,6 @@ export default function Pricing() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
-              dir="ltr"
             />
             <input
               ref={phoneRef}
@@ -216,7 +235,9 @@ export default function Pricing() {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
-              dir="ltr"
+              maxLength={11}
+              inputMode="tel"
+              autoComplete="tel"
             />
           </div>
           <textarea
@@ -322,7 +343,7 @@ export default function Pricing() {
               )}
               {packageStatus[pkg.id] === 'error' && (
                 <p className="mt-2 text-center text-xs text-yellow-700 dark:text-yellow-400 font-medium">
-                  נפתחה שיחת WhatsApp - שלחו את ההודעה ואחזור אליכם
+                  נפתחה שיחת WhatsApp - שלחו את ההודעה ונחזור אליכם
                 </p>
               )}
             </div>

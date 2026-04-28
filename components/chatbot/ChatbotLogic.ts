@@ -30,7 +30,7 @@ const knowledgeBase: QuestionPattern[] = [
 📄 **דף בודד / דף נחיתה** - 1,500 ₪
 דף נחיתה יחיד למבצע, קמפיין או מוצר
 
-🏢 **אתר קטן (פופולרי)** - 3,000 ₪
+🏢 **אתר תדמית (פופולרי)** - 3,000 ₪
 אתר תדמית מלא עד 4 דפים - מושלם לעסקים קטנים ובינוניים
 
 🚀 **אתר מורחב** - 5,000 ₪
@@ -64,7 +64,7 @@ const knowledgeBase: QuestionPattern[] = [
   // Business website
   {
     patterns: ['אתר תדמית', 'אתר לעסק', 'אתר עסקי', 'אתר חברה', 'אתר עבודה'],
-    response: `🏢 **אתר קטן (החבילה הכי פופולרית)** - 3,000 ₪
+    response: `🏢 **אתר תדמית (החבילה הכי פופולרית)** - 3,000 ₪
 
 אתר תדמית מלא עד 4 דפים - מושלם לעסקים קטנים ובינוניים.
 
@@ -87,7 +87,7 @@ const knowledgeBase: QuestionPattern[] = [
   // Portfolio
   {
     patterns: ['פורטפוליו', 'תיק עבודות', 'גלריה', 'אתר צלם', 'אתר מעצב'],
-    response: `🎨 **אתר פורטפוליו** - מ-3,000 ₪ (חבילת אתר קטן)
+    response: `🎨 **אתר פורטפוליו** - מ-3,000 ₪ (חבילת אתר תדמית)
 
 מושלם למעצבים, צלמים, אמנים וכל מי שצריך להציג עבודות.
 
@@ -155,12 +155,12 @@ const knowledgeBase: QuestionPattern[] = [
     response: `👨‍💻 **אודות Pixelia:**
 
 ✅ 5+ שנות ניסיון בפיתוח אתרים
-✅ למעלה מ-50 אתרים שהשקנו בהצלחה
+✅ כל פרויקט נבנה בהתאמה אישית ובאיכות גבוהה
 ✅ מומחיות בעיצוב רספונסיבי
 ✅ ליווי אישי לכל לקוח
 ✅ תמיכה שוטפת לאחר השקה
 
-**טכנולוגיות:** Next.js, React, TypeScript, Tailwind CSS, Node.js, WordPress
+**טכנולוגיות:** Next.js, React, TypeScript, Tailwind CSS, Node.js
 
 אנחנו מתמחים בעזרה לעסקים קטנים ובינוניים להשיק נוכחות דיגיטלית מושלמת במהירות ובמחיר הוגן.`,
     category: 'about'
@@ -176,7 +176,6 @@ const knowledgeBase: QuestionPattern[] = [
 • **TypeScript** - קוד בטוח ואיכותי
 • **Tailwind CSS** - עיצוב מודרני וגמיש
 • **Node.js** - צד שרת חזק
-• **WordPress** - למי שמעדיף CMS קלאסי
 
 כל הטכנולוגיות מבטיחות ביצועים מעולים וחוויית משתמש מהירה!`,
     category: 'tech'
@@ -236,7 +235,7 @@ const knowledgeBase: QuestionPattern[] = [
 💬 **WhatsApp:** [לחץ כאן](https://wa.me/972546361555)
 📍 **מיקום:** תל אביב, ישראל
 
-אפשר גם למלא את טופס יצירת הקשר באתר ואחזור אליך בהקדם!`,
+אפשר גם למלא את טופס יצירת הקשר באתר ונחזור אליכם בהקדם!`,
     category: 'contact'
   },
 
@@ -285,15 +284,19 @@ const knowledgeBase: QuestionPattern[] = [
 
   // Payment / Installments
   {
-    patterns: ['תשלום', 'תשלומים', 'לשלם', 'אשראי', 'העברה', 'חשבונית'],
-    response: `💳 **אפשרויות תשלום:**
+    patterns: ['תשלום', 'תשלומים', 'לשלם', 'אשראי', 'העברה', 'חשבונית', 'איך משלמים', 'בית', 'ביט'],
+    response: `💳 **איך משלמים?**
 
+לאחר שיחת תיאום קצרה ושסיכמנו את פרטי הפרויקט, נשלח אליכם קישור לחשבונית מאובטחת בוואטסאפ או במייל.
+
+**אמצעי תשלום:**
+✅ כרטיס אשראי
+✅ ביט / Apple Pay / Google Pay
 ✅ העברה בנקאית
-✅ תשלום באשראי / ביט
-✅ פריסה לתשלומים בכרטיס אשראי (דרך סליקה מאובטחת)
-✅ חשבונית מס + מע"מ
 
-**תנאי תשלום:** תשלום מלא מראש לפני תחילת העבודה.`,
+📄 **חשבונית מס מסודרת** מונפקת אוטומטית.
+
+לכל שאלה ספציפית על תשלום - מוזמנים ליצור קשר ישיר ב-WhatsApp: 054-6361555`,
     category: 'payment'
   },
 
@@ -307,7 +310,7 @@ const knowledgeBase: QuestionPattern[] = [
 ✅ המלצה על אחסון מהיר ואמין
 ✅ הקמת האתר על הדומיין שלך
 
-אפשר לבחור אחסון משלך או שאני אמליץ על פתרונות מעולים שעובדים איתם.`,
+אפשר לבחור אחסון משלך או שנמליץ על פתרונות מעולים שעובדים איתם.`,
     category: 'technical'
   },
 
@@ -319,17 +322,26 @@ const knowledgeBase: QuestionPattern[] = [
   }
 ];
 
-// Find the best matching response for user input
+// Find the best matching response for user input.
+// We pick the LONGEST matching pattern — otherwise short generic words
+// (like "שלום" inside "תשלום") would shadow more specific patterns.
 export function getBotResponse(userInput: string): string {
   const normalizedInput = userInput.toLowerCase().trim();
 
-  // Find matching patterns
+  let bestMatch: { item: QuestionPattern; patternLength: number } | null = null;
+
   for (const item of knowledgeBase) {
     for (const pattern of item.patterns) {
       if (normalizedInput.includes(pattern)) {
-        return item.response;
+        if (!bestMatch || pattern.length > bestMatch.patternLength) {
+          bestMatch = { item, patternLength: pattern.length };
+        }
       }
     }
+  }
+
+  if (bestMatch) {
+    return bestMatch.item.response;
   }
 
   // Default response if no match found

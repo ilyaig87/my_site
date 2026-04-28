@@ -10,28 +10,47 @@ export const metadata: Metadata = {
   description: 'קצת עלינו, הניסיון והטכנולוגיות שאנחנו עובדים איתן - בניית אתרים מקצועיים לעסקים',
 };
 
+// Render "Pixelia" with the per-letter colors of the logo (blue → teal → green → yellow → orange)
+const PIXELIA_LETTER_COLORS = ['#1E78C8', '#2EA88A', '#1E78C8', '#2EA88A', '#7FBE3A', '#F2C53D', '#F39323'];
+
+function renderPixeliaTitle(title: string) {
+  const idx = title.indexOf('Pixelia');
+  if (idx === -1) return title;
+  const before = title.slice(0, idx);
+  const after = title.slice(idx + 'Pixelia'.length);
+  return (
+    <>
+      {before}
+      <span className="font-black">
+        {'PIXELIA'.split('').map((letter, i) => (
+          <span key={i} style={{ color: PIXELIA_LETTER_COLORS[i] }}>{letter}</span>
+        ))}
+      </span>
+      {after}
+    </>
+  );
+}
+
 export default function AboutPage() {
   const content = getSiteContent();
 
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
+      <section className="relative py-6 md:py-8 bg-gradient-to-b from-yellow-50 to-white">
         <Container>
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-yellow-50 border border-yellow-200 text-gray-900 text-sm font-medium">
-              <svg className="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <span>נסיון וניסיון</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-full bg-yellow-50 border border-yellow-200 text-gray-900 text-[10px] font-medium">
+              <span className="w-1 h-1 bg-yellow-400 rounded-full"></span>
+              <span>ניסיון ומקצועיות</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight text-gray-900">
-              {content.about.title}
+            <h1 className="text-2xl md:text-3xl font-black mb-2 leading-tight text-gray-900">
+              {renderPixeliaTitle(content.about.title)}
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
               {content.about.description}
             </p>
           </div>
@@ -39,60 +58,111 @@ export default function AboutPage() {
       </section>
 
       {/* Experience & Technologies */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-b from-white to-yellow-50">
+      <section className="py-8 bg-gradient-to-b from-white to-gray-50">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
             {/* Experience */}
-            <Card hover className="relative overflow-hidden group">
+            <div className="relative bg-white border-2 border-yellow-200 rounded-2xl p-6 md:p-8 shadow-lg overflow-hidden group hover:border-yellow-300 hover:shadow-xl transition-all">
+              {/* Subtle background pattern */}
+              <div className="pointer-events-none absolute -top-12 -right-12 w-44 h-44 bg-yellow-100 rounded-full blur-3xl opacity-60" />
+
               <div className="relative">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-yellow-400 rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                    <svg className="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h2 className="text-4xl font-black mb-4 text-gray-900">
-                    {content.about.experience}
-                  </h2>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-4 rounded-full bg-yellow-100 border border-yellow-300 text-gray-900 text-[10px] font-semibold uppercase tracking-wide">
+                  <svg className="w-3 h-3 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  ניסיון
                 </div>
-                <ul className="space-y-4">
+
+                <h2 className="text-2xl md:text-3xl font-black mb-2 text-gray-900 leading-tight">
+                  5+ שנות ניסיון בפיתוח אתרים
+                </h2>
+                <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+                  מתמחים בבניית אתרים מודרניים, מהירים ובעלי חוויית משתמש מצוינת לעסקים בכל גודל
+                </p>
+
+                {/* Highlights */}
+                <ul className="space-y-2 mb-5">
                   {content.about.highlights.map((highlight, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <svg className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-700 text-lg">{highlight}</span>
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="flex-shrink-0 mt-0.5 inline-flex items-center justify-center w-5 h-5 rounded-full bg-yellow-100 border border-yellow-300">
+                        <svg className="w-3 h-3 text-yellow-600" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <span className="text-sm text-gray-700 leading-relaxed">{highlight}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-            </Card>
 
-            {/* Technologies */}
-            <Card hover className="relative overflow-hidden group">
-              <div className="relative">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-yellow-400 rounded-2xl mb-6 shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                    <svg className="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
+                {/* Stat row */}
+                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-gray-100">
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">5+</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">שנות ניסיון</div>
                   </div>
-                  <h2 className="text-4xl font-black mb-4 text-gray-900">
-                    הטכנולוגיות שלנו
-                  </h2>
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">∞</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">ליווי אישי</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">100%</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">תמיכה</div>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-3 justify-center">
+              </div>
+            </div>
+
+            {/* Technologies - Bright featured card */}
+            <div className="relative bg-white border-2 border-yellow-200 rounded-2xl p-6 md:p-8 shadow-lg overflow-hidden group hover:border-yellow-300 hover:shadow-xl transition-all">
+              {/* Subtle background pattern */}
+              <div className="pointer-events-none absolute -top-12 -right-12 w-44 h-44 bg-yellow-100 rounded-full blur-3xl opacity-60" />
+
+              <div className="relative">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-4 rounded-full bg-yellow-100 border border-yellow-300 text-gray-900 text-[10px] font-semibold uppercase tracking-wide">
+                  <svg className="w-3 h-3 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" />
+                  </svg>
+                  סטאק טכנולוגי מודרני
+                </div>
+
+                <h2 className="text-2xl md:text-3xl font-black mb-2 text-gray-900 leading-tight">
+                  הטכנולוגיות שאנחנו עובדים איתן
+                </h2>
+                <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+                  אתרים מהירים, מאובטחים ובעלי SEO מצוין — נבנים מכלים שמובילים את התעשייה
+                </p>
+
+                {/* Tech chips */}
+                <div className="flex flex-wrap gap-2 mb-5">
                   {content.about.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-5 py-3 bg-yellow-50 text-yellow-700 rounded-xl font-semibold border border-yellow-200 hover:bg-yellow-100 hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-br from-yellow-50 to-yellow-100 text-gray-900 rounded-lg text-sm font-bold border border-yellow-200 hover:from-yellow-100 hover:to-yellow-200 hover:scale-105 transition-all shadow-sm"
                     >
+                      <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full" />
                       {tech}
                     </span>
                   ))}
                 </div>
+
+                {/* Stat row */}
+                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-gray-100">
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">100%</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">רספונסיבי</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">A+</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">דירוג ביצועים</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xl font-black text-yellow-600">SSL</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">אבטחה מתקדמת</div>
+                  </div>
+                </div>
               </div>
-            </Card>
+            </div>
           </div>
         </Container>
       </section>
@@ -101,19 +171,19 @@ export default function AboutPage() {
       <BenefitsSection benefits={content.whyChooseMe} />
 
       {/* CTA */}
-      <section className="relative py-24 md:py-32 bg-yellow-50">
+      <section className="py-6 bg-gradient-to-b from-gray-50 to-yellow-50">
         <Container>
-          <div className="max-w-4xl mx-auto bg-white border-2 border-yellow-200 rounded-2xl p-8 md:p-12 lg:p-16 text-center shadow-lg">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight">
+          <div className="max-w-2xl mx-auto bg-white border-2 border-yellow-200 rounded-xl p-4 md:p-6 text-center shadow-sm">
+            <h2 className="text-lg md:text-xl font-black mb-1.5 text-gray-900 leading-tight">
               מוכנים להתחיל את הפרויקט שלכם?
             </h2>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-sm text-gray-600 mb-3">
               בואו נדבר ונראה איך אפשר להביא את העסק שלכם לאינטרנט
             </p>
             <Button
               href="/contact"
               variant="primary"
-              size="lg"
+              size="sm"
             >
               צרו קשר עכשיו
             </Button>
