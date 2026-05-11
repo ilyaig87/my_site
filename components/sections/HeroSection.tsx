@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import { HeroContent } from '@/types';
@@ -8,55 +11,92 @@ interface HeroSectionProps {
 
 export default function HeroSection({ content }: HeroSectionProps) {
   return (
-    <section className="relative bg-gradient-to-b from-yellow-50 to-white py-5 sm:py-6 md:py-8">
-      <Container>
-        <div className="max-w-4xl mx-auto text-center px-1">
-          {/* Simple Badge */}
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-full bg-yellow-50 border border-yellow-200 text-gray-900 text-[10px] font-medium">
-            <span className="w-1 h-1 bg-yellow-400 rounded-full"></span>
-            <span>בחר טמפלייט או עצב משהו משלך</span>
-          </div>
+    <section className="relative min-h-[92vh] flex items-center overflow-hidden hero-beam">
+      {/* The signature diagonal beams come from the layout-level SiteBeam,
+          which renders on every page. Only the radial vignette stays here
+          to anchor the hero text. */}
+      <div aria-hidden className="beam-vignette" />
 
-          {/* Clean Title */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-black mb-2 leading-tight text-gray-900">
+      <Container>
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          {/* Kicker */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-8"
+          >
+            <span className="kicker">Pixelia · Web Studio</span>
+          </motion.div>
+
+          {/* Massive title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-8"
+          >
             {content.title}
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base md:text-lg font-bold mb-2 text-gray-700">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-4 max-w-3xl mx-auto leading-tight"
+          >
             {content.subtitle}
-          </p>
+          </motion.p>
 
           {/* Description */}
-          <p className="text-xs md:text-sm text-gray-600 mb-4 leading-relaxed max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
+            className="text-base sm:text-lg text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
             {content.description}
-          </p>
+          </motion.p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 mb-4 mx-auto w-full sm:w-fit max-w-xs sm:max-w-none">
-            <Button href="/templates" size="md" className="w-full sm:w-auto">
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.66, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
+          >
+            <Button href="/templates" size="lg" variant="accent">
               {content.primaryCTA}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
             </Button>
-            <Button href="/contact" variant="outline" size="md" className="w-full sm:w-auto">
+            <Button href="/contact" size="lg" variant="outline">
               {content.secondaryCTA}
             </Button>
-          </div>
+          </motion.div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-gray-600 text-[10px]">
-            <div className="flex items-center gap-1.5">
-              <svg className="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <span>תמיכה מלאה</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <svg className="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <span>העלאה מהירה</span>
-            </div>
-          </div>
+          {/* Trust strip — subtle proof signals, never shouting */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-14 flex flex-wrap gap-x-8 gap-y-2 justify-center text-xs text-[var(--text-muted)]"
+          >
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
+              פרויקטים שעלו לאוויר
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
+              מענה תוך 24 שעות
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
+              ייעוץ ראשוני חינם
+            </span>
+          </motion.div>
         </div>
       </Container>
     </section>

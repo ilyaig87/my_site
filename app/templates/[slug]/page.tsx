@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
+import GlassCard from '@/components/ui/GlassCard';
+import GlassPill from '@/components/ui/GlassPill';
 import TemplateRenderer from '@/components/templates/TemplateRenderer';
-import TemplatePreview from '@/components/ui/TemplatePreview';
 import { getTemplateBySlug, getAllTemplateSlugs, getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
 import TemplateViewTracker from '@/components/TemplateViewTracker';
@@ -13,22 +13,15 @@ interface TemplatePageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllTemplateSlugs();
-  return slugs;
+  return getAllTemplateSlugs();
 }
 
 export async function generateMetadata({ params }: TemplatePageProps): Promise<Metadata> {
   const { slug } = await params;
   const template = getTemplateBySlug(slug);
-
-  if (!template) {
-    return {
-      title: 'טמפלייט לא נמצא',
-    };
-  }
-
+  if (!template) return { title: 'טמפלייט לא נמצא' };
   return {
-    title: `${template.name} - WebSites`,
+    title: `${template.name} - Pixelia`,
     description: template.description,
   };
 }
@@ -38,55 +31,45 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
   const template = getTemplateBySlug(slug);
   const siteContent = getSiteContent();
 
-  if (!template) {
-    notFound();
-  }
+  if (!template) notFound();
 
   return (
     <>
-      {/* Template Header */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-yellow-50 to-white">
+      <section className="relative">
         <Container>
           <div className="max-w-4xl mx-auto text-center">
-            {/* Template Info */}
-            <div>
-              <span className="inline-block px-4 py-2 bg-yellow-50 text-yellow-700 rounded-full mb-4 text-sm font-medium border border-yellow-200">
-                {getCategoryLabel(template.category)}
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                {template.name}
-              </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                {template.longDescription}
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="/contact" size="lg">
-                  אני רוצה את הטמפלייט הזה
-                </Button>
-                <Button href={`https://wa.me/${siteContent.contact.whatsapp}?text=היי, אני מעוניין בטמפלייט ${template.name}`} variant="outline" size="lg" external>
-                  דברו איתי בוואטסאפ
-                </Button>
-              </div>
+            <div className="flex justify-center mb-5">
+              <GlassPill dot>{getCategoryLabel(template.category)}</GlassPill>
+            </div>
+            <h1 className="mb-5 text-[var(--text-strong)]">{template.name}</h1>
+            <p className="text-lg text-[var(--text-muted)] mb-8 leading-relaxed max-w-3xl mx-auto">
+              {template.longDescription}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button href="/contact" variant="primary" size="lg">
+                אני רוצה את הטמפלייט הזה
+              </Button>
+              <Button
+                href={`https://wa.me/${siteContent.contact.whatsapp}?text=היי, אני מעוניין בטמפלייט ${template.name}`}
+                variant="glass"
+                size="lg"
+                external
+              >
+                דברו איתי בוואטסאפ
+              </Button>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Suitable For */}
-      <section className="py-16 bg-gradient-to-b from-white to-yellow-50">
+      {/* Suitable for */}
+      <section className="relative">
         <Container>
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            מתאים במיוחד ל:
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {template.suitableFor.map((item, index) => (
-              <div
-                key={index}
-                className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center hover:bg-yellow-100 transition-colors"
-              >
-                <p className="text-gray-800 font-medium text-sm">{item}</p>
+          <h2 className="mb-10 text-center">מתאים במיוחד ל:</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 max-w-6xl mx-auto">
+            {template.suitableFor.map((item, i) => (
+              <div key={i} className="lg-surface lg-shallow squircle-md p-4 text-center">
+                <p className="relative z-10 text-[var(--text-default)] font-medium text-sm">{item}</p>
               </div>
             ))}
           </div>
@@ -94,166 +77,133 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
       </section>
 
       {/* Features */}
-      <section className="py-16 bg-gradient-to-b from-yellow-50 to-white">
+      <section className="relative">
         <Container>
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            מה כולל הטמפלייט הזה?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {template.features.map((feature, index) => (
-              <Card key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 text-gray-900 rounded-full mb-4 shadow-md">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <h2 className="mb-12 text-center">מה כולל הטמפלייט הזה?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {template.features.map((feature, i) => (
+              <GlassCard key={i} variant="default" squircle="lg" className="text-center p-7 sm:p-8">
+                <div
+                  className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 text-[var(--on-accent)]"
+                  style={{ background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))' }}
+                >
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
-              </Card>
+                <h3 className="text-xl font-bold text-[var(--text-strong)] mb-3">{feature.title}</h3>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">{feature.description}</p>
+              </GlassCard>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Live Template Preview */}
-      <section className="py-16 bg-gradient-to-b from-white to-yellow-50">
+      {/* Live preview */}
+      <section className="relative">
         <Container size="xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            תצוגה חיה של הטמפלייט
-          </h2>
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden border-4 border-gray-200">
-            <div className="bg-gray-800 px-4 py-2 flex items-center gap-2">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <h2 className="mb-8 text-center">תצוגה חיה של הטמפלייט</h2>
+          <GlassCard variant="deep" squircle="xl" className="max-w-6xl mx-auto overflow-hidden p-2">
+            <div className="relative z-10 squircle-lg overflow-hidden bg-white">
+              <div
+                className="px-4 py-2.5 flex items-center gap-2"
+                style={{ background: '#1a1a1f' }}
+              >
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-gray-400 text-xs">yourwebsite.com</span>
+                </div>
               </div>
-              <div className="flex-1 text-center">
-                <span className="text-gray-400 text-sm">yourwebsite.com</span>
+              <div className="max-h-[800px] overflow-y-auto">
+                <TemplateRenderer template={template} />
               </div>
             </div>
-            <div className="max-h-[800px] overflow-y-auto">
-              <TemplateRenderer template={template} />
-            </div>
-          </div>
-          <p className="text-center text-gray-600 mt-4 text-sm">
+          </GlassCard>
+          <p className="text-center text-[var(--text-muted)] mt-4 text-sm">
             * זוהי תצוגה מקדימה. האתר הסופי יותאם לתכנים שלכם
           </p>
         </Container>
       </section>
 
-      {/* Design Details */}
-      <section className="py-16 bg-gradient-to-b from-yellow-50 to-white">
+      {/* Design details */}
+      <section className="relative">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Color Scheme */}
-            <Card>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">פלטת צבעים</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <GlassCard variant="default" squircle="lg" className="p-7 sm:p-8">
+              <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-6">פלטת צבעים</h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-20 h-20 rounded-lg shadow-md"
-                    style={{ backgroundColor: template.colors.primary }}
-                  ></div>
-                  <div>
-                    <p className="font-semibold text-gray-900">צבע ראשי</p>
-                    <p className="text-gray-600 font-mono text-sm">{template.colors.primary}</p>
+                {[
+                  { color: template.colors.primary, label: 'צבע ראשי' },
+                  { color: template.colors.secondary, label: 'צבע משני' },
+                  { color: template.colors.accent, label: 'צבע הדגשה' },
+                ].map((c) => (
+                  <div key={c.label} className="flex items-center gap-4">
+                    <div
+                      className="w-16 h-16 rounded-xl border border-[var(--glass-border-dim)]"
+                      style={{ backgroundColor: c.color }}
+                    />
+                    <div>
+                      <p className="font-semibold text-[var(--text-strong)]">{c.label}</p>
+                      <p className="text-[var(--text-muted)] font-mono text-sm">{c.color}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-20 h-20 rounded-lg shadow-md border-2 border-gray-200"
-                    style={{ backgroundColor: template.colors.secondary }}
-                  ></div>
-                  <div>
-                    <p className="font-semibold text-gray-900">צבע משני</p>
-                    <p className="text-gray-600 font-mono text-sm">{template.colors.secondary}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-20 h-20 rounded-lg shadow-md"
-                    style={{ backgroundColor: template.colors.accent }}
-                  ></div>
-                  <div>
-                    <p className="font-semibold text-gray-900">צבע הדגשה</p>
-                    <p className="text-gray-600 font-mono text-sm">{template.colors.accent}</p>
-                  </div>
-                </div>
+                ))}
               </div>
-            </Card>
+            </GlassCard>
 
-            {/* Typography */}
-            <Card>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">טיפוגרפיה</h3>
+            <GlassCard variant="default" squircle="lg" className="p-7 sm:p-8">
+              <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-6">טיפוגרפיה</h3>
               <div className="space-y-6">
                 <div>
-                  <p className="font-semibold text-gray-900 mb-2">פונט לכותרות</p>
-                  <p className="text-3xl font-bold" style={{ fontFamily: template.typography.headingFont }}>
+                  <p className="text-sm font-semibold text-[var(--text-muted)] mb-2">פונט לכותרות</p>
+                  <p className="text-2xl font-bold text-[var(--text-strong)]" style={{ fontFamily: template.typography.headingFont }}>
                     {template.typography.headingFont}
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-2">פונט לטקסט רגיל</p>
-                  <p className="text-xl" style={{ fontFamily: template.typography.bodyFont }}>
+                  <p className="text-sm font-semibold text-[var(--text-muted)] mb-2">פונט לטקסט רגיל</p>
+                  <p className="text-lg text-[var(--text-default)]" style={{ fontFamily: template.typography.bodyFont }}>
                     {template.typography.bodyFont}
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-2">סגנון</p>
-                  <span className="inline-block px-4 py-2 bg-gray-100 text-gray-800 rounded-full">
-                    {getStyleLabel(template.typography.style)}
-                  </span>
+                  <p className="text-sm font-semibold text-[var(--text-muted)] mb-2">סגנון</p>
+                  <GlassPill>{getStyleLabel(template.typography.style)}</GlassPill>
                 </div>
               </div>
-            </Card>
+            </GlassCard>
           </div>
         </Container>
       </section>
 
-      {/* What You Get */}
-      <section className="py-16 bg-yellow-50">
+      {/* What you get */}
+      <section className="relative">
         <Container>
-          <div className="text-center max-w-3xl mx-auto bg-white border-2 border-yellow-200 rounded-2xl p-8 md:p-12 shadow-lg">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
-              מה אתם מקבלים?
-            </h2>
-            <ul className="space-y-4 text-lg md:text-xl mb-8 text-gray-700">
-              <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>אתר שנראה מקצועי ועובד מעולה</span>
-              </li>
-              <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>בסיס טוב לקידום אורגני ב-Google</span>
-              </li>
-              <li className="flex items-center justify-center gap-3">
-                <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>תחזוקה ושינויים עתידיים בתיאום</span>
-              </li>
+          <GlassCard variant="deep" squircle="2xl" glow="primary" className="max-w-3xl mx-auto p-10 md:p-12 text-center">
+            <h2 className="mb-7">מה אתם מקבלים?</h2>
+            <ul className="space-y-3 text-lg mb-8 text-[var(--text-default)]">
+              {['אתר שנראה מקצועי ועובד מעולה', 'בסיס טוב לקידום אורגני ב-Google', 'תחזוקה ושינויים עתידיים בתיאום'].map(
+                (item) => (
+                  <li key={item} className="flex items-center justify-center gap-2.5">
+                    <svg className="w-5 h-5 text-[var(--primary)]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                )
+              )}
             </ul>
-            <Button
-              href="/contact"
-              variant="primary"
-              size="lg"
-            >
+            <Button href="/contact" variant="primary" size="lg">
               בואו נתחיל!
             </Button>
-          </div>
+          </GlassCard>
         </Container>
       </section>
 
-      {/* Track template view and show stats */}
       <TemplateViewTracker templateSlug={template.slug} templateName={template.name} />
     </>
   );

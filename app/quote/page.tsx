@@ -1,16 +1,19 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Container from '@/components/ui/Container'
+import { useState } from 'react';
+import Container from '@/components/ui/Container';
+import GlassCard from '@/components/ui/GlassCard';
+import GlassPill from '@/components/ui/GlassPill';
+import Button from '@/components/ui/Button';
+import { cn } from '@/lib/cn';
 
-// Israeli phone validation - exactly 10 digits (mobile or VOIP/business)
 function isValidIsraeliPhone(value: string) {
-  const cleaned = value.replace(/[\s-]/g, '')
-  return cleaned.length === 10 && /^0(5\d|7[2-9])\d{7}$/.test(cleaned)
+  const cleaned = value.replace(/[\s-]/g, '');
+  return cleaned.length === 10 && /^0(5\d|7[2-9])\d{7}$/.test(cleaned);
 }
 
 function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 const websiteTypes = [
@@ -18,14 +21,14 @@ const websiteTypes = [
   { id: 'business', label: 'אתר עסקי', description: 'עד 4 דפים', basePrice: 3000 },
   { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 3000 },
   { id: 'shop', label: 'חנות / אתר מורחב', description: '5+ דפים עם DB', basePrice: 5000 },
-]
+];
 
 const pageRanges = [
   { id: '1', label: 'עמוד אחד', multiplier: 1 },
   { id: '2-5', label: '2-5 עמודים', multiplier: 1.2 },
   { id: '6-10', label: '6-10 עמודים', multiplier: 1.5 },
   { id: '10+', label: '10+ עמודים', multiplier: 2 },
-]
+];
 
 const features = [
   { id: 'contact_form', label: 'טופס יצירת קשר', price: 0 },
@@ -34,10 +37,10 @@ const features = [
   { id: 'multilingual', label: 'רב-לשוני', price: 1000 },
   { id: 'animations', label: 'אנימציות מתקדמות', price: 800 },
   { id: 'seo', label: 'אופטימיזציה ל-SEO', price: 1200 },
-]
+];
 
 export default function QuotePage() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     websiteType: '',
     numPages: '',
@@ -46,354 +49,299 @@ export default function QuotePage() {
     timeline: '',
     name: '',
     email: '',
-    phone: ''
-  })
-  const [calculatedPrice, setCalculatedPrice] = useState(0)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isComplete, setIsComplete] = useState(false)
-  const [submitError, setSubmitError] = useState('')
+    phone: '',
+  });
+  const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const calculatePrice = () => {
-    const type = websiteTypes.find(t => t.id === formData.websiteType)
-    const pages = pageRanges.find(p => p.id === formData.numPages)
-
-    if (!type || !pages) return 0
-
-    let price = type.basePrice * pages.multiplier
-
-    // Add feature prices
-    formData.selectedFeatures.forEach(featureId => {
-      const feature = features.find(f => f.id === featureId)
-      if (feature) {
-        price += feature.price
-      }
-    })
-
-    return Math.round(price)
-  }
+    const type = websiteTypes.find((t) => t.id === formData.websiteType);
+    const pages = pageRanges.find((p) => p.id === formData.numPages);
+    if (!type || !pages) return 0;
+    let price = type.basePrice * pages.multiplier;
+    formData.selectedFeatures.forEach((featureId) => {
+      const feature = features.find((f) => f.id === featureId);
+      if (feature) price += feature.price;
+    });
+    return Math.round(price);
+  };
 
   const handleNext = () => {
-    if (step === 3) {
-      const price = calculatePrice()
-      setCalculatedPrice(price)
-    }
-    setStep(step + 1)
-  }
-
-  const handleBack = () => {
-    setStep(step - 1)
-  }
+    if (step === 3) setCalculatedPrice(calculatePrice());
+    setStep(step + 1);
+  };
+  const handleBack = () => setStep(step - 1);
 
   const toggleFeature = (featureId: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       selectedFeatures: prev.selectedFeatures.includes(featureId)
-        ? prev.selectedFeatures.filter(id => id !== featureId)
-        : [...prev.selectedFeatures, featureId]
-    }))
-  }
+        ? prev.selectedFeatures.filter((id) => id !== featureId)
+        : [...prev.selectedFeatures, featureId],
+    }));
+  };
 
   const handleSubmit = async () => {
-    setSubmitError('')
+    setSubmitError('');
+    if (!formData.name.trim()) return setSubmitError('נא למלא שם מלא');
+    if (!formData.email.trim() || !isValidEmail(formData.email))
+      return setSubmitError('כתובת אימייל לא תקינה');
+    if (!formData.phone.trim()) return setSubmitError('נא למלא מספר טלפון');
+    if (!isValidIsraeliPhone(formData.phone))
+      return setSubmitError('מספר טלפון חייב להכיל 10 ספרות (לדוגמה: 054-6361555)');
 
-    if (!formData.name.trim()) {
-      setSubmitError('נא למלא שם מלא')
-      return
-    }
-    if (!formData.email.trim() || !isValidEmail(formData.email)) {
-      setSubmitError('כתובת אימייל לא תקינה')
-      return
-    }
-    if (!formData.phone.trim()) {
-      setSubmitError('נא למלא מספר טלפון')
-      return
-    }
-    if (!isValidIsraeliPhone(formData.phone)) {
-      setSubmitError('מספר טלפון חייב להכיל 10 ספרות (לדוגמה: 054-6361555)')
-      return
-    }
-
-    setIsSubmitting(true)
-
+    setIsSubmitting(true);
     try {
       const response = await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          calculated_price: calculatedPrice
-        })
-      })
-
-      if (response.ok) {
-        setIsComplete(true)
-      } else {
-        setSubmitError('שגיאה בשליחת הבקשה. נסו שוב')
-      }
-    } catch (error) {
-      console.error('Error submitting quote:', error)
-      setSubmitError('שגיאה בחיבור לשרת')
+        body: JSON.stringify({ ...formData, calculated_price: calculatedPrice }),
+      });
+      if (response.ok) setIsComplete(true);
+      else setSubmitError('שגיאה בשליחת הבקשה. נסו שוב');
+    } catch {
+      setSubmitError('שגיאה בחיבור לשרת');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   if (isComplete) {
     return (
-      <section className="py-24 md:py-32 bg-gradient-to-b from-green-50 to-white min-h-screen flex items-center">
+      <section className="relative min-h-[70vh] flex items-center">
         <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500 rounded-full mb-6">
-              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <GlassCard variant="deep" squircle="xl" glow="green" className="max-w-xl mx-auto p-10 text-center">
+            <div
+              className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-5"
+              style={{ background: 'radial-gradient(circle at 30% 30%, #34d399, #16a34a)' }}
+            >
+              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black mb-6 text-gray-900">
-              תודה על הפנייה!
-            </h1>
-            <p className="text-xl text-gray-600 mb-4">
-              קיבלנו את הבקשה שלך למחיר של <span className="font-bold text-green-600">₪{calculatedPrice.toLocaleString()}</span>
+            <h1 className="mb-3 text-[var(--text-strong)]">תודה על הפנייה!</h1>
+            <p className="text-base text-[var(--text-default)] mb-2">
+              קיבלנו את הבקשה להערכה של{' '}
+              <span className="font-bold lg-text-shimmer">₪{calculatedPrice.toLocaleString()}</span>
             </p>
-            <p className="text-lg text-gray-600 mb-8">
-              נחזור אליך בהקדם עם הצעת מחיר מפורטת והמלצות מותאמות אישית.
+            <p className="text-sm text-[var(--text-muted)] mb-7 leading-relaxed">
+              זו הערכה ראשונית בלבד. נחזור אליכם בהקדם עם הצעת מחיר מפורטת.
             </p>
-            <a
-              href="/"
-              className="inline-block px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all shadow-lg"
-            >
+            <Button href="/" variant="primary" size="lg">
               חזרה לעמוד הבית
-            </a>
-          </div>
+            </Button>
+          </GlassCard>
         </Container>
       </section>
-    )
+    );
   }
 
   return (
     <>
-      {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-yellow-50 to-white">
+      <section className="relative">
         <Container>
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-yellow-400 text-gray-900 text-sm font-bold">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-              <span>קבלו הצעת מחיר מיידית</span>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex justify-center mb-5">
+              <GlassPill dot>הערכת מחיר ראשונית</GlassPill>
             </div>
-            <h1 className="text-4xl md:text-6xl font-black mb-6 text-gray-900">
-              מחשבון הצעת מחיר
+            <h1 className="mb-4">
+              מחשבון <span className="lg-text-shimmer">הצעת מחיר</span>
             </h1>
-            <p className="text-xl text-gray-600">
-              ענו על מספר שאלות וקבלו הערכת מחיר מיידית לאתר שלכם
+            <p className="text-lg text-[var(--text-muted)]">
+              ענו על מספר שאלות וקבלו הערכה ראשונית למחיר האתר. ההצעה הסופית תינתן לאחר שיחת תיאום.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Calculator */}
-      <section className="py-16 bg-white">
+      <section className="relative">
         <Container>
           <div className="max-w-3xl mx-auto">
-            {/* Progress Bar */}
-            <div className="mb-12">
+            {/* Progress */}
+            <div className="mb-10">
               <div className="flex items-center justify-between mb-3">
                 {[1, 2, 3, 4].map((s) => (
                   <div
                     key={s}
-                    className={`flex items-center justify-center w-12 h-12 rounded-full font-bold text-lg transition-all ${
+                    className={cn(
+                      'flex items-center justify-center w-12 h-12 rounded-full font-bold text-lg transition-all',
+                      step >= s ? 'text-[var(--on-accent)] scale-110 lg-glow-primary' : 'lg-surface lg-shallow text-[var(--text-faint)]'
+                    )}
+                    style={
                       step >= s
-                        ? 'bg-yellow-400 text-gray-900 shadow-lg scale-110'
-                        : 'bg-gray-200 text-gray-500'
-                    }`}
+                        ? { background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))' }
+                        : undefined
+                    }
                   >
-                    {s}
+                    <span className="relative z-10">{s}</span>
                   </div>
                 ))}
               </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-1.5 lg-surface lg-shallow rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-yellow-400 transition-all duration-500"
-                  style={{ width: `${(step / 4) * 100}%` }}
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${(step / 4) * 100}%`,
+                    background: 'linear-gradient(90deg, var(--primary), var(--primary-bright))',
+                  }}
                 />
               </div>
             </div>
 
-            <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 md:p-12 shadow-lg">
-              {/* Step 1: Website Type */}
+            <GlassCard variant="default" squircle="lg" className="p-8 md:p-10">
               {step === 1 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-3xl font-black mb-3 text-gray-900">איזה סוג אתר אתם צריכים?</h2>
-                    <p className="text-gray-600 mb-6">בחרו את האפשרות המתאימה ביותר לצרכים שלכם</p>
+                    <h2 className="mb-3">איזה סוג אתר אתם צריכים?</h2>
+                    <p className="text-[var(--text-muted)] mb-6">בחרו את האפשרות המתאימה</p>
                   </div>
-
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {websiteTypes.map((type) => (
                       <button
                         key={type.id}
-                        onClick={() => setFormData(prev => ({ ...prev, websiteType: type.id }))}
-                        className={`p-6 border-2 rounded-xl text-right transition-all ${
+                        onClick={() => setFormData((p) => ({ ...p, websiteType: type.id }))}
+                        className={cn(
+                          'lg-surface squircle-md p-6 text-right transition-all',
                           formData.websiteType === type.id
-                            ? 'border-yellow-400 bg-yellow-50 shadow-lg scale-105'
-                            : 'border-gray-200 hover:border-yellow-200'
-                        }`}
+                            ? 'lg-glow-primary scale-[1.02]'
+                            : 'lg-shallow hover:scale-[1.01]'
+                        )}
                       >
-                        <h3 className="text-xl font-bold mb-2 text-gray-900">{type.label}</h3>
-                        <p className="text-gray-600 text-sm mb-3">{type.description}</p>
-                        <p className="text-yellow-600 font-bold">החל מ-₪{type.basePrice.toLocaleString()}</p>
+                        <div className="relative z-10">
+                          <h3 className="text-xl font-bold mb-2 text-[var(--text-strong)]">{type.label}</h3>
+                          <p className="text-sm text-[var(--text-muted)] mb-3">{type.description}</p>
+                          <p className="text-[var(--primary)] font-bold">החל מ-₪{type.basePrice.toLocaleString()}</p>
+                        </div>
                       </button>
                     ))}
                   </div>
-
-                  <button
-                    onClick={handleNext}
-                    disabled={!formData.websiteType}
-                    className="w-full px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
-                  >
+                  <Button onClick={handleNext} variant="primary" size="lg" fullWidth disabled={!formData.websiteType}>
                     המשך
-                  </button>
+                  </Button>
                 </div>
               )}
 
-              {/* Step 2: Number of Pages */}
               {step === 2 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-3xl font-black mb-3 text-gray-900">כמה עמודים יהיו באתר?</h2>
-                    <p className="text-gray-600 mb-6">יותר עמודים = תוכן עשיר יותר</p>
+                    <h2 className="mb-3">כמה עמודים יהיו באתר?</h2>
+                    <p className="text-[var(--text-muted)] mb-6">יותר עמודים = תוכן עשיר יותר</p>
                   </div>
-
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {pageRanges.map((range) => (
                       <button
                         key={range.id}
-                        onClick={() => setFormData(prev => ({ ...prev, numPages: range.id }))}
-                        className={`w-full p-6 border-2 rounded-xl text-right transition-all ${
+                        onClick={() => setFormData((p) => ({ ...p, numPages: range.id }))}
+                        className={cn(
+                          'w-full lg-surface squircle-md p-5 text-right transition-all',
                           formData.numPages === range.id
-                            ? 'border-yellow-400 bg-yellow-50 shadow-lg'
-                            : 'border-gray-200 hover:border-yellow-200'
-                        }`}
+                            ? 'lg-glow-primary'
+                            : 'lg-shallow hover:scale-[1.01]'
+                        )}
                       >
-                        <h3 className="text-xl font-bold text-gray-900">{range.label}</h3>
+                        <h3 className="relative z-10 text-lg font-bold text-[var(--text-strong)]">{range.label}</h3>
                       </button>
                     ))}
                   </div>
-
-                  <div className="flex gap-4">
-                    <button
-                      onClick={handleBack}
-                      className="flex-1 px-8 py-4 bg-gray-200 text-gray-900 rounded-xl font-bold hover:bg-gray-300 transition-all"
-                    >
+                  <div className="flex gap-3">
+                    <Button onClick={handleBack} variant="glass" size="lg" fullWidth>
                       חזור
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      disabled={!formData.numPages}
-                      className="flex-1 px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                    >
+                    </Button>
+                    <Button onClick={handleNext} variant="primary" size="lg" fullWidth disabled={!formData.numPages}>
                       המשך
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}
 
-              {/* Step 3: Features */}
               {step === 3 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-3xl font-black mb-3 text-gray-900">אילו פיצ'רים תרצו להוסיף?</h2>
-                    <p className="text-gray-600 mb-6">בחרו את התכונות שחשובות לכם (אופציונלי)</p>
+                    <h2 className="mb-3">אילו פיצ&apos;רים תרצו להוסיף?</h2>
+                    <p className="text-[var(--text-muted)] mb-6">בחרו את התכונות שחשובות לכם</p>
                   </div>
-
                   <div className="space-y-3">
                     {features.map((feature) => (
                       <button
                         key={feature.id}
                         onClick={() => toggleFeature(feature.id)}
-                        className={`w-full p-4 border-2 rounded-xl text-right transition-all flex items-center justify-between ${
-                          formData.selectedFeatures.includes(feature.id)
-                            ? 'border-yellow-400 bg-yellow-50'
-                            : 'border-gray-200 hover:border-yellow-200'
-                        }`}
+                        className={cn(
+                          'w-full lg-surface squircle-md p-4 text-right transition-all flex items-center justify-between',
+                          formData.selectedFeatures.includes(feature.id) ? 'lg-glow-primary' : 'lg-shallow'
+                        )}
                       >
-                        <div className="flex items-center gap-4">
-                          <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center ${
-                            formData.selectedFeatures.includes(feature.id)
-                              ? 'border-yellow-400 bg-yellow-400'
-                              : 'border-gray-300'
-                          }`}>
+                        <div className="relative z-10 flex items-center gap-4">
+                          <div
+                            className={cn(
+                              'w-6 h-6 border-2 rounded-md flex items-center justify-center',
+                              formData.selectedFeatures.includes(feature.id)
+                                ? 'bg-[var(--primary)] border-[var(--primary)]'
+                                : 'border-[var(--glass-border-dim)]'
+                            )}
+                          >
                             {formData.selectedFeatures.includes(feature.id) && (
-                              <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-4 h-4 text-[var(--on-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                               </svg>
                             )}
                           </div>
-                          <span className="font-bold text-gray-900">{feature.label}</span>
+                          <span className="font-bold text-[var(--text-strong)]">{feature.label}</span>
                         </div>
-                        <span className="text-yellow-600 font-bold">
+                        <span className="relative z-10 text-[var(--primary)] font-bold">
                           {feature.price === 0 ? 'כלול' : `+₪${feature.price}`}
                         </span>
                       </button>
                     ))}
                   </div>
-
-                  <div className="flex gap-4">
-                    <button
-                      onClick={handleBack}
-                      className="flex-1 px-8 py-4 bg-gray-200 text-gray-900 rounded-xl font-bold hover:bg-gray-300 transition-all"
-                    >
+                  <div className="flex gap-3">
+                    <Button onClick={handleBack} variant="glass" size="lg" fullWidth>
                       חזור
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      className="flex-1 px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all shadow-lg"
-                    >
+                    </Button>
+                    <Button onClick={handleNext} variant="primary" size="lg" fullWidth>
                       קבלו הצעת מחיר
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}
 
-              {/* Step 4: Price & Contact */}
               {step === 4 && (
-                <div className="space-y-8">
-                  <div className="text-center bg-gradient-to-br from-yellow-50 to-white p-8 rounded-2xl border-2 border-yellow-200">
-                    <h2 className="text-2xl font-bold mb-3 text-gray-600">הערכת המחיר שלכם</h2>
-                    <p className="text-6xl font-black text-gray-900 mb-4">
+                <div className="space-y-7">
+                  <GlassCard variant="deep" squircle="lg" glow="primary" className="p-8 text-center">
+                    <h2 className="text-lg text-[var(--text-muted)] mb-3 font-normal">הערכת המחיר שלכם</h2>
+                    <p className="text-5xl md:text-6xl font-black lg-text-shimmer mb-4 leading-none">
                       ₪{calculatedPrice.toLocaleString()}
                     </p>
-                    <p className="text-gray-600">
-                      *המחיר הסופי עשוי להשתנות בהתאם לדרישות נוספות
-                    </p>
-                  </div>
+                    <p className="text-sm text-[var(--text-muted)]">*המחיר הסופי עשוי להשתנות בהתאם לדרישות</p>
+                  </GlassCard>
 
                   <div>
-                    <h3 className="text-2xl font-black mb-6 text-gray-900">השאירו פרטים ונחזור אליכם</h3>
-                    <div className="space-y-4">
+                    <h3 className="text-2xl font-black mb-5 text-[var(--text-strong)]">השאירו פרטים ונחזור אליכם</h3>
+                    <div className="space-y-3">
                       <input
                         type="text"
                         placeholder="שם מלא *"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none"
+                        onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
+                        className="lg-input"
                       />
                       <input
                         type="email"
                         placeholder="אימייל *"
                         required
                         value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none"
+                        onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                        className="lg-input"
                       />
                       <input
                         type="tel"
                         placeholder="טלפון *"
                         required
                         value={formData.phone}
-                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none"
+                        onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
+                        className="lg-input"
                         maxLength={11}
                         inputMode="tel"
                         autoComplete="tel"
@@ -402,32 +350,31 @@ export default function QuotePage() {
                   </div>
 
                   {submitError && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
-                      {submitError}
+                    <div className="lg-surface lg-shallow squircle-sm p-3 text-red-400 text-sm">
+                      <span className="relative z-10">{submitError}</span>
                     </div>
                   )}
 
-                  <div className="flex gap-4">
-                    <button
-                      onClick={handleBack}
-                      className="flex-1 px-8 py-4 bg-gray-200 text-gray-900 rounded-xl font-bold hover:bg-gray-300 transition-all"
-                    >
+                  <div className="flex gap-3">
+                    <Button onClick={handleBack} variant="glass" size="lg" fullWidth>
                       חזור
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={handleSubmit}
+                      variant="primary"
+                      size="lg"
+                      fullWidth
                       disabled={!formData.name || !formData.email || !formData.phone || isSubmitting}
-                      className="flex-1 px-8 py-4 bg-yellow-400 text-gray-900 rounded-xl font-bold hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                     >
                       {isSubmitting ? 'שולח...' : 'שלח בקשה'}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}
-            </div>
+            </GlassCard>
           </div>
         </Container>
       </section>
     </>
-  )
+  );
 }

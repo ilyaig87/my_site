@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 interface AccessibilityMenuProps {
   isOpen: boolean;
@@ -37,11 +37,20 @@ const DEFAULTS: A11ySettings = {
 
 const STORAGE_KEY = 'a11y-settings-v2';
 
+type TabId = 'display' | 'color' | 'reading' | 'nav';
+
+const TABS: { id: TabId; label: string; icon: string }[] = [
+  { id: 'display', label: 'תצוגה', icon: 'M4 6h16M4 12h10M4 18h16' },
+  { id: 'color', label: 'צבעים', icon: 'M7 21a4 4 0 0 1-4-4V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4Zm0 0h12a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 0 1 2.828 0l2.829 2.829a2 2 0 0 1 0 2.828l-8.486 8.485M7 17h.01' },
+  { id: 'reading', label: 'קריאה', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' },
+  { id: 'nav', label: 'ניווט', icon: 'M14.828 14.828a4 4 0 0 1-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+];
+
 export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
   const [settings, setSettings] = useState<A11ySettings>(DEFAULTS);
   const [mouseY, setMouseY] = useState(0);
+  const [tab, setTab] = useState<TabId>('display');
 
-  // Load settings from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -50,11 +59,10 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
         setSettings({ ...DEFAULTS, ...parsed });
       }
     } catch {
-      // ignore
+      /* ignore */
     }
   }, []);
 
-  // Apply settings to document and persist
   useEffect(() => {
     const root = document.documentElement;
 
@@ -80,14 +88,12 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
     } catch {
-      // ignore
+      /* ignore */
     }
   }, [settings]);
 
-  // Reading guide - track mouse Y position
   useEffect(() => {
     if (!settings.readingGuide) return;
-
     const handleMouseMove = (e: MouseEvent) => setMouseY(e.clientY);
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
@@ -102,250 +108,295 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
-      // ignore
+      /* ignore */
     }
   };
 
-  const toggleClass = (cls: string, on: boolean) =>
-    `w-full flex items-center justify-between gap-2 p-2.5 rounded-lg text-sm transition-all border ${
-      on
-        ? 'bg-yellow-50 border-yellow-400 shadow-sm'
-        : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-    } ${cls}`;
+  const activeCount = useMemo(() => {
+    let count = 0;
+    if (settings.fontSize !== 100) count++;
+    if (settings.letterSpacing !== 0) count++;
+    if (settings.lineHeight !== 0) count++;
+    if (settings.contrast !== 'none') count++;
+    if (settings.grayscale) count++;
+    if (settings.highlightLinks) count++;
+    if (settings.highlightHeadings) count++;
+    if (settings.readableFont) count++;
+    if (settings.bigCursor) count++;
+    if (settings.readingGuide) count++;
+    if (settings.pauseAnimations) count++;
+    return count;
+  }, [settings]);
 
-  const Toggle = ({ on }: { on: boolean }) => (
-    <span
-      className={`relative inline-block w-10 h-5 rounded-full transition-colors flex-shrink-0 ${
-        on ? 'bg-yellow-500' : 'bg-gray-300'
+  const ToggleRow = ({
+    label,
+    on,
+    onClick,
+  }: {
+    label: string;
+    on: boolean;
+    onClick: () => void;
+  }) => (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-sm transition-all border ${
+        on
+          ? 'bg-[var(--primary)]/15 border-[var(--primary)]/50 text-[var(--text-strong)] shadow-sm'
+          : 'bg-white/30 dark:bg-white/[0.03] border-white/30 dark:border-white/10 text-[var(--text-default)] hover:bg-white/50 dark:hover:bg-white/[0.06]'
       }`}
-      aria-hidden
+      aria-pressed={on}
     >
+      <span className="font-medium">{label}</span>
       <span
-        className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
-          on ? 'translate-x-[22px]' : 'translate-x-0.5'
+        className={`relative inline-block w-9 h-5 rounded-full transition-colors flex-shrink-0 ${
+          on ? 'bg-[var(--primary)]' : 'bg-gray-300 dark:bg-white/15'
         }`}
-      />
-    </span>
+        aria-hidden
+      >
+        <span
+          className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
+            on ? 'translate-x-[18px]' : 'translate-x-0.5'
+          }`}
+        />
+      </span>
+    </button>
   );
 
   return (
     <>
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
-        <div>
-          <h2 className="text-xl font-black text-gray-900">תפריט נגישות</h2>
-          <p className="text-xs text-gray-500 mt-0.5">התאמות אישיות לחווית גלישה נוחה</p>
+      <div className="flex items-center justify-between mb-3 pb-3 border-b border-white/20 dark:border-white/10">
+        <div className="flex items-center gap-2">
+          <div className="w-9 h-9 rounded-xl bg-[var(--primary)]/20 flex items-center justify-center">
+            <svg className="w-5 h-5 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-base font-black text-[var(--text-strong)] leading-tight">תפריט נגישות</h2>
+            <p className="text-[11px] text-[var(--text-muted)] leading-tight mt-0.5">
+              {activeCount > 0 ? `${activeCount} התאמות פעילות` : 'התאמות אישיות'}
+            </p>
+          </div>
         </div>
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
+          className="text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-white/30 dark:hover:bg-white/10 p-1.5 rounded-lg transition-colors"
           aria-label="סגור תפריט נגישות"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      <div className="space-y-5">
-        {/* גודל טקסט */}
-        <section>
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">תצוגה</h3>
+      {/* Tabs */}
+      <div
+        role="tablist"
+        aria-label="קטגוריות נגישות"
+        className="grid grid-cols-4 gap-1 p-1 mb-3 bg-white/30 dark:bg-white/[0.04] border border-white/30 dark:border-white/10 rounded-xl"
+      >
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            role="tab"
+            aria-selected={tab === t.id}
+            onClick={() => setTab(t.id)}
+            className={`flex flex-col items-center justify-center gap-0.5 py-2 rounded-lg text-[11px] font-bold transition-all ${
+              tab === t.id
+                ? 'bg-[var(--primary)] text-[var(--on-accent)] shadow-sm'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-white/40 dark:hover:bg-white/[0.06]'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d={t.icon} />
+            </svg>
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-2">
-            <label className="flex items-center justify-between text-sm font-semibold text-gray-900 mb-2">
-              <span>גודל טקסט</span>
-              <span className="text-yellow-700 font-bold">{settings.fontSize}%</span>
-            </label>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => update('fontSize', Math.max(80, settings.fontSize - 10))}
-                className="bg-white border border-gray-300 px-3 py-1.5 rounded-md text-gray-900 hover:bg-gray-50 font-bold text-sm"
-                aria-label="הקטן טקסט"
-              >
-                A-
-              </button>
-              <input
-                type="range"
-                min="80"
-                max="200"
-                step="10"
-                value={settings.fontSize}
-                onChange={(e) => update('fontSize', parseInt(e.target.value))}
-                className="flex-1 accent-yellow-500"
-                aria-label="גודל טקסט"
-              />
-              <button
-                onClick={() => update('fontSize', Math.min(200, settings.fontSize + 10))}
-                className="bg-white border border-gray-300 px-3 py-1.5 rounded-md text-gray-900 hover:bg-gray-50 font-bold text-sm"
-                aria-label="הגדל טקסט"
-              >
-                A+
-              </button>
+      {/* Tab content - fixed height so no jumping */}
+      <div className="min-h-[256px]">
+        {tab === 'display' && (
+          <div className="space-y-2.5">
+            <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold text-[var(--text-strong)]">גודל טקסט</span>
+                <span className="text-xs font-bold text-[var(--primary)] tabular-nums">{settings.fontSize}%</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => update('fontSize', Math.max(80, settings.fontSize - 10))}
+                  className="w-8 h-8 rounded-lg bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/15 text-[var(--text-strong)] hover:bg-white/80 dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
+                  aria-label="הקטן טקסט"
+                >
+                  A−
+                </button>
+                <input
+                  type="range"
+                  min="80"
+                  max="200"
+                  step="10"
+                  value={settings.fontSize}
+                  onChange={(e) => update('fontSize', parseInt(e.target.value))}
+                  className="flex-1 accent-[var(--primary)]"
+                  aria-label="גודל טקסט"
+                />
+                <button
+                  onClick={() => update('fontSize', Math.min(200, settings.fontSize + 10))}
+                  className="w-8 h-8 rounded-lg bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/15 text-[var(--text-strong)] hover:bg-white/80 dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
+                  aria-label="הגדל טקסט"
+                >
+                  A+
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-bold text-[var(--text-strong)]">מרווח אותיות</span>
+                  <span className="text-[11px] font-bold text-[var(--primary)] tabular-nums">+{settings.letterSpacing}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  step="1"
+                  value={settings.letterSpacing}
+                  onChange={(e) => update('letterSpacing', parseInt(e.target.value))}
+                  className="w-full accent-[var(--primary)]"
+                  aria-label="מרווח בין אותיות"
+                />
+              </div>
+
+              <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-bold text-[var(--text-strong)]">מרווח שורות</span>
+                  <span className="text-[11px] font-bold text-[var(--primary)] tabular-nums">+{settings.lineHeight}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="1"
+                  value={settings.lineHeight}
+                  onChange={(e) => update('lineHeight', parseInt(e.target.value))}
+                  className="w-full accent-[var(--primary)]"
+                  aria-label="מרווח בין שורות"
+                />
+              </div>
             </div>
           </div>
+        )}
 
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-2">
-            <label className="flex items-center justify-between text-sm font-semibold text-gray-900 mb-2">
-              <span>מרווח בין אותיות</span>
-              <span className="text-yellow-700 font-bold">+{settings.letterSpacing}px</span>
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="5"
-              step="1"
-              value={settings.letterSpacing}
-              onChange={(e) => update('letterSpacing', parseInt(e.target.value))}
-              className="w-full accent-yellow-500"
-              aria-label="מרווח בין אותיות"
+        {tab === 'color' && (
+          <div className="space-y-2.5">
+            <div>
+              <p className="text-[11px] font-bold text-[var(--text-muted)] mb-2 px-1">ניגודיות</p>
+              <div className="grid grid-cols-2 gap-2">
+                {(
+                  [
+                    { id: 'none', label: 'רגיל' },
+                    { id: 'high', label: 'גבוהה' },
+                    { id: 'negative', label: 'הפוכה' },
+                    { id: 'dark', label: 'כהה' },
+                  ] as const
+                ).map((opt) => (
+                  <button
+                    key={opt.id}
+                    onClick={() => update('contrast', opt.id)}
+                    className={`text-sm py-2.5 px-2 rounded-xl border transition-all font-bold ${
+                      settings.contrast === opt.id
+                        ? 'bg-[var(--primary)]/15 border-[var(--primary)]/50 text-[var(--text-strong)] shadow-sm'
+                        : 'bg-white/30 dark:bg-white/[0.03] border-white/30 dark:border-white/10 text-[var(--text-default)] hover:bg-white/50 dark:hover:bg-white/[0.06]'
+                    }`}
+                    aria-pressed={settings.contrast === opt.id}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <ToggleRow
+              label="גווני אפור (עיוורון צבעים)"
+              on={settings.grayscale}
+              onClick={() => update('grayscale', !settings.grayscale)}
             />
           </div>
+        )}
 
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-            <label className="flex items-center justify-between text-sm font-semibold text-gray-900 mb-2">
-              <span>מרווח בין שורות</span>
-              <span className="text-yellow-700 font-bold">+{settings.lineHeight}</span>
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="3"
-              step="1"
-              value={settings.lineHeight}
-              onChange={(e) => update('lineHeight', parseInt(e.target.value))}
-              className="w-full accent-yellow-500"
-              aria-label="מרווח בין שורות"
-            />
-          </div>
-        </section>
-
-        {/* ניגודיות */}
-        <section>
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">ניגודיות וצבע</h3>
-          <div className="grid grid-cols-2 gap-2">
-            {(
-              [
-                { id: 'none', label: 'רגיל' },
-                { id: 'high', label: 'גבוהה' },
-                { id: 'negative', label: 'הפוכה' },
-                { id: 'dark', label: 'כהה' },
-              ] as const
-            ).map((opt) => (
-              <button
-                key={opt.id}
-                onClick={() => update('contrast', opt.id)}
-                className={`text-sm py-2 px-2 rounded-lg border transition-all ${
-                  settings.contrast === opt.id
-                    ? 'bg-yellow-50 border-yellow-400 font-bold text-gray-900 shadow-sm'
-                    : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'
-                }`}
-                aria-pressed={settings.contrast === opt.id}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          <button
-            onClick={() => update('grayscale', !settings.grayscale)}
-            className={toggleClass('mt-2', settings.grayscale)}
-            aria-pressed={settings.grayscale}
-          >
-            <span className="font-medium text-gray-900">גווני אפור</span>
-            <Toggle on={settings.grayscale} />
-          </button>
-        </section>
-
-        {/* קריאה */}
-        <section>
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">קריאה</h3>
+        {tab === 'reading' && (
           <div className="space-y-2">
-            <button
+            <ToggleRow
+              label="פונט קריא (לדיסלקטים)"
+              on={settings.readableFont}
               onClick={() => update('readableFont', !settings.readableFont)}
-              className={toggleClass('', settings.readableFont)}
-              aria-pressed={settings.readableFont}
-            >
-              <span className="font-medium text-gray-900">פונט קריא (לדיסלקטים)</span>
-              <Toggle on={settings.readableFont} />
-            </button>
-
-            <button
+            />
+            <ToggleRow
+              label="הדגשת קישורים"
+              on={settings.highlightLinks}
               onClick={() => update('highlightLinks', !settings.highlightLinks)}
-              className={toggleClass('', settings.highlightLinks)}
-              aria-pressed={settings.highlightLinks}
-            >
-              <span className="font-medium text-gray-900">הדגשת קישורים</span>
-              <Toggle on={settings.highlightLinks} />
-            </button>
-
-            <button
+            />
+            <ToggleRow
+              label="הדגשת כותרות"
+              on={settings.highlightHeadings}
               onClick={() => update('highlightHeadings', !settings.highlightHeadings)}
-              className={toggleClass('', settings.highlightHeadings)}
-              aria-pressed={settings.highlightHeadings}
-            >
-              <span className="font-medium text-gray-900">הדגשת כותרות</span>
-              <Toggle on={settings.highlightHeadings} />
-            </button>
-
-            <button
+            />
+            <ToggleRow
+              label="קו מנחה לקריאה"
+              on={settings.readingGuide}
               onClick={() => update('readingGuide', !settings.readingGuide)}
-              className={toggleClass('', settings.readingGuide)}
-              aria-pressed={settings.readingGuide}
-            >
-              <span className="font-medium text-gray-900">קו מנחה לקריאה</span>
-              <Toggle on={settings.readingGuide} />
-            </button>
+            />
           </div>
-        </section>
+        )}
 
-        {/* ניווט */}
-        <section>
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">ניווט ואינטראקציה</h3>
+        {tab === 'nav' && (
           <div className="space-y-2">
-            <button
+            <ToggleRow
+              label="סמן עכבר מוגדל"
+              on={settings.bigCursor}
               onClick={() => update('bigCursor', !settings.bigCursor)}
-              className={toggleClass('', settings.bigCursor)}
-              aria-pressed={settings.bigCursor}
-            >
-              <span className="font-medium text-gray-900">סמן עכבר מוגדל</span>
-              <Toggle on={settings.bigCursor} />
-            </button>
-
-            <button
+            />
+            <ToggleRow
+              label="השהיית אנימציות"
+              on={settings.pauseAnimations}
               onClick={() => update('pauseAnimations', !settings.pauseAnimations)}
-              className={toggleClass('', settings.pauseAnimations)}
-              aria-pressed={settings.pauseAnimations}
-            >
-              <span className="font-medium text-gray-900">השהיית אנימציות</span>
-              <Toggle on={settings.pauseAnimations} />
-            </button>
+            />
+            <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3 text-[11px] text-[var(--text-muted)] leading-relaxed">
+              <strong className="text-[var(--text-strong)]">טיפ:</strong> ניווט מלא במקלדת זמין תמיד — Tab למעבר, Enter להפעלה, חצים לבחירה.
+            </div>
           </div>
-        </section>
+        )}
+      </div>
 
-        {/* כפתורים */}
-        <div className="pt-3 border-t border-gray-200 space-y-2">
-          <button
-            onClick={reset}
-            className="w-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-colors text-sm"
-          >
-            איפוס הגדרות
-          </button>
+      {/* Footer actions */}
+      <div className="mt-3 pt-3 border-t border-white/20 dark:border-white/10 grid grid-cols-2 gap-2">
+        <button
+          onClick={reset}
+          disabled={activeCount === 0}
+          className="col-span-2 flex items-center justify-center gap-1.5 bg-white/30 dark:bg-white/[0.04] hover:bg-white/50 dark:hover:bg-white/[0.08] disabled:opacity-50 disabled:cursor-not-allowed border border-white/30 dark:border-white/10 text-[var(--text-strong)] font-bold py-2 px-3 rounded-xl transition-colors text-xs"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0 1-15.357-2m15.357 2H15" />
+          </svg>
+          איפוס הגדרות
+        </button>
 
-          <a
-            href="/accessibility"
-            className="block w-full text-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2.5 px-4 rounded-lg transition-colors text-sm"
-          >
-            הצהרת נגישות מלאה
-          </a>
+        <a
+          href="/accessibility"
+          className="flex items-center justify-center gap-1 bg-[var(--primary)] hover:bg-[var(--primary-bright)] text-[var(--on-accent)] font-black py-2 px-2 rounded-xl transition-colors text-[11px] text-center"
+        >
+          הצהרה מלאה
+        </a>
 
-          <a
-            href="mailto:ilyaig8@gmail.com?subject=פנייה%20בנושא%20נגישות"
-            className="block w-full text-center bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors text-xs"
-          >
-            דיווח על בעיית נגישות ←
-          </a>
-        </div>
+        <a
+          href="mailto:ilyaig8@gmail.com?subject=פנייה%20בנושא%20נגישות"
+          className="flex items-center justify-center gap-1 bg-white/30 dark:bg-white/[0.04] hover:bg-white/50 dark:hover:bg-white/[0.08] border border-white/30 dark:border-white/10 text-[var(--text-default)] font-bold py-2 px-2 rounded-xl transition-colors text-[11px] text-center"
+        >
+          דיווח על בעיה
+        </a>
       </div>
 
       {/* Reading guide overlay */}
@@ -363,91 +414,6 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
         />
       )}
 
-      {/* Global accessibility styles */}
-      <style jsx global>{`
-        .a11y-contrast-high {
-          filter: contrast(1.4) saturate(1.2);
-        }
-        .a11y-contrast-negative {
-          filter: invert(1) hue-rotate(180deg);
-        }
-        .a11y-contrast-negative img,
-        .a11y-contrast-negative video,
-        .a11y-contrast-negative svg {
-          filter: invert(1) hue-rotate(180deg);
-        }
-        .a11y-contrast-dark {
-          filter: invert(0.92) hue-rotate(180deg);
-          background: #111;
-        }
-        .a11y-contrast-dark img,
-        .a11y-contrast-dark video,
-        .a11y-contrast-dark svg {
-          filter: invert(1) hue-rotate(180deg);
-        }
-        .a11y-grayscale {
-          filter: grayscale(100%);
-        }
-        .a11y-grayscale.a11y-contrast-high {
-          filter: grayscale(100%) contrast(1.4);
-        }
-
-        .a11y-highlight-links a {
-          text-decoration: underline !important;
-          text-decoration-thickness: 2px !important;
-          text-underline-offset: 4px !important;
-          outline: 1px dashed currentColor;
-          outline-offset: 2px;
-        }
-
-        .a11y-highlight-headings h1,
-        .a11y-highlight-headings h2,
-        .a11y-highlight-headings h3,
-        .a11y-highlight-headings h4,
-        .a11y-highlight-headings h5,
-        .a11y-highlight-headings h6 {
-          outline: 2px dashed #eab308;
-          outline-offset: 4px;
-          background: rgba(254, 240, 138, 0.25);
-        }
-
-        .a11y-readable-font,
-        .a11y-readable-font * {
-          font-family: 'Arial', 'Tahoma', 'Verdana', sans-serif !important;
-          font-weight: 500 !important;
-        }
-
-        .a11y-letter-spacing,
-        .a11y-letter-spacing * {
-          letter-spacing: var(--a11y-letter-spacing, 0) !important;
-        }
-
-        .a11y-line-height p,
-        .a11y-line-height li,
-        .a11y-line-height span,
-        .a11y-line-height div {
-          line-height: calc(1.5 + var(--a11y-line-height-add, 0) * 0.25) !important;
-        }
-
-        .a11y-big-cursor,
-        .a11y-big-cursor * {
-          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M4 4 L4 32 L12 24 L18 36 L24 33 L18 21 L30 21 Z' fill='black' stroke='white' stroke-width='2'/></svg>") 4 4, auto !important;
-        }
-        .a11y-big-cursor a,
-        .a11y-big-cursor button,
-        .a11y-big-cursor [role="button"] {
-          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><path d='M14 4 C14 4 14 22 14 22 L8 22 L20 36 L32 22 L26 22 C26 22 26 4 26 4 Z' fill='black' stroke='white' stroke-width='2'/></svg>") 20 20, pointer !important;
-        }
-
-        .a11y-pause-animations *,
-        .a11y-pause-animations *::before,
-        .a11y-pause-animations *::after {
-          animation-duration: 0.001ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.001ms !important;
-          scroll-behavior: auto !important;
-        }
-      `}</style>
     </>
   );
 }

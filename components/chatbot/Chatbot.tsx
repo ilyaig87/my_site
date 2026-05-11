@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Message, getBotResponse, generateMessageId } from './ChatbotLogic';
 
-// Predefined questions
 const predefinedQuestions = [
   { id: 1, label: '💰 מחירים', question: 'מחיר' },
   { id: 2, label: '⚡ תהליך העבודה', question: 'תהליך' },
@@ -23,272 +23,198 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [showQuestions, setShowQuestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Check dark mode on client side only
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    };
-
-    checkDarkMode();
-
-    // Watch for theme changes
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Initial welcome message
   useEffect(() => {
     if (messages.length === 0) {
-      const welcomeMessage: Message = {
-        id: generateMessageId(),
-        text: 'שלום! 👋 אני הבוט החכם של Pixelia.\nבחר שאלה מהרשימה למטה ואשמח לעזור!',
-        sender: 'bot',
-        timestamp: new Date()
-      };
-      setMessages([welcomeMessage]);
+      setMessages([
+        {
+          id: generateMessageId(),
+          text: 'שלום! 👋 אני הבוט החכם של Pixelia.\nבחר שאלה מהרשימה למטה ואשמח לעזור!',
+          sender: 'bot',
+          timestamp: new Date(),
+        },
+      ]);
     }
   }, []);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
   const handleQuestionClick = (question: string) => {
     setShowQuestions(false);
-
-    // Add user message
-    const userMessage: Message = {
-      id: generateMessageId(),
-      text: question,
-      sender: 'user',
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [
+      ...prev,
+      { id: generateMessageId(), text: question, sender: 'user', timestamp: new Date() },
+    ]);
     setIsTyping(true);
 
-    // Simulate bot thinking and respond
     setTimeout(() => {
       const botResponse = getBotResponse(question);
-      const botMessage: Message = {
-        id: generateMessageId(),
-        text: botResponse,
-        sender: 'bot',
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, botMessage]);
+      setMessages((prev) => [
+        ...prev,
+        { id: generateMessageId(), text: botResponse, sender: 'bot', timestamp: new Date() },
+      ]);
       setIsTyping(false);
       setShowQuestions(true);
     }, 800);
   };
 
   const handleBackToMenu = () => {
-    const menuMessage: Message = {
-      id: generateMessageId(),
-      text: 'בחר שאלה נוספת מהרשימה למטה:',
-      sender: 'bot',
-      timestamp: new Date()
-    };
-    setMessages(prev => [...prev, menuMessage]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: generateMessageId(),
+        text: 'בחר שאלה נוספת מהרשימה למטה:',
+        sender: 'bot',
+        timestamp: new Date(),
+      },
+    ]);
     setShowQuestions(true);
   };
 
   return (
     <>
       {/* Floating chat button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 left-6 z-50 w-16 h-16 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
-          isOpen ? 'scale-0' : 'scale-100'
-        } bg-yellow-400 text-gray-900`}
-        aria-label="פתח צ'אט"
-        suppressHydrationWarning
-      >
-        <svg
-          className="w-8 h-8 mx-auto"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-          />
-        </svg>
-        {/* Notification dot */}
-        <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-      </button>
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed bottom-6 left-6 z-50 lg-surface lg-glow-cool w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
+            style={{
+              background: 'radial-gradient(circle at 30% 30%, var(--accent-cool), #6d28d9)',
+            }}
+            aria-label="פתח צ'אט"
+            suppressHydrationWarning
+          >
+            <svg className="relative z-10 w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-[var(--primary)] rounded-full animate-pulse z-10" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Chat window */}
-      <div
-        className={`fixed bottom-24 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[85vh] max-h-[850px] rounded-2xl shadow-2xl transition-all duration-300 flex flex-col ${
-          isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-        } ${
-          isDarkMode
-            ? 'bg-gray-800 border border-gray-700'
-            : 'bg-white border border-gray-200'
-        }`}
-      >
-        {/* Header */}
-        <div className="bg-yellow-400 text-gray-900 rounded-t-2xl p-4 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center">
-              <svg
-                className="w-6 h-6 text-yellow-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-bold">Pixelia Bot</h3>
-              <p className="text-xs opacity-90">תשובות מיידיות לשאלות שלכם</p>
-            </div>
-          </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="hover:bg-yellow-500 rounded-full p-2 transition-colors"
-            aria-label="סגור צ'אט"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[85vh] max-h-[720px] lg-surface lg-deep squircle-lg flex flex-col overflow-hidden"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Messages */}
-        <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${
-          isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
-        }`}>
-          {messages.map((message) => (
+            {/* Header */}
             <div
-              key={message.id}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              className="relative flex-shrink-0 px-4 py-3 flex items-center justify-between border-b border-[var(--glass-border-dim)]"
+              style={{
+                background: 'linear-gradient(135deg, var(--primary-bright) 0%, var(--primary) 100%)',
+              }}
             >
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                  message.sender === 'user'
-                    ? 'bg-yellow-400 text-gray-900 rounded-br-none'
-                    : isDarkMode
-                    ? 'bg-gray-800 text-white rounded-bl-none border border-gray-700'
-                    : 'bg-white text-gray-900 rounded-bl-none border border-gray-200'
-                }`}
-              >
-                <div className="text-sm whitespace-pre-wrap break-words leading-relaxed">
-                  {message.text.split('\n').map((line, i) => {
-                    // Handle markdown-style bold
-                    const parts = line.split('**');
-                    return (
-                      <div key={i}>
-                        {parts.map((part, j) =>
-                          j % 2 === 1 ? <strong key={j}>{part}</strong> : <span key={j}>{part}</span>
-                        )}
-                      </div>
-                    );
-                  })}
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-9 h-9 rounded-full bg-[var(--ink)]/90 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[var(--primary-bright)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
                 </div>
-                <div
-                  className={`text-[10px] mt-1 ${
-                    message.sender === 'user' ? 'text-gray-700' : 'text-gray-500'
-                  }`}
-                >
-                  {message.timestamp.toLocaleTimeString('he-IL', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+                <div>
+                  <h3 className="font-bold text-[var(--on-accent)] text-sm">Pixelia Bot</h3>
+                  <p className="text-xs text-[var(--on-accent)]/70">תשובות מיידיות</p>
                 </div>
               </div>
-            </div>
-          ))}
-
-          {/* Typing indicator */}
-          {isTyping && (
-            <div className="flex justify-start">
-              <div
-                className={`rounded-2xl rounded-bl-none px-4 py-3 ${
-                  isDarkMode
-                    ? 'bg-gray-800 border border-gray-700'
-                    : 'bg-white border border-gray-200'
-                }`}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="relative z-10 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors text-[var(--on-accent)]"
+                aria-label="סגור"
               >
-                <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                </div>
-              </div>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
-          )}
 
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Questions Menu */}
-        {showQuestions && !isTyping && (
-          <div className={`border-t p-4 max-h-[400px] overflow-y-auto flex-shrink-0 ${
-            isDarkMode
-              ? 'border-gray-700 bg-gray-800'
-              : 'border-gray-200 bg-white'
-          }`}>
-            <div className="grid grid-cols-2 gap-2">
-              {predefinedQuestions.map((q) => (
-                <button
-                  key={q.id}
-                  onClick={() => handleQuestionClick(q.question)}
-                  className={`text-xs px-3 py-2 rounded-lg transition-colors text-right ${
-                    isDarkMode
-                      ? 'bg-gray-900 text-white hover:bg-gray-700 border border-gray-700'
-                      : 'bg-gray-50 text-gray-700 hover:bg-yellow-50 border border-gray-300 hover:border-yellow-400'
-                  }`}
-                >
-                  {q.label}
-                </button>
+            {/* Messages */}
+            <div className="relative z-10 flex-1 overflow-y-auto p-4 space-y-3">
+              {messages.map((m) => (
+                <div key={m.id} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    className={`max-w-[80%] px-3.5 py-2 text-sm leading-relaxed ${
+                      m.sender === 'user'
+                        ? 'rounded-2xl rounded-br-sm bg-[var(--primary)] text-[var(--on-accent)]'
+                        : 'lg-surface lg-shallow squircle-md text-[var(--text-default)]'
+                    }`}
+                  >
+                    <div className={m.sender === 'user' ? '' : 'relative z-10'}>
+                      {m.text.split('\n').map((line, i) => {
+                        const parts = line.split('**');
+                        return (
+                          <div key={i}>
+                            {parts.map((p, j) =>
+                              j % 2 === 1 ? <strong key={j}>{p}</strong> : <span key={j}>{p}</span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className={`text-[10px] mt-1 ${m.sender === 'user' ? 'text-[var(--on-accent)]/60' : 'text-[var(--text-faint)] relative z-10'}`}>
+                      {m.timestamp.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+                </div>
               ))}
-            </div>
-          </div>
-        )}
 
-        {/* Back to menu button */}
-        {!showQuestions && !isTyping && messages.length > 1 && (
-          <div className={`border-t p-4 flex-shrink-0 ${
-            isDarkMode
-              ? 'border-gray-700 bg-gray-800'
-              : 'border-gray-200 bg-white'
-          }`}>
-            <button
-              onClick={handleBackToMenu}
-              className="w-full bg-yellow-400 text-gray-900 py-2 rounded-lg hover:bg-yellow-500 transition-colors font-medium text-sm"
-            >
-              שאלה נוספת
-            </button>
-          </div>
+              {isTyping && (
+                <div className="flex justify-start">
+                  <div className="lg-surface lg-shallow squircle-md px-3.5 py-2.5">
+                    <div className="flex gap-1 relative z-10">
+                      <span className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-bounce" />
+                      <span className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Questions or back-to-menu */}
+            {showQuestions && !isTyping && (
+              <div className="relative z-10 flex-shrink-0 border-t border-[var(--glass-border-dim)] p-3 max-h-[280px] overflow-y-auto">
+                <div className="grid grid-cols-2 gap-2">
+                  {predefinedQuestions.map((q) => (
+                    <button
+                      key={q.id}
+                      onClick={() => handleQuestionClick(q.question)}
+                      className="lg-surface lg-shallow squircle-sm px-2.5 py-2 text-[11px] text-right text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors"
+                    >
+                      <span className="relative z-10">{q.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!showQuestions && !isTyping && messages.length > 1 && (
+              <div className="relative z-10 flex-shrink-0 border-t border-[var(--glass-border-dim)] p-3">
+                <button
+                  onClick={handleBackToMenu}
+                  className="w-full lg-surface lg-shallow squircle-sm py-2 text-sm font-medium text-[var(--text-strong)]"
+                >
+                  <span className="relative z-10">שאלה נוספת</span>
+                </button>
+              </div>
+            )}
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </>
   );
 }

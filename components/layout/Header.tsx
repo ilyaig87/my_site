@@ -3,276 +3,188 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getNavItems } from '@/lib/data';
-import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
+import GlassToggle from '@/components/ui/GlassToggle';
+import Container from '@/components/ui/Container';
+import { cn } from '@/lib/cn';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLightBackground, setIsLightBackground] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(true);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const navItems = getNavItems();
+  const pathname = usePathname();
 
-  useEffect(() => {
-    // טעינת מצב dark mode מ-localStorage (ברירת מחדל: light mode)
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-      setIsLightMode(false);
-      document.documentElement.classList.add('dark');
-    } else {
-      // ברירת מחדל - light mode
-      setIsLightMode(true);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // בדיקה אם עברנו את ה-hero section (בדרך כלל בגובה של 400-600px)
-      // אם כן, אנחנו כנראה על רקע בהיר
-      const scrollPosition = window.scrollY;
-      setIsLightBackground(scrollPosition > 400);
-    };
-
-    // הרצה ראשונית
-    handleScroll();
-
-    // הוספת event listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // ניקוי
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleLightMode = () => {
-    setIsLightMode(!isLightMode);
-    if (!isLightMode) {
-      // עובר למצב יום
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    } else {
-      // עובר למצב לילה
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
+  const handleHomeClick = (href: string) => (e: React.MouseEvent) => {
+    if (href === '/' && pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  return (
-    <header className="sticky top-0 z-50 bg-gradient-to-b from-yellow-50 to-white backdrop-blur-sm border-b border-yellow-200 shadow-md transition-all duration-300">
-      <Container>
-        <div className="flex items-center justify-between h-20 md:h-24">
-          {/* Logo */}
-          <Link href="/" className="flex items-center group transition-all duration-300">
-            <div className="relative h-12 md:h-14 w-32 md:w-40 transform group-hover:scale-110 transition-transform duration-300">
-              <Image
-                src="/images/logo/pixelia_logo_color.png"
-                alt="Pixelia Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </Link>
+  useEffect(() => {
+    const stored = localStorage.getItem('darkMode');
+    const dark = stored === null ? true : stored === 'true';
+    setIsDark(dark);
+    document.documentElement.classList.toggle('dark', dark);
+  }, []);
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              item.submenu ? (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  <button
-                    className="text-lg transition-all duration-300 font-medium relative group text-gray-700 hover:text-gray-900 flex items-center gap-1"
-                  >
-                    <span className="relative z-10">{item.label}</span>
-                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                  </button>
-                  {dropdownOpen && (
-                    <div className="absolute top-full right-0 pt-2 w-48 z-50">
-                      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
-                        {item.submenu.map((subitem) => (
-                          <Link
-                            key={subitem.href}
-                            href={subitem.href}
-                            className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-yellow-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors"
-                          >
-                            {subitem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  const toggleDarkMode = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('darkMode', String(next));
+  };
+
+  return (
+    <>
+      <header
+        className={cn(
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          scrolled
+            ? 'bg-[var(--bg-elevated)]/90 backdrop-blur-xl border-b border-[var(--border)]'
+            : 'bg-gradient-to-b from-[var(--bg-elevated)]/70 to-transparent'
+        )}
+      >
+        <Container>
+          <div className={cn('flex items-center justify-between transition-all duration-300', scrolled ? 'h-16 md:h-18' : 'h-20 md:h-24')}>
+            {/* Logo — large, presence */}
+            <Link href="/" onClick={handleHomeClick('/')} className="flex items-center group">
+              <div className={cn('relative transition-all duration-300', scrolled ? 'h-10 w-32 md:h-12 md:w-36' : 'h-12 w-36 md:h-14 md:w-44')}>
+                <Image
+                  src="/images/logo/pixelia_logo_color.png"
+                  alt="Pixelia"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+
+            {/* Desktop nav — bigger tabs */}
+            <nav className="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
+              {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-lg transition-all duration-300 font-medium relative group text-gray-700 hover:text-gray-900"
+                  onClick={handleHomeClick(item.href)}
+                  className="relative text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
                 >
-                  <span className="relative z-10">{item.label}</span>
-                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  <span>{item.label}</span>
+                  <span className="absolute inset-x-0 -bottom-1.5 h-px bg-[var(--accent)] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </Link>
-              )
-            ))}
-          </nav>
+              ))}
+            </nav>
 
-          {/* Light/Dark Mode Toggle & CTA Button */}
-          <div className="hidden md:flex items-center gap-3">
-            {/* Light/Dark Mode Toggle - Enhanced Design */}
-            <button
-              onClick={toggleLightMode}
-              className="relative w-14 h-7 bg-gray-200 rounded-full transition-all duration-300 group hover:shadow-lg hover:scale-105"
-              aria-label={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
-              title={isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
-              suppressHydrationWarning
-            >
-              {/* Toggle Track */}
-              <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                isLightMode
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500'
-                  : 'bg-gradient-to-r from-indigo-600 to-purple-700'
-              }`}></div>
-
-              {/* Toggle Circle */}
-              <div className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow-md transition-all duration-300 flex items-center justify-center ${
-                isLightMode ? 'right-0.5' : 'right-7'
-              }`}>
-                {isLightMode ? (
-                  // Sun Icon
-                  <svg className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                  </svg>
-                ) : (
-                  // Moon Icon
-                  <svg className="w-3.5 h-3.5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                  </svg>
-                )}
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:block">
+                <GlassToggle isDark={isDark} onToggle={toggleDarkMode} />
+              </div>
+              <div className="hidden md:block">
+                <Button href="/contact" size="sm" variant="primary">
+                  בואו נדבר
+                </Button>
               </div>
 
-              {/* Stars decoration (only in dark mode) */}
-              {!isLightMode && (
-                <div className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-                  <div className="absolute top-2 left-2 w-0.5 h-0.5 bg-white rounded-full animate-pulse"></div>
-                  <div className="absolute top-3 left-4 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <div className="absolute top-4 left-3 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                </div>
-              )}
-            </button>
-
-            <Button href="/contact" size="sm">
-              בואו נדבר
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg transition-all bg-yellow-100 border border-yellow-300 text-orange-600 hover:bg-yellow-200 hover:scale-110"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-200">
-            {navItems.map((item) => (
-              item.submenu ? (
-                <div key={item.label}>
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="w-full flex items-center justify-between py-3 text-lg transition-colors font-medium text-gray-700 hover:text-gray-900"
-                  >
-                    <span>{item.label}</span>
-                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {dropdownOpen && (
-                    <div className="pr-4 pb-2">
-                      {item.submenu.map((subitem) => (
-                        <Link
-                          key={subitem.href}
-                          href={subitem.href}
-                          className="block py-2 text-gray-600 hover:text-gray-900 transition-colors"
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            setDropdownOpen(false);
-                          }}
-                        >
-                          {subitem.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block py-3 text-lg transition-colors font-medium text-gray-700 hover:text-gray-900"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
-            ))}
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              {/* Light/Dark Mode Toggle - Mobile Enhanced */}
+              {/* Mobile burger */}
               <button
-                onClick={toggleLightMode}
-                className="w-full mb-3 flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl hover:shadow-lg transition-all border-2 border-yellow-200 hover:border-yellow-300 group"
-                aria-label={isLightMode ? 'מצב לילה' : 'מצב יום'}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden w-10 h-10 flex items-center justify-center text-[var(--text-strong)] border border-[var(--border-strong)] rounded-lg hover:bg-white/5 transition-colors"
+                aria-label="Toggle menu"
               >
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-                    isLightMode
-                      ? 'bg-gradient-to-br from-yellow-400 to-orange-500'
-                      : 'bg-gradient-to-br from-indigo-600 to-purple-700'
-                  }`}>
-                    {isLightMode ? (
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                  <span className="text-gray-900 font-bold text-lg">
-                    {isLightMode ? 'עבור למצב לילה' : 'עבור למצב יום'}
-                  </span>
-                </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                {mobileMenuOpen ? (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+                  </svg>
+                )}
               </button>
-
-              <Button href="/contact" className="w-full">
-                בואו נדבר
-              </Button>
             </div>
-          </nav>
+          </div>
+        </Container>
+      </header>
+
+      {/* Spacer */}
+      <div className="h-20 md:h-24" aria-hidden="true" />
+
+      {/* Mobile fullscreen menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 lg:hidden bg-[var(--bg-base)]"
+          >
+            <motion.nav
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
+              }}
+              className="relative z-10 h-full flex flex-col justify-center px-8 pt-20 pb-12"
+            >
+              <div className="flex flex-col gap-5 max-w-md mx-auto w-full text-center">
+                {navItems.map((item) => (
+                  <motion.div
+                    key={item.href}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      show: { opacity: 1, y: 0 },
+                    }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={(e) => {
+                        handleHomeClick(item.href)(e);
+                        setMobileMenuOpen(false);
+                      }}
+                      className="block text-xl font-medium text-[var(--text-strong)] hover:text-[var(--accent)] transition-colors tracking-tight"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+                  className="pt-8 mt-4 flex flex-col items-center gap-6 border-t border-[var(--border)]"
+                >
+                  <GlassToggle isDark={isDark} onToggle={toggleDarkMode} />
+                  <div onClick={() => setMobileMenuOpen(false)}>
+                    <Button href="/contact" variant="primary" size="lg">
+                      בואו נדבר
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.nav>
+          </motion.div>
         )}
-      </Container>
-    </header>
+      </AnimatePresence>
+    </>
   );
 }

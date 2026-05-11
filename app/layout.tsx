@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Heebo, Inter, Poppins } from "next/font/google";
+import { Heebo, Inter, Poppins, Rubik } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SiteBackdrop from "@/components/effects/SiteBackdrop";
 import FloatingAccessibility from "@/components/accessibility/FloatingAccessibility";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import CookieBanner from "@/components/CookieBanner";
@@ -11,31 +12,53 @@ import Chatbot from "@/components/chatbot/Chatbot";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import VisitorCounter from "@/components/VisitorCounter";
 
+const rubik = Rubik({
+  subsets: ["latin", "hebrew"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rubik",
+  display: "swap",
+});
+
 const heebo = Heebo({
   subsets: ["hebrew", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-heebo",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Pixelia - צור את האתר המושלם לעסק שלך",
-  description: "בחר מתוך תבניות עיצוב מוכנות או צור עיצוב מותאם אישית לעסק שלך. Pixelia - יוצרים אתרים מקצועיים לעסקים קטנים ובינוניים תוך ימים ספורים.",
-  keywords: "Pixelia, פיתוח אתרים, בניית אתרים, עיצוב אתרים, תבניות אתרים, אתרים לעסקים, דף נחיתה, עיצוב מותאם אישית",
+  title: "Pixelia - יוצרים אתרים מקצועיים",
+  description:
+    "סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים. בחרו תבנית מוכנה או עיצוב מותאם אישית — Pixelia.",
+  keywords:
+    "Pixelia, פיתוח אתרים, בניית אתרים, עיצוב אתרים, תבניות אתרים, אתרים לעסקים",
 };
+
+const themeInitScript = `
+(function(){
+  try {
+    var stored = localStorage.getItem('darkMode');
+    var isDark = stored === null ? true : stored === 'true';
+    if (isDark) document.documentElement.classList.add('dark');
+    if (stored === null) localStorage.setItem('darkMode', 'true');
+  } catch(e) {
+    document.documentElement.classList.add('dark');
+  }
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -44,14 +67,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl" suppressHydrationWarning>
-      <body className={`${heebo.variable} ${inter.variable} ${poppins.variable} font-sans antialiased`} suppressHydrationWarning>
-        <div className="relative z-10">
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </div>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body
+        className={`${rubik.variable} ${heebo.variable} ${inter.variable} ${poppins.variable} font-sans antialiased`}
+        suppressHydrationWarning
+      >
+        <SiteBackdrop />
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
 
         {/* Floating Components */}
         <FloatingAccessibility />
