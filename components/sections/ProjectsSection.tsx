@@ -45,7 +45,7 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
   return (
-    <section className="relative">
+    <section id="projects" className="relative scroll-mt-24">
       <Container>
         <motion.div
           variants={stagger()}

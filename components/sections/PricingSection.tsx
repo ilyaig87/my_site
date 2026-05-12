@@ -4,10 +4,10 @@ import Button from '@/components/ui/Button';
 export default function PricingSection() {
   const packages = [
     {
-      name: 'דף בודד',
+      name: 'דף נחיתה',
       tagline: 'Landing Page מושלם',
       description: 'דף יחיד ממוקד - לקמפיין, מוצר או שירות מסוים',
-      priceDisplay: 'החל מ-1,500 ₪',
+      priceDisplay: 'החל מ-2,500 ₪',
       features: [
         'דף נחיתה יחיד (Landing Page)',
         'בחירת תבנית מהגלריה + התאמה אישית',
@@ -28,7 +28,7 @@ export default function PricingSection() {
       name: 'אתר תדמית',
       tagline: 'הבחירה המומלצת לעסקים',
       description: 'אתר מלא עם כל מה שצריך לנוכחות מקצועית',
-      priceDisplay: 'החל מ-3,000 ₪',
+      priceDisplay: 'החל מ-4,500 ₪',
       features: [
         'עד 4 דפים (דף בית + 3 דפים נוספים)',
         'בחירת תבנית או עיצוב אישי',
@@ -49,10 +49,10 @@ export default function PricingSection() {
       ctaText: 'דברו איתי',
     },
     {
-      name: 'אתר מורחב',
+      name: 'אתר פרימיום',
       tagline: 'לעסקים שרוצים יותר',
       description: 'אתר מלא עם יותר דפים ופיצ\'רים מתקדמים',
-      priceDisplay: 'החל מ-5,000 ₪',
+      priceDisplay: 'החל מ-8,500 ₪',
       features: [
         '5+ דפים',
         'עיצוב מותאם אישית במלואו',

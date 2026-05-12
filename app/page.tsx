@@ -11,13 +11,13 @@ export default function Home() {
   const featuredTemplates = getFeaturedTemplates(3);
 
   return (
-    <>
+    <div className="home-sections">
       <HeroSection content={content.hero} />
       <ServicesSection />
       <ProjectsSection />
       <FeaturedTemplatesSection templates={featuredTemplates} />
       <PricingTeaser />
       <ContactTeaser />
-    </>
+    </div>
   );
 }

@@ -49,7 +49,7 @@ function PaymentSuccessContent() {
               התשלום בוצע בהצלחה! 🎉
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              תודה רבה על הרכישה. קיבלת אימייל עם פרטי ההזמנה וחשבונית מס.
+              תודה רבה על הרכישה. קיבלתם אימייל עם פרטי ההזמנה וחשבונית מס.
             </p>
           </div>
 
@@ -58,15 +58,15 @@ function PaymentSuccessContent() {
             <ul className="text-right space-y-3 text-gray-700">
               <li className="flex items-start gap-3">
                 <span className="text-yellow-400 text-xl">✓</span>
-                <span>נציג יצור איתך קשר תוך 24 שעות</span>
+                <span>נציג ייצור איתכם קשר תוך 24 שעות</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-yellow-400 text-xl">✓</span>
-                <span>נתחיל בתהליך עיצוב האתר שלך</span>
+                <span>נתחיל בתהליך עיצוב האתר שלכם</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-yellow-400 text-xl">✓</span>
-                <span>תקבל עדכונים שוטפים על ההתקדמות</span>
+                <span>תקבלו עדכונים שוטפים על ההתקדמות</span>
               </li>
             </ul>
           </div>
@@ -88,7 +88,7 @@ function PaymentSuccessContent() {
               href="/contact"
               className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg transition"
             >
-              צור קשר
+              צרו קשר
             </Link>
           </div>
         </div>

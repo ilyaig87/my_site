@@ -60,7 +60,7 @@ export default function TemplatePreview({
           {/* Badge */}
           <div className="text-center">
             <span className="inline-block px-4 py-2 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-full text-sm font-semibold">
-              צפה בתצוגה המלאה למטה ⬇
+              צפו בתצוגה המלאה למטה ⬇
             </span>
           </div>
         </div>

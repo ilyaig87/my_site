@@ -81,6 +81,7 @@ export interface Service {
   icon: string;
   features: string[];
   priceRange?: string;
+  suitableFor?: string;
 }
 
 export interface Benefit {
@@ -94,6 +95,7 @@ export interface ProcessStep {
   title: string;
   description: string;
   icon: string;
+  duration?: string;
 }
 
 export interface ContactInfo {

@@ -67,7 +67,13 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(function GlassCard(
     className
   );
 
-  const inner = <div className="relative z-10">{children}</div>;
+  // The inner wrapper inherits the outer's height + propagates a flex column,
+  // so children can use `flex-grow` (e.g. to push a CTA to the bottom of the
+  // card). Without this, the inner div breaks the flex chain from the outer
+  // GlassCard and CTAs end up at different vertical positions across cards.
+  const inner = (
+    <div className="relative z-10 h-full flex flex-col">{children}</div>
+  );
 
   if (Tag === 'a' && href) {
     return (

@@ -79,14 +79,14 @@ export default function StatsSection() {
       value: completedProjects.toLocaleString('he-IL'),
       suffix: '+',
       icon: '🚀',
-      color: 'from-blue-500 to-indigo-600'
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       label: 'דירוג ממוצע',
       value: avgRating.toFixed(1),
       suffix: '/5 ⭐',
       icon: '⭐',
-      color: 'from-purple-500 to-pink-600'
+      color: 'from-cyan-500 to-sky-500'
     }
   ]
 

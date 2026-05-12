@@ -15,7 +15,7 @@ const predefinedQuestions = [
   { id: 8, label: '🛠️ תמיכה', question: 'תמיכה' },
   { id: 9, label: '💳 תשלומים', question: 'תשלום' },
   { id: 10, label: '🌐 דומיין ואחסון', question: 'דומיין' },
-  { id: 11, label: '📞 צור קשר', question: 'צור קשר' },
+  { id: 11, label: '📞 צרו קשר', question: 'צור קשר' },
   { id: 12, label: '⭐ למה לבחור בנו?', question: 'למה' },
 ];
 
@@ -31,7 +31,7 @@ export default function Chatbot() {
       setMessages([
         {
           id: generateMessageId(),
-          text: 'שלום! 👋 אני הבוט החכם של Pixelia.\nבחר שאלה מהרשימה למטה ואשמח לעזור!',
+          text: 'שלום! 👋 אני הבוט החכם של Pixelia.\nבחרו שאלה מהרשימה למטה ואשמח לעזור!',
           sender: 'bot',
           timestamp: new Date(),
         },
@@ -67,7 +67,7 @@ export default function Chatbot() {
       ...prev,
       {
         id: generateMessageId(),
-        text: 'בחר שאלה נוספת מהרשימה למטה:',
+        text: 'בחרו שאלה נוספת מהרשימה למטה:',
         sender: 'bot',
         timestamp: new Date(),
       },
@@ -89,7 +89,7 @@ export default function Chatbot() {
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 left-6 z-50 lg-surface lg-glow-cool w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, var(--accent-cool), #6d28d9)',
+              background: 'conic-gradient(from 200deg at 50% 50%, #3b82f6, #14b8a6, #22c55e, #facc15, #f97316, #3b82f6)',
             }}
             aria-label="פתח צ'אט"
             suppressHydrationWarning

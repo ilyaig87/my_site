@@ -26,8 +26,11 @@ export default function ServicesPage() {
             <h1 className="mb-4 text-[var(--text-strong)]">
               <span className="lg-text-shimmer">השירותים</span> שלנו
             </h1>
-            <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
-              אנחנו מתמחים בפיתוח אתרים מקצועיים לכל סוג של עסק
+            <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto mb-3">
+              ארבעה סוגי אתרים — והליווי שמלווה אותם. מחירים מפורטים מופיעים בעמוד התמחור.
+            </p>
+            <p className="text-base font-semibold text-[var(--text-strong)] max-w-2xl mx-auto">
+              לא בטוחים מה מתאים? נשמח להמליץ בשיחה קצרה — ללא התחייבות.
             </p>
           </div>
         </Container>
@@ -52,9 +55,17 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <p className="text-base text-[var(--text-muted)] mb-6 leading-relaxed">{service.description}</p>
+                <p className="text-base text-[var(--text-muted)] mb-5 leading-relaxed">{service.description}</p>
 
-                <ul className="space-y-2.5 mb-6">
+                {service.suitableFor && (
+                  <div className="lg-surface lg-shallow squircle-md p-4 mb-5">
+                    <p className="relative z-10 text-sm text-[var(--text-default)] leading-relaxed">
+                      {service.suitableFor}
+                    </p>
+                  </div>
+                )}
+
+                <ul className="space-y-2.5">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-[var(--text-default)]">
                       <svg className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -64,15 +75,6 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-
-                {service.priceRange && (
-                  <span
-                    className="inline-flex items-center px-5 py-2.5 rounded-xl font-bold text-base text-[var(--on-accent)]"
-                    style={{ background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))' }}
-                  >
-                    {service.priceRange}
-                  </span>
-                )}
               </GlassCard>
             ))}
           </div>
@@ -86,14 +88,19 @@ export default function ServicesPage() {
           <GlassCard variant="deep" squircle="xl" glow="primary" className="max-w-3xl mx-auto p-8 sm:p-12 text-center">
             <h2 className="mb-3">מעוניינים באחד השירותים?</h2>
             <p className="text-base text-[var(--text-muted)] mb-7 max-w-xl mx-auto">
-              דברו איתנו ונתאים יחד את הפתרון המושלם
+              דברו איתנו ונתאים יחד את הפתרון המושלם — מענה ראשון תוך 24 שעות
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button href="/contact" variant="primary" size="lg">
-                צרו קשר
+              <Button href="/quote" variant="primary" size="lg">
+                קבלו הצעת מחיר
               </Button>
-              <Button href="/templates" variant="glass" size="lg">
-                צפו בתבניות
+              <Button
+                href="https://wa.me/972546361555"
+                external
+                variant="glass"
+                size="lg"
+              >
+                דברו איתנו ב-WhatsApp
               </Button>
             </div>
           </GlassCard>

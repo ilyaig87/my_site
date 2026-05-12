@@ -84,7 +84,7 @@ export default function ContactForm() {
             תודה שפניתם אלינו. נחזור אליכם בהקדם האפשרי.
           </p>
           <Button onClick={() => setStatus('idle')} variant="primary" size="sm">
-            שלח הודעה נוספת
+            שלחו הודעה נוספת
           </Button>
         </div>
       </GlassCard>
@@ -115,7 +115,7 @@ export default function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 className={inputClass('name')}
-                placeholder="איך קוראים לך?"
+                placeholder="איך קוראים לכם?"
               />
               {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
             </div>
@@ -188,9 +188,13 @@ export default function ContactForm() {
                 שולח...
               </span>
             ) : (
-              'שלח הודעה'
+              'שלחו הודעה'
             )}
           </Button>
+
+          <p className="text-[11px] text-[var(--text-faint)] text-center leading-relaxed">
+            אנחנו לא שולחים ניוזלטר. הפרטים משמשים רק למענה על הפנייה הזאת.
+          </p>
         </form>
       </div>
     </GlassCard>

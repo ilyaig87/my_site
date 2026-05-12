@@ -64,10 +64,10 @@ export default function AboutPage() {
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-black mb-3 text-[var(--text-strong)] leading-tight">
-                5+ שנות ניסיון בפיתוח אתרים
+                איך אנחנו עובדים — בקצרה
               </h2>
               <p className="text-base text-[var(--text-muted)] mb-6 leading-relaxed">
-                מתמחים בבניית אתרים מודרניים, מהירים ובעלי חוויית משתמש מצוינת לעסקים בכל גודל
+                ארבע הבטחות שמלוות כל פרויקט שאנחנו לוקחים. בלי גימיקים, בלי הפתעות, ובלי תיווך.
               </p>
 
               <ul className="space-y-3 mb-6">
@@ -86,8 +86,8 @@ export default function AboutPage() {
               <div className="grid grid-cols-3 gap-3 pt-5 border-t border-[var(--glass-border-dim)]">
                 {[
                   { stat: '5+', label: 'שנות ניסיון' },
-                  { stat: '∞', label: 'ליווי אישי' },
-                  { stat: '100%', label: 'תמיכה' },
+                  { stat: '2', label: 'אתרים חיים באוויר' },
+                  { stat: '<14d', label: 'אספקה ממוצעת' },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
                     <div className="text-2xl font-black lg-text-shimmer">{item.stat}</div>
@@ -149,11 +149,16 @@ export default function AboutPage() {
           <GlassCard variant="deep" squircle="xl" glow="primary" className="max-w-3xl mx-auto p-8 sm:p-12 text-center">
             <h2 className="mb-3 text-[var(--text-strong)]">מוכנים להתחיל את הפרויקט שלכם?</h2>
             <p className="text-base text-[var(--text-muted)] mb-7 max-w-xl mx-auto">
-              בואו נדבר ונראה איך אפשר להביא את העסק שלכם לאינטרנט
+              קבלו הצעת מחיר תוך 24 שעות — בלי התחייבות, בלי הפתעות
             </p>
-            <Button href="/contact" variant="primary" size="lg">
-              צרו קשר עכשיו
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button href="/quote" variant="primary" size="lg">
+                קבלו הצעת מחיר
+              </Button>
+              <Button href="https://wa.me/972546361555" external variant="glass" size="lg">
+                דברו איתנו ב-WhatsApp
+              </Button>
+            </div>
           </GlassCard>
         </Container>
       </section>

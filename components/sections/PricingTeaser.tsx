@@ -28,9 +28,9 @@ interface Tier {
 
 const tiers: Tier[] = [
   {
-    name: 'דף בודד',
-    price: '1,500',
-    subtitle: 'Landing Page ממוקד',
+    name: 'דף נחיתה',
+    price: '2,500',
+    subtitle: 'דף יחיד ממוקד המרה',
     bestFor: 'קמפיין · מוצר · שירות',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -40,9 +40,9 @@ const tiers: Tier[] = [
   },
   {
     name: 'אתר תדמית',
-    price: '3,000',
-    subtitle: 'אתר מלא לעסקים',
-    bestFor: 'עד 4 דפים · גלריה · SEO',
+    price: '4,500',
+    subtitle: 'נוכחות עסקית מלאה',
+    bestFor: 'סיפור · שירותים · גלריה',
     highlighted: true,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -51,10 +51,10 @@ const tiers: Tier[] = [
     ),
   },
   {
-    name: 'אתר מורחב',
-    price: '5,000',
-    subtitle: 'פתרון מקצה לקצה',
-    bestFor: '5+ דפים · DB · אנימציות',
+    name: 'אתר פרימיום',
+    price: '8,500',
+    subtitle: 'חוויית מותג מורחבת',
+    bestFor: 'מספר קווי שירות · בלוג · אנימציות',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -98,17 +98,16 @@ export default function PricingTeaser() {
               variants={fadeUp}
               animate={tier.highlighted ? breathingAnimate : undefined}
               transition={tier.highlighted ? breathingTransition : undefined}
-              className={tier.highlighted ? 'sm:-translate-y-3' : ''}
             >
               <GlassCard
                 variant={tier.highlighted ? 'deep' : 'default'}
                 tilt
                 glow={tier.highlighted ? 'primary' : 'none'}
                 squircle="lg"
-                className="relative h-full p-7 sm:p-8"
+                className="relative h-full p-7 sm:p-8 pt-10 sm:pt-11 flex flex-col"
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
                     <span
                       className="px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[var(--on-accent)] flex items-center gap-1.5 shadow-lg"
                       style={{
@@ -170,7 +169,7 @@ export default function PricingTeaser() {
           </Button>
           <Button href="/contact" variant="accent" size="md" fullWidth>
             <span className="flex items-center gap-2 justify-center">
-              להצעת מחיר מותאמת
+              פרויקט מותאם אישית
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
@@ -178,7 +177,7 @@ export default function PricingTeaser() {
           </Button>
         </div>
         <p className="text-xs text-[var(--text-muted)] mt-4 text-center">
-          המחיר הסופי תלוי במורכבות ובתוספות שתבחרו
+          לפרויקטים מותאמים אישית — החל מ-18,000 ₪. המחיר הסופי תלוי במורכבות ובתוספות.
         </p>
       </Container>
     </section>

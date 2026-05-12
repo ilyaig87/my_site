@@ -43,14 +43,14 @@ export default function TemplatesPage() {
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center mb-6">
-              <GlassPill dot dotColor="primary">{templates.length} טמפלייטים מקצועיים</GlassPill>
+              <GlassPill dot dotColor="primary">{templates.length} רעיונות לעיצוב להשראה</GlassPill>
             </div>
             <h1 className="mb-5 text-[var(--text-strong)]">
-              גלריית <span className="lg-text-shimmer">הטמפלייטים</span>
+              רעיונות <span className="lg-text-shimmer">לעיצוב</span> — נקודת התחלה, לא מוצר מדף
             </h1>
-            <p className="text-xl font-semibold mb-4 text-[var(--primary)]">עיצובים מקצועיים לכל סוג עסק</p>
+            <p className="text-xl font-semibold mb-4 text-[var(--primary)]">השראה לכל סוג עסק — אתר אחד לא דומה לשני</p>
             <p className="text-lg text-[var(--text-muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
-              בחר טמפלייט מוכן, התאם אותו למותג שלך והעלה לאוויר תוך ימים ספורים
+              כל טמפלייט הוא דמו של מה שאפשר. כל אתר שאנחנו בונים — נכתב, נצבע ומותאם מאפס סביב המותג שלכם.
             </p>
 
             {/* Search */}
@@ -58,7 +58,7 @@ export default function TemplatesPage() {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="חפש טמפלייט..."
+                  placeholder="חפשו טמפלייט..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="lg-input text-base pr-12"
@@ -113,9 +113,9 @@ export default function TemplatesPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                 </svg>
               </div>
-              <h2 className="text-[var(--text-strong)] mb-4">רוצים משהו מיוחד יותר?</h2>
+              <h2 className="text-[var(--text-strong)] mb-4">לא בטוחים שזה מה שאתם רוצים? זה בסדר — רוב הלקוחות שלנו לא בחרו טמפלייט.</h2>
               <p className="text-lg text-[var(--text-muted)] mb-8 leading-relaxed max-w-3xl mx-auto">
-                הטמפלייטים שלנו הם נקודת התחלה מעולה — אבל אנחנו גם יכולים לעצב לכם אתר מותאם אישית לחלוטין שמשקף בדיוק את המותג והחזון שלכם
+                הטמפלייטים פה הם השראה. אנחנו מעצבים ובונים לכם אתר מותאם אישית — סביב המותג, הקהל והמטרות שלכם. בלי הגבלות, בלי תבנית קבועה.
               </p>
             </div>
 
@@ -133,9 +133,9 @@ export default function TemplatesPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button href="/contact" variant="primary" size="lg">
+              <Button href="/quote" variant="primary" size="lg">
                 <span className="flex items-center gap-2">
-                  בואו נדבר על עיצוב אישי
+                  קבלו הצעת מחיר
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -148,7 +148,7 @@ export default function TemplatesPage() {
                   document.querySelector('#templates-grid')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                המשיכו לעיין בטמפלייטים
+                לגלריית הטמפלייטים
               </Button>
             </div>
           </GlassCard>
@@ -160,14 +160,14 @@ export default function TemplatesPage() {
         <Container>
           <div className="mb-10 text-center">
             <p className="text-[var(--text-muted)] text-lg">
-              נמצאו <span className="font-bold text-[var(--primary)]">{filteredTemplates.length}</span> טמפלייטים
+              <span className="font-bold text-[var(--primary)]">{filteredTemplates.length}</span> רעיונות תואמים
             </p>
           </div>
 
           {filteredTemplates.length === 0 ? (
             <div className="text-center py-16">
               <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-3">לא נמצאו טמפלייטים</h3>
-              <p className="text-[var(--text-muted)] mb-6">נסה לשנות את הסינון או החיפוש</p>
+              <p className="text-[var(--text-muted)] mb-6">נסו לשנות את הסינון או החיפוש</p>
               <Button
                 onClick={() => {
                   setSelectedCategory('all');
@@ -176,7 +176,7 @@ export default function TemplatesPage() {
                 variant="primary"
                 size="md"
               >
-                אפס סינונים
+                אפסו סינונים
               </Button>
             </div>
           ) : (
@@ -241,7 +241,7 @@ function TemplateCard({ template }: { template: Template }) {
             <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
               <GlassPill className="!bg-[var(--primary)] !border-transparent text-[var(--on-accent)] font-bold">
                 <span className="flex items-center gap-1.5">
-                  צפה בטמפלייט
+                  צפו בטמפלייט
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                   </svg>

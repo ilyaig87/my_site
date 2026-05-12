@@ -6,7 +6,7 @@ import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 
 export const metadata: Metadata = {
-  title: 'צור קשר - Pixelia',
+  title: 'צרו קשר - Pixelia',
   description: 'דברו עם Pixelia ובואו נתחיל לעבוד על האתר המושלם שלכם',
 };
 
@@ -29,8 +29,11 @@ export default function ContactPage() {
             <h1 className="mb-4 text-[var(--text-strong)]">
               בואו <span className="lg-text-shimmer">נדבר</span>
             </h1>
-            <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
+            <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto mb-3">
               יש לכם שאלות? רוצים להתחיל פרויקט? אנחנו כאן בשבילכם
+            </p>
+            <p className="text-base font-semibold text-[var(--text-strong)] max-w-2xl mx-auto">
+              תוך 24 שעות אתם מקבלים תשובה מאדם אמיתי. בלי בוטים, בלי תור.
             </p>
           </div>
         </Container>
@@ -64,7 +67,7 @@ export default function ContactPage() {
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 relative z-10"
-                style={{ background: 'radial-gradient(circle at 30% 30%, var(--accent-cool), #6d28d9)' }}
+                style={{ background: 'conic-gradient(from 200deg at 50% 50%, #3b82f6, #14b8a6, #22c55e, #facc15, #f97316, #3b82f6)' }}
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -91,7 +94,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <p className="relative z-10 text-sm font-bold text-[var(--text-strong)] mb-1">WhatsApp</p>
-              <p className="relative z-10 text-xs text-[var(--text-muted)]">לחצו לשיחה</p>
+              <p className="relative z-10 text-xs text-[var(--text-muted)]">הכי מהיר — מענה תוך דקות</p>
             </a>
           </div>
 

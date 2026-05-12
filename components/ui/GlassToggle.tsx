@@ -20,7 +20,7 @@ export default function GlassToggle({ isDark, onToggle }: GlassToggleProps) {
         className="absolute inset-0 transition-opacity duration-500"
         style={{
           background: isDark
-            ? 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%)'
+            ? 'linear-gradient(135deg, #0e1626 0%, #1e40af 100%)'
             : 'linear-gradient(135deg, #fde047 0%, #fb923c 100%)',
           opacity: 0.6,
         }}
@@ -32,7 +32,7 @@ export default function GlassToggle({ isDark, onToggle }: GlassToggleProps) {
         transition={{ type: 'spring', damping: 18, stiffness: 280 }}
       >
         {isDark ? (
-          <svg className="w-3.5 h-3.5 text-indigo-700" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="w-3.5 h-3.5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
           </svg>
         ) : (

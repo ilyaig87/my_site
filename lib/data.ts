@@ -30,16 +30,17 @@ export function getSiteContent(): SiteContent {
   return siteContentData as SiteContent;
 }
 
-// Get navigation items
+// Get navigation items — ordered to match the homepage narrative funnel:
+// hook → what we do → examples → price → who we are → answers → CTA.
 export function getNavItems() {
   return [
     { label: 'בית', href: '/' },
-    { label: 'טמפלייטים', href: '/templates' },
     { label: 'שירותים', href: '/services' },
+    { label: 'טמפלייטים', href: '/templates' },
     { label: 'תמחור', href: '/pricing' },
     { label: 'אודות', href: '/about' },
     { label: 'שאלות נפוצות', href: '/faq' },
-    { label: 'צור קשר', href: '/contact' },
+    { label: 'צרו קשר', href: '/contact' },
   ];
 }
 

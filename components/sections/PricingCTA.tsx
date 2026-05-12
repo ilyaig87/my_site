@@ -9,7 +9,7 @@ export default function PricingCTA() {
             מוכנים להתחיל?
           </h2>
           <p className="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
-            בחר את החבילה המתאימה לך ותתחיל לבנות את האתר המושלם לעסק שלך היום
+            בחרו את החבילה המתאימה לכם ותתחילו לבנות את האתר המושלם לעסק שלכם היום
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -17,7 +17,7 @@ export default function PricingCTA() {
               href="/pricing"
               className="group relative px-8 py-4 bg-gray-900 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110"
             >
-              <span className="relative z-10">צפה במחירים</span>
+              <span className="relative z-10">צפו במחירים</span>
               <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
 
@@ -25,7 +25,7 @@ export default function PricingCTA() {
               href="/contact"
               className="px-8 py-4 bg-white text-gray-900 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-900 hover:scale-105"
             >
-              או צור קשר לייעוץ
+              או צרו קשר לייעוץ
             </Link>
           </div>
 

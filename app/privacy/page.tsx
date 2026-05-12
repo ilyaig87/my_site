@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'מדיניות פרטיות - Pixelia',
-  description: 'מדיניות הפרטיות של Pixelia - כיצד אנו אוספים, משתמשים ושומרים על המידע שלך',
+  description: 'מדיניות הפרטיות של Pixelia - כיצד אנו אוספים, משתמשים ושומרים על המידע שלכם',
 };
 
 const TOC = [

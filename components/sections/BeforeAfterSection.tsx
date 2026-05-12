@@ -29,7 +29,7 @@ export default function BeforeAfterSection() {
         '85% פניות דרך האתר'
       ],
       beforeColor: 'from-orange-400 to-red-600',
-      afterColor: 'from-blue-400 to-indigo-600'
+      afterColor: 'from-blue-400 to-cyan-500'
     },
     {
       title: 'מסעדה משפחתית',

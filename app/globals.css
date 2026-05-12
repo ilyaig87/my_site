@@ -94,79 +94,123 @@
 }
 
 
-/* Light mode — porcelain & cream, museum-grade warm neutrals */
+/* Light mode — frosted porcelain, blue-tinted snow.
+   All undertones in the logo's blue/cyan family — never violet. */
 :root {
-  /* Layered warm whites — bg-base is gently tinted cream paper,
-     elevated surfaces lift to porcelain white (clearly distinct),
-     deep cream anchors sections */
-  --bg-base: #f8f1e2;
+  /* Layered cool whites — icy sky snow, porcelain elevation, deep slate */
+  --bg-base: #f3f7fb;
   --bg-elevated: #ffffff;
-  --bg-deep: #efe5cf;
+  --bg-deep: #e4ecf5;
 
-  /* Warm graphite ink — never harsh black, breathes with cream */
-  --foreground: #1f1a12;
-  --text-strong: #1f1a12;
-  --ink: #1f1a12;
-  --text-default: rgba(31, 26, 18, 0.84);
-  --text-muted: rgba(31, 26, 18, 0.52);
-  --text-faint: rgba(31, 26, 18, 0.36);
+  /* Deep near-black with a BLUE undertone (not violet) */
+  --foreground: #07172e;
+  --text-strong: #07172e;
+  --ink: #07172e;
+  --text-default: rgba(7, 23, 46, 0.86);
+  --text-muted: rgba(7, 23, 46, 0.54);
+  --text-faint: rgba(7, 23, 46, 0.34);
 
-  /* Whisper-soft borders — barely-there hairlines */
-  --border: rgba(31, 26, 18, 0.08);
-  --border-strong: rgba(31, 26, 18, 0.18);
-  --glass-border-dim: rgba(31, 26, 18, 0.05);
-  --glass-border: rgba(31, 26, 18, 0.09);
+  /* Whisper-soft borders */
+  --border: rgba(7, 23, 46, 0.06);
+  --border-strong: rgba(7, 23, 46, 0.16);
+  --glass-border-dim: rgba(7, 23, 46, 0.04);
+  --glass-border: rgba(7, 23, 46, 0.08);
 
-  /* Deep refined teal — gallery accent against warm cream */
-  --accent: #0d6661;
-  --accent-bright: #0f766e;
-  --accent-deep: #084d49;
+  /* Full logo palette — the 5 colors from pixelia_logo_color.png:
+     blue → teal → green → yellow → orange. Pop and warmth, not monochrome. */
+  --accent: #3b82f6;        /* blue-500 — primary brand */
+  --accent-bright: #60a5fa; /* blue-400 */
+  --accent-deep: #2563eb;   /* blue-600 */
 
   --primary: var(--accent);
   --primary-soft: var(--accent-bright);
   --primary-bright: var(--accent-bright);
   --primary-deep: var(--accent-deep);
-  --accent-cool: #2c5577;
-  --accent-warm: #b56a3d;
 
-  /* On-teal text — crisp white */
+  /* The 5-color brand spectrum — use these for "touches" of color */
+  --brand-blue:   #3b82f6;
+  --brand-teal:   #14b8a6;
+  --brand-green:  #22c55e;
+  --brand-yellow: #facc15;
+  --brand-orange: #f97316;
+
+  /* Legacy aliases — kept so existing components keep working */
+  --accent-cool: var(--brand-teal);   /* secondary slot — now teal */
+  --accent-warm: var(--brand-orange); /* tertiary slot — now orange */
+
   --on-accent: #ffffff;
+
+  /* Aurora — full 5-color logo spectrum, the centerpiece */
+  --aurora: linear-gradient(135deg,
+    #3b82f6 0%,
+    #14b8a6 25%,
+    #22c55e 50%,
+    #facc15 75%,
+    #f97316 100%);
+  --aurora-soft: linear-gradient(135deg,
+    rgba(59, 130, 246, 0.55) 0%,
+    rgba(20, 184, 166, 0.50) 25%,
+    rgba(34, 197, 94, 0.50) 50%,
+    rgba(250, 204, 21, 0.50) 75%,
+    rgba(249, 115, 22, 0.55) 100%);
 
   --background: var(--bg-base);
 }
 
-/* Dark mode — deep navy, soft warmth */
+/* Dark mode — deep midnight blue (not violet), Apple Vision OS liquid glass.
+   All undertones in the logo's blue/cyan family. */
 html.dark {
-  --bg-base: #0e1420;
-  --bg-elevated: #161e2d;
-  --bg-deep: #08101e;
+  --bg-base: #040814;
+  --bg-elevated: #0e1626;
+  --bg-deep: #02050d;
 
-  --foreground: #f5efe3;
-  --text-strong: #f5efe3;
-  --ink: #f5efe3;
-  --text-default: rgba(245, 239, 227, 0.86);
-  --text-muted: rgba(245, 239, 227, 0.58);
-  --text-faint: rgba(245, 239, 227, 0.40);
+  --foreground: #f0f7ff;
+  --text-strong: #f0f7ff;
+  --ink: #f0f7ff;
+  --text-default: rgba(240, 247, 255, 0.86);
+  --text-muted: rgba(240, 247, 255, 0.58);
+  --text-faint: rgba(240, 247, 255, 0.38);
 
-  --border: rgba(245, 239, 227, 0.10);
-  --border-strong: rgba(245, 239, 227, 0.22);
-  --glass-border-dim: rgba(245, 239, 227, 0.06);
-  --glass-border: rgba(245, 239, 227, 0.12);
+  --border: rgba(240, 247, 255, 0.08);
+  --border-strong: rgba(240, 247, 255, 0.20);
+  --glass-border-dim: rgba(240, 247, 255, 0.05);
+  --glass-border: rgba(240, 247, 255, 0.10);
 
-  /* Bright teal glows on deep navy */
-  --accent: #2dd4bf;
-  --accent-bright: #5eead4;
-  --accent-deep: #14b8a6;
+  /* Full logo spectrum, brighter siblings so they glow on the dark void.
+     Blue → teal → green → yellow → orange — all from logo squares. */
+  --accent: #60a5fa;        /* blue-400 — glows on dark */
+  --accent-bright: #93c5fd; /* blue-300 */
+  --accent-deep: #3b82f6;   /* blue-500 — LOGO COLOR */
 
   --primary: var(--accent);
   --primary-soft: var(--accent-bright);
   --primary-bright: var(--accent-bright);
   --primary-deep: var(--accent-deep);
-  --accent-cool: #7dbfe3;
-  --accent-warm: #fdb876;
 
-  /* On bright teal, dark navy reads sharper than white */
-  --on-accent: #042f2c;
+  /* The 5-color brand spectrum — brighter siblings for dark mode glow */
+  --brand-blue:   #60a5fa;
+  --brand-teal:   #2dd4bf;
+  --brand-green:  #4ade80;
+  --brand-yellow: #fde047;
+  --brand-orange: #fb923c;
+
+  --accent-cool: var(--brand-teal);
+  --accent-warm: var(--brand-orange);
+
+  --on-accent: #07172e;
+
+  --aurora: linear-gradient(135deg,
+    #60a5fa 0%,
+    #2dd4bf 25%,
+    #4ade80 50%,
+    #fde047 75%,
+    #fb923c 100%);
+  --aurora-soft: linear-gradient(135deg,
+    rgba(96, 165, 250, 0.65) 0%,
+    rgba(45, 212, 191, 0.55) 25%,
+    rgba(74, 222, 128, 0.55) 50%,
+    rgba(253, 224, 71, 0.55) 75%,
+    rgba(251, 146, 60, 0.65) 100%);
 
   color-scheme: dark;
 }
@@ -264,9 +308,17 @@ html.dark {
     position: relative;
   }
 
+  .home-sections > section {
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .home-sections > section.hero-beam {
+    padding-block: 0;
+  }
+
   ::selection {
-    background: var(--accent);
-    color: #ffffff;
+    background: var(--accent-deep);
+    color: var(--on-accent);
   }
 }
 
@@ -326,77 +378,131 @@ html.dark {
     opacity: 0.6;
   }
 
-  /* ── Cards: premium surfaces with soft elevation ── */
+  /* ── Liquid Glass surfaces — Apple Vision OS aesthetic ──
+     Real refraction via backdrop-filter, inset highlight on top edge
+     for the 3D rim, iridescent aurora border that wakes on hover. */
   .lg-surface {
     position: relative;
-    background: var(--bg-elevated);
+    background: rgba(240, 247, 255, 0.04);
     border: 1px solid var(--border);
-    transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: 0 1px 0 rgba(14, 20, 32, 0.04), 0 1px 2px rgba(14, 20, 32, 0.04);
-    background-image: none;
-  }
-
-  html.dark .lg-surface {
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Light mode — porcelain white card floating on warm cream,
-     with a feather-light warm shadow so the lift feels organic */
-  html:not(.dark) .lg-surface {
-    background: #ffffff;
+    transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     box-shadow:
-      0 1px 0 rgba(120, 90, 50, 0.04),
-      0 2px 8px -2px rgba(120, 90, 50, 0.06),
-      0 12px 24px -16px rgba(120, 90, 50, 0.10);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+      0 8px 32px -10px rgba(0, 0, 0, 0.45);
+    isolation: isolate;
   }
 
-  .lg-surface::before,
+  /* Light mode — frosted porcelain card, glass refraction over snow */
+  html:not(.dark) .lg-surface {
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(7, 23, 46, 0.04),
+      0 1px 2px rgba(7, 23, 46, 0.04),
+      0 12px 32px -14px rgba(7, 23, 46, 0.10);
+  }
+
+  /* Iridescent aurora rim — appears on hover, that "wow" reveal */
+  .lg-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--aurora-soft);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Inner specular sheen — diagonal highlight that gives the glass life */
   .lg-surface::after {
-    content: none;
-    display: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.0) 35%,
+      rgba(255, 255, 255, 0.0) 65%,
+      rgba(255, 255, 255, 0.03) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  html:not(.dark) .lg-surface::after {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.0) 30%,
+      rgba(255, 255, 255, 0.0) 70%,
+      rgba(255, 255, 255, 0.25) 100%);
   }
 
   .lg-surface:hover {
-    background: #1c2538;
-    border-color: rgba(45, 212, 191, 0.42);
-    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(45, 212, 191, 0.18);
+    background: rgba(240, 247, 255, 0.06);
+    border-color: rgba(240, 247, 255, 0.04);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.10),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+      0 18px 56px -16px rgba(59, 130, 246, 0.42),
+      0 0 0 1px rgba(96, 165, 250, 0.18);
   }
 
   html:not(.dark) .lg-surface:hover {
-    background: #ffffff;
-    border-color: rgba(15, 118, 110, 0.28);
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(7, 23, 46, 0.04);
     box-shadow:
-      0 1px 0 rgba(120, 90, 50, 0.05),
-      0 18px 36px -20px rgba(120, 90, 50, 0.14),
-      0 0 0 1px rgba(15, 118, 110, 0.10);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(7, 23, 46, 0.05),
+      0 22px 56px -22px rgba(37, 99, 235, 0.22),
+      0 0 0 1px rgba(37, 99, 235, 0.14);
   }
 
+  .lg-surface:hover::before {
+    opacity: 1;
+  }
+
+  /* Shallow — barely-there frost, used for backgrounds behind tighter cards */
   .lg-shallow {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(240, 247, 255, 0.02);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
   }
 
+  /* Deep — denser frost, more presence, used for hero cards */
   .lg-deep {
-    background: var(--bg-elevated);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(240, 247, 255, 0.06);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
   }
 
-  /* Light mode — shallow is a whisper of warm tint, deep is porcelain white */
   html:not(.dark) .lg-shallow {
-    background: rgba(31, 26, 18, 0.025);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
   }
 
   html:not(.dark) .lg-deep {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
     box-shadow:
-      0 1px 0 rgba(120, 90, 50, 0.04),
-      0 2px 8px -2px rgba(120, 90, 50, 0.05);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(7, 23, 46, 0.04),
+      0 18px 40px -18px rgba(7, 23, 46, 0.10);
   }
 
   /* Squircles — subtle, Apple-like */
@@ -406,18 +512,20 @@ html.dark {
   .squircle-xl { border-radius: 22px; }
   .squircle-2xl { border-radius: 28px; }
 
-  /* Shimmer text → amber accent — the brand pop inside titles */
+  /* Aurora text — the real shimmer: violet → magenta → cyan gradient
+     painted into the glyphs. This is the brand "wow" inside titles. */
   .lg-text-shimmer {
-    color: var(--accent);
+    background: var(--aurora);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     font-weight: 700;
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: currentColor;
-    background-clip: initial;
-    animation: none;
+    animation: aurora-shift 9s ease-in-out infinite;
   }
 
-  /* Kicker — refined: thin amber bar + label */
+  /* Kicker — aurora hairline + label */
   .kicker {
     position: relative;
   }
@@ -426,16 +534,26 @@ html.dark {
     display: inline-block;
     width: 2rem;
     height: 1px;
-    background: var(--accent);
+    background: var(--aurora);
     margin-inline-end: 0.5rem;
     transform: translateY(-3px);
   }
 
-  /* Tasteful elevation glows — used selectively on hero CTAs and feature cards */
+  /* Tasteful elevation glows — used selectively on hero CTAs and feature cards.
+     Primary is a layered aurora: violet halo + magenta inner + cyan rim */
   .lg-glow-primary {
     box-shadow:
-      0 14px 36px -14px color-mix(in oklab, var(--accent) 55%, transparent),
-      0 0 0 1px color-mix(in oklab, var(--accent) 22%, transparent);
+      0 22px 56px -18px rgba(59, 130, 246, 0.55),
+      0 8px 24px -8px rgba(6, 182, 212, 0.32),
+      0 0 0 1px rgba(96, 165, 250, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  html:not(.dark) .lg-glow-primary {
+    box-shadow:
+      0 22px 56px -22px rgba(37, 99, 235, 0.32),
+      0 8px 24px -10px rgba(6, 182, 212, 0.20),
+      0 0 0 1px rgba(37, 99, 235, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
   }
   .lg-glow-cool {
     box-shadow:
@@ -451,25 +569,37 @@ html.dark {
       0 14px 36px -14px rgba(34, 197, 94, 0.55);
   }
 
-  /* No floating effects */
+  /* Aurora mesh — far-off violet + cyan pools, the only color in the room */
   .lg-orb { display: none; }
   .lg-mesh-bg {
     background-color: var(--bg-base);
-    background-image: none;
+    background-image:
+      radial-gradient(ellipse 70% 55% at 12% 8%,
+        rgba(59, 130, 246, 0.22) 0%,
+        transparent 60%),
+      radial-gradient(ellipse 60% 45% at 88% 92%,
+        rgba(56, 189, 248, 0.14) 0%,
+        transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 100%,
+        rgba(34, 211, 238, 0.10) 0%,
+        transparent 60%);
   }
   .lg-grain { display: none; }
 
-  /* Light mode — a barely-there warm wash that makes cream feel alive
-     without breaking the calm. Radial cream pools on porcelain. */
+  /* Light mode — same composition, dialed down: subtle aurora pools
+     hovering above porcelain, never breaking the calm */
   html:not(.dark) .lg-mesh-bg {
     background-color: var(--bg-base);
     background-image:
-      radial-gradient(ellipse 80% 60% at 15% 0%,
-        rgba(250, 240, 220, 0.55) 0%,
+      radial-gradient(ellipse 70% 55% at 12% 8%,
+        rgba(59, 130, 246, 0.09) 0%,
         transparent 60%),
-      radial-gradient(ellipse 70% 50% at 85% 100%,
-        rgba(245, 235, 215, 0.45) 0%,
-        transparent 55%);
+      radial-gradient(ellipse 60% 45% at 88% 92%,
+        rgba(6, 182, 212, 0.07) 0%,
+        transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 100%,
+        rgba(6, 182, 212, 0.05) 0%,
+        transparent 60%);
   }
 
   /* Input — minimal underline */
@@ -538,8 +668,8 @@ html.dark {
 
 html.dark .site-grid {
   background-image:
-    linear-gradient(to right,  rgba(245, 239, 227, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245, 239, 227, 0.06) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(240, 247, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 247, 255, 0.06) 1px, transparent 1px);
   opacity: 0.9;
 }
 
@@ -584,6 +714,7 @@ html.dark .site-grid-vignette {
     will-change: transform, opacity;
   }
 
+  /* True aurora — full 5-color logo spectrum slashing across the page */
   .beam-primary {
     top: -25%; left: 50%;
     width: 240vmax;
@@ -591,18 +722,20 @@ html.dark .site-grid-vignette {
     transform: translateX(-50%) rotate(-22deg);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 8%,
-      color-mix(in oklab, var(--accent) 55%, transparent) 30%,
-      color-mix(in oklab, var(--accent-bright) 75%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 55%, transparent) 70%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 92%,
+      rgba(59, 130, 246, 0) 8%,
+      rgba(59, 130, 246, 0.55) 22%,
+      rgba(20, 184, 166, 0.65) 35%,
+      rgba(34, 197, 94, 0.70) 48%,
+      rgba(250, 204, 21, 0.70) 60%,
+      rgba(249, 115, 22, 0.60) 75%,
+      rgba(249, 115, 22, 0) 92%,
       transparent 100%);
     filter: blur(48px);
-    opacity: 0.55;
+    opacity: 0.65;
     animation: beam-drift 14s ease-in-out infinite alternate;
   }
 
-  /* Echo beam: thinner, offset, lower opacity — adds dimension */
+  /* Echo beam — sharper aurora ribbon, hits green→yellow→orange */
   .beam-echo {
     top: 35%; left: 50%;
     width: 220vmax;
@@ -610,37 +743,41 @@ html.dark .site-grid-vignette {
     transform: translateX(-50%) rotate(-18deg);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent-bright) 70%, transparent) 45%,
-      color-mix(in oklab, var(--accent-bright) 90%, transparent) 50%,
-      color-mix(in oklab, var(--accent-bright) 70%, transparent) 55%,
+      rgba(45, 212, 191, 0.70) 30%,
+      rgba(74, 222, 128, 0.85) 45%,
+      rgba(253, 224, 71, 0.90) 58%,
+      rgba(251, 146, 60, 0.80) 72%,
       transparent 100%);
     filter: blur(14px);
-    opacity: 0.35;
+    opacity: 0.45;
     animation: beam-shimmer 9s ease-in-out infinite;
   }
 
-  /* LIGHT MODE — more refined, beam reads as a soft warm spotlight */
+  /* LIGHT MODE — same 5-color aurora, dialed for porcelain background */
   html:not(.dark) .beam-primary {
     opacity: 0.42;
     filter: blur(56px);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 8%,
-      color-mix(in oklab, var(--accent) 45%, transparent) 30%,
-      color-mix(in oklab, var(--accent-bright) 60%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 45%, transparent) 70%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 92%,
+      rgba(37, 99, 235, 0) 8%,
+      rgba(37, 99, 235, 0.42) 22%,
+      rgba(20, 184, 166, 0.50) 35%,
+      rgba(34, 197, 94, 0.55) 48%,
+      rgba(250, 204, 21, 0.55) 60%,
+      rgba(249, 115, 22, 0.48) 75%,
+      rgba(249, 115, 22, 0) 92%,
       transparent 100%);
   }
 
   html:not(.dark) .beam-echo {
-    opacity: 0.28;
+    opacity: 0.34;
     height: 60px;
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 60%, transparent) 45%,
-      color-mix(in oklab, var(--accent-bright) 75%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 60%, transparent) 55%,
+      rgba(20, 184, 166, 0.55) 30%,
+      rgba(34, 197, 94, 0.65) 45%,
+      rgba(250, 204, 21, 0.70) 58%,
+      rgba(249, 115, 22, 0.62) 72%,
       transparent 100%);
   }
 
@@ -691,14 +828,16 @@ html.dark .site-grid-vignette {
     transform: translateX(-50%) rotate(-22deg);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 8%,
-      color-mix(in oklab, var(--accent) 65%, transparent) 30%,
-      color-mix(in oklab, var(--accent-bright) 90%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 65%, transparent) 70%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 92%,
+      rgba(59, 130, 246, 0) 8%,
+      rgba(59, 130, 246, 0.65) 22%,
+      rgba(20, 184, 166, 0.75) 35%,
+      rgba(34, 197, 94, 0.80) 48%,
+      rgba(250, 204, 21, 0.80) 60%,
+      rgba(249, 115, 22, 0.70) 75%,
+      rgba(249, 115, 22, 0) 92%,
       transparent 100%);
     filter: blur(48px);
-    opacity: 0.65;
+    opacity: 0.75;
     animation: beam-drift 18s ease-in-out infinite alternate;
     will-change: transform, opacity;
   }
@@ -711,38 +850,42 @@ html.dark .site-grid-vignette {
     transform: translateX(-50%) rotate(-18deg);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent-bright) 75%, transparent) 45%,
-      color-mix(in oklab, var(--accent-bright) 95%, transparent) 50%,
-      color-mix(in oklab, var(--accent-bright) 75%, transparent) 55%,
+      rgba(45, 212, 191, 0.75) 30%,
+      rgba(74, 222, 128, 0.90) 45%,
+      rgba(253, 224, 71, 0.95) 58%,
+      rgba(251, 146, 60, 0.85) 72%,
       transparent 100%);
     filter: blur(14px);
-    opacity: 0.42;
+    opacity: 0.50;
     animation: beam-shimmer 11s ease-in-out infinite;
     will-change: opacity;
   }
 
-  /* Light mode — same streak, tuned for cream background */
+  /* Light mode — same 5-color aurora, dialed for porcelain background */
   html:not(.dark) .site-beam-primary {
     opacity: 0.48;
     filter: blur(54px);
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 8%,
-      color-mix(in oklab, var(--accent) 55%, transparent) 30%,
-      color-mix(in oklab, var(--accent-bright) 75%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 55%, transparent) 70%,
-      color-mix(in oklab, var(--accent) 0%, transparent) 92%,
+      rgba(37, 99, 235, 0) 8%,
+      rgba(37, 99, 235, 0.50) 22%,
+      rgba(20, 184, 166, 0.55) 35%,
+      rgba(34, 197, 94, 0.60) 48%,
+      rgba(250, 204, 21, 0.60) 60%,
+      rgba(249, 115, 22, 0.52) 75%,
+      rgba(249, 115, 22, 0) 92%,
       transparent 100%);
   }
 
   html:not(.dark) .site-beam-echo {
-    opacity: 0.32;
+    opacity: 0.36;
     height: 70px;
     background: linear-gradient(to right,
       transparent 0%,
-      color-mix(in oklab, var(--accent) 65%, transparent) 45%,
-      color-mix(in oklab, var(--accent-bright) 85%, transparent) 50%,
-      color-mix(in oklab, var(--accent) 65%, transparent) 55%,
+      rgba(20, 184, 166, 0.60) 30%,
+      rgba(34, 197, 94, 0.70) 45%,
+      rgba(250, 204, 21, 0.75) 58%,
+      rgba(249, 115, 22, 0.65) 72%,
       transparent 100%);
   }
 }
@@ -894,7 +1037,7 @@ html.dark .site-grid-vignette {
   html:not(.dark) .ring-core {
     background: radial-gradient(circle,
       color-mix(in oklab, var(--accent) 10%, transparent) 0%,
-      rgba(255, 247, 230, 0.5) 40%,
+      rgba(230, 240, 255, 0.5) 40%,
       transparent 70%);
   }
 
@@ -955,6 +1098,12 @@ html.dark .site-grid-vignette {
 @keyframes shimmer { to { background-position: 0 0; } }
 @keyframes mesh-drift { to { background-position: 0% 0%; } }
 @keyframes float-y { to { transform: translateY(0); } }
+
+/* Aurora text — slow drift of the gradient through the glyphs */
+@keyframes aurora-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
 
 /* ============================================================
    UTILITIES

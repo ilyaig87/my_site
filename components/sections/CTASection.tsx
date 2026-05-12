@@ -21,7 +21,7 @@ export default function CTASection() {
             {/* Main content */}
             <div className="text-center mb-3">
               <h2 className="text-lg sm:text-xl md:text-2xl font-black mb-2 text-gray-900 leading-tight">
-                רוצה אתר שנראה טוב ועובד מעולה?
+                רוצים אתר שנראה טוב ועובד מעולה?
               </h2>
               <p className="text-xs sm:text-sm text-gray-700 mb-1 leading-relaxed">
                 בואו נדבר ונמצא את הפתרון המושלם
@@ -42,7 +42,7 @@ export default function CTASection() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  השאר פרטים
+                  השאירו פרטים
                 </span>
               </Button>
               <Button
@@ -55,7 +55,7 @@ export default function CTASection() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  צפה בטמפלייטים
+                  צפו בטמפלייטים
                 </span>
               </Button>
             </div>

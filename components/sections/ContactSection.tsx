@@ -128,7 +128,7 @@ export default function ContactSection() {
                     className={`w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all ${
                       errors.fullName ? 'border-red-300 bg-red-50' : 'border-gray-300'
                     }`}
-                    placeholder="איך קוראים לך?"
+                    placeholder="איך קוראים לכם?"
                     suppressHydrationWarning
                   />
                   {errors.fullName && (
@@ -192,7 +192,7 @@ export default function ContactSection() {
                     }`}
                     suppressHydrationWarning
                   >
-                    <option value="">בחר סוג עסק</option>
+                    <option value="">בחרו סוג עסק</option>
                     <option value="restaurant">מסעדה / בית קפה</option>
                     <option value="retail">חנות / קמעונאות</option>
                     <option value="services">שירותים מקצועיים</option>
@@ -247,7 +247,7 @@ export default function ContactSection() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
-                    שלח הודעה
+                    שלחו הודעה
                   </span>
                 )}
               </Button>

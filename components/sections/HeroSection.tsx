@@ -44,20 +44,22 @@ export default function HeroSection({ content }: HeroSectionProps) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-4 max-w-3xl mx-auto leading-tight"
+            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-10 max-w-3xl mx-auto leading-tight"
           >
             {content.subtitle}
           </motion.p>
 
           {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base sm:text-lg text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed"
-          >
-            {content.description}
-          </motion.p>
+          {content.description && (
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              className="text-base sm:text-lg text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed"
+            >
+              {content.description}
+            </motion.p>
+          )}
 
           {/* CTAs */}
           <motion.div
@@ -66,13 +68,13 @@ export default function HeroSection({ content }: HeroSectionProps) {
             transition={{ duration: 0.9, delay: 0.66, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
-            <Button href="/templates" size="lg" variant="accent">
+            <Button href="/contact" size="lg" variant="accent">
               {content.primaryCTA}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </Button>
-            <Button href="/contact" size="lg" variant="outline">
+            <Button href="/#projects" size="lg" variant="outline">
               {content.secondaryCTA}
             </Button>
           </motion.div>
@@ -82,19 +84,15 @@ export default function HeroSection({ content }: HeroSectionProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-14 flex flex-wrap gap-x-8 gap-y-2 justify-center text-xs text-[var(--text-muted)]"
+            className="mt-14 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-[var(--text-muted)]"
           >
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
-              פרויקטים שעלו לאוויר
+              אספקה תוך 5–14 ימי עבודה
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
-              מענה תוך 24 שעות
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
-              ייעוץ ראשוני חינם
+              מענה ראשון תוך 24 שעות
             </span>
           </motion.div>
         </div>

@@ -17,10 +17,11 @@ function isValidEmail(value: string) {
 }
 
 const websiteTypes = [
-  { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד להמרות', basePrice: 1500 },
-  { id: 'business', label: 'אתר עסקי', description: 'עד 4 דפים', basePrice: 3000 },
-  { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 3000 },
-  { id: 'shop', label: 'חנות / אתר מורחב', description: '5+ דפים עם DB', basePrice: 5000 },
+  { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד ממוקד המרה', basePrice: 2500 },
+  { id: 'business', label: 'אתר תדמית', description: 'נוכחות עסקית מלאה', basePrice: 4500 },
+  { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 4500 },
+  { id: 'premium', label: 'אתר פרימיום', description: 'חוויית מותג מורחבת', basePrice: 8500 },
+  { id: 'custom', label: 'פרויקט מותאם אישית', description: 'מוצר דיגיטלי מלא', basePrice: 18000 },
 ];
 
 const pageRanges = [
@@ -129,9 +130,18 @@ export default function QuotePage() {
             <p className="text-sm text-[var(--text-muted)] mb-7 leading-relaxed">
               זו הערכה ראשונית בלבד. נחזור אליכם בהקדם עם הצעת מחיר מפורטת.
             </p>
-            <Button href="/" variant="primary" size="lg">
-              חזרה לעמוד הבית
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                href={`https://wa.me/972546361555?text=${encodeURIComponent(`שלום, השארתי בקשת הצעת מחיר באתר (הערכה: ₪${calculatedPrice.toLocaleString()}). אשמח לזרז.`)}`}
+                variant="primary"
+                size="lg"
+              >
+                רוצים לזרז? שלחו לנו ב-WhatsApp
+              </Button>
+              <Button href="/" variant="glass" size="lg">
+                חזרה לעמוד הבית
+              </Button>
+            </div>
           </GlassCard>
         </Container>
       </section>
@@ -194,8 +204,8 @@ export default function QuotePage() {
               {step === 1 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className="mb-3">איזה סוג אתר אתם צריכים?</h2>
-                    <p className="text-[var(--text-muted)] mb-6">בחרו את האפשרות המתאימה</p>
+                    <h2 className="mb-3">מה אתם בונים?</h2>
+                    <p className="text-[var(--text-muted)] mb-6">בחרו את האפשרות הקרובה ביותר — אפשר לעדכן בכל שלב</p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {websiteTypes.map((type) => (
@@ -227,7 +237,7 @@ export default function QuotePage() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="mb-3">כמה עמודים יהיו באתר?</h2>
-                    <p className="text-[var(--text-muted)] mb-6">יותר עמודים = תוכן עשיר יותר</p>
+                    <p className="text-[var(--text-muted)] mb-6">לא בטוחים? אפשר תמיד לעדכן את ההיקף לפני סיום הפרויקט.</p>
                   </div>
                   <div className="space-y-3">
                     {pageRanges.map((range) => (
@@ -313,7 +323,7 @@ export default function QuotePage() {
                     <p className="text-5xl md:text-6xl font-black lg-text-shimmer mb-4 leading-none">
                       ₪{calculatedPrice.toLocaleString()}
                     </p>
-                    <p className="text-sm text-[var(--text-muted)]">*המחיר הסופי עשוי להשתנות בהתאם לדרישות</p>
+                    <p className="text-sm text-[var(--text-muted)]">*זו הערכה אוטומטית. המחיר הסופי נקבע בשיחה קצרה, בלי הפתעות.</p>
                   </GlassCard>
 
                   <div>
@@ -366,7 +376,7 @@ export default function QuotePage() {
                       fullWidth
                       disabled={!formData.name || !formData.email || !formData.phone || isSubmitting}
                     >
-                      {isSubmitting ? 'שולח...' : 'שלח בקשה'}
+                      {isSubmitting ? 'שולח...' : 'שלחו בקשה'}
                     </Button>
                   </div>
                 </div>
