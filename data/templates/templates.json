@@ -379,8 +379,8 @@
       "bodyFont": "Varela Round",
       "style": "classic"
     },
-    "previewImage": "/images/templates/restaurant-preview.jpg",
-    "mobilePreviewImage": "/images/templates/restaurant-mobile.jpg",
+    "previewImage": "/images/templates/restaurant-preview.png",
+    "mobilePreviewImage": "/images/templates/restaurant-mobile.png",
     "tags": ["מסעדה", "אוכל", "חם", "מזמין"]
   },
   {
@@ -427,8 +427,8 @@
       "bodyFont": "Crimson Text",
       "style": "classic"
     },
-    "previewImage": "/images/templates/photographer-preview.jpg",
-    "mobilePreviewImage": "/images/templates/photographer-mobile.jpg",
+    "previewImage": "/images/templates/photographer-preview.png",
+    "mobilePreviewImage": "/images/templates/photographer-mobile.png",
     "tags": ["צילום", "אמנותי", "אלגנטי", "גלריה"]
   },
   {
