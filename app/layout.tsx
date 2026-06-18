@@ -76,7 +76,7 @@ export default function RootLayout({
       >
         <SiteBackdrop />
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="site-main min-h-screen">{children}</main>
         <Footer />
 
         {/* Floating Components */}

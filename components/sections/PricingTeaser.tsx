@@ -62,7 +62,7 @@ export default function PricingTeaser() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-10"
         >
           <motion.div variants={fadeUp} className="flex justify-center mb-5">
             <GlassPill dot>המחיר שתראו הוא המחיר שתשלמו</GlassPill>
