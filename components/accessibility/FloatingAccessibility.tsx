@@ -57,7 +57,7 @@ export default function FloatingAccessibility() {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[90]"
+          className="fixed inset-0 z-[90] bg-black/40 sm:bg-transparent"
           onClick={() => setIsOpen(false)}
           aria-hidden
         />
@@ -92,7 +92,7 @@ export default function FloatingAccessibility() {
             <div
               role="dialog"
               aria-label="תפריט נגישות"
-              className="absolute left-[40px] sm:left-[52px] top-0 w-[360px] max-w-[calc(100vw-32px)] lg-surface lg-deep squircle-lg p-4"
+              className="fixed sm:absolute left-3 right-3 top-20 sm:left-[52px] sm:right-auto sm:top-0 sm:w-[360px] max-h-[calc(100dvh-6rem)] sm:max-h-[calc(100vh-9rem)] overflow-y-auto overscroll-contain lg-surface lg-solid squircle-lg p-4"
             >
               <div className="relative z-10">
                 <AccessibilityMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />

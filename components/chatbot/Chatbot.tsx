@@ -110,7 +110,7 @@ export default function Chatbot() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[85vh] max-h-[720px] lg-surface lg-deep squircle-lg flex flex-col overflow-hidden"
+            className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[85vh] max-h-[720px] lg-surface lg-solid squircle-lg flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div

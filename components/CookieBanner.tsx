@@ -46,7 +46,7 @@ export default function CookieBanner() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-6 z-50"
         >
-          <div className="max-w-5xl mx-auto lg-surface lg-deep squircle-xl p-5 sm:p-7">
+          <div className="max-w-5xl mx-auto lg-surface lg-solid squircle-xl p-5 sm:p-7">
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
               <div className="flex-shrink-0">
                 <div

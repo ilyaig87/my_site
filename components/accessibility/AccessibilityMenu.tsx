@@ -142,7 +142,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
       className={`w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-sm transition-all border ${
         on
           ? 'bg-[var(--primary)]/15 border-[var(--primary)]/50 text-[var(--text-strong)] shadow-sm'
-          : 'bg-white/30 dark:bg-white/[0.03] border-white/30 dark:border-white/10 text-[var(--text-default)] hover:bg-white/50 dark:hover:bg-white/[0.06]'
+          : 'bg-black/[0.04] dark:bg-white/[0.05] border-black/10 dark:border-white/10 text-[var(--text-default)] hover:bg-black/[0.06] dark:hover:bg-white/[0.08]'
       }`}
       aria-pressed={on}
     >
@@ -165,7 +165,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
   return (
     <>
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 pb-3 border-b border-white/20 dark:border-white/10">
+      <div className="flex items-center justify-between mb-3 pb-3 border-b border-black/10 dark:border-white/10">
         <div className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-xl bg-[var(--primary)]/20 flex items-center justify-center">
             <svg className="w-5 h-5 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
@@ -181,7 +181,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
         </div>
         <button
           onClick={onClose}
-          className="text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-white/30 dark:hover:bg-white/10 p-1.5 rounded-lg transition-colors"
+          className="text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-black/[0.06] dark:hover:bg-white/10 p-1.5 rounded-lg transition-colors"
           aria-label="סגור תפריט נגישות"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
       <div
         role="tablist"
         aria-label="קטגוריות נגישות"
-        className="grid grid-cols-4 gap-1 p-1 mb-3 bg-white/30 dark:bg-white/[0.04] border border-white/30 dark:border-white/10 rounded-xl"
+        className="grid grid-cols-4 gap-1 p-1 mb-3 bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 rounded-xl"
       >
         {TABS.map((t) => (
           <button
@@ -205,7 +205,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
             className={`flex flex-col items-center justify-center gap-0.5 py-2 rounded-lg text-[11px] font-bold transition-all ${
               tab === t.id
                 ? 'bg-[var(--primary)] text-[var(--on-accent)] shadow-sm'
-                : 'text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-white/40 dark:hover:bg-white/[0.06]'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08]'
             }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -220,7 +220,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
       <div className="min-h-[256px]">
         {tab === 'display' && (
           <div className="space-y-2.5">
-            <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+            <div className="bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 rounded-xl p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-bold text-[var(--text-strong)]">גודל טקסט</span>
                 <span className="text-xs font-bold text-[var(--primary)] tabular-nums">{settings.fontSize}%</span>
@@ -228,7 +228,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => update('fontSize', Math.max(80, settings.fontSize - 10))}
-                  className="w-8 h-8 rounded-lg bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/15 text-[var(--text-strong)] hover:bg-white/80 dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
+                  className="w-8 h-8 rounded-lg bg-black/[0.05] dark:bg-white/10 border border-black/10 dark:border-white/15 text-[var(--text-strong)] hover:bg-black/[0.08] dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
                   aria-label="הקטן טקסט"
                 >
                   A−
@@ -245,7 +245,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
                 />
                 <button
                   onClick={() => update('fontSize', Math.min(200, settings.fontSize + 10))}
-                  className="w-8 h-8 rounded-lg bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/15 text-[var(--text-strong)] hover:bg-white/80 dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
+                  className="w-8 h-8 rounded-lg bg-black/[0.05] dark:bg-white/10 border border-black/10 dark:border-white/15 text-[var(--text-strong)] hover:bg-black/[0.08] dark:hover:bg-white/15 font-bold text-sm flex-shrink-0"
                   aria-label="הגדל טקסט"
                 >
                   A+
@@ -254,7 +254,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+              <div className="bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 rounded-xl p-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] font-bold text-[var(--text-strong)]">מרווח אותיות</span>
                   <span className="text-[11px] font-bold text-[var(--primary)] tabular-nums">+{settings.letterSpacing}</span>
@@ -271,7 +271,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
                 />
               </div>
 
-              <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3">
+              <div className="bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 rounded-xl p-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] font-bold text-[var(--text-strong)]">מרווח שורות</span>
                   <span className="text-[11px] font-bold text-[var(--primary)] tabular-nums">+{settings.lineHeight}</span>
@@ -310,7 +310,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
                     className={`text-sm py-2.5 px-2 rounded-xl border transition-all font-bold ${
                       settings.contrast === opt.id
                         ? 'bg-[var(--primary)]/15 border-[var(--primary)]/50 text-[var(--text-strong)] shadow-sm'
-                        : 'bg-white/30 dark:bg-white/[0.03] border-white/30 dark:border-white/10 text-[var(--text-default)] hover:bg-white/50 dark:hover:bg-white/[0.06]'
+                        : 'bg-black/[0.04] dark:bg-white/[0.05] border-black/10 dark:border-white/10 text-[var(--text-default)] hover:bg-black/[0.06] dark:hover:bg-white/[0.08]'
                     }`}
                     aria-pressed={settings.contrast === opt.id}
                   >
@@ -364,7 +364,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
               on={settings.pauseAnimations}
               onClick={() => update('pauseAnimations', !settings.pauseAnimations)}
             />
-            <div className="bg-white/30 dark:bg-white/[0.03] border border-white/30 dark:border-white/10 rounded-xl p-3 text-[11px] text-[var(--text-muted)] leading-relaxed">
+            <div className="bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 rounded-xl p-3 text-[11px] text-[var(--text-muted)] leading-relaxed">
               <strong className="text-[var(--text-strong)]">טיפ:</strong> ניווט מלא במקלדת זמין תמיד — Tab למעבר, Enter להפעלה, חצים לבחירה.
             </div>
           </div>
@@ -372,11 +372,11 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
       </div>
 
       {/* Footer actions */}
-      <div className="mt-3 pt-3 border-t border-white/20 dark:border-white/10 grid grid-cols-2 gap-2">
+      <div className="mt-3 pt-3 border-t border-black/10 dark:border-white/10 grid grid-cols-2 gap-2">
         <button
           onClick={reset}
           disabled={activeCount === 0}
-          className="col-span-2 flex items-center justify-center gap-1.5 bg-white/30 dark:bg-white/[0.04] hover:bg-white/50 dark:hover:bg-white/[0.08] disabled:opacity-50 disabled:cursor-not-allowed border border-white/30 dark:border-white/10 text-[var(--text-strong)] font-bold py-2 px-3 rounded-xl transition-colors text-xs"
+          className="col-span-2 flex items-center justify-center gap-1.5 bg-black/[0.04] dark:bg-white/[0.05] hover:bg-black/[0.06] dark:hover:bg-white/[0.1] disabled:opacity-50 disabled:cursor-not-allowed border border-black/10 dark:border-white/10 text-[var(--text-strong)] font-bold py-2 px-3 rounded-xl transition-colors text-xs"
         >
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0 1-15.357-2m15.357 2H15" />
@@ -393,7 +393,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
 
         <a
           href="mailto:ilyaig8@gmail.com?subject=פנייה%20בנושא%20נגישות"
-          className="flex items-center justify-center gap-1 bg-white/30 dark:bg-white/[0.04] hover:bg-white/50 dark:hover:bg-white/[0.08] border border-white/30 dark:border-white/10 text-[var(--text-default)] font-bold py-2 px-2 rounded-xl transition-colors text-[11px] text-center"
+          className="flex items-center justify-center gap-1 bg-black/[0.04] dark:bg-white/[0.05] hover:bg-black/[0.06] dark:hover:bg-white/[0.1] border border-black/10 dark:border-white/10 text-[var(--text-default)] font-bold py-2 px-2 rounded-xl transition-colors text-[11px] text-center"
         >
           דיווח על בעיה
         </a>
