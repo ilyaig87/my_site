@@ -22,7 +22,7 @@ const websiteTypes = [
 ];
 
 // Each page beyond the landing page is an add-on, priced per request.
-const PRICE_PER_EXTRA_PAGE = 900;
+const PRICE_PER_EXTRA_PAGE = 300;
 const pageRanges = [
   { id: '1', label: 'עמוד אחד', extraPages: 0 },
   { id: '2-5', label: '2-5 עמודים', extraPages: 3 },
