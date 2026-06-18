@@ -17,18 +17,17 @@ function isValidEmail(value: string) {
 }
 
 const websiteTypes = [
-  { id: 'landing', label: 'דף נחיתה', description: 'דף יחיד ממוקד המרה', basePrice: 2500 },
-  { id: 'business', label: 'אתר תדמית', description: 'נוכחות עסקית מלאה', basePrice: 4500 },
-  { id: 'portfolio', label: 'פורטפוליו', description: 'הצגת עבודות', basePrice: 4500 },
-  { id: 'premium', label: 'אתר פרימיום', description: 'חוויית מותג מורחבת', basePrice: 8500 },
-  { id: 'custom', label: 'פרויקט מותאם אישית', description: 'מוצר דיגיטלי מלא', basePrice: 18000 },
+  { id: 'landing', label: 'דף נחיתה', description: 'עמוד אחד · עד 5 רכיבים · ללא דפים נוספים', basePrice: 2500 },
+  { id: 'multipage', label: 'אתר רב-עמודי', description: 'דף בית + דפים נוספים לפי הצורך', basePrice: 2500 },
 ];
 
+// Each page beyond the landing page is an add-on, priced per request.
+const PRICE_PER_EXTRA_PAGE = 900;
 const pageRanges = [
-  { id: '1', label: 'עמוד אחד', multiplier: 1 },
-  { id: '2-5', label: '2-5 עמודים', multiplier: 1.2 },
-  { id: '6-10', label: '6-10 עמודים', multiplier: 1.5 },
-  { id: '10+', label: '10+ עמודים', multiplier: 2 },
+  { id: '1', label: 'עמוד אחד', extraPages: 0 },
+  { id: '2-5', label: '2-5 עמודים', extraPages: 3 },
+  { id: '6-10', label: '6-10 עמודים', extraPages: 7 },
+  { id: '10+', label: '10+ עמודים', extraPages: 11 },
 ];
 
 const features = [
@@ -61,7 +60,8 @@ export default function QuotePage() {
     const type = websiteTypes.find((t) => t.id === formData.websiteType);
     const pages = pageRanges.find((p) => p.id === formData.numPages);
     if (!type || !pages) return 0;
-    let price = type.basePrice * pages.multiplier;
+    // Landing page is a fixed base; each additional page is an add-on.
+    let price = type.basePrice + pages.extraPages * PRICE_PER_EXTRA_PAGE;
     formData.selectedFeatures.forEach((featureId) => {
       const feature = features.find((f) => f.id === featureId);
       if (feature) price += feature.price;

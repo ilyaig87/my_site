@@ -31,7 +31,7 @@ interface Package {
 
 const optionalAddons = [
   { label: 'דומיין + אחסון שנתי', price: '300 ₪/שנה' },
-  { label: 'דף נוסף לאתר', price: '250-300 ₪' },
+  { label: 'דף נוסף לאתר', price: 'בהצעת מחיר אישית' },
   { label: 'תחזוקה חודשית', price: 'החל מ-150 ₪/חודש' },
   { label: 'פאנל ניהול תוכן פשוט', price: 'החל מ-1,200 ₪' },
   { label: 'שמירת לידים והרשמות במסד נתונים', price: 'החל מ-800 ₪' },
@@ -54,9 +54,12 @@ export default function Pricing() {
   const formatPrice = (price: number) =>
     new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS', maximumFractionDigits: 0 }).format(price);
 
+  // What to show for the price: a custom-quote package has no fixed price.
+  const priceLabel = (pkg: Package) => (pkg.customQuote ? 'הצעת מחיר אישית' : formatPrice(pkg.price));
+
   const buildWhatsAppLink = (pkg: Package) => {
     const lines = [
-      `שלום, אני מעוניין/ת בחבילה: *${pkg.name}* (${formatPrice(pkg.price)})`,
+      `שלום, אני מעוניין/ת בחבילה: *${pkg.name}* (${priceLabel(pkg)})`,
       '',
       `שם: ${formData.name}`,
       `מייל: ${formData.email}`,
@@ -130,7 +133,7 @@ export default function Pricing() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          message: `התעניינות בחבילה: ${selectedPackage.name} (${formatPrice(selectedPackage.price)}).\n${formData.notes || ''}`,
+          message: `התעניינות בחבילה: ${selectedPackage.name} (${priceLabel(selectedPackage)}).\n${formData.notes || ''}`,
           source_page: '/pricing',
         }),
       });
@@ -190,8 +193,8 @@ export default function Pricing() {
             </p>
           </div>
 
-          {/* Packages — 4 tiers */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-7xl mx-auto items-stretch">
+          {/* Packages */}
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto items-stretch">
             {packages.map((pkg) => (
               <GlassCard
                 key={pkg.id}
@@ -217,10 +220,18 @@ export default function Pricing() {
                 <div className="text-center mb-5">
                   <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-2">{pkg.name}</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-4">{pkg.description}</p>
-                  <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
-                  <div className="text-4xl font-black text-[var(--text-strong)] leading-none">
-                    {formatPrice(pkg.price)}
-                  </div>
+                  {pkg.customQuote ? (
+                    <div className="text-3xl font-black text-[var(--text-strong)] leading-tight">
+                      הצעת מחיר אישית
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
+                      <div className="text-4xl font-black text-[var(--text-strong)] leading-none">
+                        {formatPrice(pkg.price)}
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <ul className="space-y-2 mb-6 flex-grow">
@@ -294,7 +305,7 @@ export default function Pricing() {
                       <p className="font-bold text-[var(--text-strong)] truncate">
                         {selectedPackage.name}
                         <span className="font-normal text-[var(--text-muted)] text-sm mr-2">
-                          · החל מ-{formatPrice(selectedPackage.price)}
+                          · {selectedPackage.customQuote ? 'הצעת מחיר אישית' : `החל מ-${formatPrice(selectedPackage.price)}`}
                         </span>
                       </p>
                     </div>

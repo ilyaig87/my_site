@@ -19,7 +19,8 @@ const breathingTransition = {
 
 interface Tier {
   name: string;
-  price: string;
+  price?: string;
+  priceText?: string;
   subtitle: string;
   bestFor: string;
   icon: React.ReactNode;
@@ -30,8 +31,9 @@ const tiers: Tier[] = [
   {
     name: 'דף נחיתה',
     price: '2,500',
-    subtitle: 'דף יחיד ממוקד המרה',
-    bestFor: 'קמפיין · מוצר · שירות',
+    subtitle: 'עמוד אחד ממוקד המרה',
+    bestFor: 'עמוד אחד · עד 5 רכיבים · ללא דפים נוספים',
+    highlighted: true,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
@@ -39,25 +41,13 @@ const tiers: Tier[] = [
     ),
   },
   {
-    name: 'אתר תדמית',
-    price: '4,500',
-    subtitle: 'נוכחות עסקית מלאה',
-    bestFor: 'סיפור · שירותים · גלריה',
-    highlighted: true,
+    name: 'אתר רב-עמודי',
+    priceText: 'הצעת מחיר אישית',
+    subtitle: 'כל דף נוסף לפי הבקשה שלכם',
+    bestFor: 'דפים נוספים · ראוטינג מלא · תמחור לפי הצורך',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-      </svg>
-    ),
-  },
-  {
-    name: 'אתר פרימיום',
-    price: '8,500',
-    subtitle: 'חוויית מותג מורחבת',
-    bestFor: 'מספר קווי שירות · בלוג · אנימציות',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
   },
@@ -90,7 +80,7 @@ export default function PricingTeaser() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto mb-10"
         >
           {tiers.map((tier) => (
             <motion.div
@@ -144,12 +134,23 @@ export default function PricingTeaser() {
                 <p className="text-sm text-[var(--text-muted)] mb-5">{tier.subtitle}</p>
 
                 <div className="mb-5 pb-5 border-b border-[var(--glass-border-dim)]">
-                  <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight">
-                      ₪{tier.price}
-                    </span>
-                  </div>
+                  {tier.priceText ? (
+                    <>
+                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">תמחור גמיש</p>
+                      <span className="text-3xl sm:text-4xl font-black text-[var(--text-strong)] leading-none tracking-tight">
+                        {tier.priceText}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight">
+                          ₪{tier.price}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <p className="text-sm text-[var(--text-default)] leading-relaxed flex items-start gap-2">
@@ -177,7 +178,7 @@ export default function PricingTeaser() {
           </Button>
         </div>
         <p className="text-xs text-[var(--text-muted)] mt-4 text-center">
-          לפרויקטים מותאמים אישית — החל מ-18,000 ₪. המחיר הסופי תלוי במורכבות ובתוספות.
+          אתר רב-עמודי או פרויקט מורכב? המחיר נבנה לפי מספר הדפים והרכיבים — נשמח לתת הצעת מחיר אישית ושקופה.
         </p>
       </Container>
     </section>
