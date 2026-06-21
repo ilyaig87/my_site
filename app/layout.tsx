@@ -5,6 +5,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SiteBackdrop from "@/components/effects/SiteBackdrop";
 import DeferredWidgets from "@/components/DeferredWidgets";
+import { getSiteContent } from "@/lib/data";
+
+const SITE_URL = "https://www.pixelia.co.il";
 
 // Rubik is the single brand font — it covers both Hebrew and Latin and is the
 // primary face for every text style on the site. The previous build also loaded
@@ -22,16 +25,28 @@ export const metadata: Metadata = {
   // canonical/OG/sitemap URL resolve to https://www.pixelia.co.il directly, so
   // crawlers and shared links skip the apex→www 301 redirect (the ~70ms
   // redirect overhead the audit flagged).
-  metadataBase: new URL("https://www.pixelia.co.il"),
+  metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
-  title: "Pixelia - יוצרים אתרים מקצועיים",
+  title: {
+    default: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    template: "%s | Pixelia",
+  },
   description:
-    "סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים. בחרו תבנית מוכנה או עיצוב מותאם אישית — Pixelia.",
-  keywords:
-    "Pixelia, פיתוח אתרים, בניית אתרים, עיצוב אתרים, תבניות אתרים, אתרים לעסקים",
+    "Pixelia — סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים. בחרו תבנית מוכנה או עיצוב מותאם אישית.",
+  keywords: [
+    "Pixelia",
+    "בניית אתרים",
+    "עיצוב אתרים",
+    "פיתוח אתרים",
+    "תבניות אתרים",
+    "אתרים לעסקים",
+    "בניית אתרים תל אביב",
+  ],
   openGraph: {
     type: "website",
-    url: "https://www.pixelia.co.il",
+    url: SITE_URL,
+    title: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    description: "Pixelia — סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים.",
     siteName: "Pixelia",
     locale: "he_IL",
   },
@@ -55,10 +70,56 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { contact } = getSiteContent();
+
+  // Organization + WebSite structured data so Google can recognize the brand,
+  // logo and contact details.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "Pixelia",
+        url: SITE_URL,
+        logo: `${SITE_URL}/images/logo/pixelia_logo_color.png`,
+        image: `${SITE_URL}/images/logo/pixelia_logo_color.png`,
+        description: "סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים.",
+        email: contact.email,
+        telephone: `+${contact.whatsapp}`,
+        areaServed: "IL",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "תל אביב",
+          addressCountry: "IL",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: `+${contact.whatsapp}`,
+          email: contact.email,
+          contactType: "customer service",
+          availableLanguage: ["he", "en"],
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Pixelia",
+        inLanguage: "he-IL",
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+    ],
+  };
+
   return (
     <html lang="he" dir="rtl" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body
         className={`${rubik.variable} font-sans antialiased`}

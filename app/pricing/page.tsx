@@ -1,8 +1,8 @@
 import Pricing from '@/components/Pricing'
 
 export const metadata = {
-  title: 'מחירים וחבילות | Pixelia',
-  description: 'בחרו את החבילה המתאימה לכם - חבילות בניית אתרים מקצועיות במחירים שקופים'
+  title: 'מחירון בניית אתרים — חבילות ומחירים | Pixelia',
+  description: 'מחירון שקוף לבניית אתרים מקצועיים לעסקים. בחרו את חבילת עיצוב ובניית האתר שמתאימה לכם.'
 }
 
 export default function PricingPage() {

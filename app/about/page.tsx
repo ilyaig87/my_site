@@ -7,8 +7,8 @@ import { getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'אודות - Pixelia',
-  description: 'קצת עלינו, הניסיון והטכנולוגיות שאנחנו עובדים איתן - בניית אתרים מקצועיים לעסקים',
+  title: 'אודות — סטודיו לעיצוב ובניית אתרים | Pixelia',
+  description: 'הסטודיו, הניסיון והטכנולוגיות שאיתן אנחנו מעצבים ובונים אתרים מקצועיים לעסקים.',
 };
 
 const PIXELIA_LETTER_COLORS = ['#FCD34D', '#FBBF24', '#F59E0B', '#FB923C', '#F472B6', '#A78BFA', '#8B5CF6'];

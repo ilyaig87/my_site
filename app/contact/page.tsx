@@ -6,8 +6,8 @@ import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 
 export const metadata: Metadata = {
-  title: 'צרו קשר - Pixelia',
-  description: 'דברו עם Pixelia ובואו נתחיל לעבוד על האתר המושלם שלכם',
+  title: 'צרו קשר — בניית אתרים לעסקים | Pixelia',
+  description: 'דברו איתנו על עיצוב ובניית אתר מקצועי לעסק שלכם. מענה ראשון תוך 24 שעות.',
 };
 
 export default function ContactPage() {
