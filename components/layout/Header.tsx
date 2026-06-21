@@ -67,19 +67,22 @@ export default function Header() {
           <div className={cn('flex items-center justify-between transition-all duration-300', scrolled ? 'h-16 md:h-18' : 'h-20 md:h-24')}>
             {/* Logo — large, presence */}
             <Link href="/" onClick={handleHomeClick('/')} className="flex items-center group">
-              <div className={cn('relative transition-all duration-300', scrolled ? 'h-10 w-32 md:h-12 md:w-36' : 'h-12 w-36 md:h-14 md:w-44')}>
-                <Image
-                  src="/images/logo/pixelia_logo_color.png"
-                  alt="Pixelia"
-                  fill
-                  // The logo never renders wider than ~176px, so cap the
-                  // requested size instead of letting `fill` default to 100vw
-                  // (which made the browser download a 640px-wide variant).
-                  sizes="(max-width: 768px) 144px, 176px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              <Image
+                src="/images/logo/pixelia_logo_color.png"
+                alt="Pixelia"
+                // The logo asset is a 1024×1024 square. With object-contain it
+                // only ever paints at its rendered height (40–56px), so declare
+                // the real intrinsic box and request a 56px variant instead of
+                // letting a `fill` layout pull a multi-hundred-px image.
+                width={56}
+                height={56}
+                sizes="56px"
+                priority
+                className={cn(
+                  'object-contain w-auto transition-all duration-300',
+                  scrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
+                )}
+              />
             </Link>
 
             {/* Desktop nav — bigger tabs */}

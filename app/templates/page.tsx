@@ -211,7 +211,9 @@ function TemplateCard({ template }: { template: Template }) {
             src={template.previewImage}
             alt={`תצוגה — ${template.name}`}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            // Matches the 3-up grid (max-w-6xl): ~342px per card on desktop
+            // instead of 33vw, which over-fetched the 640px source.
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 342px"
             className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />

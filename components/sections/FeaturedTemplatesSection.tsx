@@ -53,7 +53,10 @@ export default function FeaturedTemplatesSection({ templates }: FeaturedTemplate
                       src={template.previewImage}
                       alt={`תצוגה - ${template.name}`}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      // 3-up grid capped at max-w-6xl, so each card image paints
+                      // at ~342px on desktop — not the 33vw (~475px) the browser
+                      // was rounding up to a 640px download.
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 342px"
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                       quality={85}

@@ -553,17 +553,24 @@ html.dark {
   .squircle-xl { border-radius: 22px; }
   .squircle-2xl { border-radius: 28px; }
 
-  /* Aurora text — the real shimmer: violet → magenta → cyan gradient
-     painted into the glyphs. This is the brand "wow" inside titles. */
+  /* Aurora text — violet → magenta → cyan gradient painted into the glyphs.
+     The brand "wow" inside titles.
+
+     The gradient is now STATIC. The old `aurora-shift` animation drove
+     `background-position`, which is not a compositor property: every frame
+     forced a main-thread paint of the text layer (the "non-composited
+     animation" the audit flagged). A gradient masked into text can only be
+     moved via background-position, so there is no transform/opacity
+     equivalent — the correct fix is to drop the perpetual repaint. The rich
+     static gradient keeps the premium look at zero ongoing main-thread cost. */
   .lg-text-shimmer {
     background: var(--aurora);
-    background-size: 200% 200%;
+    background-size: 100% 100%;
     -webkit-background-clip: text;
             background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
     font-weight: 700;
-    animation: aurora-shift 9s ease-in-out infinite;
   }
 
   /* Kicker — aurora hairline + label */
@@ -1125,6 +1132,16 @@ html.dark .site-grid-vignette {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* LCP-safe hero title rise. Unlike fadeInUp, opacity stays at 1 for the whole
+   animation, so the <h1> (the LCP element) is fully painted on the very first
+   frame instead of fading in from transparent — that fade was adding ~2s of
+   "render delay" to LCP. Only the transform animates, which is compositor-only
+   (paired with will-change: transform), so the entrance is still smooth. */
+@keyframes heroTitleRise {
+  from { transform: translate3d(0, 24px, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1139,12 +1156,6 @@ html.dark .site-grid-vignette {
 @keyframes shimmer { to { background-position: 0 0; } }
 @keyframes mesh-drift { to { background-position: 0% 0%; } }
 @keyframes float-y { to { transform: translateY(0); } }
-
-/* Aurora text — slow drift of the gradient through the glyphs */
-@keyframes aurora-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
-}
 
 /* ============================================================
    UTILITIES
@@ -1162,6 +1173,13 @@ html.dark .site-grid-vignette {
   .animate-fade-in { animation: fadeIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
   .animate-fade-up { animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
   .animate-fade-down { animation: fadeInDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+  /* Hero <h1> entrance — opacity:1 throughout so LCP paints immediately. */
+  .animate-hero-title {
+    opacity: 1;
+    will-change: transform;
+    animation: heroTitleRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     *,

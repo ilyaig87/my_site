@@ -38,15 +38,16 @@ export default function Footer() {
             {/* Brand block */}
             <div className="flex flex-col items-start gap-3">
               <Link href="/" className="inline-block group" aria-label="Pixelia — חזרה לדף הבית">
-                <div className="relative h-11 w-36 transition-opacity duration-300 group-hover:opacity-85">
-                  <Image
-                    src="/images/logo/pixelia_logo_color.png"
-                    alt="Pixelia"
-                    fill
-                    sizes="144px"
-                    className="object-contain object-right"
-                  />
-                </div>
+                {/* Square 1024×1024 logo painted at ~44px — request a matching
+                    small variant rather than the old 144px `fill` box. */}
+                <Image
+                  src="/images/logo/pixelia_logo_color.png"
+                  alt="Pixelia"
+                  width={44}
+                  height={44}
+                  sizes="44px"
+                  className="h-11 w-auto object-contain transition-opacity duration-300 group-hover:opacity-85"
+                />
               </Link>
               <p className="text-sm leading-relaxed text-[var(--text-muted)] max-w-md">
                 סטודיו פיתוח אתרים. מהרעיון ועד אתר חי באוויר — מהיר, מדויק, מרשים.

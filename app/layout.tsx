@@ -18,11 +18,23 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
+  // Canonical host is the www subdomain. Setting metadataBase here makes every
+  // canonical/OG/sitemap URL resolve to https://www.pixelia.co.il directly, so
+  // crawlers and shared links skip the apex→www 301 redirect (the ~70ms
+  // redirect overhead the audit flagged).
+  metadataBase: new URL("https://www.pixelia.co.il"),
+  alternates: { canonical: "/" },
   title: "Pixelia - יוצרים אתרים מקצועיים",
   description:
     "סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים. בחרו תבנית מוכנה או עיצוב מותאם אישית — Pixelia.",
   keywords:
     "Pixelia, פיתוח אתרים, בניית אתרים, עיצוב אתרים, תבניות אתרים, אתרים לעסקים",
+  openGraph: {
+    type: "website",
+    url: "https://www.pixelia.co.il",
+    siteName: "Pixelia",
+    locale: "he_IL",
+  },
 };
 
 const themeInitScript = `

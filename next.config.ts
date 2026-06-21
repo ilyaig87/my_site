@@ -1,4 +1,47 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+// Only active when ANALYZE=true (e.g. `ANALYZE=true npm run build`), so normal
+// dev/prod builds are completely unaffected.
+const bundleAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" });
+
+// Intentionally permissive Content-Security-Policy to start (per the audit:
+// "start permissive and tighten"). It already locks down the dangerous bits
+// (object-src none, frame-ancestors self, base-uri self) while keeping the
+// site working:
+//   - 'unsafe-inline' script/style: Next injects inline bootstrap scripts and
+//     the theme-init script, and we inline critical CSS + a few inline styles.
+//   - 'unsafe-eval': left in for now to avoid breaking any third-party lib;
+//     remove once verified and move to a nonce-based policy to tighten.
+//   - js.stripe.com / api.stripe.com: Stripe checkout.
+//   - img-src https:: remote template imagery (e.g. images.unsplash.com).
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://api.stripe.com",
+  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
+  "frame-ancestors 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const securityHeaders = [
+  { key: "Content-Security-Policy", value: contentSecurityPolicy },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=31536000; includeSubDomains; preload",
+  },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  // Sensible companions that cost nothing and round out the baseline.
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+];
 
 const nextConfig: NextConfig = {
   images: {
@@ -18,6 +61,15 @@ const nextConfig: NextConfig = {
     // trimming unused JavaScript.
     optimizePackageImports: ["framer-motion"],
   },
+  async headers() {
+    return [
+      {
+        // Apply the security baseline to every route.
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+export default bundleAnalyzer(nextConfig);

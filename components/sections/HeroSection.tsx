@@ -28,8 +28,10 @@ export default function HeroSection({ content }: HeroSectionProps) {
             <span className="kicker">Pixelia · Web Studio</span>
           </div>
 
-          {/* Massive title — LCP element, no entrance delay */}
-          <h1 className="mb-8 animate-fade-up">{content.title}</h1>
+          {/* Massive title — the LCP element. Uses animate-hero-title (opacity
+              stays 1, transform-only rise) so it paints at full opacity on the
+              first frame instead of fading in, which was delaying LCP. */}
+          <h1 className="mb-8 animate-hero-title">{content.title}</h1>
 
           {/* Subtitle */}
           <p
