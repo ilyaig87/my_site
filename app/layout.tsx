@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   // redirect overhead the audit flagged).
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
+  // Google Search Console domain verification.
+  verification: {
+    google: "Yt6gCzeUfM-XfZityDS8_hoW3jGp3oBDsvdNFxPN1WA",
+  },
   title: {
     default: "Pixelia — בניית אתרים מקצועיים לעסקים",
     template: "%s | Pixelia",
