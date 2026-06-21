@@ -43,6 +43,7 @@ export default function Footer() {
                     src="/images/logo/pixelia_logo_color.png"
                     alt="Pixelia"
                     fill
+                    sizes="144px"
                     className="object-contain object-right"
                   />
                 </div>

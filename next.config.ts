@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  experimental: {
+    // Inline the page's CSS into a <style> tag in the document head instead of
+    // shipping render-blocking <link rel="stylesheet"> requests. Removes the
+    // two blocking CSS chunks from the critical path.
+    inlineCss: true,
+    // Tree-shake framer-motion so only the used modules land in the bundle,
+    // trimming unused JavaScript.
+    optimizePackageImports: ["framer-motion"],
+  },
 };
 
 export default nextConfig;

@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import { HeroContent } from '@/types';
@@ -9,6 +6,13 @@ interface HeroSectionProps {
   content: HeroContent;
 }
 
+/**
+ * Server-rendered hero. The entrance animation is driven by pure CSS
+ * (see .animate-fade-* in globals.css) instead of framer-motion, so the
+ * LCP <h1> is present and paints immediately in the SSR HTML rather than
+ * waiting for the JS bundle to hydrate. The h1 itself starts with no delay
+ * to keep LCP as fast as possible; the rest stagger in around it.
+ */
 export default function HeroSection({ content }: HeroSectionProps) {
   return (
     <section className="relative min-h-[92vh] flex items-center overflow-hidden hero-beam">
@@ -20,53 +24,35 @@ export default function HeroSection({ content }: HeroSectionProps) {
       <Container>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           {/* Kicker */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-8"
-          >
+          <div className="mb-8 animate-fade-down">
             <span className="kicker">Pixelia · Web Studio</span>
-          </motion.div>
+          </div>
 
-          {/* Massive title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-8"
-          >
-            {content.title}
-          </motion.h1>
+          {/* Massive title — LCP element, no entrance delay */}
+          <h1 className="mb-8 animate-fade-up">{content.title}</h1>
 
           {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-10 max-w-3xl mx-auto leading-tight"
+          <p
+            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-10 max-w-3xl mx-auto leading-tight animate-fade-up"
+            style={{ animationDelay: '0.12s' }}
           >
             {content.subtitle}
-          </motion.p>
+          </p>
 
           {/* Description */}
           {content.description && (
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
-              className="text-base sm:text-lg text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed"
+            <p
+              className="text-base sm:text-lg text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-up"
+              style={{ animationDelay: '0.22s' }}
             >
               {content.description}
-            </motion.p>
+            </p>
           )}
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.66, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
+          <div
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center animate-fade-up"
+            style={{ animationDelay: '0.32s' }}
           >
             <Button href="/contact" size="lg" variant="accent">
               {content.primaryCTA}
@@ -77,14 +63,12 @@ export default function HeroSection({ content }: HeroSectionProps) {
             <Button href="/#projects" size="lg" variant="outline">
               {content.secondaryCTA}
             </Button>
-          </motion.div>
+          </div>
 
           {/* Trust strip — subtle proof signals, never shouting */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-14 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-[var(--text-muted)]"
+          <div
+            className="mt-14 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-[var(--text-muted)] animate-fade-in"
+            style={{ animationDelay: '0.5s' }}
           >
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
@@ -94,7 +78,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
               מענה ראשון תוך 24 שעות
             </span>
-          </motion.div>
+          </div>
         </div>
       </Container>
     </section>

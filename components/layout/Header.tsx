@@ -72,6 +72,10 @@ export default function Header() {
                   src="/images/logo/pixelia_logo_color.png"
                   alt="Pixelia"
                   fill
+                  // The logo never renders wider than ~176px, so cap the
+                  // requested size instead of letting `fill` default to 100vw
+                  // (which made the browser download a 640px-wide variant).
+                  sizes="(max-width: 768px) 144px, 176px"
                   className="object-contain"
                   priority
                 />

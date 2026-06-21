@@ -1,41 +1,19 @@
 import type { Metadata } from "next";
-import { Heebo, Inter, Poppins, Rubik } from "next/font/google";
-import { Suspense } from "react";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SiteBackdrop from "@/components/effects/SiteBackdrop";
-import FloatingAccessibility from "@/components/accessibility/FloatingAccessibility";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import CookieBanner from "@/components/CookieBanner";
-import Chatbot from "@/components/chatbot/Chatbot";
-import AnalyticsTracker from "@/components/AnalyticsTracker";
-import VisitorCounter from "@/components/VisitorCounter";
+import DeferredWidgets from "@/components/DeferredWidgets";
 
+// Rubik is the single brand font — it covers both Hebrew and Latin and is the
+// primary face for every text style on the site. The previous build also loaded
+// Heebo, Inter and Poppins, but those were only ever listed as fallbacks *after*
+// Rubik and never actually rendered, so loading them was pure wasted bandwidth.
 const rubik = Rubik({
   subsets: ["latin", "hebrew"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-rubik",
-  display: "swap",
-});
-
-const heebo = Heebo({
-  subsets: ["hebrew", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-heebo",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -71,7 +49,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body
-        className={`${rubik.variable} ${heebo.variable} ${inter.variable} ${poppins.variable} font-sans antialiased`}
+        className={`${rubik.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         <SiteBackdrop />
@@ -79,15 +57,8 @@ export default function RootLayout({
         <main className="site-main min-h-screen">{children}</main>
         <Footer />
 
-        {/* Floating Components */}
-        <FloatingAccessibility />
-        <CookieBanner />
-        <Chatbot />
-        <FloatingWhatsApp />
-        <VisitorCounter />
-        <Suspense fallback={null}>
-          <AnalyticsTracker />
-        </Suspense>
+        {/* Non-critical floating widgets + analytics, loaded after idle */}
+        <DeferredWidgets />
       </body>
     </html>
   );
