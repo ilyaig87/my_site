@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer
       id="site-footer"
-      className="relative mt-20 sm:mt-24 isolate overflow-hidden"
+      className="relative mt-12 sm:mt-16 isolate overflow-hidden"
     >
       {/* Hairline accent at the very top edge — echoes the site beam */}
       <div
@@ -32,7 +32,7 @@ export default function Footer() {
       />
 
       <Container>
-        <div className="relative pt-10 pb-7 sm:pt-12 sm:pb-8">
+        <div className="relative pt-10 pb-28 sm:pt-12 sm:pb-8">
           {/* ─── Top row — brand + contact pills ─── */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-7 md:gap-8">
             {/* Brand block */}
@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
 
           {/* ─── Bottom strip ─── */}
-          <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-col items-center text-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:text-right">
             <p className="text-xs text-[var(--text-faint)]">
               © {currentYear} Pixelia. כל הזכויות שמורות.
             </p>
