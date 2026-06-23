@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { turso, initDatabase } from '@/lib/turso'
+import { sendLeadNotification } from '@/lib/email'
 
 // Initialize database on first request
 let isInitialized = false
@@ -45,13 +46,24 @@ export async function POST(request: NextRequest) {
       args: [id, name, email, phone || '', message, source_page || '/contact', created_at]
     })
 
-    // TODO: Send email notification to admin
-    // TODO: Send confirmation email to user
+    // Email notification to admin (non-blocking: never fail the request if email breaks)
+    const emailResult = await sendLeadNotification({
+      subject: `פנייה חדשה מהאתר — ${name}`,
+      replyTo: email,
+      rows: [
+        { label: 'שם', value: name },
+        { label: 'אימייל', value: email },
+        { label: 'טלפון', value: phone || '' },
+        { label: 'מעמוד', value: source_page || '/contact' },
+      ],
+      note: message,
+    })
 
     return NextResponse.json({
       success: true,
       message: 'Contact submission received successfully',
-      id
+      id,
+      emailed: emailResult.sent
     })
   } catch (error) {
     console.error('Error saving contact submission:', error)

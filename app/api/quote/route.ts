@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { turso, initDatabase } from '@/lib/turso'
+import { sendLeadNotification } from '@/lib/email'
 
 // Initialize database on first request
 let isInitialized = false
@@ -58,14 +59,29 @@ export async function POST(request: NextRequest) {
       ]
     })
 
-    // TODO: Send email notification to admin
-    // TODO: Send confirmation email to customer
+    // Email notification to admin
+    const priceText = calculated_price ? `₪${Number(calculated_price).toLocaleString('he-IL')}` : ''
+    const featuresText = Array.isArray(selectedFeatures) ? selectedFeatures.join(', ') : ''
+    const emailResult = await sendLeadNotification({
+      subject: `בקשת הצעת מחיר חדשה — ${name}${priceText ? ` (${priceText})` : ''}`,
+      replyTo: email,
+      rows: [
+        { label: 'שם', value: name },
+        { label: 'אימייל', value: email },
+        { label: 'טלפון', value: phone || '' },
+        { label: 'סוג אתר', value: websiteType || '' },
+        { label: 'מספר עמודים', value: numPages || '' },
+        { label: 'תוספות', value: featuresText },
+        { label: 'הערכת מחיר', value: priceText },
+      ],
+    })
 
     return NextResponse.json({
       success: true,
       message: 'Quote request received successfully',
       id,
-      calculated_price
+      calculated_price,
+      emailed: emailResult.sent
     })
   } catch (error) {
     console.error('Error saving quote request:', error)
