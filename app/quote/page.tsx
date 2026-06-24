@@ -17,8 +17,9 @@ function isValidEmail(value: string) {
 }
 
 const websiteTypes = [
-  { id: 'landing', label: 'דף נחיתה', description: 'עמוד אחד · עד 5 רכיבים · ללא דפים נוספים', basePrice: 2500 },
-  { id: 'multipage', label: 'אתר רב-עמודי', description: 'דף בית + דפים נוספים לפי הצורך', basePrice: 2500 },
+  { id: 'starter', label: 'Starter — דף נחיתה', description: 'עמוד אחד · עד 5 סקשנים · ללא דפים נוספים', basePrice: 2500 },
+  { id: 'business', label: 'Business — אתר עסקי', description: 'עד 5 עמודים · נוכחות מלאה · גלריה', basePrice: 3500 },
+  { id: 'premium', label: 'Premium — אתר מתקדם', description: 'בלוג/CMS · אנימציות · אינטגרציות', basePrice: 5000 },
 ];
 
 // Each page beyond the landing page is an add-on, priced per request.

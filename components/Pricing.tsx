@@ -25,16 +25,18 @@ interface Package {
   currency: string;
   description: string;
   features: string[];
+  notIncluded?: string[];
+  priceFrom?: boolean;
   popular: boolean;
   customQuote?: boolean;
 }
 
 const optionalAddons = [
   { label: 'דומיין + אחסון שנתי', price: '300 ₪/שנה' },
-  { label: 'דף נוסף לאתר', price: 'בהצעת מחיר אישית' },
+  { label: 'מערכת הזמנות / קביעת תורים', price: 'בהצעת מחיר' },
+  { label: 'חנות ותשלומים אונליין (Stripe)', price: 'בהצעת מחיר' },
+  { label: 'אזור משתמשים / התחברות', price: 'בהצעת מחיר' },
   { label: 'תחזוקה חודשית', price: 'החל מ-150 ₪/חודש' },
-  { label: 'פאנל ניהול תוכן פשוט', price: 'החל מ-1,200 ₪' },
-  { label: 'שמירת לידים והרשמות במסד נתונים', price: 'החל מ-800 ₪' },
 ];
 
 export default function Pricing() {
@@ -54,8 +56,12 @@ export default function Pricing() {
   const formatPrice = (price: number) =>
     new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS', maximumFractionDigits: 0 }).format(price);
 
-  // What to show for the price: a custom-quote package has no fixed price.
-  const priceLabel = (pkg: Package) => (pkg.customQuote ? 'הצעת מחיר אישית' : formatPrice(pkg.price));
+  // What to show for the price: custom-quote has no fixed price; "from" packages
+  // start at the listed price and go up by scope.
+  const priceLabel = (pkg: Package) =>
+    pkg.customQuote
+      ? 'הצעת מחיר אישית'
+      : `${pkg.priceFrom ? 'החל מ-' : ''}${formatPrice(pkg.price)}`;
 
   const buildWhatsAppLink = (pkg: Package) => {
     const lines = [
@@ -194,7 +200,7 @@ export default function Pricing() {
           </div>
 
           {/* Packages */}
-          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
             {packages.map((pkg) => (
               <GlassCard
                 key={pkg.id}
@@ -226,7 +232,9 @@ export default function Pricing() {
                     </div>
                   ) : (
                     <>
-                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
+                      {pkg.priceFrom && (
+                        <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">החל מ-</p>
+                      )}
                       <div className="text-4xl font-black text-[var(--text-strong)] leading-none">
                         {formatPrice(pkg.price)}
                       </div>
@@ -234,7 +242,7 @@ export default function Pricing() {
                   )}
                 </div>
 
-                <ul className="space-y-2 mb-6 flex-grow">
+                <ul className="space-y-2 mb-4">
                   {pkg.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <svg
@@ -251,10 +259,35 @@ export default function Pricing() {
                   ))}
                 </ul>
 
+                {pkg.notIncluded && pkg.notIncluded.length > 0 && (
+                  <div className="mb-6 pt-3 border-t border-[var(--glass-border-dim)]">
+                    <p className="text-[11px] font-bold text-[var(--text-faint)] uppercase tracking-wide mb-2">
+                      {pkg.priceFrom ? 'תוספות שמעלות את המחיר' : 'לא כלול בחבילה'}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {pkg.notIncluded.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-[var(--text-muted)]">
+                          <svg
+                            className="w-4 h-4 text-[var(--text-faint)] flex-shrink-0 mt-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                          <span className="text-[13px] leading-snug">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 <Button
                   variant={selectedPackageId === pkg.id ? 'primary' : pkg.popular ? 'primary' : 'glass'}
                   size="md"
                   fullWidth
+                  className="mt-auto"
                   onClick={() => choosePackage(pkg)}
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -305,7 +338,7 @@ export default function Pricing() {
                       <p className="font-bold text-[var(--text-strong)] truncate">
                         {selectedPackage.name}
                         <span className="font-normal text-[var(--text-muted)] text-sm mr-2">
-                          · {selectedPackage.customQuote ? 'הצעת מחיר אישית' : `החל מ-${formatPrice(selectedPackage.price)}`}
+                          · {priceLabel(selectedPackage)}
                         </span>
                       </p>
                     </div>
