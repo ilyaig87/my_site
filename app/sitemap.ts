@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllTemplates } from "@/lib/data";
 import { getAllPosts } from "@/lib/blog";
+import { getAllSeoPages } from "@/lib/seoPages";
 
 // Canonical host — the www subdomain. Emitting absolute www URLs here means
 // search engines crawl them directly instead of hitting the apex → www 301.
@@ -40,5 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...templateRoutes, ...blogRoutes];
+  const seoRoutes = getAllSeoPages().map((page) => ({
+    url: `${BASE_URL}/services/${page.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...templateRoutes, ...blogRoutes, ...seoRoutes];
 }

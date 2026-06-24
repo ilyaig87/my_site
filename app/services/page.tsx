@@ -1,9 +1,11 @@
+import Link from 'next/link';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 import ProcessSection from '@/components/sections/ProcessSection';
 import { getSiteContent } from '@/lib/data';
+import { getAllSeoPages } from '@/lib/seoPages';
 import { Metadata } from 'next';
 import { ReactElement } from 'react';
 
@@ -77,6 +79,27 @@ export default function ServicesPage() {
                 </ul>
               </GlassCard>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Popular service pages — internal links for SEO */}
+      <section className="relative">
+        <Container>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-2xl font-bold text-[var(--text-strong)] text-center mb-6">שירותים מבוקשים</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {getAllSeoPages().map((p) => (
+                <Link key={p.slug} href={`/services/${p.slug}`} className="group">
+                  <GlassCard variant="default" squircle="md" className="h-full p-5">
+                    <p className="relative z-10 font-bold text-[var(--text-strong)] group-hover:text-[var(--primary)] transition-colors mb-1">
+                      {p.h1Lead} {p.h1Highlight}
+                    </p>
+                    <p className="relative z-10 text-sm text-[var(--text-muted)] line-clamp-2">{p.metaDescription}</p>
+                  </GlassCard>
+                </Link>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
