@@ -10,9 +10,9 @@ import { getSiteContent } from "@/lib/data";
 
 const SITE_URL = "https://www.pixelia.co.il";
 
-// Google Analytics 4 — set NEXT_PUBLIC_GA_ID (e.g. "G-XXXXXXXXXX") in the
-// environment to activate. Without it, no tracking script is rendered.
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// Google Analytics 4. The Measurement ID is public (it ships in the page HTML),
+// so it lives here as the default; NEXT_PUBLIC_GA_ID can override it.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-NXQHQHCEVS";
 
 // Rubik is the single brand font — it covers both Hebrew and Latin and is the
 // primary face for every text style on the site. The previous build also loaded
