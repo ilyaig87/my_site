@@ -4,6 +4,42 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Message, getBotResponse, generateMessageId } from './ChatbotLogic';
 
+// Turn markdown links [text](url) and bare URLs into clickable links.
+function linkify(text: string): React.ReactNode[] {
+  const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s]+)/g;
+  const nodes: React.ReactNode[] = [];
+  let last = 0;
+  let k = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    let label: string;
+    let url: string;
+    let trailing = '';
+    if (m[2]) {
+      label = m[1];
+      url = m[2];
+    } else {
+      url = m[3];
+      const t = url.match(/[.,);]+$/);
+      if (t) {
+        trailing = t[0];
+        url = url.slice(0, -trailing.length);
+      }
+      label = url;
+    }
+    nodes.push(
+      <a key={`l${k++}`} href={url} target="_blank" rel="noopener noreferrer" className="underline font-semibold break-all">
+        {label}
+      </a>
+    );
+    if (trailing) nodes.push(trailing);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes.length ? nodes : [text];
+}
+
 const predefinedQuestions = [
   { id: 1, label: '💰 מחירים', question: 'מחיר' },
   { id: 2, label: '⚡ תהליך העבודה', question: 'תהליך' },
@@ -193,7 +229,7 @@ export default function Chatbot() {
                         return (
                           <div key={i}>
                             {parts.map((p, j) =>
-                              j % 2 === 1 ? <strong key={j}>{p}</strong> : <span key={j}>{p}</span>
+                              j % 2 === 1 ? <strong key={j}>{linkify(p)}</strong> : <span key={j}>{linkify(p)}</span>
                             )}
                           </div>
                         );
