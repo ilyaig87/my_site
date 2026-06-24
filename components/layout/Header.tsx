@@ -86,13 +86,13 @@ export default function Header() {
             </Link>
 
             {/* Desktop nav — bigger tabs */}
-            <nav className="hidden lg:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-6 absolute left-1/2 -translate-x-1/2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={handleHomeClick(item.href)}
-                  className="relative text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
+                  className="relative text-[14px] xl:text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
                 >
                   <span>{item.label}</span>
                   <span className="absolute inset-x-0 -bottom-1.5 h-px bg-[var(--accent)] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />

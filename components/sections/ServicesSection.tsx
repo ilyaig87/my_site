@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
+import Button from '@/components/ui/Button';
 import { fadeUp, stagger } from '@/lib/animations';
 
 const services = [
@@ -97,6 +98,32 @@ export default function ServicesSection() {
               </GlassCard>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* AI & automation highlight */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-50px' }}
+          className="mt-6 sm:mt-8 max-w-5xl mx-auto"
+        >
+          <GlassCard variant="deep" glow="primary" squircle="lg" className="p-6 sm:p-8">
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+              <div className="flex-1 text-center md:text-right">
+                <GlassPill dot dotColor="cool">חדש</GlassPill>
+                <h3 className="text-xl sm:text-2xl font-black text-[var(--text-strong)] mt-3 mb-2">
+                  לא רק אתרים — מערכות AI ואוטומציה
+                </h3>
+                <p className="text-base text-[var(--text-muted)] leading-relaxed">
+                  צ&apos;אטבוטים חכמים, אוטומציות עסקיות וסוכני AI שעובדים בשבילכם 24/7 — חוסכים זמן וסוגרים יותר לקוחות.
+                </p>
+              </div>
+              <div className="flex-shrink-0 flex justify-center">
+                <Button href="/ai" variant="primary" size="lg">גלו עוד</Button>
+              </div>
+            </div>
+          </GlassCard>
         </motion.div>
       </Container>
     </section>

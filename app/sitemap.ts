@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllTemplates } from "@/lib/data";
+import { getAllPosts } from "@/lib/blog";
 
 // Canonical host — the www subdomain. Emitting absolute www URLs here means
 // search engines crawl them directly instead of hitting the apex → www 301.
@@ -10,8 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/services",
+    "/ai",
     "/pricing",
     "/templates",
+    "/blog",
     "/contact",
     "/quote",
     "/faq",
@@ -21,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.7,
+    priority: path === "" ? 1 : path === "/ai" ? 0.8 : 0.7,
   }));
 
   const templateRoutes = getAllTemplates().map((template) => ({
@@ -30,5 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...templateRoutes];
+  const blogRoutes = getAllPosts().map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: post.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...templateRoutes, ...blogRoutes];
 }

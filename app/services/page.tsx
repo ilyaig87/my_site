@@ -27,7 +27,7 @@ export default function ServicesPage() {
               <span className="lg-text-shimmer">השירותים</span> שלנו
             </h1>
             <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto mb-3">
-              ארבעה סוגי אתרים — והליווי שמלווה אותם. מחירים מפורטים מופיעים בעמוד התמחור.
+                מאתרים ועד מערכות AI ואוטומציה — והליווי שמלווה אותם. מחירים מפורטים מופיעים בעמוד התמחור.
             </p>
             <p className="text-base font-semibold text-[var(--text-strong)] max-w-2xl mx-auto">
               לא בטוחים מה מתאים? נשמח להמליץ בשיחה קצרה — ללא התחייבות.
@@ -130,6 +130,11 @@ function getServiceIcon(icon: string): ReactElement {
     shopping: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+      </svg>
+    ),
+    ai: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-3.5-7.1M21 4v4h-4M9 18l-4 3v-3" />
       </svg>
     ),
   };

@@ -36,10 +36,11 @@ export function getNavItems() {
   return [
     { label: 'בית', href: '/' },
     { label: 'שירותים', href: '/services' },
+    { label: 'AI ואוטומציה', href: '/ai' },
     { label: 'טמפלייטים', href: '/templates' },
     { label: 'תמחור', href: '/pricing' },
+    { label: 'בלוג', href: '/blog' },
     { label: 'אודות', href: '/about' },
-    { label: 'שאלות נפוצות', href: '/faq' },
     { label: 'צרו קשר', href: '/contact' },
   ];
 }
