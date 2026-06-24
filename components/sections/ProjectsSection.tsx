@@ -20,6 +20,17 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: 'צחי צדקה',
+    url: 'https://zedakaprojects.co.il',
+    domain: 'zedakaprojects.co.il',
+    tagline: 'דף נחיתה עסקי בעמוד אחד',
+    description:
+      'דף נחיתה עסקי ממוקד המרה בעמוד אחד — עיצוב נקי ומהיר, מותאם מלא למובייל, שמוביל את הגולש לפנייה.',
+    image: '/images/projects/zedaka-projects.png',
+    highlights: ['עמוד אחד ממוקד המרה', 'עיצוב נקי ומהיר', 'מותאם מובייל', 'CTA בולט ליצירת קשר'],
+    tags: ['דף נחיתה', 'עסקי', 'עמוד אחד'],
+  },
+  {
     name: 'חן שעיה — שירותי כמאות',
     url: 'https://www.chenshaya.com/',
     domain: 'chenshaya.com',
