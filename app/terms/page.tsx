@@ -209,7 +209,7 @@ export default function TermsPage() {
                     אחריות לעבודה
                   </h2>
                   <ul className="space-y-1 text-xs text-[var(--text-default)]">
-                    <li className="flex items-start gap-1.5"><span className="text-[var(--primary)]/70 mt-0.5">●</span> ליווי צמוד ותיקונים ללא תשלום אחרי ההשקה — עד לשביעות רצונכם המלאה</li>
+                    <li className="flex items-start gap-1.5"><span className="text-[var(--primary)]/70 mt-0.5">●</span> ליווי צמוד ותיקוני באגים ללא תשלום לאחר ההשקה</li>
                     <li className="flex items-start gap-1.5"><span className="text-[var(--primary)]/70 mt-0.5">●</span> תיקון באג = משהו לא פועל כפי שסוכם</li>
                     <li className="flex items-start gap-1.5"><span className="text-[var(--primary)]/70 mt-0.5">●</span> הוספה/שינוי = שירות נפרד בתשלום</li>
                     <li className="flex items-start gap-1.5"><span className="text-[var(--primary)]/70 mt-0.5">●</span> נזקים מפעולות הלקוח אינם באחריות</li>
