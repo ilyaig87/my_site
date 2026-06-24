@@ -26,6 +26,10 @@ export default function Chatbot() {
   const [showQuestions, setShowQuestions] = useState(true);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const sessionIdRef = useRef<string>('');
+  if (!sessionIdRef.current) {
+    sessionIdRef.current = 'sess_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+  }
 
   useEffect(() => {
     if (messages.length === 0) {
@@ -81,6 +85,7 @@ export default function Chatbot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          sessionId: sessionIdRef.current,
           messages: history
             .filter((m) => m.sender === 'user' || m.sender === 'bot')
             .slice(-8)
