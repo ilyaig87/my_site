@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -8,6 +9,10 @@ import DeferredWidgets from "@/components/DeferredWidgets";
 import { getSiteContent } from "@/lib/data";
 
 const SITE_URL = "https://www.pixelia.co.il";
+
+// Google Analytics 4 — set NEXT_PUBLIC_GA_ID (e.g. "G-XXXXXXXXXX") in the
+// environment to activate. Without it, no tracking script is rendered.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 // Rubik is the single brand font — it covers both Hebrew and Latin and is the
 // primary face for every text style on the site. The previous build also loaded
@@ -136,6 +141,22 @@ export default function RootLayout({
 
         {/* Non-critical floating widgets + analytics, loaded after idle */}
         <DeferredWidgets />
+
+        {/* Google Analytics 4 — only when NEXT_PUBLIC_GA_ID is set */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
