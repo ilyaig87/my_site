@@ -149,7 +149,7 @@ export default function AiServicesPage() {
               אתר זה ההתחלה. <span className="lg-text-shimmer">מערכות חכמות</span> זה היתרון.
             </h1>
             <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto mb-3">
-              היום כל אחד יכול אתר. מה שבאמת מזיז את העסק זה AI ואוטומציה — מערכות שעובדות בשבילכם 24/7,
+              היום אתר כבר יש לכולם — מה שבאמת מזיז את העסק זה AI ואוטומציה: מערכות שעובדות בשבילכם 24/7,
               עונות ללקוחות, מסננות לידים וחוסכות לכם שעות בשבוע.
             </p>
             <p className="text-base font-semibold text-[var(--text-strong)] max-w-2xl mx-auto mb-7">
