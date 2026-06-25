@@ -101,7 +101,7 @@ export default function Header() {
 
             {/* Right side */}
             <div className="flex items-center gap-3">
-              <div className="hidden sm:block">
+              <div className="block">
                 <GlassToggle isDark={isDark} onToggle={toggleDarkMode} />
               </div>
               <div className="hidden md:block">
