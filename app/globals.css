@@ -328,6 +328,12 @@ html.dark {
     padding-block: 0;
   }
 
+  /* The header clearance already lives on .site-main, so the first section on
+     a page only needs a small top padding — keeps the header↔hero gap tight. */
+  .site-main > section:first-child {
+    padding-top: clamp(0.5rem, 1.5vw, 1rem);
+  }
+
   ::selection {
     background: var(--accent-deep);
     color: var(--on-accent);
