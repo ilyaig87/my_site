@@ -22,7 +22,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
       <div aria-hidden className="beam-vignette" />
 
       <Container>
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
           {/* Kicker */}
           <div className="mb-8 animate-fade-down">
             <span className="kicker">Pixelia · Web Studio</span>

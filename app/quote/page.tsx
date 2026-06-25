@@ -153,7 +153,7 @@ export default function QuotePage() {
     <>
       <section className="relative">
         <Container>
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-5">
               <GlassPill dot>הערכת מחיר ראשונית</GlassPill>
             </div>

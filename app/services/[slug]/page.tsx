@@ -71,7 +71,7 @@ export default async function SeoServicePage({ params }: PageProps) {
       {/* Hero */}
       <section className="relative">
         <Container size="md">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-5">
               <GlassPill dot>{page.badge}</GlassPill>
             </div>

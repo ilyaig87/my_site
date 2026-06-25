@@ -19,7 +19,7 @@ export default function BlogPage() {
     <>
       <section className="relative">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center mb-5">
               <GlassPill dot>הבלוג של Pixelia</GlassPill>
             </div>

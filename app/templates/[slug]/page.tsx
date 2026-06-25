@@ -37,7 +37,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
     <>
       <section className="relative">
         <Container>
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center mb-5">
               <GlassPill dot>{getCategoryLabel(template.category)}</GlassPill>
             </div>

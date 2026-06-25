@@ -41,7 +41,7 @@ export default function TemplatesPage() {
       {/* Hero */}
       <section className="relative">
         <Container>
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-5xl mx-auto">
             <div className="flex justify-center mb-6">
               <GlassPill dot dotColor="primary">{templates.length} רעיונות לעיצוב להשראה</GlassPill>
             </div>
