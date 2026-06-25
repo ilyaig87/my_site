@@ -299,9 +299,7 @@ export default function AccessibilityMenu({ onClose }: AccessibilityMenuProps) {
                 {(
                   [
                     { id: 'none', label: 'רגיל' },
-                    { id: 'high', label: 'גבוהה' },
-                    { id: 'negative', label: 'הפוכה' },
-                    { id: 'dark', label: 'כהה' },
+                    { id: 'high', label: 'ניגודיות גבוהה' },
                   ] as const
                 ).map((opt) => (
                   <button

@@ -1,21 +1,10 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import SiteBeam from './SiteBeam';
-
 /**
- * Renders the page-top decorative backdrop based on the current route.
- * - Home (/)          → diagonal beam (Tesla-style signature)
- * - Everywhere else   → blueprint grid (squares — "we build things")
+ * Page-top decorative backdrop — a subtle blueprint grid ("we build things").
+ * Light, neutral, and the same on every page (no colored beam).
  */
 export default function SiteBackdrop() {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
-
-  if (isHome) {
-    return <SiteBeam />;
-  }
-
   return (
     <div
       aria-hidden="true"

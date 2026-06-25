@@ -64,13 +64,9 @@ export const metadata: Metadata = {
 const themeInitScript = `
 (function(){
   try {
-    var stored = localStorage.getItem('darkMode');
-    var isDark = stored === null ? true : stored === 'true';
-    if (isDark) document.documentElement.classList.add('dark');
-    if (stored === null) localStorage.setItem('darkMode', 'true');
-  } catch(e) {
-    document.documentElement.classList.add('dark');
-  }
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('darkMode', 'false');
+  } catch(e) {}
 })();
 `;
 
