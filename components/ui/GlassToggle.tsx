@@ -36,7 +36,6 @@ export default function GlassToggle({ isDark, onToggle }: GlassToggleProps) {
       onClick={onToggle}
       className="lg-surface lg-shallow w-9 h-9 rounded-full inline-flex items-center justify-center hover:scale-110 transition-transform"
       aria-label={label}
-      title={label}
       suppressHydrationWarning
     >
       <AnimatePresence mode="wait" initial={false}>
