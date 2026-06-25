@@ -7,12 +7,14 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getNavItems } from '@/lib/data';
 import Button from '@/components/ui/Button';
+import GlassToggle from '@/components/ui/GlassToggle';
 import Container from '@/components/ui/Container';
 import { cn } from '@/lib/cn';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(false); // default = light
   const navItems = getNavItems();
   const pathname = usePathname();
 
@@ -21,6 +23,19 @@ export default function Header() {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  useEffect(() => {
+    const dark = localStorage.getItem('darkMode') === 'true';
+    setIsDark(dark);
+    document.documentElement.classList.toggle('dark', dark);
+  }, []);
+
+  const toggleDarkMode = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('darkMode', String(next));
   };
 
   useEffect(() => {
@@ -86,6 +101,9 @@ export default function Header() {
 
             {/* Right side */}
             <div className="flex items-center gap-3">
+              <div className="hidden sm:block">
+                <GlassToggle isDark={isDark} onToggle={toggleDarkMode} />
+              </div>
               <div className="hidden md:block">
                 <Button href="/contact" size="sm" variant="primary">
                   בואו נדבר
@@ -161,6 +179,7 @@ export default function Header() {
                   variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
                   className="pt-8 mt-4 flex flex-col items-center gap-6 border-t border-[var(--border)]"
                 >
+                  <GlassToggle isDark={isDark} onToggle={toggleDarkMode} />
                   <div onClick={() => setMobileMenuOpen(false)}>
                     <Button href="/contact" variant="primary" size="lg">
                       בואו נדבר
