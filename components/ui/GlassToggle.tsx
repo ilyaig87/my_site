@@ -1,5 +1,7 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
+
 interface GlassToggleProps {
   isDark: boolean;
   onToggle: () => void;
@@ -22,27 +24,37 @@ const MoonIcon = ({ className }: { className?: string }) => (
 );
 
 /**
- * Theme switch shown as an explicit labeled button: it always says what it will
- * DO ("מצב כהה" / "מצב בהיר") with a matching icon — no ambiguous slider.
+ * Single-icon theme switch. The icon shows the action you'll take:
+ * - Light mode → moon (click to go dark)
+ * - Dark mode  → sun  (click to go light)
+ * Clicking swaps the mode and the icon.
  */
 export default function GlassToggle({ isDark, onToggle }: GlassToggleProps) {
-  const label = isDark ? 'מצב בהיר' : 'מצב כהה';
+  const label = isDark ? 'עבור למצב בהיר' : 'עבור למצב כהה';
   return (
     <button
       onClick={onToggle}
-      className="lg-surface lg-shallow inline-flex items-center gap-1.5 h-9 px-3 rounded-full hover:scale-105 transition-all"
-      aria-label={`החלפת רקע — ${label}`}
-      title={`החלפת רקע — ${label}`}
+      className="lg-surface lg-shallow w-9 h-9 rounded-full inline-flex items-center justify-center hover:scale-110 transition-transform"
+      aria-label={label}
+      title={label}
       suppressHydrationWarning
     >
-      <span className="relative z-10 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--text-strong)] whitespace-nowrap">
-        {isDark ? (
-          <SunIcon className="w-4 h-4 text-amber-500" />
-        ) : (
-          <MoonIcon className="w-4 h-4 text-[var(--primary)]" />
-        )}
-        {label}
-      </span>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? 'sun' : 'moon'}
+          initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+          transition={{ duration: 0.2 }}
+          className="relative z-10 inline-flex"
+        >
+          {isDark ? (
+            <SunIcon className="w-5 h-5 text-amber-500" />
+          ) : (
+            <MoonIcon className="w-5 h-5 text-[var(--primary)]" />
+          )}
+        </motion.span>
+      </AnimatePresence>
     </button>
   );
 }
