@@ -109,7 +109,8 @@ async function maybeCaptureLead(session: string, messages: ClientMessage[]) {
   });
 }
 
-async function callGemini(apiKey: string, payload: object): Promise<string | null> {
+async function callGemini(apiKey: string, payload: object): Promise<{ text?: string; error?: string }> {
+  let lastError = '';
   for (const model of MODEL_CANDIDATES) {
     try {
       const res = await fetch(
@@ -120,19 +121,24 @@ async function callGemini(apiKey: string, payload: object): Promise<string | nul
         const data = await res.json();
         const text: string =
           data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text || '').join('') || '';
-        return text.trim() || null;
+        if (text.trim()) return { text: text.trim() };
+        lastError = `${model}: empty response (${JSON.stringify(data).slice(0, 200)})`;
+        console.error('[chat] Gemini', lastError);
+        continue;
       }
       const errBody = await res.text().catch(() => '');
-      console.error(`[chat] Gemini ${model} -> ${res.status}: ${errBody.slice(0, 300)}`);
+      lastError = `${model} -> ${res.status}: ${errBody.slice(0, 250)}`;
+      console.error('[chat] Gemini', lastError);
       // 404 = model not available for this key; try the next candidate.
       if (res.status === 404) continue;
       // Other errors (auth/quota/bad request) won't be fixed by another model.
-      return null;
+      return { error: lastError };
     } catch (e) {
-      console.error(`[chat] Gemini ${model} request failed`, e);
+      lastError = `${model} exception: ${String(e).slice(0, 180)}`;
+      console.error('[chat] Gemini', lastError);
     }
   }
-  return null;
+  return { error: lastError || 'all models failed' };
 }
 
 function buildKnowledge(): string {
@@ -239,11 +245,20 @@ export async function POST(request: NextRequest) {
     generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS, temperature: 0.5 },
   };
 
-  const reply = await callGemini(apiKey, payload);
-  if (!reply) {
-    return NextResponse.json({
-      reply: `מצטער, יש לי תקלה רגעית 🙏 נסו שוב בעוד רגע, או דברו איתנו בוואטסאפ: ${FALLBACK_WA}`,
-    });
+  const result = await callGemini(apiKey, payload);
+  if (result.text) {
+    return NextResponse.json({ reply: result.text });
   }
-  return NextResponse.json({ reply });
+
+  // Debug: typing "דיבאג" (or setting CHAT_DEBUG=1) surfaces the real error
+  // so we can diagnose without server logs. Normal users get the friendly text.
+  const lastUserText = [...contents].reverse().find((c) => c.role === 'user')?.parts?.[0]?.text || '';
+  const debugMode = process.env.CHAT_DEBUG === '1' || /דיבאג|debug/i.test(lastUserText);
+
+  return NextResponse.json({
+    reply: debugMode
+      ? `🛠️ שגיאת AI (דיבאג): ${result.error}`
+      : `מצטער, יש לי תקלה רגעית 🙏 נסו שוב בעוד רגע, או דברו איתנו בוואטסאפ: ${FALLBACK_WA}`,
+    debug: result.error,
+  });
 }
