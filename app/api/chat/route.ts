@@ -218,12 +218,24 @@ export async function POST(request: NextRequest) {
   }
 
   // ── Ask Gemini ──
-  const payload = {
-    systemInstruction: { parts: [{ text: `${SYSTEM_INSTRUCTION}\n\n${buildKnowledge()}` }] },
-    contents: messages.slice(-MAX_HISTORY).map((m) => ({
+  // Gemini requires the conversation to START with a 'user' turn, so drop any
+  // leading 'model' messages (e.g. the bot's welcome message).
+  const contents = messages
+    .slice(-MAX_HISTORY)
+    .map((m) => ({
       role: m.role === 'user' ? 'user' : 'model',
       parts: [{ text: String(m.content || '').slice(0, MAX_INPUT_CHARS) }],
-    })),
+    }));
+  while (contents.length && contents[0].role !== 'user') {
+    contents.shift();
+  }
+  if (contents.length === 0) {
+    return NextResponse.json({ error: 'no user message' }, { status: 400 });
+  }
+
+  const payload = {
+    systemInstruction: { parts: [{ text: `${SYSTEM_INSTRUCTION}\n\n${buildKnowledge()}` }] },
+    contents,
     generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS, temperature: 0.5 },
   };
 
