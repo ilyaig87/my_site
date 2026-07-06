@@ -262,3 +262,27 @@ export async function POST(request: NextRequest) {
     debug: result.error,
   });
 }
+
+// Diagnostics — open /api/chat?test=1 in a browser to see exactly what the
+// Gemini call returns (key presence, model, raw error). Remove when fixed.
+export async function GET(request: NextRequest) {
+  if (request.nextUrl.searchParams.get('test') !== '1') {
+    return NextResponse.json({ ok: true, hint: 'open /api/chat?test=1 to run a Gemini connectivity test' });
+  }
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ ok: false, keyPresent: false, reason: 'GEMINI_API_KEY is not set in the environment (add it in Vercel and redeploy)' });
+  }
+  const result = await callGemini(apiKey, {
+    contents: [{ role: 'user', parts: [{ text: 'תגיד שלום במילה אחת' }] }],
+    generationConfig: { maxOutputTokens: 20, temperature: 0.2 },
+  });
+  return NextResponse.json({
+    ok: !!result.text,
+    keyPresent: true,
+    keyPrefix: `${apiKey.slice(0, 6)}…${apiKey.slice(-3)}`,
+    modelsTried: MODEL_CANDIDATES,
+    sample: result.text || null,
+    error: result.error || null,
+  });
+}
