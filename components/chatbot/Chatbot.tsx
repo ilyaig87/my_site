@@ -4,7 +4,18 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Message, getBotResponse, generateMessageId } from './ChatbotLogic';
 
-// Turn markdown links [text](url) and bare URLs into clickable links.
+// Give a bare URL a friendly, human-readable label instead of showing the
+// raw address (e.g. WhatsApp links become a clear "פתיחת וואטסאפ" button).
+function friendlyLabel(url: string): string {
+  if (/wa\.me|api\.whatsapp\.com|whatsapp/i.test(url)) return '💬 פתיחת וואטסאפ';
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
+// Turn markdown links [text](url) and bare URLs into clickable, nicely-styled links.
 function linkify(text: string): React.ReactNode[] {
   const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s]+)/g;
   const nodes: React.ReactNode[] = [];
@@ -17,6 +28,7 @@ function linkify(text: string): React.ReactNode[] {
     let url: string;
     let trailing = '';
     if (m[2]) {
+      // Explicit markdown link — trust the author's label.
       label = m[1];
       url = m[2];
     } else {
@@ -26,12 +38,27 @@ function linkify(text: string): React.ReactNode[] {
         trailing = t[0];
         url = url.slice(0, -trailing.length);
       }
-      label = url;
+      // Bare URL — show a friendly label rather than the raw address.
+      label = friendlyLabel(url);
     }
+    const isWhatsApp = /wa\.me|api\.whatsapp\.com|whatsapp/i.test(url);
     nodes.push(
-      <a key={`l${k++}`} href={url} target="_blank" rel="noopener noreferrer" className="underline font-semibold break-all">
-        {label}
-      </a>
+      isWhatsApp ? (
+        <a
+          key={`l${k++}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 my-1 px-3 py-1.5 rounded-full font-semibold text-white no-underline hover:opacity-90 transition-opacity"
+          style={{ background: '#25D366' }}
+        >
+          {label}
+        </a>
+      ) : (
+        <a key={`l${k++}`} href={url} target="_blank" rel="noopener noreferrer" className="underline font-semibold text-[var(--primary)] break-all">
+          {label}
+        </a>
+      )
     );
     if (trailing) nodes.push(trailing);
     last = m.index + m[0].length;
