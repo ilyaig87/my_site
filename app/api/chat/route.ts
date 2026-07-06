@@ -250,39 +250,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ reply: result.text });
   }
 
-  // Debug: typing "דיבאג" (or setting CHAT_DEBUG=1) surfaces the real error
-  // so we can diagnose without server logs. Normal users get the friendly text.
-  const lastUserText = [...contents].reverse().find((c) => c.role === 'user')?.parts?.[0]?.text || '';
-  const debugMode = process.env.CHAT_DEBUG === '1' || /דיבאג|debug/i.test(lastUserText);
-
+  console.error('[chat] Gemini failed:', result.error);
   return NextResponse.json({
-    reply: debugMode
-      ? `🛠️ שגיאת AI (דיבאג): ${result.error}`
-      : `מצטער, יש לי תקלה רגעית 🙏 נסו שוב בעוד רגע, או דברו איתנו בוואטסאפ: ${FALLBACK_WA}`,
-    debug: result.error,
-  });
-}
-
-// Diagnostics — open /api/chat?test=1 in a browser to see exactly what the
-// Gemini call returns (key presence, model, raw error). Remove when fixed.
-export async function GET(request: NextRequest) {
-  if (request.nextUrl.searchParams.get('test') !== '1') {
-    return NextResponse.json({ ok: true, hint: 'open /api/chat?test=1 to run a Gemini connectivity test' });
-  }
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ ok: false, keyPresent: false, reason: 'GEMINI_API_KEY is not set in the environment (add it in Vercel and redeploy)' });
-  }
-  const result = await callGemini(apiKey, {
-    contents: [{ role: 'user', parts: [{ text: 'תגיד שלום במילה אחת' }] }],
-    generationConfig: { maxOutputTokens: 20, temperature: 0.2 },
-  });
-  return NextResponse.json({
-    ok: !!result.text,
-    keyPresent: true,
-    keyPrefix: `${apiKey.slice(0, 6)}…${apiKey.slice(-3)}`,
-    modelsTried: MODEL_CANDIDATES,
-    sample: result.text || null,
-    error: result.error || null,
+    reply: `מצטער, יש לי תקלה רגעית 🙏 נסו שוב בעוד רגע, או דברו איתנו בוואטסאפ: ${FALLBACK_WA}`,
   });
 }
