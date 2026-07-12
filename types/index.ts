@@ -56,6 +56,7 @@ export interface SiteContent {
   whyChooseMe: Benefit[];
   process: ProcessStep[];
   contact: ContactInfo;
+  testimonials?: Testimonial[];
 }
 
 export interface HeroContent {

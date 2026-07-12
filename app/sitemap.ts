@@ -10,6 +10,7 @@ const BASE_URL = "https://www.pixelia.co.il";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
+    "/ru",
     "/about",
     "/services",
     "/ai",
@@ -25,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : path === "/ai" ? 0.8 : 0.7,
+    priority: path === "" ? 1 : path === "/ai" || path === "/ru" ? 0.8 : 0.7,
   }));
 
   const templateRoutes = getAllTemplates().map((template) => ({

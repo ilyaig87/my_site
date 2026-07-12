@@ -9,6 +9,7 @@ const QUICK_LINKS = [
   { label: 'תמחור', href: '/pricing' },
   { label: 'בלוג', href: '/blog' },
   { label: 'שאלות נפוצות', href: '/faq' },
+  { label: 'По-русски 🇷🇺', href: '/ru' },
 ];
 
 const LEGAL_LINKS = [

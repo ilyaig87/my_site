@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
 import GlassCard from '@/components/ui/GlassCard';
+import { trackEvent } from '@/lib/ga';
 
 const israeliPhoneRegex = /^0(5\d|7[2-9])\d{7}$/;
 
@@ -45,6 +46,7 @@ export default function ContactForm() {
       });
       if (response.ok) {
         setStatus('success');
+        trackEvent('generate_lead', { method: 'contact_form', page: window.location.pathname });
         setFormData({ name: '', email: '', phone: '', message: '' });
         setErrors({});
       } else {

@@ -6,6 +6,7 @@ import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
 import { cn } from '@/lib/cn';
+import { trackEvent } from '@/lib/ga';
 
 function isValidIsraeliPhone(value: string) {
   const cleaned = value.replace(/[\s-]/g, '');
@@ -101,8 +102,10 @@ export default function QuotePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, calculated_price: calculatedPrice }),
       });
-      if (response.ok) setIsComplete(true);
-      else setSubmitError('שגיאה בשליחת הבקשה. נסו שוב');
+      if (response.ok) {
+        setIsComplete(true);
+        trackEvent('generate_lead', { method: 'quote_form', value: calculatedPrice, currency: 'ILS' });
+      } else setSubmitError('שגיאה בשליחת הבקשה. נסו שוב');
     } catch {
       setSubmitError('שגיאה בחיבור לשרת');
     } finally {

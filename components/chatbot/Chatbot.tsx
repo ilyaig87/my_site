@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Message, getBotResponse, generateMessageId } from './ChatbotLogic';
+import { trackEvent } from '@/lib/ga';
 
 // Give a bare URL a friendly, human-readable label instead of showing the
 // raw address (e.g. WhatsApp links become a clear "פתיחת וואטסאפ" button).
@@ -49,6 +50,7 @@ function linkify(text: string): React.ReactNode[] {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent('whatsapp_click', { location: 'chatbot_reply' })}
           className="inline-flex items-center gap-1 my-1 px-3 py-1.5 rounded-full font-semibold text-white no-underline hover:opacity-90 transition-opacity"
           style={{ background: '#25D366' }}
         >
@@ -142,6 +144,7 @@ export default function Chatbot() {
     setInput('');
     setShowQuestions(false);
     setIsTyping(true);
+    trackEvent('chatbot_message');
 
     try {
       const res = await fetch('/api/chat', {
@@ -184,7 +187,10 @@ export default function Chatbot() {
             exit={{ scale: 0, opacity: 0 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+              trackEvent('chatbot_open');
+            }}
             className="fixed bottom-6 left-6 z-50 lg-surface lg-glow-cool w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
             style={{
               background: 'conic-gradient(from 200deg at 50% 50%, #3b82f6, #14b8a6, #22c55e, #facc15, #f97316, #3b82f6)',
