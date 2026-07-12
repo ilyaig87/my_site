@@ -14,14 +14,18 @@ const bundleAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === "tr
 //   - 'unsafe-eval': left in for now to avoid breaking any third-party lib;
 //     remove once verified and move to a nonce-based policy to tighten.
 //   - js.stripe.com / api.stripe.com: Stripe checkout.
+//   - googletagmanager.com / google-analytics.com: Google Analytics 4 (gtag).
+//     The gtag.js script loads from googletagmanager.com and beacons hits to
+//     *.google-analytics.com — both must be allowed or the browser blocks GA
+//     and no data ever reaches the property.
 //   - img-src https:: remote template imagery (e.g. images.unsplash.com).
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://api.stripe.com",
+  "connect-src 'self' https://api.stripe.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
   "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",
