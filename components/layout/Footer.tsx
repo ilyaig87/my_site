@@ -3,19 +3,13 @@ import Image from 'next/image';
 import { getSiteContent } from '@/lib/data';
 import Container from '@/components/ui/Container';
 
-const QUICK_LINKS = [
-  { label: 'שירותים', href: '/services' },
-  { label: 'AI ואוטומציה', href: '/ai' },
-  { label: 'תמחור', href: '/pricing' },
-  { label: 'בלוג', href: '/blog' },
-  { label: 'שאלות נפוצות', href: '/faq' },
-  { label: 'По-русски 🇷🇺', href: '/ru' },
-];
-
+// The footer intentionally carries no navigation — only legal links (and the
+// Russian page, which appears nowhere else). Site navigation lives in the header.
 const LEGAL_LINKS = [
   { label: 'פרטיות', href: '/privacy' },
   { label: 'תנאי שימוש', href: '/terms' },
   { label: 'נגישות', href: '/accessibility' },
+  { label: 'По-русски', href: '/ru' },
 ];
 
 export default function Footer() {
@@ -100,21 +94,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ─── Quick links ─── */}
-          <nav className="mt-8 pt-5 border-t border-[var(--border)] flex flex-wrap justify-center sm:justify-start gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
-            {QUICK_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:text-[var(--text-strong)] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
           {/* ─── Bottom strip ─── */}
-          <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-col items-center text-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:text-right">
+          <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-col items-center text-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:text-right">
             <p className="text-xs text-[var(--text-faint)]">
               © {currentYear} Pixelia. כל הזכויות שמורות.
             </p>

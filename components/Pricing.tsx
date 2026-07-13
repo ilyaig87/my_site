@@ -9,6 +9,14 @@ import Button from '@/components/ui/Button';
 
 const WHATSAPP_NUMBER = '972546361555';
 
+// Accent gradient per package — colour identity shared with the homepage teaser.
+const PKG_ACCENTS: Record<string, string> = {
+  starter: 'linear-gradient(135deg, #38bdf8, #2563eb)',
+  business: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+  premium: 'linear-gradient(135deg, #7c3aed, #db2777)',
+  ai: 'linear-gradient(135deg, #14b8a6, #22c55e)',
+};
+
 // Package icons, matching the homepage pricing teaser for a consistent look.
 const PKG_ICONS: Record<string, ReactNode> = {
   starter: (
@@ -237,11 +245,12 @@ export default function Pricing() {
                 squircle="lg"
                 className={`relative p-7 sm:p-8 ${selectedPackageId === starterPkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
               >
+                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full z-10" style={{ background: PKG_ACCENTS.starter }} />
                 <div className="relative z-10 grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] gap-7 md:gap-10 items-center">
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-3 mb-2">
-                      <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
-                        <span className="relative z-10">{PKG_ICONS.starter}</span>
+                      <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: PKG_ACCENTS.starter }}>
+                        {PKG_ICONS.starter}
                       </div>
                       <h3 className="text-2xl font-bold text-[var(--text-strong)]">{starterPkg.name}</h3>
                     </div>
@@ -308,29 +317,30 @@ export default function Pricing() {
                 glow={pkg.popular ? 'primary' : selectedPackageId === pkg.id ? 'primary' : 'none'}
                 tilt
                 squircle="lg"
-                className={`relative h-full p-7 sm:p-8 pt-10 sm:pt-11 flex flex-col ${selectedPackageId === pkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
+                className={`relative h-full p-7 sm:p-8 flex flex-col ${selectedPackageId === pkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
               >
-                {pkg.popular && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
-                    <span
-                      className="px-4 py-1.5 rounded-full text-xs font-bold text-[var(--on-accent)] shadow-lg whitespace-nowrap"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))',
-                      }}
-                    >
-                      פופולרי ביותר
-                    </span>
-                  </div>
-                )}
+                {/* Package colour accent */}
+                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: PKG_ACCENTS[pkg.id] }} />
 
                 <div className="mb-5">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
-                      <span className="relative z-10">{PKG_ICONS[pkg.id]}</span>
+                  {/* Header row — badge sits inline so all titles share the same line */}
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: PKG_ACCENTS[pkg.id] }}>
+                        {PKG_ICONS[pkg.id]}
+                      </div>
+                      <h3 className="text-xl font-bold text-[var(--text-strong)] whitespace-nowrap">{pkg.name}</h3>
                     </div>
-                    <h3 className="text-xl font-bold text-[var(--text-strong)]">{pkg.name}</h3>
+                    {pkg.popular && (
+                      <span
+                        className="px-2.5 py-1 rounded-full text-[10px] font-bold text-white shadow flex-shrink-0"
+                        style={{ background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))' }}
+                      >
+                        ★ פופולרי ביותר
+                      </span>
+                    )}
                   </div>
-                  <p className="text-sm text-[var(--text-muted)] mb-4">{pkg.description}</p>
+                  <p className="text-sm text-[var(--text-muted)] mb-4 min-h-[3.75rem]">{pkg.description}</p>
                   {pkg.customQuote ? (
                     <GlassPill dot>הצעת מחיר מותאמת · תוך 24 שעות</GlassPill>
                   ) : (

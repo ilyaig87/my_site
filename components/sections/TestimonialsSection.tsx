@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
             מה אומרים <span className="lg-text-shimmer">הלקוחות שלנו</span>
           </h2>
           <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
-            התוצאה הכי טובה שלנו היא לקוח שממליץ הלאה.
+            התוצאה הכי טובה שלנו היא לקוח שממליץ הלאה
           </p>
         </div>
 

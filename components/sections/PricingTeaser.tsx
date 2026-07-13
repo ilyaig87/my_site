@@ -17,6 +17,13 @@ interface Tier {
   highlighted?: boolean;
 }
 
+const ACCENTS: Record<string, string> = {
+  Starter: 'linear-gradient(135deg, #38bdf8, #2563eb)',
+  Business: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+  Premium: 'linear-gradient(135deg, #7c3aed, #db2777)',
+  'AI ואוטומציה': 'linear-gradient(135deg, #14b8a6, #22c55e)',
+};
+
 const Check = () => (
   <svg className="w-4 h-4 text-[var(--primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -103,11 +110,12 @@ export default function PricingTeaser() {
             className="max-w-5xl mx-auto mb-5 sm:mb-6"
           >
             <GlassCard variant="deep" glow="primary" squircle="lg" className="relative p-7 sm:p-8">
+              <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: ACCENTS.Starter }} />
               <div className="relative z-10 grid md:grid-cols-[1.1fr_1fr_auto] items-center gap-6 md:gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-1.5">
-                    <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
-                      <span className="relative z-10">{tiers[0].icon}</span>
+                    <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: ACCENTS.Starter }}>
+                      {tiers[0].icon}
                     </div>
                     <h3 className="text-2xl font-black text-[var(--text-strong)] leading-tight">{tiers[0].name}</h3>
                   </div>
@@ -151,45 +159,34 @@ export default function PricingTeaser() {
                 tilt
                 glow={tier.highlighted ? 'primary' : 'none'}
                 squircle="lg"
-                className="relative h-full p-7 sm:p-8 pt-10 sm:pt-11 flex flex-col"
+                className="relative h-full p-7 sm:p-8 flex flex-col"
               >
-                {tier.highlighted && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
-                    <span
-                      className="px-3.5 py-1.5 rounded-full text-[11px] font-bold text-[var(--on-accent)] flex items-center gap-1.5 shadow-lg"
-                      style={{
-                        background:
-                          'linear-gradient(135deg, var(--primary-bright), var(--primary))',
-                      }}
-                    >
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      הכי פופולרי
-                    </span>
-                  </div>
-                )}
+                {/* Package colour accent */}
+                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: ACCENTS[tier.name] }} />
 
-                <div className="flex items-center gap-3 mb-1.5">
-                  <div
-                    className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center"
-                    style={
-                      tier.highlighted
-                        ? {
-                            background:
-                              'linear-gradient(135deg, var(--primary-bright), var(--primary))',
-                            color: 'var(--on-accent)',
-                          }
-                        : { color: 'var(--primary)' }
-                    }
-                  >
-                    <span className="relative z-10">{tier.icon}</span>
+                {/* Header row — badge sits inline so every title shares the same line */}
+                <div className="flex items-center justify-between gap-3 mb-1.5">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md"
+                      style={{ background: ACCENTS[tier.name] }}
+                    >
+                      {tier.icon}
+                    </div>
+                    <h3 className="text-xl font-black text-[var(--text-strong)] leading-tight whitespace-nowrap">
+                      {tier.name}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-black text-[var(--text-strong)] leading-tight">
-                    {tier.name}
-                  </h3>
+                  {tier.highlighted && (
+                    <span
+                      className="px-2.5 py-1 rounded-full text-[10px] font-bold text-white shadow flex-shrink-0"
+                      style={{ background: 'linear-gradient(135deg, var(--primary-bright), var(--primary))' }}
+                    >
+                      ★ הכי פופולרי
+                    </span>
+                  )}
                 </div>
-                <p className="text-sm text-[var(--text-muted)] mb-5">{tier.subtitle}</p>
+                <p className="text-sm text-[var(--text-muted)] mb-5 min-h-[2.5rem]">{tier.subtitle}</p>
 
                 <ul className="space-y-2.5 mb-6">
                   {tier.points.map((pt) => (
