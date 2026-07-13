@@ -97,14 +97,52 @@ export default function PricingTeaser() {
           </motion.p>
         </motion.div>
 
+        {/* Starter — the fixed-price package, featured on its own row */}
+        {tiers[0] && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-50px' }}
+            className="max-w-5xl mx-auto mb-5 sm:mb-6"
+          >
+            <GlassCard variant="default" tilt squircle="lg" className="relative p-7 sm:p-8">
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                <div className="flex items-center gap-4 md:flex-1">
+                  <div className="lg-surface lg-shallow squircle-md w-12 h-12 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
+                    <span className="relative z-10">{tiers[0].icon}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-[var(--text-strong)] leading-tight">{tiers[0].name}</h3>
+                    <p className="text-sm text-[var(--text-muted)]">{tiers[0].subtitle}</p>
+                  </div>
+                </div>
+                <div className="md:text-center">
+                  <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">מחיר חד-פעמי</p>
+                  <span className="text-4xl font-black text-[var(--text-strong)] leading-none tracking-tight">
+                    ₪{tiers[0].price}
+                  </span>
+                </div>
+                <p className="text-sm text-[var(--text-default)] leading-relaxed flex items-start gap-2 md:flex-1">
+                  <svg className="w-4 h-4 text-[var(--primary)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>{tiers[0].bestFor}</span>
+                </p>
+              </div>
+            </GlassCard>
+          </motion.div>
+        )}
+
+        {/* Custom-quote tiers — three in a row */}
         <motion.div
           variants={stagger(0.12)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto mb-10"
         >
-          {tiers.map((tier) => (
+          {tiers.slice(1).map((tier) => (
             <motion.div
               key={tier.name}
               variants={fadeUp}

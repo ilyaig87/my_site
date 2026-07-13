@@ -172,8 +172,40 @@ export default function RussianLandingPage() {
           <p className="text-center text-[var(--text-muted)] mb-8">
             Разовая оплата. Код и домен — ваша собственность.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch">
-            {packages.map((p) => (
+          {/* Starter — фиксированная цена, отдельной широкой карточкой */}
+          <div className="max-w-5xl mx-auto mb-5">
+            <GlassCard variant="default" squircle="lg" className="p-6 sm:p-7">
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                <div className="md:flex-1">
+                  <h3 className="text-xl font-black text-[var(--text-strong)]">{packages[0].name}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{packages[0].desc}</p>
+                </div>
+                <div className="md:text-center">
+                  <div className="text-3xl font-black text-[var(--primary)] leading-none">{packages[0].price}</div>
+                  <p className="text-xs text-[var(--text-faint)] mt-1">{packages[0].priceNote}</p>
+                </div>
+                <div className="md:flex-1">
+                  <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1.5">
+                    {packages[0].features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-[var(--text-default)]">
+                        <svg className="w-4 h-4 text-[var(--primary)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button href={WHATSAPP} variant="primary" size="md" external>
+                  Заказать
+                </Button>
+              </div>
+            </GlassCard>
+          </div>
+
+          {/* Индивидуальные пакеты — три в ряд */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-stretch">
+            {packages.slice(1).map((p) => (
               <GlassCard
                 key={p.name}
                 variant={p.popular ? 'deep' : 'default'}
