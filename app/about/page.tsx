@@ -13,6 +13,35 @@ export const metadata: Metadata = {
 
 const PIXELIA_LETTER_COLORS = ['#FCD34D', '#FBBF24', '#F59E0B', '#FB923C', '#F472B6', '#A78BFA', '#8B5CF6'];
 
+// The stack, grouped by what the client actually needs — not by tool name.
+// Colours match the package colour identity used across the site.
+const TECH_GROUPS = [
+  {
+    title: 'פיתוח בהתאמה אישית',
+    desc: 'אתרים מהירים במיוחד שנבנים בדיוק בשבילכם, בטכנולוגיות שמניעות את האתרים הגדולים בעולם.',
+    color: '#2563eb',
+    items: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Tailwind CSS'],
+  },
+  {
+    title: 'אתרי תדמית עם ניהול תוכן עצמאי',
+    desc: 'רוצים לעדכן טקסטים ותמונות לבד, בלי לתלות במתכנת? גם לזה יש לכם בית אצלנו.',
+    color: '#4f46e5',
+    items: ['WordPress', 'Elementor', 'Wix Studio'],
+  },
+  {
+    title: 'חנויות ומסחר אונליין',
+    desc: 'מכירה אונליין מקצה לקצה — קטלוג, עגלה, סליקה ומשלוחים.',
+    color: '#c026d3',
+    items: ['Shopify', 'WooCommerce'],
+  },
+  {
+    title: 'אוטומציות, חיבורים ו-AI',
+    desc: 'מה שעסקים מחפשים עכשיו: מערכות חכמות שעונות ללקוחות ועובדות בשבילכם 24/7.',
+    color: '#0d9488',
+    items: ['צ\'אטבוטים חכמים', 'סוכני AI', 'WhatsApp API', 'מערכות CRM', 'Make'],
+  },
+];
+
 function renderPixeliaTitle(title: string) {
   const idx = title.indexOf('Pixelia');
   if (idx === -1) return title;
@@ -97,30 +126,42 @@ export default function AboutPage() {
               </div>
             </GlassCard>
 
-            {/* Technologies */}
+            {/* Technologies — grouped by what the client needs, not by tool name */}
             <GlassCard variant="default" tilt squircle="lg" glow="cool" className="p-8 sm:p-10">
               <div className="mb-4">
-                <GlassPill dot dotColor="cool">סטאק טכנולוגי</GlassPill>
+                <GlassPill dot dotColor="cool">הכלים הנכונים לכל צורך</GlassPill>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-black mb-3 text-[var(--text-strong)] leading-tight">
-                הטכנולוגיות שאנחנו עובדים איתן
+                לא מתחילים מהטכנולוגיה — מתחילים מהצורך שלכם
               </h2>
               <p className="text-base text-[var(--text-muted)] mb-6 leading-relaxed">
-                אלה הכלים שמעולים עבור רוב הפרויקטים שלנו. הסוד הוא לא ברשימה — אלא ביכולת להתאים את הטכנולוגיה לדרישות שלכם.
+                לכל סוג פרויקט יש את הכלי המתאים לו. אנחנו שולטים בכולם — ובוחרים יחד אתכם את מה שנכון לעסק, לא את מה שנוח לנו.
               </p>
 
-              <div className="flex flex-wrap gap-2 mb-6">
-                {content.about.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="lg-surface lg-shallow squircle-sm px-3 py-1.5 text-sm font-bold text-[var(--text-strong)]"
-                  >
-                    <span className="relative z-10 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full" />
-                      {tech}
-                    </span>
-                  </span>
+              <div className="space-y-5 mb-6">
+                {TECH_GROUPS.map((group) => (
+                  <div key={group.title}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: group.color }} />
+                      <h3 className="text-base font-bold text-[var(--text-strong)]">{group.title}</h3>
+                    </div>
+                    <p className="text-sm text-[var(--text-muted)] mb-2 mr-4">{group.desc}</p>
+                    <div className="flex flex-wrap gap-2 mr-4">
+                      {group.items.map((tech) => (
+                        <span
+                          key={tech}
+                          className="squircle-sm px-3 py-1.5 text-[13px] font-bold"
+                          style={{
+                            background: `color-mix(in oklab, ${group.color} 9%, transparent)`,
+                            color: `color-mix(in oklab, ${group.color} 80%, var(--text-strong))`,
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
 
