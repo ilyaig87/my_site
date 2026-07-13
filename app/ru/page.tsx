@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     title: 'Pixelia — создание сайтов в Израиле на русском',
     description: 'Лендинги, бизнес-сайты, AI-чатботы. Говорим по-русски и на иврите.',
     url: `${SITE_URL}/ru`,
+    images: [
+      {
+        url: '/images/og/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pixelia — сайты для бизнеса в Израиле',
+      },
+    ],
   },
 };
 

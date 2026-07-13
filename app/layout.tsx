@@ -55,9 +55,25 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     title: "Pixelia — בניית אתרים מקצועיים לעסקים",
-    description: "Pixelia — סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים.",
+    description:
+      "אתרי תדמית, דפי נחיתה, צ'אטבוטים ואוטומציית AI לעסקים. עיצוב מודרני, ליווי אישי ומחירים הוגנים — שירות בעברית וברוסית.",
     siteName: "Pixelia",
     locale: "he_IL",
+    images: [
+      {
+        url: "/images/og/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Pixelia — בונים לעסק שלכם אתר שמביא לקוחות",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    description:
+      "אתרי תדמית, דפי נחיתה, צ'אטבוטים ואוטומציית AI לעסקים — שירות בעברית וברוסית.",
+    images: ["/images/og/og-image.png"],
   },
 };
 
