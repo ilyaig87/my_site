@@ -9,14 +9,26 @@ import Button from '@/components/ui/Button';
 const SITE_URL = 'https://www.pixelia.co.il';
 
 export const metadata: Metadata = {
-  title: 'מערכות AI ואוטומציה לעסקים — צ\'אטבוטים, אוטומציות ובוטים | Pixelia',
+  title: 'סוכני AI (Agents), צ\'אטבוטים ואוטומציה לעסקים | Pixelia',
   description:
-    'Pixelia בונה לעסקים מערכות AI ואוטומציה: צ\'אטבוט חכם לאתר ולוואטסאפ, אוטומציות עסקיות, סוכני AI, חיבור CRM ויצירת תוכן אוטומטית. חוסכים זמן וסוגרים יותר לקוחות.',
+    'Pixelia בונה לעסקים סוכני AI (AI Agents), צ\'אטבוטים חכמים ואוטומציות: מענה ללקוחות 24/7 בעברית, סינון לידים, חיבור CRM ויצירת תוכן אוטומטית. חוסכים זמן וסוגרים יותר לקוחות.',
+  keywords: [
+    'סוכני AI',
+    'AI Agents',
+    'סוכן AI לעסק',
+    'צ\'אטבוט לעסק',
+    'צ\'אטבוט AI',
+    'אוטומציה לעסקים',
+    'אוטומציה עסקית',
+    'בוט לוואטסאפ',
+    'מערכות AI לעסקים',
+    'בינה מלאכותית לעסקים',
+  ],
   alternates: { canonical: '/ai' },
   openGraph: {
     type: 'website',
-    title: 'מערכות AI ואוטומציה לעסקים | Pixelia',
-    description: 'צ\'אטבוטים חכמים, אוטומציות עסקיות וסוכני AI — מותאמים לעסק שלכם.',
+    title: 'סוכני AI, צ\'אטבוטים ואוטומציה לעסקים | Pixelia',
+    description: 'סוכני AI (Agents), צ\'אטבוטים חכמים ואוטומציות עסקיות — מותאמים לעסק שלכם.',
     url: `${SITE_URL}/ai`,
   },
 };
@@ -34,8 +46,8 @@ const capabilities: Capability[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-3.5-7.1M21 4v4h-4M9 18l-4 3v-3" />
       </svg>
     ),
-    title: 'צ\'אטבוט וסוכן AI',
-    description: 'בוט חכם לאתר ולוואטסאפ שעונה ללקוחות 24/7 בעברית טבעית, מסנן לידים וקובע פגישות.',
+    title: 'סוכני AI — Agents',
+    description: 'עובד דיגיטלי שזמין 24/7: עונה ללקוחות בעברית טבעית, מסנן לידים, קובע פגישות ומבצע משימות בפועל — באתר ובוואטסאפ.',
   },
   {
     icon: (
@@ -115,12 +127,12 @@ export default function AiServicesPage() {
     '@graph': [
       {
         '@type': 'Service',
-        name: 'מערכות AI ואוטומציה לעסקים',
-        serviceType: 'AI & Automation systems',
+        name: 'סוכני AI (AI Agents), צ\'אטבוטים ואוטומציה לעסקים',
+        serviceType: 'AI Agents, Chatbots & Business Automation',
         provider: { '@type': 'Organization', name: 'Pixelia', url: SITE_URL },
         areaServed: 'IL',
         description:
-          'בניית מערכות AI ואוטומציה לעסקים: צ\'אטבוט חכם לאתר ולוואטסאפ, אוטומציות עסקיות, סוכני AI, חיבור CRM ויצירת תוכן אוטומטית.',
+          'בניית סוכני AI (AI Agents) לעסקים: צ\'אטבוט חכם לאתר ולוואטסאפ, אוטומציות עסקיות, חיבור CRM ויצירת תוכן אוטומטית.',
         url: `${SITE_URL}/ai`,
       },
       {
@@ -143,14 +155,14 @@ export default function AiServicesPage() {
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center mb-5">
-              <GlassPill dot>AI ואוטומציה לעסקים</GlassPill>
+              <GlassPill dot>סוכני AI · Agents · אוטומציה</GlassPill>
             </div>
             <h1 className="mb-4 text-[var(--text-strong)]">
-              אתר זה ההתחלה. <span className="lg-text-shimmer">מערכות חכמות</span> זה היתרון.
+              אתר זה ההתחלה. <span className="lg-text-shimmer">סוכני AI</span> זה היתרון.
             </h1>
             <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto mb-3">
-              היום אתר כבר יש לכולם — מה שבאמת מזיז את העסק זה AI ואוטומציה: מערכות שעובדות בשבילכם 24/7,
-              עונות ללקוחות, מסננות לידים וחוסכות לכם שעות בשבוע.
+              היום אתר כבר יש לכולם — מה שבאמת מזיז את העסק זה סוכני AI (Agents) ואוטומציה: עובדים
+              דיגיטליים שפועלים בשבילכם 24/7, עונים ללקוחות, מסננים לידים וחוסכים לכם שעות בשבוע.
             </p>
             <p className="text-base font-semibold text-[var(--text-strong)] max-w-2xl mx-auto mb-7">
               ב-Pixelia בונים לכם בדיוק את זה — מותאם לעסק, פשוט לתפעול.
@@ -231,9 +243,14 @@ export default function AiServicesPage() {
             <p className="relative z-10 text-[var(--text-muted)] mb-6 max-w-xl mx-auto">
               שיחה קצרה, בלי התחייבות — נבין מה אפשר לאוטמט אצלכם ונחזור עם הצעה מדויקת.
             </p>
-            <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center mb-6">
               <Button href="/contact" variant="primary" size="lg">דברו איתנו</Button>
               <Button href="/" variant="glass" size="lg">חזרה לדף הבית</Button>
+            </div>
+            <div className="relative z-10 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-[var(--text-muted)]">
+              <Link href="/services/ai-agents" className="hover:text-[var(--primary)] transition-colors">סוכני AI · Agents</Link>
+              <Link href="/services/business-automation" className="hover:text-[var(--primary)] transition-colors">אוטומציה לעסקים</Link>
+              <Link href="/services/ai-chatbot" className="hover:text-[var(--primary)] transition-colors">צ&apos;אטבוט AI</Link>
             </div>
           </GlassCard>
         </Container>
