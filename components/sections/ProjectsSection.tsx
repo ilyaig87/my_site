@@ -52,6 +52,39 @@ const projects: Project[] = [
     highlights: ['דפי שירותים מפורטים', 'CTA חזקים', 'אופטימיזציה ל-SEO', 'טפסי בקשה'],
     tags: ['אתר תדמית', 'פיננסים', 'לידים'],
   },
+  {
+    name: 'Uriel Furniture',
+    url: 'https://uriel-furniture.vercel.app/',
+    domain: 'uriel-furniture.vercel.app',
+    tagline: 'אתר תצוגה לעסק רהיטים',
+    description:
+      'אתר תצוגה לעסק רהיטים — קטלוג נקי וחם שמציג את המוצרים בצורה מזמינה ומקצועית, עם דגש על תמונות ואווירה.',
+    image: '/images/projects/uriel-furniture.png',
+    highlights: ['קטלוג מוצרים', 'עיצוב חם ונקי', 'גלריית תמונות', 'מותאם מובייל'],
+    tags: ['אתר תדמית', 'קטלוג', 'רהיטים'],
+  },
+  {
+    name: 'Critics',
+    url: 'https://critics.netlify.app/',
+    domain: 'critics.netlify.app',
+    tagline: 'אפליקציית ווב — ביקורות ודירוגים',
+    description:
+      'אפליקציית ווב אינטראקטיבית לביקורות ודירוגים עם ממשק מהיר וריאקטיבי — הדגמה ליכולת לבנות אפליקציות מלאות בדפדפן, לא רק אתרים.',
+    image: '/images/projects/critics.png',
+    highlights: ['ממשק ריאקטיבי מהיר', 'ניהול תוכן דינמי', 'עיצוב כהה ונקי', 'React'],
+    tags: ['אפליקציית ווב', 'React', 'דירוגים'],
+  },
+  {
+    name: 'Memory Game',
+    url: 'https://memory-game-tawny-eta.vercel.app/',
+    domain: 'memory-game … vercel.app',
+    tagline: 'משחק דפדפן אינטראקטיבי',
+    description:
+      'משחק זיכרון מהיר וממכר שבנינו להנאה — והוכחה חיה ליכולות אינטראקציה, אנימציות ולוגיקת משחק בדפדפן. נסו לנצח 😉',
+    image: '/images/projects/memory-game.png',
+    highlights: ['אנימציות חלקות', 'לוגיקת משחק', 'מונה מהלכים', 'כיף לשחק'],
+    tags: ['משחק', 'אינטראקטיבי', 'JavaScript'],
+  },
 ];
 
 export default function ProjectsSection() {

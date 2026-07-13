@@ -115,7 +115,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-3 gap-3 pt-5 border-t border-[var(--glass-border-dim)]">
                 {[
                   { stat: '5+', label: 'שנות ניסיון' },
-                  { stat: '2', label: 'אתרים חיים באוויר' },
+                  { stat: '24/7', label: 'מענה חכם ללקוחות' },
                   { stat: '7 ימים', label: 'אספקה ממוצעת' },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
