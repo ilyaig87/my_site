@@ -7,32 +7,28 @@ import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
 import { fadeUp, stagger } from '@/lib/animations';
 
-const breathingAnimate = {
-  scale: [1, 1.015, 1] as number[],
-};
-
-const breathingTransition = {
-  duration: 4,
-  ease: 'easeInOut' as const,
-  repeat: Infinity,
-};
-
 interface Tier {
   name: string;
   price?: string;
   custom?: boolean;
   subtitle: string;
-  bestFor: string;
+  points: string[];
   icon: React.ReactNode;
   highlighted?: boolean;
 }
+
+const Check = () => (
+  <svg className="w-4 h-4 text-[var(--primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+  </svg>
+);
 
 const tiers: Tier[] = [
   {
     name: 'Starter',
     price: '2,500',
     subtitle: 'דף נחיתה אחד ממוקד המרה',
-    bestFor: 'עמוד אחד · עד 5 סקשנים · ללא דפים נוספים',
+    points: ['עמוד אחד ממוקד — עד 5 סקשנים', 'טופס לידים + כפתור WhatsApp', 'באוויר תוך 5–7 ימי עבודה'],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
@@ -43,7 +39,7 @@ const tiers: Tier[] = [
     name: 'Business',
     custom: true,
     subtitle: 'אתר עסקי מלא עם כמה עמודים',
-    bestFor: 'מספר עמודים · ניווט מלא · גלריה · SEO מלא',
+    points: ['מספר עמודים וניווט מלא', 'גלריית עבודות ותמונות', 'SEO מלא + Google Analytics'],
     highlighted: true,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -55,7 +51,7 @@ const tiers: Tier[] = [
     name: 'Premium',
     custom: true,
     subtitle: 'אתר מתקדם לפי הצרכים',
-    bestFor: 'בלוג/CMS · אנימציות · אינטגרציות',
+    points: ['בלוג / מערכת ניהול תוכן', 'אנימציות ואינטגרציות', 'עיצוב פרימיום לפי דרישה'],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -66,7 +62,7 @@ const tiers: Tier[] = [
     name: 'AI ואוטומציה',
     custom: true,
     subtitle: 'צ\'אטבוטים ואוטומציות לעסק',
-    bestFor: 'צ\'אטבוט AI · לכידת לידים · אוטומציות',
+    points: ['צ\'אטבוט AI לאתר ולוואטסאפ', 'לכידת לידים אוטומטית', 'אוטומציות שחוסכות שעות'],
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
@@ -106,29 +102,32 @@ export default function PricingTeaser() {
             viewport={{ once: true, margin: '-50px' }}
             className="max-w-5xl mx-auto mb-5 sm:mb-6"
           >
-            <GlassCard variant="default" tilt squircle="lg" className="relative p-7 sm:p-8">
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-                <div className="flex items-center gap-4 md:flex-1">
-                  <div className="lg-surface lg-shallow squircle-md w-12 h-12 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
-                    <span className="relative z-10">{tiers[0].icon}</span>
-                  </div>
-                  <div>
+            <GlassCard variant="deep" glow="primary" squircle="lg" className="relative p-7 sm:p-8">
+              <div className="relative z-10 grid md:grid-cols-[1.1fr_1fr_auto] items-center gap-6 md:gap-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-1.5">
+                    <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
+                      <span className="relative z-10">{tiers[0].icon}</span>
+                    </div>
                     <h3 className="text-2xl font-black text-[var(--text-strong)] leading-tight">{tiers[0].name}</h3>
-                    <p className="text-sm text-[var(--text-muted)]">{tiers[0].subtitle}</p>
                   </div>
+                  <p className="text-sm text-[var(--text-muted)]">{tiers[0].subtitle}</p>
                 </div>
-                <div className="md:text-center">
+                <ul className="space-y-2">
+                  {tiers[0].points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2 text-sm text-[var(--text-default)]">
+                      <Check />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-center">
                   <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">מחיר חד-פעמי</p>
-                  <span className="text-4xl font-black text-[var(--text-strong)] leading-none tracking-tight">
+                  <div className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight mb-3">
                     ₪{tiers[0].price}
-                  </span>
+                  </div>
+                  <Button href="/pricing" variant="primary" size="sm">התחילו עכשיו</Button>
                 </div>
-                <p className="text-sm text-[var(--text-default)] leading-relaxed flex items-start gap-2 md:flex-1">
-                  <svg className="w-4 h-4 text-[var(--primary)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>{tiers[0].bestFor}</span>
-                </p>
               </div>
             </GlassCard>
           </motion.div>
@@ -146,8 +145,6 @@ export default function PricingTeaser() {
             <motion.div
               key={tier.name}
               variants={fadeUp}
-              animate={tier.highlighted ? breathingAnimate : undefined}
-              transition={tier.highlighted ? breathingTransition : undefined}
             >
               <GlassCard
                 variant={tier.highlighted ? 'deep' : 'default'}
@@ -173,56 +170,40 @@ export default function PricingTeaser() {
                   </div>
                 )}
 
-                <div
-                  className="lg-surface lg-shallow squircle-md w-12 h-12 flex items-center justify-center mb-5"
-                  style={
-                    tier.highlighted
-                      ? {
-                          background:
-                            'linear-gradient(135deg, var(--primary-bright), var(--primary))',
-                          color: 'var(--on-accent)',
-                        }
-                      : { color: 'var(--primary)' }
-                  }
-                >
-                  <span className="relative z-10">{tier.icon}</span>
+                <div className="flex items-center gap-3 mb-1.5">
+                  <div
+                    className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center"
+                    style={
+                      tier.highlighted
+                        ? {
+                            background:
+                              'linear-gradient(135deg, var(--primary-bright), var(--primary))',
+                            color: 'var(--on-accent)',
+                          }
+                        : { color: 'var(--primary)' }
+                    }
+                  >
+                    <span className="relative z-10">{tier.icon}</span>
+                  </div>
+                  <h3 className="text-xl font-black text-[var(--text-strong)] leading-tight">
+                    {tier.name}
+                  </h3>
                 </div>
-
-                <h3 className="text-2xl font-black text-[var(--text-strong)] leading-tight mb-1">
-                  {tier.name}
-                </h3>
                 <p className="text-sm text-[var(--text-muted)] mb-5">{tier.subtitle}</p>
 
-                <div className="mb-5 pb-5 border-b border-[var(--glass-border-dim)]">
-                  {tier.custom ? (
-                    <>
-                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">
-                        מותאם לצרכים שלכם
-                      </p>
-                      <div className="text-2xl sm:text-3xl font-black text-[var(--text-strong)] leading-tight tracking-tight">
-                        נשמח לפרטים
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">
-                        מחיר חד-פעמי
-                      </p>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight">
-                          ₪{tier.price}
-                        </span>
-                      </div>
-                    </>
-                  )}
-                </div>
+                <ul className="space-y-2.5 mb-6">
+                  {tier.points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2 text-sm text-[var(--text-default)]">
+                      <Check />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
 
-                <p className="text-sm text-[var(--text-default)] leading-relaxed flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[var(--primary)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>{tier.bestFor}</span>
-                </p>
+                <div className="mt-auto pt-4 border-t border-[var(--glass-border-dim)] flex items-center justify-between gap-2">
+                  <span className="text-sm font-bold text-[var(--primary)]">נשמח לפרטים</span>
+                  <span className="text-xs text-[var(--text-muted)]">הצעה תוך 24 שעות</span>
+                </div>
               </GlassCard>
             </motion.div>
           ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import packagesData from '@/data/packages.json';
 import Container from '@/components/ui/Container';
 import GlassCard from '@/components/ui/GlassCard';
@@ -8,6 +8,30 @@ import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
 
 const WHATSAPP_NUMBER = '972546361555';
+
+// Package icons, matching the homepage pricing teaser for a consistent look.
+const PKG_ICONS: Record<string, ReactNode> = {
+  starter: (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+    </svg>
+  ),
+  business: (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+  ),
+  premium: (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  ),
+  ai: (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+    </svg>
+  ),
+};
 
 function isValidIsraeliPhone(value: string) {
   const cleaned = value.replace(/[\s-]/g, '');
@@ -215,7 +239,12 @@ export default function Pricing() {
               >
                 <div className="relative z-10 grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] gap-7 md:gap-10 items-center">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-2">{starterPkg.name}</h3>
+                    <div className="flex items-center justify-center gap-3 mb-2">
+                      <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
+                        <span className="relative z-10">{PKG_ICONS.starter}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-[var(--text-strong)]">{starterPkg.name}</h3>
+                    </div>
                     <p className="text-sm text-[var(--text-muted)] mb-4">{starterPkg.description}</p>
                     <div className="text-4xl font-black text-[var(--text-strong)] leading-none mb-1">
                       {formatPrice(starterPkg.price)}
@@ -294,13 +323,16 @@ export default function Pricing() {
                   </div>
                 )}
 
-                <div className="text-center mb-5">
-                  <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-2">{pkg.name}</h3>
+                <div className="mb-5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="lg-surface lg-shallow squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center" style={{ color: 'var(--primary)' }}>
+                      <span className="relative z-10">{PKG_ICONS[pkg.id]}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-[var(--text-strong)]">{pkg.name}</h3>
+                  </div>
                   <p className="text-sm text-[var(--text-muted)] mb-4">{pkg.description}</p>
                   {pkg.customQuote ? (
-                    <div className="flex justify-center">
-                      <GlassPill dot>הצעת מחיר מותאמת</GlassPill>
-                    </div>
+                    <GlassPill dot>הצעת מחיר מותאמת · תוך 24 שעות</GlassPill>
                   ) : (
                     <>
                       {pkg.priceFrom && (
