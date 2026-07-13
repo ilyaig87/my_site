@@ -29,10 +29,10 @@ export default function TestimonialsSection() {
           <div className="flex justify-center mb-4">
             <GlassPill dot>לקוחות מספרים</GlassPill>
           </div>
-          <h2 className="text-3xl sm:text-4xl mb-3 text-[var(--text-strong)]">
+          <h2 className="mb-4">
             מה אומרים <span className="lg-text-shimmer">הלקוחות שלנו</span>
           </h2>
-          <p className="text-[var(--text-muted)]">
+          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
             התוצאה הכי טובה שלנו היא לקוח שממליץ הלאה.
           </p>
         </div>
