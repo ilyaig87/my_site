@@ -17,10 +17,11 @@ function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+// Only Starter has a public fixed price; the rest are quoted per project.
 const websiteTypes = [
-  { id: 'starter', label: 'Starter — דף נחיתה', description: 'עמוד אחד · עד 5 סקשנים · ללא דפים נוספים', basePrice: 2500 },
-  { id: 'business', label: 'Business — אתר עסקי', description: 'עד 5 עמודים · נוכחות מלאה · גלריה', basePrice: 3500 },
-  { id: 'premium', label: 'Premium — אתר מתקדם', description: 'בלוג/CMS · אנימציות · אינטגרציות', basePrice: 5000 },
+  { id: 'starter', label: 'Starter — דף נחיתה', description: 'עמוד אחד · עד 5 סקשנים · ללא דפים נוספים', basePrice: 2500, customQuote: false },
+  { id: 'business', label: 'Business — אתר עסקי', description: 'מספר עמודים · נוכחות מלאה · גלריה', basePrice: 0, customQuote: true },
+  { id: 'premium', label: 'Premium — אתר מתקדם', description: 'בלוג/CMS · אנימציות · אינטגרציות', basePrice: 0, customQuote: true },
 ];
 
 // Each page beyond the landing page is an add-on, priced per request.
@@ -58,10 +59,15 @@ export default function QuotePage() {
   const [isComplete, setIsComplete] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
+  const selectedType = websiteTypes.find((t) => t.id === formData.websiteType);
+  const isCustomQuote = selectedType?.customQuote === true;
+
   const calculatePrice = () => {
     const type = websiteTypes.find((t) => t.id === formData.websiteType);
     const pages = pageRanges.find((p) => p.id === formData.numPages);
     if (!type || !pages) return 0;
+    // Custom-quote packages get a tailored offer, not an automatic estimate.
+    if (type.customQuote) return 0;
     // Landing page is a fixed base; each additional page is an add-on.
     let price = type.basePrice + pages.extraPages * PRICE_PER_EXTRA_PAGE;
     formData.selectedFeatures.forEach((featureId) => {
@@ -127,16 +133,24 @@ export default function QuotePage() {
               </svg>
             </div>
             <h1 className="mb-3 text-[var(--text-strong)]">תודה על הפנייה!</h1>
-            <p className="text-base text-[var(--text-default)] mb-2">
-              קיבלנו את הבקשה להערכה של{' '}
-              <span className="font-bold lg-text-shimmer">₪{calculatedPrice.toLocaleString()}</span>
-            </p>
+            {calculatedPrice > 0 ? (
+              <p className="text-base text-[var(--text-default)] mb-2">
+                קיבלנו את הבקשה להערכה של{' '}
+                <span className="font-bold lg-text-shimmer">₪{calculatedPrice.toLocaleString()}</span>
+              </p>
+            ) : (
+              <p className="text-base text-[var(--text-default)] mb-2">
+                קיבלנו את הבקשה שלכם להצעת מחיר מותאמת אישית
+              </p>
+            )}
             <p className="text-sm text-[var(--text-muted)] mb-7 leading-relaxed">
-              זו הערכה ראשונית בלבד. נחזור אליכם בהקדם עם הצעת מחיר מפורטת.
+              {calculatedPrice > 0
+                ? 'זו הערכה ראשונית בלבד. נחזור אליכם בהקדם עם הצעת מחיר מפורטת.'
+                : 'נעבור על הפרטים ונחזור אליכם תוך 24 שעות עם הצעה מדויקת ושקופה.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                href={`https://wa.me/972546361555?text=${encodeURIComponent(`שלום, השארתי בקשת הצעת מחיר באתר (הערכה: ₪${calculatedPrice.toLocaleString()}). אשמח לזרז.`)}`}
+                href={`https://wa.me/972546361555?text=${encodeURIComponent(calculatedPrice > 0 ? `שלום, השארתי בקשת הצעת מחיר באתר (הערכה: ₪${calculatedPrice.toLocaleString()}). אשמח לזרז.` : 'שלום, השארתי בקשת הצעת מחיר באתר. אשמח לזרז.')}`}
                 variant="primary"
                 size="lg"
               >
@@ -323,11 +337,23 @@ export default function QuotePage() {
               {step === 4 && (
                 <div className="space-y-7">
                   <GlassCard variant="deep" squircle="lg" glow="primary" className="p-8 text-center">
-                    <h2 className="text-lg text-[var(--text-muted)] mb-3 font-normal">הערכת המחיר שלכם</h2>
-                    <p className="text-5xl md:text-6xl font-black lg-text-shimmer mb-4 leading-none">
-                      ₪{calculatedPrice.toLocaleString()}
-                    </p>
-                    <p className="text-sm text-[var(--text-muted)]">*זו הערכה אוטומטית. המחיר הסופי נקבע בשיחה קצרה, בלי הפתעות.</p>
+                    {isCustomQuote ? (
+                      <>
+                        <h2 className="text-lg text-[var(--text-muted)] mb-3 font-normal">הבקשה שלכם</h2>
+                        <p className="text-3xl md:text-4xl font-black lg-text-shimmer mb-4 leading-tight">
+                          הצעת מחיר מותאמת אישית
+                        </p>
+                        <p className="text-sm text-[var(--text-muted)]">השאירו פרטים — ונחזור אליכם תוך 24 שעות עם הצעה מדויקת לפי הבחירות שלכם. בלי הפתעות.</p>
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="text-lg text-[var(--text-muted)] mb-3 font-normal">הערכת המחיר שלכם</h2>
+                        <p className="text-5xl md:text-6xl font-black lg-text-shimmer mb-4 leading-none">
+                          ₪{calculatedPrice.toLocaleString()}
+                        </p>
+                        <p className="text-sm text-[var(--text-muted)]">*זו הערכה אוטומטית. המחיר הסופי נקבע בשיחה קצרה, בלי הפתעות.</p>
+                      </>
+                    )}
                   </GlassCard>
 
                   <div>

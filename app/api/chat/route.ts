@@ -144,11 +144,15 @@ async function callGemini(apiKey: string, payload: object): Promise<{ text?: str
 function buildKnowledge(): string {
   const content = getSiteContent();
   const pkgs = packagesData as Array<{
-    name: string; price: number; priceFrom?: boolean; description: string; features: string[]; notIncluded?: string[];
+    name: string; price: number; priceFrom?: boolean; customQuote?: boolean; description: string; features: string[]; notIncluded?: string[];
   }>;
   const pkgText = pkgs
     .map((p) => {
-      const price = p.priceFrom ? `החל מ-${p.price.toLocaleString('he-IL')} ₪` : `${p.price.toLocaleString('he-IL')} ₪`;
+      const price = p.customQuote
+        ? 'הצעת מחיר מותאמת אישית (לפי היקף וצרכים — הצעה מדויקת תוך 24 שעות)'
+        : p.priceFrom
+          ? `החל מ-${p.price.toLocaleString('he-IL')} ₪`
+          : `${p.price.toLocaleString('he-IL')} ₪`;
       const exc = p.notIncluded?.length ? ` | לא כלול: ${p.notIncluded.join('; ')}` : '';
       return `• ${p.name} — ${price}: ${p.description} כולל: ${p.features.join('; ')}${exc}`;
     })

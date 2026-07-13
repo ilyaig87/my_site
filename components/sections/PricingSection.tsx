@@ -27,10 +27,10 @@ export default function PricingSection() {
       name: 'Business',
       tagline: 'אתר עסקי מלא',
       description: 'כמה עמודים, נוכחות מקצועית מלאה',
-      priceDisplay: '3,500 ₪',
+      priceDisplay: 'הצעת מחיר מותאמת',
       features: [
         'כל מה שב-Starter, ובנוסף:',
-        'עד 5 עמודים עם ניווט מלא',
+        'מספר עמודים עם ניווט מלא',
         'עיצוב מותאם אישית מלא',
         'גלריית עבודות / תמונות',
         'SEO מלא + Google Analytics + Schema.org',
@@ -47,8 +47,8 @@ export default function PricingSection() {
     {
       name: 'Premium',
       tagline: 'אתר מתקדם לפי הצרכים',
-      description: 'המחיר נקבע לפי ההיקף והפיצ\'רים — לכן "החל מ-"',
-      priceDisplay: 'החל מ-5,000 ₪',
+      description: 'המחיר נקבע לפי ההיקף והפיצ\'רים שתבחרו',
+      priceDisplay: 'הצעת מחיר מותאמת',
       features: [
         'כל מה שב-Business, ובנוסף:',
         'עד ~8 עמודים, עיצוב פרימיום ואנימציות',

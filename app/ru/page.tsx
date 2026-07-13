@@ -43,21 +43,31 @@ const packages = [
   {
     name: 'Starter',
     price: '2 500 ₪',
+    priceNote: 'разовая оплата',
     desc: 'Одностраничный лендинг — идеален для рекламных кампаний и быстрого старта.',
     features: ['Современный дизайн', 'Адаптация под мобильные', 'Форма заявки + WhatsApp', 'Базовое SEO', 'Срок: 5–7 дней'],
   },
   {
     name: 'Business',
-    price: '3 500 ₪',
+    price: 'Индивидуальный расчёт',
+    priceNote: 'расскажите о проекте — вернёмся с точным предложением',
     popular: true,
-    desc: 'Полноценный сайт-визитка для бизнеса: до 3 страниц, галерея, формы.',
-    features: ['До 3 страниц (доп. страница — 300 ₪)', 'Галерея работ', 'Продвинутые формы', 'SEO-оптимизация', 'Срок: 1–2 недели'],
+    desc: 'Полноценный сайт-визитка для бизнеса: несколько страниц, галерея, формы.',
+    features: ['Несколько страниц с навигацией', 'Галерея работ', 'Продвинутые формы', 'SEO-оптимизация', 'Срок: 1–2 недели'],
   },
   {
     name: 'Premium',
-    price: 'от 5 000 ₪',
+    price: 'Индивидуальный расчёт',
+    priceNote: 'цена зависит от объёма и функционала',
     desc: 'Индивидуальный проект: интернет-магазин, личный кабинет, интеграции, AI.',
-    features: ['Индивидуальный функционал', 'Интеграции и оплата', 'AI-чатбот по желанию', 'Полное сопровождение', 'Срок: 2–4 недели'],
+    features: ['Индивидуальный функционал', 'Интеграции и оплата', 'Блог / CMS', 'Полное сопровождение', 'Срок: 2–4 недели'],
+  },
+  {
+    name: 'AI и автоматизация',
+    price: 'Индивидуальный расчёт',
+    priceNote: 'как дополнение к сайту или отдельный проект',
+    desc: 'Умные чатботы, автоматизация бизнеса и AI-агенты, которые работают 24/7.',
+    features: ['AI-чатбот для сайта и WhatsApp', 'Автоматический сбор заявок', 'Бизнес-автоматизации (CRM, почта)', 'Интеграция AI в ваши системы', 'Обучение и сопровождение'],
   },
 ];
 
@@ -74,7 +84,7 @@ const faqs = [
   },
   {
     q: 'Сколько стоит сайт?',
-    a: 'Лендинг — 2 500 ₪, бизнес-сайт — 3 500 ₪, индивидуальные проекты — от 5 000 ₪. Цена фиксируется до начала работы, без скрытых платежей.',
+    a: 'Лендинг — 2 500 ₪ (разовая оплата). Бизнес-сайты, индивидуальные проекты и AI-решения рассчитываются персонально: короткий разговор — и в течение 24 часов вы получаете точное предложение. Цена фиксируется до начала работы, без скрытых платежей.',
   },
   {
     q: 'Кому принадлежит сайт после оплаты?',
@@ -162,7 +172,7 @@ export default function RussianLandingPage() {
           <p className="text-center text-[var(--text-muted)] mb-8">
             Разовая оплата. Код и домен — ваша собственность.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch">
             {packages.map((p) => (
               <GlassCard
                 key={p.name}
@@ -177,7 +187,8 @@ export default function RussianLandingPage() {
                   </div>
                 )}
                 <h3 className="relative z-10 text-xl font-black text-[var(--text-strong)]">{p.name}</h3>
-                <div className="relative z-10 text-3xl font-black text-[var(--primary)] my-2">{p.price}</div>
+                <div className={`relative z-10 font-black text-[var(--primary)] my-2 ${p.price.includes('₪') ? 'text-3xl' : 'text-xl leading-snug'}`}>{p.price}</div>
+                {p.priceNote && <p className="relative z-10 text-xs text-[var(--text-faint)] mb-2">{p.priceNote}</p>}
                 <p className="relative z-10 text-sm text-[var(--text-muted)] mb-4">{p.desc}</p>
                 <ul className="relative z-10 space-y-2 flex-1">
                   {p.features.map((f) => (

@@ -19,8 +19,8 @@ const breathingTransition = {
 
 interface Tier {
   name: string;
-  price: string;
-  from?: boolean;
+  price?: string;
+  custom?: boolean;
   subtitle: string;
   bestFor: string;
   icon: React.ReactNode;
@@ -41,9 +41,9 @@ const tiers: Tier[] = [
   },
   {
     name: 'Business',
-    price: '3,500',
+    custom: true,
     subtitle: 'אתר עסקי מלא עם כמה עמודים',
-    bestFor: 'עד 5 עמודים · ניווט מלא · גלריה · SEO מלא',
+    bestFor: 'מספר עמודים · ניווט מלא · גלריה · SEO מלא',
     highlighted: true,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -53,13 +53,23 @@ const tiers: Tier[] = [
   },
   {
     name: 'Premium',
-    price: '5,000',
-    from: true,
+    custom: true,
     subtitle: 'אתר מתקדם לפי הצרכים',
     bestFor: 'בלוג/CMS · אנימציות · אינטגרציות',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'AI ואוטומציה',
+    custom: true,
+    subtitle: 'צ\'אטבוטים ואוטומציות לעסק',
+    bestFor: 'צ\'אטבוט AI · לכידת לידים · אוטומציות',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
       </svg>
     ),
   },
@@ -77,7 +87,7 @@ export default function PricingTeaser() {
           className="text-center mb-8 sm:mb-10"
         >
           <motion.div variants={fadeUp} className="flex justify-center mb-5">
-            <GlassPill dot>המחיר שתראו הוא המחיר שתשלמו</GlassPill>
+            <GlassPill dot>תמחור הוגן, שקוף וללא הפתעות</GlassPill>
           </motion.div>
           <motion.h2 variants={fadeUp} className="mb-4">
             תקציב ברור <span className="lg-text-shimmer">והחלטה קלה</span>
@@ -92,7 +102,7 @@ export default function PricingTeaser() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto mb-10"
         >
           {tiers.map((tier) => (
             <motion.div
@@ -146,14 +156,27 @@ export default function PricingTeaser() {
                 <p className="text-sm text-[var(--text-muted)] mb-5">{tier.subtitle}</p>
 
                 <div className="mb-5 pb-5 border-b border-[var(--glass-border-dim)]">
-                  <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">
-                    {tier.from ? 'החל מ-' : 'מחיר חד-פעמי'}
-                  </p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight">
-                      ₪{tier.price}
-                    </span>
-                  </div>
+                  {tier.custom ? (
+                    <>
+                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">
+                        מותאם לצרכים שלכם
+                      </p>
+                      <div className="text-2xl sm:text-3xl font-black text-[var(--text-strong)] leading-tight tracking-tight">
+                        נשמח לפרטים
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">
+                        מחיר חד-פעמי
+                      </p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight">
+                          ₪{tier.price}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <p className="text-sm text-[var(--text-default)] leading-relaxed flex items-start gap-2">
@@ -181,7 +204,7 @@ export default function PricingTeaser() {
           </Button>
         </div>
         <p className="text-xs text-[var(--text-muted)] mt-4 text-center max-w-2xl mx-auto">
-          Premium מתחיל ב-5,000 ₪ — המחיר הסופי תלוי בפיצ'רים שתבחרו (חנות ותשלומים, מערכת הזמנות, אזור משתמשים, רב-לשוני). לכן &quot;החל מ-&quot;. נשמח לתת הצעת מחיר מדויקת ושקופה.
+          כל עסק הוא עולם — ולכן ב-Business, Premium ו-AI המחיר נקבע יחד אתכם, לפי ההיקף והצרכים בפועל. שיחה קצרה, הצעה מדויקת תוך 24 שעות, ובלי הפתעות בהמשך.
         </p>
       </Container>
     </section>

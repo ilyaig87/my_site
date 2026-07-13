@@ -60,7 +60,7 @@ export default function Pricing() {
   // start at the listed price and go up by scope.
   const priceLabel = (pkg: Package) =>
     pkg.customQuote
-      ? 'הצעת מחיר אישית'
+      ? 'הצעת מחיר מותאמת'
       : `${pkg.priceFrom ? 'החל מ-' : ''}${formatPrice(pkg.price)}`;
 
   const buildWhatsAppLink = (pkg: Package) => {
@@ -200,7 +200,7 @@ export default function Pricing() {
           </div>
 
           {/* Packages */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto items-stretch">
             {packages.map((pkg) => (
               <GlassCard
                 key={pkg.id}
@@ -227,8 +227,13 @@ export default function Pricing() {
                   <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-2">{pkg.name}</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-4">{pkg.description}</p>
                   {pkg.customQuote ? (
-                    <div className="text-3xl font-black text-[var(--text-strong)] leading-tight">
-                      הצעת מחיר אישית
+                    <div>
+                      <div className="text-2xl font-black text-[var(--text-strong)] leading-tight">
+                        בהתאמה אישית
+                      </div>
+                      <p className="text-xs text-[var(--text-muted)] mt-1.5">
+                        ספרו לנו מה אתם צריכים — ונחזור עם הצעה מדויקת
+                      </p>
                     </div>
                   ) : (
                     <>
@@ -262,7 +267,7 @@ export default function Pricing() {
                 {pkg.notIncluded && pkg.notIncluded.length > 0 && (
                   <div className="mb-6 pt-3 border-t border-[var(--glass-border-dim)]">
                     <p className="text-[11px] font-bold text-[var(--text-faint)] uppercase tracking-wide mb-2">
-                      {pkg.priceFrom ? 'תוספות שמעלות את המחיר' : 'לא כלול בחבילה'}
+                      {pkg.customQuote ? 'אפשר להוסיף — לפי הצורך' : 'לא כלול בחבילה'}
                     </p>
                     <ul className="space-y-1.5">
                       {pkg.notIncluded.map((item, i) => (
