@@ -116,7 +116,7 @@ export default function AboutPage() {
                 {[
                   { stat: '5+', label: 'שנות ניסיון' },
                   { stat: '2', label: 'אתרים חיים באוויר' },
-                  { stat: '<14d', label: 'אספקה ממוצעת' },
+                  { stat: '7 ימים', label: 'אספקה ממוצעת' },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
                     <div className="text-2xl font-black lg-text-shimmer">{item.stat}</div>
