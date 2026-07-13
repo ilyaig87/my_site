@@ -15,7 +15,7 @@ interface HeroSectionProps {
  */
 export default function HeroSection({ content }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden hero-beam">
+    <section className="relative min-h-[68vh] flex items-center overflow-hidden hero-beam">
       {/* The signature diagonal beams come from the layout-level SiteBeam,
           which renders on every page. Only the radial vignette stays here
           to anchor the hero text. */}
@@ -24,20 +24,20 @@ export default function HeroSection({ content }: HeroSectionProps) {
       <Container>
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           {/* Kicker */}
-          <div className="mb-5 animate-fade-down">
+          <div className="mb-6 animate-fade-down">
             <span className="kicker">Pixelia · Web Studio</span>
           </div>
 
           {/* Massive title — the LCP element. Uses animate-hero-title (opacity
               stays 1, transform-only rise) so it paints at full opacity on the
               first frame instead of fading in, which was delaying LCP. */}
-          <h1 className="mb-6 animate-hero-title">
+          <h1 className="mb-7 animate-hero-title">
             <span className="lg-text-shimmer">{content.title}</span>
           </h1>
 
           {/* Subtitle */}
           <p
-            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-7 max-w-3xl mx-auto leading-tight animate-fade-up"
+            className="text-xl sm:text-2xl md:text-3xl font-normal text-[var(--text-default)] mb-9 max-w-3xl mx-auto leading-tight animate-fade-up"
             style={{ animationDelay: '0.12s' }}
           >
             {content.subtitle}
@@ -71,7 +71,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
 
           {/* Trust strip — subtle proof signals, never shouting */}
           <div
-            className="mt-9 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-[var(--text-muted)] animate-fade-in"
+            className="mt-11 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-[var(--text-muted)] animate-fade-in"
             style={{ animationDelay: '0.5s' }}
           >
             <span className="flex items-center gap-1.5">
