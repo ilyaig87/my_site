@@ -207,8 +207,8 @@ export default function Pricing() {
           {starterPkg && (
             <div className="max-w-5xl mx-auto mb-6 sm:mb-8">
               <GlassCard
-                variant="default"
-                glow={selectedPackageId === starterPkg.id ? 'primary' : 'none'}
+                variant="deep"
+                glow="primary"
                 squircle="lg"
                 className={`relative p-7 sm:p-8 ${selectedPackageId === starterPkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
               >
@@ -263,6 +263,12 @@ export default function Pricing() {
             </div>
           )}
 
+          {/* One shared explainer instead of repeating it inside every card */}
+          <p className="text-center text-sm text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
+            שלושת המסלולים הבאים נבנים <span className="font-semibold text-[var(--text-strong)]">בהתאמה אישית</span> —
+            ספרו לנו מה אתם צריכים ותקבלו הצעה מדויקת תוך 24 שעות.
+          </p>
+
           {/* Custom-quote packages — three in a row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
             {customPackages.map((pkg) => (
@@ -291,13 +297,8 @@ export default function Pricing() {
                   <h3 className="text-2xl font-bold text-[var(--text-strong)] mb-2">{pkg.name}</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-4">{pkg.description}</p>
                   {pkg.customQuote ? (
-                    <div>
-                      <div className="text-2xl font-black text-[var(--text-strong)] leading-tight">
-                        בהתאמה אישית
-                      </div>
-                      <p className="text-xs text-[var(--text-muted)] mt-1.5">
-                        ספרו לנו מה אתם צריכים — ונחזור עם הצעה מדויקת
-                      </p>
+                    <div className="flex justify-center">
+                      <GlassPill dot>הצעת מחיר מותאמת</GlassPill>
                     </div>
                   ) : (
                     <>

@@ -63,7 +63,9 @@ export default function Header() {
         )}
       >
         <Container>
-          <div className={cn('flex items-center justify-between transition-all duration-300', scrolled ? 'h-16 md:h-18' : 'h-20 md:h-24')}>
+          {/* Constant height — scrolling only changes the backdrop, never the size,
+              so the header doesn't visibly "jump" right after page load. */}
+          <div className="flex items-center justify-between h-20 md:h-24">
             {/* Logo — large, presence */}
             <Link href="/" onClick={handleHomeClick('/')} className="flex items-center group">
               <Image
@@ -77,10 +79,7 @@ export default function Header() {
                 height={56}
                 sizes="56px"
                 priority
-                className={cn(
-                  'object-contain w-auto transition-all duration-300',
-                  scrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
-                )}
+                className="object-contain w-auto h-12 md:h-14"
               />
             </Link>
 
