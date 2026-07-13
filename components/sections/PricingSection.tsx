@@ -18,7 +18,7 @@ export default function PricingSection() {
       ],
       additions: [
         'לא כלול: עמודים נוספים, בלוג, אינטגרציות',
-        'דומיין ואחסון: 300 ₪/שנה',
+        'לא כלול: דומיין (150 ₪/שנה כתוספת) ואחסון (לפי ספק)',
       ],
       highlighted: false,
       ctaText: 'דברו איתי',
@@ -39,7 +39,7 @@ export default function PricingSection() {
       ],
       additions: [
         'לא כלול: בלוג/CMS, רב-לשוני, הזמנות/תשלומים',
-        'דומיין ואחסון: 300 ₪/שנה',
+        'לא כלול: דומיין (150 ₪/שנה כתוספת) ואחסון (לפי ספק)',
       ],
       highlighted: true,
       ctaText: 'דברו איתי',

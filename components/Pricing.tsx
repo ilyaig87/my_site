@@ -32,7 +32,8 @@ interface Package {
 }
 
 const optionalAddons = [
-  { label: 'דומיין + אחסון שנתי', price: '300 ₪/שנה' },
+  { label: 'רכישה וניהול דומיין (על שמכם)', price: '150 ₪/שנה' },
+  { label: 'אחסון האתר — משולם ישירות לספק', price: 'לפי המסלול שתבחרו · נעזור לבחור ולהקים' },
   { label: 'מערכת הזמנות / קביעת תורים', price: 'בהצעת מחיר' },
   { label: 'חנות ותשלומים אונליין (Stripe)', price: 'בהצעת מחיר' },
   { label: 'אזור משתמשים / התחברות', price: 'בהצעת מחיר' },
@@ -539,7 +540,7 @@ export default function Pricing() {
               <h3 className="text-xl font-bold text-[var(--text-strong)] text-center">תוספות אופציונליות</h3>
             </div>
             <p className="text-center text-sm text-[var(--text-muted)] mb-1">
-              כל תוספת מתווספת למחיר החבילה הבסיסית
+              כל תוספת מתווספת למחיר החבילה הבסיסית. <b>שימו לב:</b> מחירי החבילות אינם כוללים דומיין ואחסון.
             </p>
             <p className="text-center text-xs text-[var(--text-faint)] mb-6">
               <b>תוספות מתקדמות מתואמות בשיחה</b> לפי המורכבות והצורך
