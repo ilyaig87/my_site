@@ -100,56 +100,15 @@ export default function PricingTeaser() {
           </motion.p>
         </motion.div>
 
-        {/* Starter — the fixed-price package, featured on its own row */}
-        {tiers[0] && (
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-50px' }}
-            className="max-w-5xl mx-auto mb-5 sm:mb-6"
-          >
-            <GlassCard variant="deep" glow="primary" squircle="lg" className="relative p-7 sm:p-8">
-              <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: ACCENTS.Starter }} />
-              <div className="relative z-10 grid md:grid-cols-[1.1fr_1fr_auto] items-center gap-6 md:gap-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: ACCENTS.Starter }}>
-                      {tiers[0].icon}
-                    </div>
-                    <h3 className="text-2xl font-black text-[var(--text-strong)] leading-tight">{tiers[0].name}</h3>
-                  </div>
-                  <p className="text-sm text-[var(--text-muted)]">{tiers[0].subtitle}</p>
-                </div>
-                <ul className="space-y-2">
-                  {tiers[0].points.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2 text-sm text-[var(--text-default)]">
-                      <Check />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-                <div className="text-center">
-                  <p className="text-xs font-semibold text-[var(--text-muted)] mb-1">מחיר חד-פעמי</p>
-                  <div className="text-4xl sm:text-5xl font-black text-[var(--text-strong)] leading-none tracking-tight mb-3">
-                    ₪{tiers[0].price}
-                  </div>
-                  <Button href="/pricing" variant="primary" size="sm">התחילו עכשיו</Button>
-                </div>
-              </div>
-            </GlassCard>
-          </motion.div>
-        )}
-
-        {/* Custom-quote tiers — three in a row */}
+        {/* All packages — two per row, same tall card for everyone */}
         <motion.div
           variants={stagger(0.12)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto mb-10"
         >
-          {tiers.slice(1).map((tier) => (
+          {tiers.map((tier) => (
             <motion.div
               key={tier.name}
               variants={fadeUp}
@@ -186,9 +145,23 @@ export default function PricingTeaser() {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-[var(--text-muted)] mb-5 min-h-[2.5rem]">{tier.subtitle}</p>
+                <p className="text-sm text-[var(--text-muted)] mb-4 min-h-[1.25rem]">{tier.subtitle}</p>
 
-                <ul className="space-y-2.5 mb-6">
+                <div className="mb-5 pb-5 border-b border-[var(--glass-border-dim)] min-h-[4.5rem]">
+                  {tier.custom ? (
+                    <>
+                      <p className="text-xl font-black text-[var(--primary)] leading-tight">הצעת מחיר מותאמת</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-1">שיחה קצרה — הצעה מדויקת תוך 24 שעות</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-3xl font-black text-[var(--text-strong)] leading-none">₪{tier.price}</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-1.5">מחיר חד-פעמי, ללא תשלומים חודשיים</p>
+                    </>
+                  )}
+                </div>
+
+                <ul className="space-y-2.5">
                   {tier.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-2 text-sm text-[var(--text-default)]">
                       <Check />
@@ -196,11 +169,6 @@ export default function PricingTeaser() {
                     </li>
                   ))}
                 </ul>
-
-                <div className="mt-auto pt-4 border-t border-[var(--glass-border-dim)] flex items-center justify-between gap-2">
-                  <span className="text-sm font-bold text-[var(--primary)]">נשמח לפרטים</span>
-                  <span className="text-xs text-[var(--text-muted)]">הצעה תוך 24 שעות</span>
-                </div>
               </GlassCard>
             </motion.div>
           ))}

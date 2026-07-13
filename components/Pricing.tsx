@@ -85,10 +85,6 @@ export default function Pricing() {
 
   const packages: Package[] = packagesData as Package[];
   const selectedPackage = packages.find((p) => p.id === selectedPackageId) ?? null;
-  // Starter (the only fixed-price package) gets its own featured wide card;
-  // the custom-quote packages sit below it, three in a row.
-  const starterPkg = packages.find((p) => p.id === 'starter') ?? null;
-  const customPackages = packages.filter((p) => p.id !== 'starter');
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS', maximumFractionDigits: 0 }).format(price);
@@ -236,81 +232,15 @@ export default function Pricing() {
             </p>
           </div>
 
-          {/* Starter — the fixed-price package, featured on its own row */}
-          {starterPkg && (
-            <div className="max-w-5xl mx-auto mb-6 sm:mb-8">
-              <GlassCard
-                variant="deep"
-                glow="primary"
-                squircle="lg"
-                className={`relative p-7 sm:p-8 ${selectedPackageId === starterPkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
-              >
-                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full z-10" style={{ background: PKG_ACCENTS.starter }} />
-                <div className="relative z-10 grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] gap-7 md:gap-10 items-center">
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-3 mb-2">
-                      <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: PKG_ACCENTS.starter }}>
-                        {PKG_ICONS.starter}
-                      </div>
-                      <h3 className="text-2xl font-bold text-[var(--text-strong)]">{starterPkg.name}</h3>
-                    </div>
-                    <p className="text-sm text-[var(--text-muted)] mb-4">{starterPkg.description}</p>
-                    <div className="text-4xl font-black text-[var(--text-strong)] leading-none mb-1">
-                      {formatPrice(starterPkg.price)}
-                    </div>
-                    <p className="text-xs text-[var(--text-muted)] mb-5">מחיר חד-פעמי, ללא תשלומים חודשיים</p>
-                    <Button
-                      variant={selectedPackageId === starterPkg.id ? 'primary' : 'glass'}
-                      size="md"
-                      fullWidth
-                      onClick={() => choosePackage(starterPkg)}
-                    >
-                      {selectedPackageId === starterPkg.id ? '✓ נבחרה — המשיכו לפרטים' : 'בחרו חבילה זו'}
-                    </Button>
-                  </div>
-                  <div>
-                    <ul className="grid sm:grid-cols-2 gap-x-5 gap-y-2 mb-4">
-                      {starterPkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <svg className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-sm text-[var(--text-default)]">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    {starterPkg.notIncluded && starterPkg.notIncluded.length > 0 && (
-                      <div className="pt-3 border-t border-[var(--glass-border-dim)]">
-                        <p className="text-[11px] font-bold text-[var(--text-faint)] uppercase tracking-wide mb-2">
-                          לא כלול בחבילה
-                        </p>
-                        <ul className="space-y-1.5">
-                          {starterPkg.notIncluded.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-[var(--text-muted)]">
-                              <svg className="w-4 h-4 text-[var(--text-faint)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                              <span className="text-[13px] leading-snug">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </GlassCard>
-            </div>
-          )}
-
           {/* One shared explainer instead of repeating it inside every card */}
           <p className="text-center text-sm text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
-            שלושת המסלולים הבאים נבנים <span className="font-semibold text-[var(--text-strong)]">בהתאמה אישית</span> —
+            Starter במחיר קבוע. Business, Premium ו-AI נבנים <span className="font-semibold text-[var(--text-strong)]">בהתאמה אישית</span> —
             ספרו לנו מה אתם צריכים ותקבלו הצעה מדויקת תוך 24 שעות.
           </p>
 
-          {/* Custom-quote packages — three in a row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
-            {customPackages.map((pkg) => (
+          {/* All packages — two per row, same tall card for everyone */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto items-stretch">
+            {packages.map((pkg) => (
               <GlassCard
                 key={pkg.id}
                 variant={pkg.popular ? 'deep' : 'default'}
