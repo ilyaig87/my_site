@@ -9,12 +9,13 @@ import Button from '@/components/ui/Button';
 
 const WHATSAPP_NUMBER = '972546361555';
 
-// Accent gradient per package — colour identity shared with the homepage teaser.
+// One solid accent per package — colour identity shared with the homepage teaser,
+// rendered as a soft tint so the cards stay calm.
 const PKG_ACCENTS: Record<string, string> = {
-  starter: 'linear-gradient(135deg, #38bdf8, #2563eb)',
-  business: 'linear-gradient(135deg, #2563eb, #7c3aed)',
-  premium: 'linear-gradient(135deg, #7c3aed, #db2777)',
-  ai: 'linear-gradient(135deg, #14b8a6, #22c55e)',
+  starter: '#2563eb',
+  business: '#4f46e5',
+  premium: '#c026d3',
+  ai: '#0d9488',
 };
 
 // Package icons, matching the homepage pricing teaser for a consistent look.
@@ -249,14 +250,17 @@ export default function Pricing() {
                 squircle="lg"
                 className={`relative h-full p-7 sm:p-8 flex flex-col ${selectedPackageId === pkg.id ? 'ring-2 ring-[var(--accent)]' : ''}`}
               >
-                {/* Package colour accent */}
-                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: PKG_ACCENTS[pkg.id] }} />
-
                 <div className="mb-5">
                   {/* Header row — badge sits inline so all titles share the same line */}
                   <div className="flex items-center justify-between gap-3 mb-2">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md" style={{ background: PKG_ACCENTS[pkg.id] }}>
+                      <div
+                        className="squircle-md w-10 h-10 flex-shrink-0 flex items-center justify-center"
+                        style={{
+                          background: `color-mix(in oklab, ${PKG_ACCENTS[pkg.id]} 12%, transparent)`,
+                          color: PKG_ACCENTS[pkg.id],
+                        }}
+                      >
                         {PKG_ICONS[pkg.id]}
                       </div>
                       <h3 className="text-xl font-bold text-[var(--text-strong)] whitespace-nowrap">{pkg.name}</h3>

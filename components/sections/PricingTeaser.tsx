@@ -17,11 +17,12 @@ interface Tier {
   highlighted?: boolean;
 }
 
+// One solid accent per package; rendered as a soft tint so the cards stay calm.
 const ACCENTS: Record<string, string> = {
-  Starter: 'linear-gradient(135deg, #38bdf8, #2563eb)',
-  Business: 'linear-gradient(135deg, #2563eb, #7c3aed)',
-  Premium: 'linear-gradient(135deg, #7c3aed, #db2777)',
-  'AI ואוטומציה': 'linear-gradient(135deg, #14b8a6, #22c55e)',
+  Starter: '#2563eb',
+  Business: '#4f46e5',
+  Premium: '#c026d3',
+  'AI ואוטומציה': '#0d9488',
 };
 
 const Check = () => (
@@ -120,15 +121,15 @@ export default function PricingTeaser() {
                 squircle="lg"
                 className="relative h-full p-7 sm:p-8 flex flex-col"
               >
-                {/* Package colour accent */}
-                <div aria-hidden className="absolute top-0 inset-x-6 h-[3px] rounded-full" style={{ background: ACCENTS[tier.name] }} />
-
                 {/* Header row — badge sits inline so every title shares the same line */}
                 <div className="flex items-center justify-between gap-3 mb-1.5">
                   <div className="flex items-center gap-3 min-w-0">
                     <div
-                      className="squircle-md w-11 h-11 flex-shrink-0 flex items-center justify-center text-white shadow-md"
-                      style={{ background: ACCENTS[tier.name] }}
+                      className="squircle-md w-10 h-10 flex-shrink-0 flex items-center justify-center"
+                      style={{
+                        background: `color-mix(in oklab, ${ACCENTS[tier.name]} 12%, transparent)`,
+                        color: ACCENTS[tier.name],
+                      }}
                     >
                       {tier.icon}
                     </div>
