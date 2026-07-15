@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button';
 const SITE_URL = 'https://www.pixelia.co.il';
 
 export const metadata: Metadata = {
-  title: 'סוכני AI (Agents), צ\'אטבוטים ואוטומציה לעסקים | Pixelia',
+  title: 'סוכני AI (Agents), צ\'אטבוטים ואוטומציה לעסקים',
   description:
     'Pixelia בונה לעסקים סוכני AI (AI Agents), צ\'אטבוטים חכמים ואוטומציות: מענה ללקוחות 24/7 בעברית, סינון לידים, חיבור CRM ויצירת תוכן אוטומטית. חוסכים זמן וסוגרים יותר לקוחות.',
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/ai' },
   openGraph: {
     type: 'website',
-    title: 'סוכני AI, צ\'אטבוטים ואוטומציה לעסקים | Pixelia',
+    title: 'סוכני AI, צ\'אטבוטים ואוטומציה לעסקים',
     description: 'סוכני AI (Agents), צ\'אטבוטים חכמים ואוטומציות עסקיות — מותאמים לעסק שלכם.',
     url: `${SITE_URL}/ai`,
   },

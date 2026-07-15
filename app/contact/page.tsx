@@ -7,7 +7,7 @@ import GlassPill from '@/components/ui/GlassPill';
 import WhatsAppLink from '@/components/WhatsAppLink';
 
 export const metadata: Metadata = {
-  title: 'צרו קשר — בניית אתרים לעסקים | Pixelia',
+  title: 'צרו קשר — בניית אתרים לעסקים',
   description: 'דברו איתנו על עיצוב ובניית אתר מקצועי לעסק שלכם. מענה ראשון תוך 24 שעות.',
 };
 

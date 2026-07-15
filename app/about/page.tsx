@@ -7,7 +7,7 @@ import { getSiteContent } from '@/lib/data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'אודות — סטודיו לעיצוב ובניית אתרים | Pixelia',
+  title: 'אודות — סטודיו לעיצוב ובניית אתרים',
   description: 'הסטודיו, הניסיון והטכנולוגיות שאיתן אנחנו מעצבים ובונים אתרים מקצועיים לעסקים.',
 };
 

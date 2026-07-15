@@ -19,9 +19,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: 'מאמר לא נמצא | Pixelia' };
+  if (!post) return { title: 'מאמר לא נמצא' };
   return {
-    title: `${post.title} | Pixelia`,
+    title: `${post.title}`,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {

@@ -1,7 +1,7 @@
 import FAQSection from '@/components/sections/FAQSection';
 
 export const metadata = {
-  title: 'שאלות נפוצות | Pixelia',
+  title: 'שאלות נפוצות',
   description: 'כל מה שרציתם לדעת על בניית אתרים עם Pixelia - שאלות ותשובות',
 };
 
