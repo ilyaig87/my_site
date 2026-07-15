@@ -4,8 +4,7 @@ import { Metadata } from 'next';
 import Container from '@/components/ui/Container';
 import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
-import { getPostBySlug, getAllPostSlugs, getAllPosts, formatDateHe } from '@/lib/blog';
-import { getRuPostByHeSlug } from '@/lib/blogRu';
+import { getRuPostBySlug, getAllRuPostSlugs, getAllRuPosts, formatDateRu } from '@/lib/blogRu';
 import { renderBlock } from '@/components/blog/PostBlocks';
 import { breadcrumbList } from '@/lib/breadcrumbs';
 
@@ -16,47 +15,37 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return getAllPostSlugs();
+  return getAllRuPostSlugs();
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return { title: 'מאמר לא נמצא' };
-  const ru = getRuPostByHeSlug(post.slug);
+  const post = getRuPostBySlug(slug);
+  if (!post) return { title: 'Статья не найдена' };
   return {
-    title: `${post.title}`,
+    title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${post.slug}`,
-      // hreflang pair when a Russian adaptation exists
-      ...(ru ? { languages: { he: `/blog/${post.slug}`, ru: `/ru/blog/${ru.slug}` } } : {}),
+      canonical: `/ru/blog/${post.slug}`,
+      // hreflang pair with the Hebrew original
+      languages: { he: `/blog/${post.heSlug}`, ru: `/ru/blog/${post.slug}` },
     },
     openGraph: {
       type: 'article',
+      locale: 'ru_RU',
       title: post.title,
       description: post.excerpt,
-      url: `${SITE_URL}/blog/${post.slug}`,
+      url: `${SITE_URL}/ru/blog/${post.slug}`,
     },
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function RuBlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getRuPostBySlug(slug);
   if (!post) notFound();
 
-  // Explicit topic-cluster mates first; fall back to the two newest posts.
-  const related = post.related
-    ? post.related.map((s) => getPostBySlug(s)).filter((p): p is NonNullable<typeof p> => !!p)
-    : getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
-
-  const cta = post.cta ?? {
-    title: 'רוצים מערכת AI או אוטומציה לעסק שלכם?',
-    body: 'ב-Pixelia בונים מערכות חכמות שעובדות בשבילכם. בואו נדבר על מה שמתאים לכם.',
-    href: '/ai',
-    label: 'השירות שלנו',
-  };
+  const related = getAllRuPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -65,38 +54,36 @@ export default async function BlogPostPage({ params }: PageProps) {
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.excerpt,
-        // Posts have no per-post artwork yet, so the brand OG image stands in —
-        // an Article without image is excluded from most rich results.
         image: `${SITE_URL}/images/og/og-image.png`,
         datePublished: post.date,
         dateModified: post.date,
-        inLanguage: 'he-IL',
+        inLanguage: 'ru',
         author: { '@type': 'Organization', name: 'Pixelia', url: SITE_URL },
         publisher: {
           '@type': 'Organization',
           name: 'Pixelia',
           logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo/pixelia_logo_color.png` },
         },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/ru/blog/${post.slug}` },
         keywords: post.tags.join(', '),
       },
       breadcrumbList([
-        { name: 'בית', path: '/' },
-        { name: 'בלוג', path: '/blog' },
-        { name: post.title, path: `/blog/${post.slug}` },
+        { name: 'Главная', path: '/ru' },
+        { name: 'Блог', path: '/ru/blog' },
+        { name: post.title, path: `/ru/blog/${post.slug}` },
       ]),
     ],
   };
 
   return (
-    <>
+    <div dir="ltr" lang="ru">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="relative">
         <Container size="md">
           <article className="max-w-3xl mx-auto">
-            <Link href="/blog" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
-              → חזרה לבלוג
+            <Link href="/ru/blog" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
+              ← Назад в блог
             </Link>
 
             <div className="flex flex-wrap gap-1.5 mt-5 mb-4">
@@ -109,9 +96,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.title}
             </h1>
             <div className="flex items-center gap-3 text-sm text-[var(--text-faint)] mb-8">
-              <span>{formatDateHe(post.date)}</span>
+              <span>{formatDateRu(post.date)}</span>
               <span>·</span>
-              <span>{post.readingMinutes} דק׳ קריאה</span>
+              <span>{post.readingMinutes} мин чтения</span>
             </div>
 
             <div>{post.content.map(renderBlock)}</div>
@@ -119,14 +106,21 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Post-specific CTA */}
             <div className="lg-surface lg-deep squircle-lg p-6 sm:p-8 mt-10 text-center">
               <h3 className="relative z-10 text-xl font-bold text-[var(--text-strong)] mb-2">
-                {cta.title}
+                {post.cta.title}
               </h3>
               <p className="relative z-10 text-sm text-[var(--text-muted)] mb-5">
-                {cta.body}
+                {post.cta.body}
               </p>
               <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button href={cta.href} variant="glass" size="md">{cta.label}</Button>
-                <Button href="/contact" variant="primary" size="md">דברו איתנו</Button>
+                <Button href={post.cta.href} variant="glass" size="md">{post.cta.label}</Button>
+                <Button
+                  href={`https://wa.me/972546361555?text=${encodeURIComponent('Здравствуйте! Пишу из блога Pixelia.')}`}
+                  external
+                  variant="primary"
+                  size="md"
+                >
+                  Написать в WhatsApp
+                </Button>
               </div>
             </div>
           </article>
@@ -137,10 +131,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         <section className="relative">
           <Container>
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-xl font-bold text-[var(--text-strong)] mb-5">עוד מהבלוג</h2>
+              <h2 className="text-xl font-bold text-[var(--text-strong)] mb-5">Ещё из блога</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {related.map((p) => (
-                  <Link key={p.slug} href={`/blog/${p.slug}`} className="group block">
+                  <Link key={p.slug} href={`/ru/blog/${p.slug}`} className="group block">
                     <div className="lg-surface lg-shallow squircle-md p-5 h-full">
                       <h3 className="relative z-10 font-bold text-[var(--text-strong)] group-hover:text-[var(--primary)] transition-colors mb-1.5 leading-snug">
                         {p.title}
@@ -154,6 +148,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Container>
         </section>
       )}
-    </>
+    </div>
   );
 }

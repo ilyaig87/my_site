@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Container from '@/components/ui/Container';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
@@ -275,6 +276,11 @@ export default function RussianLandingPage() {
               <Button href="/contact" variant="glass" size="lg">
                 Форма заявки
               </Button>
+            </div>
+            <div className="relative z-10 mt-6">
+              <Link href="/ru/blog" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
+                Читайте наш блог на русском →
+              </Link>
             </div>
           </GlassCard>
         </Container>
