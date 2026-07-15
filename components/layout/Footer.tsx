@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getSiteContent } from '@/lib/data';
-import { getAllSeoPages } from '@/lib/seoPages';
 import Container from '@/components/ui/Container';
 import WhatsAppLink from '@/components/WhatsAppLink';
 
-// The footer carries no primary navigation (that lives in the header) — only
-// legal links, the Russian page, and a compact SEO strip linking the niche
-// landing pages, which otherwise get no internal links outside /services.
+// The footer intentionally carries no navigation — only legal links (and the
+// Russian page, which appears nowhere else). Site navigation lives in the
+// header, where the "שירותים" dropdown links the niche & area landing pages.
 const LEGAL_LINKS = [
   { label: 'פרטיות', href: '/privacy' },
   { label: 'תנאי שימוש', href: '/terms' },
@@ -96,24 +95,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ─── Niche landing pages — internal-link strip for SEO ─── */}
-          <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:justify-start">
-            <span className="text-xs font-semibold text-[var(--text-muted)]">בניית אתרים לפי תחום ואזור:</span>
-            {getAllSeoPages()
-              .filter((p) => p.niche || p.area)
-              .map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/services/${p.slug}`}
-                  className="text-xs text-[var(--text-faint)] hover:text-[var(--primary)] transition-colors"
-                >
-                  {p.badge}
-                </Link>
-              ))}
-          </div>
-
           {/* ─── Bottom strip ─── */}
-          <div className="mt-5 pt-5 border-t border-[var(--border)] flex flex-col items-center text-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:text-right">
+          <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-col items-center text-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:text-right">
             <p className="text-xs text-[var(--text-faint)]">
               © {currentYear} Pixelia. כל הזכויות שמורות.
             </p>
