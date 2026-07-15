@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'תנאי שימוש - Pixelia',
+  alternates: { canonical: '/terms' },
   description: 'תנאי השימוש באתר Pixelia - כללים והתחייבויות לשימוש באתר ובשירותים',
 };
 

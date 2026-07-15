@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'מדיניות פרטיות - Pixelia',
+  alternates: { canonical: '/privacy' },
   description: 'מדיניות הפרטיות של Pixelia - כיצד אנו אוספים, משתמשים ושומרים על המידע שלכם',
 };
 

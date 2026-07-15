@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'אודות — סטודיו לעיצוב ובניית אתרים',
+  alternates: { canonical: '/about' },
   description: 'הסטודיו, הניסיון והטכנולוגיות שאיתן אנחנו מעצבים ובונים אתרים מקצועיים לעסקים.',
 };
 

@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'הצהרת נגישות - Pixelia',
+  alternates: { canonical: '/accessibility' },
   description: 'הצהרת נגישות לאתר Pixelia בהתאם לתקן הישראלי ת"י 5568 ברמה AA',
 };
 

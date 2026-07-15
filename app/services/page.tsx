@@ -11,6 +11,7 @@ import { ReactElement } from 'react';
 
 export const metadata: Metadata = {
   title: 'עיצוב ובניית אתרים — השירותים שלנו',
+  alternates: { canonical: '/services' },
   description: 'שירותי עיצוב ובניית אתרים מקצועיים לעסקים: אתרי תדמית, חנויות אונליין, דפי נחיתה ותהליך עבודה מלא מהרעיון ועד אתר חי.',
 };
 

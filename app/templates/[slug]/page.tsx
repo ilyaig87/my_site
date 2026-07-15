@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: TemplatePageProps): Promise<M
   if (!template) return { title: 'טמפלייט לא נמצא' };
   return {
     title: `${template.name} - Pixelia`,
+    alternates: { canonical: `/templates/${template.slug}` },
     description: template.description,
   };
 }
