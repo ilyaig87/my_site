@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { trackEvent } from '@/lib/ga';
+import { trackWhatsAppClick } from '@/lib/ga';
 
 const WHATSAPP_NUMBER = '972546361555';
 const DEFAULT_MESSAGE = 'היי, אני מעוניין לבנות אתר';
@@ -22,7 +22,7 @@ export default function FloatingWhatsApp() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => trackEvent('whatsapp_click', { location: 'floating_button' })}
+      onClick={() => trackWhatsAppClick('floating_button')}
       aria-label="פתחו שיחת WhatsApp"
       title="שלחו הודעה ב-WhatsApp"
       className="group fixed bottom-6 right-6 z-50 lg-surface lg-glow-green w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"

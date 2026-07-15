@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
+import WhatsAppLink from '@/components/WhatsAppLink';
 
 export const metadata: Metadata = {
   title: 'צרו קשר — בניית אתרים לעסקים | Pixelia',
@@ -79,10 +80,9 @@ export default function ContactPage() {
               </p>
             </a>
 
-            <a
+            <WhatsAppLink
               href={`https://wa.me/${content.contact.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              location="contact_card"
               className="group lg-surface lg-shallow squircle-md p-3 sm:p-5 flex flex-col items-center text-center transition-transform hover:scale-[1.03]"
             >
               <div
@@ -95,7 +95,7 @@ export default function ContactPage() {
               </div>
               <p className="relative z-10 text-xs sm:text-sm font-bold text-[var(--text-strong)] mb-1">WhatsApp</p>
               <p className="relative z-10 text-[10px] sm:text-xs text-[var(--text-muted)] leading-tight break-words">מענה תוך דקות</p>
-            </a>
+            </WhatsAppLink>
           </div>
 
           {/* Contact Form */}

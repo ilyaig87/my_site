@@ -6,6 +6,7 @@ import Container from '@/components/ui/Container';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
+import { trackEvent, trackWhatsAppClick } from '@/lib/ga';
 
 const WHATSAPP_NUMBER = '972546361555';
 
@@ -161,6 +162,11 @@ export default function Pricing() {
 
     setFormError('');
     setPendingPackageId(selectedPackage.id);
+
+    // The pricing flow is the highest-intent conversion on the site: the user
+    // picked a package, left details AND opens a WhatsApp chat — report both.
+    trackEvent('generate_lead', { method: 'pricing_package', package: selectedPackage.name });
+    trackWhatsAppClick('pricing_package_form');
 
     const whatsappUrl = buildWhatsAppLink(selectedPackage);
     const whatsappWindow = window.open(whatsappUrl, '_blank');

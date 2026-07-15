@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import { trackWhatsAppClick } from '@/lib/ga';
 
 type Variant = 'primary' | 'glass' | 'ghost' | 'secondary' | 'outline' | 'accent';
 type Size = 'sm' | 'md' | 'lg';
@@ -64,8 +65,15 @@ export default function Button({
 
   if (href) {
     if (external) {
+      // WhatsApp CTAs are the site's primary conversion — every Button that
+      // points at WhatsApp reports the click to GA4 automatically.
+      const isWhatsApp = /wa\.me|api\.whatsapp\.com/i.test(href);
+      const handleClick = () => {
+        if (isWhatsApp) trackWhatsAppClick('cta_button');
+        onClick?.();
+      };
       return (
-        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+        <a href={href} className={classes} target="_blank" rel="noopener noreferrer" onClick={handleClick}>
           {children}
         </a>
       );

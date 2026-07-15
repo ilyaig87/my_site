@@ -21,3 +21,13 @@ export function trackEvent(eventName: string, params?: GtagParams) {
     // Analytics must never break the UI.
   }
 }
+
+/**
+ * Standard WhatsApp-click conversion event.
+ * `location` identifies the button ('footer', 'floating_button', ...);
+ * `page` records which page the click came from.
+ */
+export function trackWhatsAppClick(location: string) {
+  if (typeof window === 'undefined') return;
+  trackEvent('whatsapp_click', { location, page: window.location.pathname });
+}
