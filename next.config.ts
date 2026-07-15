@@ -74,6 +74,22 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // The short-lived Tel Aviv / Gush Dan area pages were replaced by one
+      // honest nationwide page (the studio works remotely, Israel-wide).
+      {
+        source: "/services/website-development-tel-aviv",
+        destination: "/services/website-development-israel",
+        permanent: true,
+      },
+      {
+        source: "/services/website-development-center",
+        destination: "/services/website-development-israel",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default bundleAnalyzer(nextConfig);

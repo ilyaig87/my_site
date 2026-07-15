@@ -62,10 +62,9 @@ export function getServicesMenu() {
         ],
       },
       {
-        title: 'לפי אזור',
+        title: 'איפה אנחנו עובדים',
         links: [
-          { label: 'בניית אתרים בתל אביב', href: '/services/website-development-tel-aviv' },
-          { label: 'בניית אתרים בגוש דן והמרכז', href: '/services/website-development-center' },
+          { label: 'בניית אתרים בכל הארץ — מרחוק', href: '/services/website-development-israel' },
         ],
       },
     ],

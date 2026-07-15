@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "אתרים לעסקים",
     "בניית אתרים לעסקים קטנים",
     "בניית דף נחיתה",
-    "בניית אתרים תל אביב",
+    "בניית אתרים בכל הארץ",
     "סוכני AI",
     "AI Agents",
     "סוכן AI לעסק",
@@ -122,10 +122,11 @@ export default function RootLayout({
         email: contact.email,
         telephone: `+${contact.whatsapp}`,
         priceRange: "₪₪",
-        areaServed: ["תל אביב", "גוש דן והמרכז", "כל הארץ — אונליין"],
+        // Pixelia works remotely with businesses across all of Israel —
+        // no single-city presence is claimed.
+        areaServed: { "@type": "Country", name: "ישראל" },
         address: {
           "@type": "PostalAddress",
-          addressLocality: "תל אביב",
           addressCountry: "IL",
         },
         contactPoint: {
