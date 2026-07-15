@@ -76,16 +76,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // The short-lived Tel Aviv / Gush Dan area pages were replaced by one
-      // honest nationwide page (the studio works remotely, Israel-wide).
+      // The short-lived area pages (Tel Aviv / Gush Dan / nationwide) were
+      // folded into a "we work everywhere, remotely" note on the contact page.
       {
-        source: "/services/website-development-tel-aviv",
-        destination: "/services/website-development-israel",
-        permanent: true,
-      },
-      {
-        source: "/services/website-development-center",
-        destination: "/services/website-development-israel",
+        source: "/services/website-development-:area(tel-aviv|center|israel)",
+        destination: "/contact",
         permanent: true,
       },
     ];

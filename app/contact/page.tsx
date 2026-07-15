@@ -99,6 +99,20 @@ export default function ContactPage() {
             </WhatsAppLink>
           </div>
 
+          {/* Where we work — remote-first, all of Israel */}
+          <div className="max-w-3xl mx-auto mb-10">
+            <GlassCard variant="default" squircle="lg" className="p-6 sm:p-7 text-center">
+              <h2 className="relative z-10 text-xl font-bold text-[var(--text-strong)] mb-2">
+                איפה אנחנו עובדים? <span className="lg-text-shimmer">בכל הארץ</span>
+              </h2>
+              <p className="relative z-10 text-sm text-[var(--text-muted)] leading-relaxed max-w-xl mx-auto">
+                כל התהליך מתנהל מרחוק — אפיון בזום, עדכונים בוואטסאפ ודמו חי לאישור — כך שמהצפון ועד
+                אילת מקבלים בדיוק את אותו שירות, באותם מחירים ובאותם זמנים. בלי פגישות מיותרות, בלי
+                תוספת מרחק.
+              </p>
+            </GlassCard>
+          </div>
+
           {/* Contact Form */}
           <div className="max-w-2xl mx-auto">
             <ContactForm />

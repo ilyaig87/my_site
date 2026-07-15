@@ -61,12 +61,6 @@ export function getServicesMenu() {
           { label: 'אתרים למותגי רהיטים ועיצוב', href: '/services/furniture-design-brands' },
         ],
       },
-      {
-        title: 'איפה אנחנו עובדים',
-        links: [
-          { label: 'בניית אתרים בכל הארץ — מרחוק', href: '/services/website-development-israel' },
-        ],
-      },
     ],
   };
 }
