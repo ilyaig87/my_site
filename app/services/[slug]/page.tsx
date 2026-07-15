@@ -160,7 +160,15 @@ export default async function SeoServicePage({ params }: PageProps) {
                     <Button href={page.caseStudy.url} external variant="glass" size="sm">
                       לאתר החי ←
                     </Button>
-                    <Link href="/#projects" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
+                    {page.caseStudy.portfolioSlug && (
+                      <Link
+                        href={`/portfolio/${page.caseStudy.portfolioSlug}`}
+                        className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
+                      >
+                        לקייס המלא
+                      </Link>
+                    )}
+                    <Link href="/portfolio" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
                       עוד עבודות בפורטפוליו
                     </Link>
                   </div>

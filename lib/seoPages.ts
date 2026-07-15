@@ -20,6 +20,7 @@ export interface SeoCaseStudy {
   url: string; // the live site
   image: string; // screenshot, same asset the homepage portfolio uses
   blurb: string;
+  portfolioSlug?: string; // matching /portfolio/[slug] case-study page
 }
 
 export interface SeoPage {
@@ -317,6 +318,7 @@ export const SEO_PAGES: SeoPage[] = [
       name: 'צחי צדקה',
       tagline: 'דף נחיתה לקבלן שיפוצים — "מבטון עד מפתח"',
       url: 'https://zedakaprojects.co.il',
+      portfolioSlug: 'zedaka-projects',
       image: '/images/projects/zedaka-projects.png',
       blurb: 'דף נחיתה בעמוד אחד שבנינו לקבלן שיפוצים: הצגת שירותים ותהליך עבודה, אזורי שירות ופרויקטים — הכל מוביל ליצירת קשר.',
     },
@@ -363,6 +365,7 @@ export const SEO_PAGES: SeoPage[] = [
       name: 'פז השקעות',
       tagline: 'אתר לחברת מימון פיננסי עם 30+ שנות ותק',
       url: 'https://www.paz-invest.co.il/',
+      portfolioSlug: 'paz-invest',
       image: '/images/projects/paz-invest.png',
       blurb: 'אתר שבנינו לחברה פיננסית ותיקה: דפי שירותים מפורטים, טפסי בקשה, CTA חזקים ואופטימיזציה ל-SEO — עיצוב שמשדר בדיוק את היציבות שהתחום דורש.',
     },
@@ -409,6 +412,7 @@ export const SEO_PAGES: SeoPage[] = [
       name: 'חן שעיה — שירותי כמאות',
       tagline: 'אתר תדמית לחברת כמאות והנדסה',
       url: 'https://www.chenshaya.com/',
+      portfolioSlug: 'chen-shaya',
       image: '/images/projects/chenshaya.png',
       blurb: 'אתר שבנינו לחברה המתמחה בחישובי כמויות, כתבי מכרזים וניתוחי מחיר: עיצוב נקי ומכובד, גלריית פרויקטים וטופס פנייה — מקצועיות שרואים מהמסך.',
     },
@@ -455,6 +459,7 @@ export const SEO_PAGES: SeoPage[] = [
       name: 'Uriel Furniture',
       tagline: 'אתר תדמית למותג רהיטים — "עוצב לנוחות מושלמת"',
       url: 'https://uriel-furniture.vercel.app/',
+      portfolioSlug: 'uriel-furniture',
       image: '/images/projects/uriel-furniture.png',
       blurb: 'אתר שבנינו למותג רהיטים: קולקציה מעוצבת באווירה נקייה ושלווה, דו-לשוני עברית/אנגלית — האסתטיקה של המוצר נמשכת אל תוך המסך.',
     },

@@ -1,91 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 import { fadeUp, stagger } from '@/lib/animations';
+import { getAllProjects } from '@/lib/projects';
 
-interface Project {
-  name: string;
-  url: string;
-  domain: string;
-  tagline: string;
-  description: string;
-  image: string;
-  highlights: string[];
-  tags: string[];
-}
-
-const projects: Project[] = [
-  {
-    name: 'צחי צדקה',
-    url: 'https://zedakaprojects.co.il',
-    domain: 'zedakaprojects.co.il',
-    tagline: 'דף נחיתה — שיפוצים כלליים',
-    description:
-      'דף נחיתה עסקי בעמוד אחד לקבלן שיפוצים — "מבטון עד מפתח". עיצוב נקי וממוקד המרה, מותאם מלא למובייל, שמוביל את הגולש ליצירת קשר.',
-    image: '/images/projects/zedaka-projects.png',
-    highlights: ['עמוד אחד ממוקד המרה', 'הצגת שירותים ותהליך עבודה', 'אזורי שירות ופרויקטים', 'מותאם מובייל'],
-    tags: ['דף נחיתה', 'שיפוצים', 'עמוד אחד'],
-  },
-  {
-    name: 'חן שעיה — שירותי כמאות',
-    url: 'https://www.chenshaya.com/',
-    domain: 'chenshaya.com',
-    tagline: 'אתר תדמית לחברת כמאות והנדסה',
-    description:
-      'אתר תדמית מקצועי לחברה המתמחה בחישובי כמויות, כתבי מכרזים וניתוחי מחיר. עיצוב נקי ומכובד שמדגיש מקצועיות.',
-    image: '/images/projects/chenshaya.png',
-    highlights: ['עיצוב מודרני ונקי', 'גלריית פרויקטים', 'טופס יצירת קשר', 'מותאם מובייל'],
-    tags: ['אתר תדמית', 'הנדסה', 'B2B'],
-  },
-  {
-    name: 'פז השקעות',
-    url: 'https://www.paz-invest.co.il/',
-    domain: 'paz-invest.co.il',
-    tagline: 'אתר לחברת מימון פיננסי',
-    description:
-      'אתר לחברה ותיקה (30+ שנה) המתמחה בהלוואות חוץ בנקאיות, ניכיון שיקים ומימון פרויקטים בנדל"ן.',
-    image: '/images/projects/paz-invest.png',
-    highlights: ['דפי שירותים מפורטים', 'CTA חזקים', 'אופטימיזציה ל-SEO', 'טפסי בקשה'],
-    tags: ['אתר תדמית', 'פיננסים', 'לידים'],
-  },
-  {
-    name: 'Uriel Furniture',
-    url: 'https://uriel-furniture.vercel.app/',
-    domain: 'uriel-furniture.vercel.app',
-    tagline: 'אתר תדמית למותג רהיטים',
-    description:
-      'אתר תדמית אלגנטי למותג רהיטים — "עוצב לנוחות מושלמת": קולקציה מעוצבת, אווירה נקייה ושלווה, ותמיכה דו-לשונית עברית/אנגלית.',
-    image: '/images/projects/uriel-furniture.png',
-    highlights: ['עיצוב אלגנטי ושליו', 'הצגת קולקציה', 'דו-לשוני עברית/אנגלית', 'מותאם מובייל'],
-    tags: ['אתר תדמית', 'רהיטים', 'דו-לשוני'],
-  },
-  {
-    name: 'Critic.',
-    url: 'https://critics.netlify.app/',
-    domain: 'critics.netlify.app',
-    tagline: 'אפליקציית סרטים וסדרות',
-    description:
-      'אפליקציית ווב מלאה לסרטים וסדרות בסגנון שירותי סטרימינג — חיפוש, דירוגים, טרנדים ורשימת צפייה אישית, בעיצוב כהה ומלוטש.',
-    image: '/images/projects/critics.png',
-    highlights: ['קטלוג סרטים וסדרות', 'חיפוש ודירוגים', 'רשימת צפייה אישית', 'עיצוב סטרימינג כהה'],
-    tags: ['אפליקציית ווב', 'React', 'סרטים וסדרות'],
-  },
-  {
-    name: 'I-Games',
-    url: 'https://memory-game-tawny-eta.vercel.app/',
-    domain: 'i-games · vercel.app',
-    tagline: 'פורטל משחקים — עם יריבי AI אמיתיים',
-    description:
-      'שישה משחקי דפדפן במקום אחד — שלושה מהם מול יריב AI חושב אמיתי. בלי הורדות, בלי הרשמה, פשוט משחקים. הוכחה חיה ליכולות ה-AI והאינטראקציה שאנחנו בונים.',
-    image: '/images/projects/memory-game.png',
-    highlights: ['6 משחקים בדפדפן', '3 יריבי AI חכמים', 'בלי הרשמה — לוחצים ומשחקים', 'אנימציות ולוגיקת משחק'],
-    tags: ['משחקים', 'AI', 'אינטראקטיבי'],
-  },
-];
+const projects = getAllProjects();
 
 export default function ProjectsSection() {
   return (
@@ -200,6 +124,14 @@ export default function ProjectsSection() {
                   </div>
                 </div>
               </GlassCard>
+              {/* The card itself opens the live site, so the case-study link
+                  sits below it (nested anchors are invalid HTML). */}
+              <Link
+                href={`/portfolio/${project.slug}`}
+                className="inline-block mt-2.5 mr-2 text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
+              >
+                איך בנינו את זה? לקייס המלא ←
+              </Link>
             </motion.div>
           ))}
         </motion.div>
