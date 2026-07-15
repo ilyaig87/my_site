@@ -98,9 +98,9 @@ export default function Footer() {
 
           {/* ─── Niche landing pages — internal-link strip for SEO ─── */}
           <div className="mt-8 pt-5 border-t border-[var(--border)] flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:justify-start">
-            <span className="text-xs font-semibold text-[var(--text-muted)]">בניית אתרים לפי תחום:</span>
+            <span className="text-xs font-semibold text-[var(--text-muted)]">בניית אתרים לפי תחום ואזור:</span>
             {getAllSeoPages()
-              .filter((p) => p.niche)
+              .filter((p) => p.niche || p.area)
               .map((p) => (
                 <Link
                   key={p.slug}

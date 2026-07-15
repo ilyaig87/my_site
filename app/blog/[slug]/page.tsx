@@ -5,6 +5,7 @@ import Container from '@/components/ui/Container';
 import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
 import { getPostBySlug, getAllPostSlugs, getAllPosts, formatDateHe, type Block } from '@/lib/blog';
+import { breadcrumbList } from '@/lib/breadcrumbs';
 
 const SITE_URL = 'https://www.pixelia.co.il';
 
@@ -80,20 +81,32 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    dateModified: post.date,
-    inLanguage: 'he-IL',
-    author: { '@type': 'Organization', name: 'Pixelia', url: SITE_URL },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Pixelia',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo/pixelia_logo_color.png` },
-    },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
-    keywords: post.tags.join(', '),
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        // Posts have no per-post artwork yet, so the brand OG image stands in —
+        // an Article without image is excluded from most rich results.
+        image: `${SITE_URL}/images/og/og-image.png`,
+        datePublished: post.date,
+        dateModified: post.date,
+        inLanguage: 'he-IL',
+        author: { '@type': 'Organization', name: 'Pixelia', url: SITE_URL },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Pixelia',
+          logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo/pixelia_logo_color.png` },
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+        keywords: post.tags.join(', '),
+      },
+      breadcrumbList([
+        { name: 'בית', path: '/' },
+        { name: 'בלוג', path: '/blog' },
+        { name: post.title, path: `/blog/${post.slug}` },
+      ]),
+    ],
   };
 
   return (

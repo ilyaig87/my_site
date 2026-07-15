@@ -7,6 +7,7 @@ import GlassCard from '@/components/ui/GlassCard';
 import GlassPill from '@/components/ui/GlassPill';
 import Button from '@/components/ui/Button';
 import { getSeoPage, getAllSeoSlugs, getAllSeoPages } from '@/lib/seoPages';
+import { breadcrumbList } from '@/lib/breadcrumbs';
 
 const SITE_URL = 'https://www.pixelia.co.il';
 
@@ -68,6 +69,11 @@ export default async function SeoServicePage({ params }: PageProps) {
           acceptedAnswer: { '@type': 'Answer', text: f.a },
         })),
       },
+      breadcrumbList([
+        { name: 'בית', path: '/' },
+        { name: 'שירותים', path: '/services' },
+        { name: page.badge, path: `/services/${page.slug}` },
+      ]),
     ],
   };
 

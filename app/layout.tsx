@@ -110,7 +110,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        // ProfessionalService is a LocalBusiness subtype — this is what makes
+        // Google treat Pixelia as a local business for map-pack / local results.
+        "@type": ["Organization", "ProfessionalService"],
         "@id": `${SITE_URL}/#organization`,
         name: "Pixelia",
         url: SITE_URL,
@@ -119,7 +121,8 @@ export default function RootLayout({
         description: "סטודיו לעיצוב ופיתוח אתרים מקצועיים לעסקים.",
         email: contact.email,
         telephone: `+${contact.whatsapp}`,
-        areaServed: "IL",
+        priceRange: "₪₪",
+        areaServed: ["תל אביב", "גוש דן והמרכז", "כל הארץ — אונליין"],
         address: {
           "@type": "PostalAddress",
           addressLocality: "תל אביב",
