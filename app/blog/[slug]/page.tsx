@@ -34,6 +34,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+// Markdown-style [label](href) links inside post text become real links —
+// internal paths use next/link, anything else a plain anchor.
+function renderInline(text: string): React.ReactNode {
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  const nodes: React.ReactNode[] = [];
+  let last = 0;
+  let k = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    const [, label, href] = m;
+    const cls = 'text-[var(--primary)] font-medium hover:underline';
+    nodes.push(
+      href.startsWith('/') ? (
+        <Link key={`k${k++}`} href={href} className={cls}>{label}</Link>
+      ) : (
+        <a key={`k${k++}`} href={href} target="_blank" rel="noopener noreferrer" className={cls}>{label}</a>
+      )
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes.length > 1 || k > 0 ? nodes : text;
+}
+
 function renderBlock(block: Block, i: number) {
   switch (block.type) {
     case 'h2':
@@ -45,7 +70,7 @@ function renderBlock(block: Block, i: number) {
     case 'p':
       return (
         <p key={i} className="text-base text-[var(--text-default)] leading-relaxed mb-4">
-          {block.text}
+          {renderInline(block.text)}
         </p>
       );
     case 'ul':
@@ -56,7 +81,7 @@ function renderBlock(block: Block, i: number) {
               <svg className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-base leading-relaxed">{item}</span>
+              <span className="text-base leading-relaxed">{renderInline(item)}</span>
             </li>
           ))}
         </ul>
@@ -64,7 +89,7 @@ function renderBlock(block: Block, i: number) {
     case 'quote':
       return (
         <blockquote key={i} className="lg-surface lg-shallow squircle-md p-5 my-6 text-[var(--text-strong)] font-medium border-r-4 border-[var(--primary)]">
-          <span className="relative z-10">{block.text}</span>
+          <span className="relative z-10">{renderInline(block.text)}</span>
         </blockquote>
       );
     default:
@@ -77,7 +102,17 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
+  // Explicit topic-cluster mates first; fall back to the two newest posts.
+  const related = post.related
+    ? post.related.map((s) => getPostBySlug(s)).filter((p): p is NonNullable<typeof p> => !!p)
+    : getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
+
+  const cta = post.cta ?? {
+    title: 'רוצים מערכת AI או אוטומציה לעסק שלכם?',
+    body: 'ב-Pixelia בונים מערכות חכמות שעובדות בשבילכם. בואו נדבר על מה שמתאים לכם.',
+    href: '/ai',
+    label: 'השירות שלנו',
+  };
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -137,16 +172,16 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <div>{post.content.map(renderBlock)}</div>
 
-            {/* CTA */}
+            {/* Post-specific CTA */}
             <div className="lg-surface lg-deep squircle-lg p-6 sm:p-8 mt-10 text-center">
               <h3 className="relative z-10 text-xl font-bold text-[var(--text-strong)] mb-2">
-                רוצים מערכת AI או אוטומציה לעסק שלכם?
+                {cta.title}
               </h3>
               <p className="relative z-10 text-sm text-[var(--text-muted)] mb-5">
-                ב-Pixelia בונים מערכות חכמות שעובדות בשבילכם. בואו נדבר על מה שמתאים לכם.
+                {cta.body}
               </p>
               <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center">
-                <Button href="/ai" variant="glass" size="md">השירות שלנו</Button>
+                <Button href={cta.href} variant="glass" size="md">{cta.label}</Button>
                 <Button href="/contact" variant="primary" size="md">דברו איתנו</Button>
               </div>
             </div>
