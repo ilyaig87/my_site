@@ -76,7 +76,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
           >
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
-              אספקה מהירה — החל מ-5 ימי עבודה
+              דף נחיתה באוויר — עד 5 ימי עסקים
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[var(--accent)]" />
