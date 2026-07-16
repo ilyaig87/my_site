@@ -46,7 +46,7 @@ const capabilities: Capability[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-3.5-7.1M21 4v4h-4M9 18l-4 3v-3" />
       </svg>
     ),
-    title: 'סוכני AI — Agents',
+    title: 'סוכני AI (Agents)',
     description: 'עובד דיגיטלי שזמין 24/7: עונה ללקוחות בעברית טבעית, מסנן לידים, קובע פגישות ומבצע משימות בפועל — באתר ובוואטסאפ.',
   },
   {

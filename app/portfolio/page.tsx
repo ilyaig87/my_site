@@ -9,7 +9,7 @@ import { getAllProjects } from '@/lib/projects';
 import { breadcrumbList } from '@/lib/breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'פורטפוליו — קייסים מלאים של אתרים שבנינו',
+  title: 'פורטפוליו: קייסים מלאים של אתרים שבנינו',
   description:
     'הצצה לעבודות של Pixelia: קייסים מלאים — האתגר, הפתרון והתוצאה — של אתרים חיים שבנינו לעסקים בישראל, עם קישור לכל אתר באוויר.',
   alternates: { canonical: '/portfolio' },

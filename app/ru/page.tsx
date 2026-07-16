@@ -9,7 +9,7 @@ const SITE_URL = 'https://www.pixelia.co.il';
 const WHATSAPP = 'https://wa.me/972546361555?text=' + encodeURIComponent('Здравствуйте! Мне нужен сайт для бизнеса.');
 
 export const metadata: Metadata = {
-  title: 'Создание сайтов в Израиле — Pixelia | Сайты для бизнеса на русском',
+  title: 'Создание сайтов в Израиле: сайты для бизнеса на русском',
   description:
     'Профессиональные сайты для бизнеса в Израиле: лендинги от 2 500 ₪, корпоративные сайты, AI-чатботы и автоматизация. Обслуживание на русском и иврите. Быстро, современно, без скрытых платежей.',
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
-    title: 'Pixelia — создание сайтов в Израиле на русском',
+    title: 'Pixelia: создание сайтов в Израиле на русском',
     description: 'Лендинги, бизнес-сайты, AI-чатботы. Говорим по-русски и на иврите.',
     url: `${SITE_URL}/ru`,
     images: [
@@ -133,7 +133,7 @@ export default function RussianLandingPage() {
               <GlassPill dot>Говорим по-русски 🇮🇱</GlassPill>
             </div>
             <h1 className="mb-4 text-[var(--text-strong)]">
-              Сайт для вашего бизнеса — <span className="lg-text-shimmer">на русском языке</span>
+              Сайт для вашего бизнеса <span className="lg-text-shimmer">на русском языке</span>
             </h1>
             <p className="text-lg text-[var(--text-muted)] mb-7">
               Профессиональные сайты для бизнеса в Израиле. Небольшая студия с высоким стандартом:

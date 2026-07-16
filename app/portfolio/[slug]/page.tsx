@@ -93,7 +93,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               ))}
             </div>
             <h1 className="mb-3 text-[var(--text-strong)]">
-              {project.name} — <span className="lg-text-shimmer">{project.tagline}</span>
+              {project.name}: <span className="lg-text-shimmer">{project.tagline}</span>
             </h1>
             <p className="text-lg text-[var(--text-muted)]">{project.description}</p>
           </div>

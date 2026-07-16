@@ -32,13 +32,13 @@ export const PROJECTS: Project[] = [
     name: 'צחי צדקה',
     url: 'https://zedakaprojects.co.il',
     domain: 'zedakaprojects.co.il',
-    tagline: 'דף נחיתה — שיפוצים כלליים',
+    tagline: 'דף נחיתה לקבלן שיפוצים',
     description:
       'דף נחיתה עסקי בעמוד אחד לקבלן שיפוצים — "מבטון עד מפתח". עיצוב נקי וממוקד המרה, מותאם מלא למובייל, שמוביל את הגולש ליצירת קשר.',
     image: '/images/projects/zedaka-projects.png',
     highlights: ['עמוד אחד ממוקד המרה', 'הצגת שירותים ותהליך עבודה', 'אזורי שירות ופרויקטים', 'מותאם מובייל'],
     tags: ['דף נחיתה', 'שיפוצים', 'עמוד אחד'],
-    metaTitle: 'קייס סטדי: דף נחיתה לקבלן שיפוצים — צחי צדקה',
+    metaTitle: 'קייס סטדי: דף נחיתה לקבלן שיפוצים (צחי צדקה)',
     metaDescription:
       'איך בנינו דף נחיתה לקבלן שיפוצים: האתגר, הפתרון והתוצאה. עמוד אחד ממוקד המרה שהופך המלצות מפה לאוזן לפניות בוואטסאפ.',
     challenge:
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'chen-shaya',
-    name: 'חן שעיה — שירותי כמאות',
+    name: 'חן שעיה',
     url: 'https://www.chenshaya.com/',
     domain: 'chenshaya.com',
     tagline: 'אתר תדמית לחברת כמאות והנדסה',
@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
     image: '/images/projects/chenshaya.png',
     highlights: ['עיצוב מודרני ונקי', 'גלריית פרויקטים', 'טופס יצירת קשר', 'מותאם מובייל'],
     tags: ['אתר תדמית', 'הנדסה', 'B2B'],
-    metaTitle: 'קייס סטדי: אתר תדמית לחברת כמאות והנדסה — חן שעיה',
+    metaTitle: 'קייס סטדי: אתר תדמית לחברת כמאות והנדסה (חן שעיה)',
     metaDescription:
       'איך בנינו אתר תדמית לחברת כמאות: האתגר, הפתרון והתוצאה. נוכחות B2B שמשדרת דיוק מול יזמים, מכרזים ומזמינים.',
     challenge:
@@ -96,7 +96,7 @@ export const PROJECTS: Project[] = [
     image: '/images/projects/paz-invest.png',
     highlights: ['דפי שירותים מפורטים', 'CTA חזקים', 'אופטימיזציה ל-SEO', 'טפסי בקשה'],
     tags: ['אתר תדמית', 'פיננסים', 'לידים'],
-    metaTitle: 'קייס סטדי: אתר לחברת מימון פיננסי — פז השקעות',
+    metaTitle: 'קייס סטדי: אתר לחברת מימון פיננסי (פז השקעות)',
     metaDescription:
       'איך בנינו אתר לחברת מימון עם 30+ שנות ותק: האתגר, הפתרון והתוצאה. עמוד לכל שירות, טפסי בקשה ו-SEO — אמינות שמייצרת פניות.',
     challenge:
@@ -125,7 +125,7 @@ export const PROJECTS: Project[] = [
     image: '/images/projects/uriel-furniture.png',
     highlights: ['עיצוב אלגנטי ושליו', 'הצגת קולקציה', 'דו-לשוני עברית/אנגלית', 'מותאם מובייל'],
     tags: ['אתר תדמית', 'רהיטים', 'דו-לשוני'],
-    metaTitle: 'קייס סטדי: אתר למותג רהיטים — Uriel Furniture',
+    metaTitle: 'קייס סטדי: אתר למותג רהיטים (Uriel Furniture)',
     metaDescription:
       'איך בנינו אתר למותג רהיטים: האתגר, הפתרון והתוצאה. חדר תצוגה דיגיטלי דו-לשוני שנותן לקולקציה לנשום.',
     challenge:
@@ -154,7 +154,7 @@ export const PROJECTS: Project[] = [
     image: '/images/projects/critics.png',
     highlights: ['קטלוג סרטים וסדרות', 'חיפוש ודירוגים', 'רשימת צפייה אישית', 'עיצוב סטרימינג כהה'],
     tags: ['אפליקציית ווב', 'React', 'סרטים וסדרות'],
-    metaTitle: 'קייס סטדי: אפליקציית ווב לסרטים וסדרות — Critic',
+    metaTitle: 'קייס סטדי: אפליקציית ווב לסרטים וסדרות (Critic)',
     metaDescription:
       'איך בנינו אפליקציית ווב מלאה בסגנון שירות סטרימינג: חיפוש, דירוגים, טרנדים ורשימת צפייה — הוכחת יכולת לפיתוח מוצר מקצה לקצה.',
     challenge:
@@ -177,13 +177,13 @@ export const PROJECTS: Project[] = [
     name: 'I-Games',
     url: 'https://memory-game-tawny-eta.vercel.app/',
     domain: 'i-games · vercel.app',
-    tagline: 'פורטל משחקים — עם יריבי AI אמיתיים',
+    tagline: 'פורטל משחקים עם יריבי AI אמיתיים',
     description:
       'שישה משחקי דפדפן במקום אחד — שלושה מהם מול יריב AI חושב אמיתי. בלי הורדות, בלי הרשמה, פשוט משחקים. הוכחה חיה ליכולות ה-AI והאינטראקציה שאנחנו בונים.',
     image: '/images/projects/memory-game.png',
     highlights: ['6 משחקים בדפדפן', '3 יריבי AI חכמים', 'בלי הרשמה — לוחצים ומשחקים', 'אנימציות ולוגיקת משחק'],
     tags: ['משחקים', 'AI', 'אינטראקטיבי'],
-    metaTitle: 'קייס סטדי: פורטל משחקים עם יריבי AI — I-Games',
+    metaTitle: 'קייס סטדי: פורטל משחקים עם יריבי AI (I-Games)',
     metaDescription:
       'איך בנינו פורטל משחקי דפדפן עם יריבי AI אמיתיים: האתגר, הפתרון והתוצאה. הוכחה חיה ליכולות AI ואינטראקציה בדפדפן.',
     challenge:

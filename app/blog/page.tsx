@@ -6,7 +6,7 @@ import GlassPill from '@/components/ui/GlassPill';
 import { getAllPosts, formatDateHe } from '@/lib/blog';
 
 export const metadata: Metadata = {
-  title: 'בלוג — AI, אוטומציה ובניית אתרים לעסקים',
+  title: 'בלוג: AI, אוטומציה ובניית אתרים לעסקים',
   description:
     'מדריכים וטיפים על AI, אוטומציה עסקית, צ\'אטבוטים ובניית אתרים חכמים לעסקים קטנים בישראל.',
   alternates: { canonical: '/blog' },

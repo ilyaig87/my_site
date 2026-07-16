@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     google: "Yt6gCzeUfM-XfZityDS8_hoW3jGp3oBDsvdNFxPN1WA",
   },
   title: {
-    default: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    default: "בניית אתרים מקצועיים לעסקים | Pixelia",
     template: "%s | Pixelia",
   },
   description:
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    title: "בניית אתרים מקצועיים לעסקים | Pixelia",
     description:
       "אתרי תדמית, דפי נחיתה, צ'אטבוטים ואוטומציית AI לעסקים. עיצוב מודרני, ליווי אישי ומחירים הוגנים — שירות בעברית וברוסית.",
     siteName: "Pixelia",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pixelia — בניית אתרים מקצועיים לעסקים",
+    title: "בניית אתרים מקצועיים לעסקים | Pixelia",
     description:
       "אתרי תדמית, דפי נחיתה, צ'אטבוטים ואוטומציית AI לעסקים — שירות בעברית וברוסית.",
     images: ["/images/og/og-image.png"],

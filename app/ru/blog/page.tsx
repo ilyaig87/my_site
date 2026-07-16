@@ -8,7 +8,7 @@ import { getAllRuPosts, formatDateRu } from '@/lib/blogRu';
 import { breadcrumbList } from '@/lib/breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Блог — сайты, AI и автоматизация для бизнеса в Израиле',
+  title: 'Блог: сайты, AI и автоматизация для бизнеса в Израиле',
   description:
     'Статьи на русском для владельцев бизнеса в Израиле: сколько стоит сайт, что такое AI-агенты, как не терять заявки. Практично и без воды.',
   alternates: {
