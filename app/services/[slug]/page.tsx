@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Container from '@/components/ui/Container';
@@ -125,59 +124,6 @@ export default async function SeoServicePage({ params }: PageProps) {
           </div>
         </Container>
       </section>
-
-      {/* Proof — the matching portfolio project (niche pages) */}
-      {page.caseStudy && (
-        <section className="relative">
-          <Container size="md">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl mb-6 text-[var(--text-strong)] text-center">
-                כבר בנינו כזה — <span className="lg-text-shimmer">תראו בעצמכם</span>
-              </h2>
-              <GlassCard variant="deep" squircle="lg" className="overflow-hidden">
-                <a
-                  href={page.caseStudy.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 block group"
-                  aria-label={`${page.caseStudy.name} — לצפייה באתר החי`}
-                >
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image
-                      src={page.caseStudy.image}
-                      alt={`צילום מסך — ${page.caseStudy.name}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 768px"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                    />
-                  </div>
-                </a>
-                <div className="relative z-10 p-6 sm:p-8">
-                  <h3 className="text-xl font-bold text-[var(--text-strong)] mb-1">{page.caseStudy.name}</h3>
-                  <p className="text-sm text-[var(--primary)] font-medium mb-3">{page.caseStudy.tagline}</p>
-                  <p className="text-base text-[var(--text-default)] leading-relaxed mb-5">{page.caseStudy.blurb}</p>
-                  <div className="flex flex-wrap gap-3 items-center">
-                    <Button href={page.caseStudy.url} external variant="glass" size="sm">
-                      לאתר החי ←
-                    </Button>
-                    {page.caseStudy.portfolioSlug && (
-                      <Link
-                        href={`/portfolio/${page.caseStudy.portfolioSlug}`}
-                        className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
-                      >
-                        לקייס המלא
-                      </Link>
-                    )}
-                    <Link href="/portfolio" className="text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">
-                      עוד עבודות בפורטפוליו
-                    </Link>
-                  </div>
-                </div>
-              </GlassCard>
-            </div>
-          </Container>
-        </section>
-      )}
 
       {/* FAQ */}
       <section className="relative">

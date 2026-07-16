@@ -83,6 +83,12 @@ const nextConfig: NextConfig = {
         destination: "/contact",
         permanent: true,
       },
+      // The niche landing pages were retired at the owner's request.
+      {
+        source: "/services/:niche(renovation-contractors|accountants-financial-advisors|engineering-firms|furniture-design-brands)",
+        destination: "/services",
+        permanent: true,
+      },
     ];
   },
 };

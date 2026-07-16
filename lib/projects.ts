@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     },
     result:
       'כרטיס ביקור דיגיטלי שסוגר את מעגל האמון: לקוח שמקבל המלצה מוצא עכשיו עמוד מקצועי שמאשר את מה ששמע — ופונה בקליק אחד. הקבלן מפסיק להפסיד פניות למתחרים שנראים יותר רציניים בגוגל.',
-    serviceLink: { label: 'בניית אתר לקבלני שיפוצים', href: '/services/renovation-contractors' },
+    serviceLink: { label: 'בניית דף נחיתה לעסק', href: '/services/landing-page' },
   },
   {
     slug: 'chen-shaya',
@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
     },
     result:
       'תיק עבודות מקצועי שזמין 24/7: כל הצעה או מכרז שהחברה מגישה מגובים עכשיו בכתובת שאפשר לבדוק — והרושם הראשוני בבדיקת הנאותות עובד לטובתה.',
-    serviceLink: { label: 'אתר תדמית לחברות הנדסה', href: '/services/engineering-firms' },
+    serviceLink: { label: 'בניית אתר תדמית לעסק', href: '/services/business-website' },
   },
   {
     slug: 'paz-invest',
@@ -112,7 +112,7 @@ export const PROJECTS: Project[] = [
     },
     result:
       'נוכחות דיגיטלית שסוף סוף תואמת את הוותק: כל שירות נגיש בחיפוש, כל עמוד מוביל לטופס בקשה, והחברה מתמודדת על הלקוח המקוון באותה רמה שבה היא עובדת מול לקוחותיה הוותיקים.',
-    serviceLink: { label: 'אתרים לרו"ח וליועצים פיננסיים', href: '/services/accountants-financial-advisors' },
+    serviceLink: { label: 'אתר תדמית שמייצר לידים', href: '/services/business-website' },
   },
   {
     slug: 'uriel-furniture',
@@ -141,7 +141,7 @@ export const PROJECTS: Project[] = [
     },
     result:
       'חדר תצוגה דיגיטלי שמרגיש כמו המותג: הלקוח עובר מהאינסטגרם לאתר בלי שבר בחוויה, והקולקציה נמכרת בעיניים — בשתי שפות.',
-    serviceLink: { label: 'אתרים למותגי רהיטים ועיצוב', href: '/services/furniture-design-brands' },
+    serviceLink: { label: 'אתר תדמית לעסק ולמותג', href: '/services/business-website' },
   },
   {
     slug: 'critic',

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getNavItems, getServicesMenu } from '@/lib/data';
+import { getNavItems } from '@/lib/data';
 import Button from '@/components/ui/Button';
 import GlassToggle from '@/components/ui/GlassToggle';
 import Container from '@/components/ui/Container';
@@ -13,12 +13,9 @@ import { cn } from '@/lib/cn';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false); // default = light
   const navItems = getNavItems();
-  const servicesMenu = getServicesMenu();
   const pathname = usePathname();
 
   const handleHomeClick = (href: string) => (e: React.MouseEvent) => {
@@ -88,86 +85,17 @@ export default function Header() {
 
             {/* Desktop nav — bigger tabs */}
             <nav className="hidden lg:flex items-center gap-5 xl:gap-6 absolute left-1/2 -translate-x-1/2">
-              {navItems.map((item) =>
-                item.href === '/services' ? (
-                  // "שירותים" opens a dropdown with the niche & area landing
-                  // pages; the label itself still navigates to /services.
-                  // State-driven (not CSS :hover) so keyboard focus works too.
-                  <div
-                    key={item.href}
-                    className="relative"
-                    onMouseEnter={() => setServicesOpen(true)}
-                    onMouseLeave={() => setServicesOpen(false)}
-                    onFocus={() => setServicesOpen(true)}
-                    onBlur={(e) => {
-                      if (!e.currentTarget.contains(e.relatedTarget as Node)) setServicesOpen(false);
-                    }}
-                  >
-                    <Link
-                      href={item.href}
-                      aria-expanded={servicesOpen}
-                      className="relative flex items-center gap-1 text-[14px] xl:text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
-                    >
-                      <span>{item.label}</span>
-                      <svg
-                        className={cn('w-3 h-3 mt-0.5 transition-transform duration-200', servicesOpen && 'rotate-180')}
-                        fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                      <span className="absolute inset-x-0 -bottom-1.5 h-px bg-[var(--accent)] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                    </Link>
-
-                    {/* pt-3 bridges the hover gap between the tab and the panel */}
-                    <div
-                      className={cn(
-                        'absolute top-full right-1/2 translate-x-1/2 pt-3 transition-all duration-200 z-50',
-                        servicesOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 translate-y-1'
-                      )}
-                    >
-                      <div className="w-72 p-4 rounded-2xl bg-[var(--bg-elevated)]/95 backdrop-blur-xl border border-[var(--border)] shadow-[0_20px_50px_-20px_rgba(14,20,32,0.35)] text-right">
-                        {servicesMenu.groups.map((group) => (
-                          <div key={group.title} className="mb-3 last:mb-0">
-                            <p className="text-[11px] font-bold text-[var(--text-faint)] uppercase tracking-wide mb-1.5 px-2">
-                              {group.title}
-                            </p>
-                            <ul>
-                              {group.links.map((link) => (
-                                <li key={link.href}>
-                                  <Link
-                                    href={link.href}
-                                    className="block px-2 py-1.5 rounded-lg text-[13px] text-[var(--text-default)] hover:text-[var(--text-strong)] hover:bg-[var(--ink)]/[0.05] transition-colors"
-                                  >
-                                    {link.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                        <div className="mt-2 pt-2 border-t border-[var(--border)]">
-                          <Link
-                            href={servicesMenu.overview.href}
-                            className="block px-2 py-1.5 rounded-lg text-[13px] font-semibold text-[var(--primary)] hover:bg-[var(--ink)]/[0.05] transition-colors"
-                          >
-                            {servicesMenu.overview.label}
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={handleHomeClick(item.href)}
-                    className="relative text-[14px] xl:text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
-                  >
-                    <span>{item.label}</span>
-                    <span className="absolute inset-x-0 -bottom-1.5 h-px bg-[var(--accent)] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  </Link>
-                )
-              )}
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={handleHomeClick(item.href)}
+                  className="relative text-[14px] xl:text-[15px] font-normal text-[var(--text-default)] hover:text-[var(--text-strong)] transition-colors group whitespace-nowrap"
+                >
+                  <span>{item.label}</span>
+                  <span className="absolute inset-x-0 -bottom-1.5 h-px bg-[var(--accent)] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                </Link>
+              ))}
             </nav>
 
             {/* Right side */}
@@ -233,67 +161,16 @@ export default function Header() {
                       show: { opacity: 1, y: 0 },
                     }}
                   >
-                    {item.href === '/services' ? (
-                      <>
-                        <div className="flex items-center justify-center gap-2">
-                          <Link
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-xl font-medium text-[var(--text-strong)] hover:text-[var(--accent)] transition-colors tracking-tight"
-                          >
-                            {item.label}
-                          </Link>
-                          <button
-                            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                            aria-label={mobileServicesOpen ? 'סגירת רשימת השירותים' : 'פתיחת רשימת השירותים'}
-                            aria-expanded={mobileServicesOpen}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-muted)]"
-                          >
-                            <svg
-                              className={cn('w-4 h-4 transition-transform duration-200', mobileServicesOpen && 'rotate-180')}
-                              fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </button>
-                        </div>
-                        <AnimatePresence initial={false}>
-                          {mobileServicesOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.25 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pt-3 flex flex-col gap-2.5">
-                                {servicesMenu.groups.flatMap((g) => g.links).map((link) => (
-                                  <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="block text-base text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
-                                  >
-                                    {link.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={(e) => {
-                          handleHomeClick(item.href)(e);
-                          setMobileMenuOpen(false);
-                        }}
-                        className="block text-xl font-medium text-[var(--text-strong)] hover:text-[var(--accent)] transition-colors tracking-tight"
-                      >
-                        {item.label}
-                      </Link>
-                    )}
+                    <Link
+                      href={item.href}
+                      onClick={(e) => {
+                        handleHomeClick(item.href)(e);
+                        setMobileMenuOpen(false);
+                      }}
+                      className="block text-xl font-medium text-[var(--text-strong)] hover:text-[var(--accent)] transition-colors tracking-tight"
+                    >
+                      {item.label}
+                    </Link>
                   </motion.div>
                 ))}
 

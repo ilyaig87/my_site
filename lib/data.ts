@@ -45,25 +45,6 @@ export function getNavItems() {
   ];
 }
 
-// The "שירותים" dropdown in the header — niche & area landing pages.
-// Kept as a light label/href list (in sync with lib/seoPages.ts slugs) so the
-// client-side header doesn't pull the full landing-page content into its bundle.
-export function getServicesMenu() {
-  return {
-    overview: { label: 'כל השירותים ←', href: '/services' },
-    groups: [
-      {
-        title: 'לפי תחום',
-        links: [
-          { label: 'אתרים לקבלני שיפוצים', href: '/services/renovation-contractors' },
-          { label: 'אתרים לרו"ח ויועצים פיננסיים', href: '/services/accountants-financial-advisors' },
-          { label: 'אתרים לחברות הנדסה', href: '/services/engineering-firms' },
-          { label: 'אתרים למותגי רהיטים ועיצוב', href: '/services/furniture-design-brands' },
-        ],
-      },
-    ],
-  };
-}
 
 // Generate template slugs for static paths
 export function getAllTemplateSlugs() {
