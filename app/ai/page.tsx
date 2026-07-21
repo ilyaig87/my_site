@@ -102,6 +102,33 @@ const useCases = [
   { who: 'נותן שירות מקצועי', what: 'סינון לידים אוטומטי — מגיעים אליכם רק הפניות הרלוונטיות, מתואמות ומסוכמות.' },
 ];
 
+const audiences = [
+  {
+    tag: 'לפרטיים',
+    title: 'עוזר אישי חכם שעובד בשבילכם',
+    items: [
+      'סדר במיילים — סיווג, סיכום וטיוטות תשובה אוטומטיות',
+      'מענה אוטומטי בוואטסאפ כשאתם עסוקים',
+      'סיכום מסמכים, חוזים ומאמרים ארוכים בשניות',
+      'תזכורות חכמות ומעקב משימות אישי',
+      'יצירת תוכן — מכתבים, קורות חיים ופוסטים',
+      'עזרה בטפסים ובבירוקרטיה, בשפה פשוטה',
+    ],
+  },
+  {
+    tag: 'לעסקים',
+    title: 'עובדים דיגיטליים שפועלים 24/7',
+    items: [
+      'סוכן AI שעונה ללקוחות באתר ובוואטסאפ, קובע פגישות ומסנן לידים',
+      'חיבור הכלים שלכם — טפסים, CRM, מייל ווואטסאפ — שעובדים יחד לבד',
+      'בוט שמכיר את המוצרים והמחירים שלכם ועונה בדיוק לפי המידע שלכם',
+      'הודעות יזומות: תזכורות תורים, פולואו-אפ ללידים וגבייה',
+      'דוחות וסיכומים שבועיים שמגיעים אליכם אוטומטית',
+      'יצירת תוכן שיווקי — תיאורי מוצר, פוסטים ותשובות לביקורות',
+    ],
+  },
+];
+
 const faqs = [
   {
     q: 'אני לא חברה גדולה — זה מתאים גם לעסק קטן?',
@@ -193,6 +220,39 @@ export default function AiServicesPage() {
                 </div>
                 <h3 className="text-lg font-bold text-[var(--text-strong)] mb-2">{c.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">{c.description}</p>
+              </GlassCard>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Who it's for — individuals & businesses */}
+      <section className="relative">
+        <Container>
+          <div className="text-center mb-8 sm:mb-10">
+            <div className="flex justify-center mb-4">
+              <GlassPill dot>גם לפרטיים · גם לעסקים</GlassPill>
+            </div>
+            <h2 className="text-3xl sm:text-4xl mb-2 text-[var(--text-strong)]">מה אפשר לעשות</h2>
+            <p className="text-sm text-[var(--text-muted)] max-w-2xl mx-auto">
+              הרעיון פשוט: כל דבר חוזר, ידני ומעייף — אפשר להעביר ל-AI שיעשה אותו בשבילכם. הנה איך זה נראה, בין אם אתם אדם פרטי או עסק.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
+            {audiences.map((a) => (
+              <GlassCard key={a.tag} variant="default" tilt squircle="lg" className="h-full p-7">
+                <GlassPill dot>{a.tag}</GlassPill>
+                <h3 className="text-xl font-bold text-[var(--text-strong)] mt-4 mb-4">{a.title}</h3>
+                <ul className="space-y-2.5">
+                  {a.items.map((it) => (
+                    <li key={it} className="relative z-10 flex items-start gap-2.5 text-sm text-[var(--text-default)] leading-relaxed">
+                      <svg className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--primary)' }} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
               </GlassCard>
             ))}
           </div>
