@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const templateRoutes = getAllTemplates().map((template) => ({
     url: `${BASE_URL}/templates/${template.slug}`,
+    lastModified: template.updated,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
@@ -48,12 +49,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const seoRoutes = getAllSeoPages().map((page) => ({
     url: `${BASE_URL}/services/${page.slug}`,
+    lastModified: page.updated,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   const portfolioRoutes = getAllProjects().map((project) => ({
     url: `${BASE_URL}/portfolio/${project.slug}`,
+    lastModified: project.updated,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

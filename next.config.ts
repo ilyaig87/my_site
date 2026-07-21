@@ -83,10 +83,31 @@ const nextConfig: NextConfig = {
         destination: "/contact",
         permanent: true,
       },
-      // The niche landing pages were retired at the owner's request.
+      // The niche landing pages were retired at the owner's request, but the
+      // renovation and furniture URLs still earn real traffic and conversions,
+      // and old links keep pointing at all four. Sending them to the generic
+      // /services index drops the visitor on a page that answers none of the
+      // intent they searched for. Each niche instead lands on the portfolio
+      // case study built for that exact industry — same intent, real proof,
+      // and its own CTA back into the matching service page.
       {
-        source: "/services/:niche(renovation-contractors|accountants-financial-advisors|engineering-firms|furniture-design-brands)",
-        destination: "/services",
+        source: "/services/renovation-contractors",
+        destination: "/portfolio/zedaka-projects",
+        permanent: true,
+      },
+      {
+        source: "/services/furniture-design-brands",
+        destination: "/portfolio/uriel-furniture",
+        permanent: true,
+      },
+      {
+        source: "/services/accountants-financial-advisors",
+        destination: "/portfolio/paz-invest",
+        permanent: true,
+      },
+      {
+        source: "/services/engineering-firms",
+        destination: "/portfolio/chen-shaya",
         permanent: true,
       },
     ];

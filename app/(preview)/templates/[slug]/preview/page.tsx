@@ -25,6 +25,12 @@ export async function generateMetadata({ params }: PreviewPageProps): Promise<Me
   return {
     title: `תצוגה מקדימה - ${template.name}`,
     description: template.description,
+    // A preview is a full render of the demo site itself — same name and
+    // description as /templates/[slug], no canonical of its own, and absent
+    // from the sitemap. Left indexable it competes with the real template
+    // page for the same query. Keep it crawlable (follow) so link equity
+    // still flows, but out of the index.
+    robots: { index: false, follow: true },
   };
 }
 

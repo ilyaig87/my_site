@@ -14,6 +14,10 @@ export interface SeoFaq {
 
 export interface SeoPage {
   slug: string;
+  // ISO yyyy-mm-dd, feeds <lastmod> in the sitemap. Bump it when the page's
+  // copy actually changes — a date that never moves, or one that jumps on
+  // every deploy without the text changing, gets the signal ignored.
+  updated: string;
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
@@ -28,6 +32,7 @@ export interface SeoPage {
 export const SEO_PAGES: SeoPage[] = [
   {
     slug: 'small-business-websites',
+    updated: '2026-07-16',
     metaTitle: 'בניית אתרים לעסקים קטנים: מהיר, מקצועי ובמחיר הוגן',
     metaDescription:
       'בניית אתרים לעסקים קטנים בישראל: עיצוב מקצועי, התאמה מלאה למובייל, SEO וליווי אישי. אתר חי באוויר תוך ימים, במחיר שקוף וללא הפתעות.',
@@ -65,6 +70,7 @@ export const SEO_PAGES: SeoPage[] = [
   },
   {
     slug: 'landing-page',
+    updated: '2026-07-16',
     metaTitle: 'בניית דף נחיתה ממוקד המרה מ-2,500 ₪',
     metaDescription:
       'בניית דף נחיתה מקצועי שממיר גולשים ללקוחות: עיצוב ממוקד מטרה, מהיר, מותאם למובייל ומחובר לכלי השיווק. אידיאלי לקמפיינים והשקות מוצר.',
@@ -103,6 +109,7 @@ export const SEO_PAGES: SeoPage[] = [
   },
   {
     slug: 'business-website',
+    updated: '2026-07-16',
     metaTitle: 'בניית אתר תדמית לעסק: עיצוב מקצועי ונוכחות מלאה',
     metaDescription:
       'בניית אתר תדמית לעסק: כמה עמודים, גלריה, SEO מלא ועיצוב מותאם אישית שמשדר מקצועיות. נוכחות עסקית שמביאה לקוחות. הצעת מחיר מותאמת תוך 24 שעות.',
@@ -141,6 +148,7 @@ export const SEO_PAGES: SeoPage[] = [
   },
   {
     slug: 'ai-agents',
+    updated: '2026-07-16',
     metaTitle: 'סוכני AI לעסקים (AI Agents): עובד דיגיטלי שלא ישן',
     metaDescription:
       'בניית סוכני AI לעסקים בישראל: סוכן חכם (AI Agent) שעונה ללקוחות בעברית, מסנן לידים, קובע פגישות ומבצע משימות אוטומטית 24/7. מותאם בדיוק לעסק שלכם.',
@@ -179,6 +187,7 @@ export const SEO_PAGES: SeoPage[] = [
   },
   {
     slug: 'business-automation',
+    updated: '2026-07-16',
     metaTitle: 'אוטומציה לעסקים: תהליכים שרצים לבד וחוסכים שעות',
     metaDescription:
       'אוטומציה עסקית בישראל: חיבור טפסים, CRM, מייל ווואטסאפ לתהליך אחד שרץ לבד (Make / Zapier / n8n). פחות עבודה ידנית, אפס פניות שמתפספסות.',
@@ -217,6 +226,7 @@ export const SEO_PAGES: SeoPage[] = [
   },
   {
     slug: 'ai-chatbot',
+    updated: '2026-07-16',
     metaTitle: 'צ\'אטבוט AI לעסק: לאתר ולוואטסאפ, בעברית',
     metaDescription:
       'בניית צ\'אטבוט AI לעסקים: בוט חכם לאתר ולוואטסאפ שעונה ללקוחות בעברית 24/7, אוסף לידים ומעביר אליכם רק פניות רלוונטיות. הדגמה חיה באתר שלנו.',

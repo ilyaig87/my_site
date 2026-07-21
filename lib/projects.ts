@@ -8,6 +8,9 @@ export interface ProjectSolution {
 
 export interface Project {
   slug: string;
+  // ISO yyyy-mm-dd, feeds <lastmod> in the sitemap. Bump it when the case
+  // study's copy actually changes, not on every deploy.
+  updated: string;
   name: string;
   url: string;
   domain: string;
@@ -29,6 +32,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     slug: 'zedaka-projects',
+    updated: '2026-07-16',
     name: 'צחי צדקה',
     url: 'https://zedakaprojects.co.il',
     domain: 'zedakaprojects.co.il',
@@ -58,6 +62,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'chen-shaya',
+    updated: '2026-07-16',
     name: 'חן שעיה',
     url: 'https://www.chenshaya.com/',
     domain: 'chenshaya.com',
@@ -87,6 +92,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'paz-invest',
+    updated: '2026-07-16',
     name: 'פז השקעות',
     url: 'https://www.paz-invest.co.il/',
     domain: 'paz-invest.co.il',
@@ -116,6 +122,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'uriel-furniture',
+    updated: '2026-07-16',
     name: 'Uriel Furniture',
     url: 'https://uriel-furniture.vercel.app/',
     domain: 'uriel-furniture.vercel.app',
@@ -145,6 +152,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'critic',
+    updated: '2026-07-16',
     name: 'Critic.',
     url: 'https://critics.netlify.app/',
     domain: 'critics.netlify.app',
@@ -174,6 +182,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'i-games',
+    updated: '2026-07-16',
     name: 'I-Games',
     url: 'https://memory-game-tawny-eta.vercel.app/',
     domain: 'i-games · vercel.app',

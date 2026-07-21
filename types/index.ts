@@ -3,6 +3,9 @@ export interface Template {
   id: string;
   name: string;
   slug: string;
+  // ISO yyyy-mm-dd, feeds <lastmod> in the sitemap. Bump it when the
+  // template's copy or design actually changes, not on every deploy.
+  updated: string;
   description: string;
   longDescription: string;
   category: TemplateCategory;
